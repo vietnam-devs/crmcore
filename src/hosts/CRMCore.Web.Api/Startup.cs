@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using CRMCore.Mvc.Core.Extensions;
 
 namespace CRMCore.Web.Api
 {
@@ -23,7 +24,8 @@ namespace CRMCore.Web.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            //services.AddModules(configure => configure.WithConfiguration(Configuration));
+            services.AddMvcModules();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,7 +36,12 @@ namespace CRMCore.Web.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+           {
+               routes.MapRoute(
+                   "default",
+                   "{controller=Home}/{action=Index}/{id?}");
+           });
         }
     }
 }

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<ModuleManifest>Name: $(MSBuildProjectName)</ModuleManifest>
+		<ExcludedFiles>**\*.cs;*.csproj*;obj\**;bin\**;Assets.json;Assets\**;Properties\**;*.props;*.targets;.vs\**</ExcludedFiles>
+		<ModuleType Condition="'$(ModuleType)' == ''">Module</ModuleType>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageAssetFiles Include="**\*" Exclude="$(ExcludedFiles)" />
+	</ItemGroup>
+	<Target Name="CopyPackageAssetFiles">
+		<ItemGroup>
+			<ApplicationAssetFiles Include="$(ApplicationDirectory)\Packages\$(MSBuildProjectName)\**\*" />
+		</ItemGroup>
+		<Delete Files="@(ApplicationAssetFiles)" Condition="!Exists('%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="true" />
+		<Message Text="Packaging asset files: $(MSBuildProjectName)" Importance="high" />
+		<Copy SourceFiles="@(PackageAssetFiles)" DestinationFolder="$(ApplicationDirectory)\Packages\$(MSBuildProjectName)\%(RecursiveDir)" />
+		<Copy SourceFiles="obj\$(ModuleType).txt" DestinationFolder="$(ApplicationDirectory)\Packages\$(MSBuildProjectName)" Condition="!Exists('$(ModuleType).txt')" />
+	</Target>
+</Project>

@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CRMCore.Application.Targets\CRMCore.Application.Targets.csproj" />
+    <ProjectReference Include="..\..\modules\CRMCore.Module.Common\CRMCore.Module.Common.csproj" />
+  </ItemGroup>
+</Project>

@@ -4,4 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.csproj" />
+    <ProjectReference Include="..\CRMCore.Mvc.Core\CRMCore.Mvc.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
 </Project>
