@@ -16,9 +16,15 @@ A CRM lightweight version builds with clean modern architecture and technology.
 
 ## Quick start
 
+### Manual
+
 - Download the latest .NET SDK (2.x) & NodeJS
 - Clone the repo: `git clone [https://github.com/crm-core/crmcore.git](https://github.com/crm-core/crmcore.git)`
 - Change location to `\crmcore\src\Hosts\CRMCore.WebApp`, then run command `dotnet run`
+
+### Docker
+
+*Coming soon...*
 
 ## What's included
 
@@ -28,6 +34,8 @@ A CRM lightweight version builds with clean modern architecture and technology.
 Have a bug or a feature request? Please first read the issue guidelines and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/crm-core/crmcore/issues/new).
 
 ## Dependencies
+*Coming soon: Technologies and frameworks*
+
 
 ## Community
 Get updates on CRMCore' development and chat with the project maintainers and community members:
@@ -35,12 +43,17 @@ Get updates on CRMCore' development and chat with the project maintainers and co
 - Follow [@thangchung on Twitter](https://twitter.com/thangchung)
 
 ## Development
+
 #### Get code
 
 ```bash
 git clone git@github.com:crm-core/crmcore.git
 cd crmcore
 ```
+
+### Development environment
+
+*Coming soon...*
 
 #### Install dependencies and run project
 
