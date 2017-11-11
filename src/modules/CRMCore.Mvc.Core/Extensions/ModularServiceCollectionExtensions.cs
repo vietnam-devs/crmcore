@@ -1,6 +1,8 @@
 ﻿using CRMCore.Mvc.Core.LocationExpander;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace CRMCore.Mvc.Core.Extensions
 {
@@ -9,11 +11,13 @@ namespace CRMCore.Mvc.Core.Extensions
         public static IServiceCollection AddMvcModules(this IServiceCollection services)
         {
             // services.TryAddSingleton(new ApplicationPartManager());
+            var mvcBuilder = services.AddMvc().AddViewLocalization();
 
-            services.AddMvc().AddViewLocalization();
+            // TODO: aPhuong considers to add mvcBuilder.AddApplicationPart
+            // TODO: ...
+
             AddModularRazorViewEngine(services);
             AddMvcModuleCoreServices(services);
-
             return services;
         }
 
