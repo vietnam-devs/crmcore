@@ -1,25 +1,26 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2002
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{801A9F75-24F6-4D8C-A884-98C6BE76986B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F0C24C62-76B3-494D-B8BE-BC200E5F80B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{74D2F004-44D9-4BEE-AEA7-51DFA9FD027C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{62C7829F-E191-4104-AD01-8E110FD44D67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Web.Api", "src\hosts\CRMCore.Web.Api\CRMCore.Web.Api.csproj", "{90206BD1-C06E-4677-A539-C5DB5D79E7FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Common", "src\modules\CRMCore.Module.Common\CRMCore.Module.Common.csproj", "{6E6311E5-0D3C-4ACD-98CD-83FFC1FB8CDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.Common", "src\modules\CRMCore.Module.Common\CRMCore.Module.Common.csproj", "{6E6311E5-0D3C-4ACD-98CD-83FFC1FB8CDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Application.Targets", "src\targets\CRMCore.Application.Targets\CRMCore.Application.Targets.csproj", "{4D9E1B42-374D-4C6A-B7FA-08681EF5F259}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Application.Targets", "src\targets\CRMCore.Application.Targets\CRMCore.Application.Targets.csproj", "{4D9E1B42-374D-4C6A-B7FA-08681EF5F259}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Application.Crm.targets", "src\targets\CRMCore.Application.Crm.targets\CRMCore.Application.Crm.targets.csproj", "{84B858B7-8758-4430-A971-3AC3A107F0B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Application.Crm.targets", "src\targets\CRMCore.Application.Crm.targets\CRMCore.Application.Crm.targets.csproj", "{84B858B7-8758-4430-A971-3AC3A107F0B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Targets", "src\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.csproj", "{6851B274-D743-4F6E-AEED-08D4CEC7ABA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.Targets", "src\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.csproj", "{6851B274-D743-4F6E-AEED-08D4CEC7ABA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Mvc.Core", "src\modules\CRMCore.Mvc.Core\CRMCore.Mvc.Core.csproj", "{8A0A5C46-5112-4DF9-83B6-FDD78C3DA749}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Mvc.Core", "src\modules\CRMCore.Mvc.Core\CRMCore.Mvc.Core.csproj", "{8A0A5C46-5112-4DF9-83B6-FDD78C3DA749}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{77413DBB-9C3A-4094-8A67-8FA6B2E40A34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.WebApp", "src\hosts\CRMCore.WebApp\CRMCore.WebApp.csproj", "{679E4C9F-8D3C-4D94-819B-114208B73A30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +28,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{90206BD1-C06E-4677-A539-C5DB5D79E7FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90206BD1-C06E-4677-A539-C5DB5D79E7FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90206BD1-C06E-4677-A539-C5DB5D79E7FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90206BD1-C06E-4677-A539-C5DB5D79E7FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E6311E5-0D3C-4ACD-98CD-83FFC1FB8CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E6311E5-0D3C-4ACD-98CD-83FFC1FB8CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E6311E5-0D3C-4ACD-98CD-83FFC1FB8CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,13 +48,23 @@ Global
 		{8A0A5C46-5112-4DF9-83B6-FDD78C3DA749}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A0A5C46-5112-4DF9-83B6-FDD78C3DA749}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A0A5C46-5112-4DF9-83B6-FDD78C3DA749}.Release|Any CPU.Build.0 = Release|Any CPU
+		{679E4C9F-8D3C-4D94-819B-114208B73A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{679E4C9F-8D3C-4D94-819B-114208B73A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{679E4C9F-8D3C-4D94-819B-114208B73A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{679E4C9F-8D3C-4D94-819B-114208B73A30}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{90206BD1-C06E-4677-A539-C5DB5D79E7FF} = {62C7829F-E191-4104-AD01-8E110FD44D67}
 		{6E6311E5-0D3C-4ACD-98CD-83FFC1FB8CDA} = {74D2F004-44D9-4BEE-AEA7-51DFA9FD027C}
 		{4D9E1B42-374D-4C6A-B7FA-08681EF5F259} = {801A9F75-24F6-4D8C-A884-98C6BE76986B}
 		{84B858B7-8758-4430-A971-3AC3A107F0B8} = {801A9F75-24F6-4D8C-A884-98C6BE76986B}
 		{6851B274-D743-4F6E-AEED-08D4CEC7ABA9} = {801A9F75-24F6-4D8C-A884-98C6BE76986B}
 		{8A0A5C46-5112-4DF9-83B6-FDD78C3DA749} = {74D2F004-44D9-4BEE-AEA7-51DFA9FD027C}
+		{679E4C9F-8D3C-4D94-819B-114208B73A30} = {62C7829F-E191-4104-AD01-8E110FD44D67}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3171C67F-EFB1-46FF-A566-6DC6C1E80FC5}
 	EndGlobalSection
 EndGlobal

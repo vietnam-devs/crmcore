@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace CRMCore.Module.Common.Controllers
 {
     [Route("[controller]")]
-    public class HomeController : Controller
+    public class CommonController : Controller
     {
-        public HomeController()
+        public CommonController()
         {
         }
 

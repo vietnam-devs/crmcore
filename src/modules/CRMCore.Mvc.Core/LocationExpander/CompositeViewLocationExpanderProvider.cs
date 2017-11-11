@@ -12,7 +12,7 @@ namespace CRMCore.Mvc.Core.LocationExpander
         {
             get { throw new NotSupportedException(); }
         }
-            
+
         public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations)
         {
             var expanderProviders = DiscoverProviders(context);
