@@ -6,7 +6,16 @@
   <a href="https://github.com/crm-core/crmcore/blob/master/LICENSE"><img src="https://img.shields.io/badge/price-FREE-0098f7.svg" alt="Price"></a>
 </p>
 
-**CRM-Core** project builds a lightweigh-CRM web application with clean modern architecture and technology.
+----
+<p align="center">
+<img width='46px' src="http://browserbadge.com/ie/9">
+<img width='46px' src="http://browserbadge.com/opera/20">
+<img width='46px' src="http://browserbadge.com/safari/6">
+<img width='46px' src="http://browserbadge.com/firefox/28">
+<img width='46px' src="http://browserbadge.com/chrome/39">
+</p>
+
+**CRM-Core** makes it easy to create and manage a **Lightweigh-CRM Web Application** efficiently.
 
 ## Table of contents
 - [Quick start](https://github.com/crm-core/crmcore#quick-start)
