@@ -1,8 +1,12 @@
-# CRMCore project
+<p align="center">
+  <img align="center" class="image" src="https://github.com/crm-core/crmcore/blob/master/art/logo.png" width="150px">  
+</p>
 
-A CRM lightweight version builds with clean modern architecture and technology.
+<p align="center">
+  <a href="https://github.com/crm-core/crmcore/blob/master/LICENSE"><img src="https://img.shields.io/badge/price-FREE-0098f7.svg" alt="Price"></a>
+</p>
 
-[![Price](https://img.shields.io/badge/price-FREE-0098f7.svg)](https://github.com/crm-core/crmcore/blob/master/LICENSE)
+**CRM-Core** project builds a lightweigh-CRM web application with clean modern architecture and technology.
 
 ## Table of contents
 - [Quick start](https://github.com/crm-core/crmcore#quick-start)
