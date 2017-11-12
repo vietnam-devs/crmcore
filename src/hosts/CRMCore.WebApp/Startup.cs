@@ -38,7 +38,6 @@ namespace CRMCore.WebApp
         public void Configure(IApplicationBuilder app)
         {
             MapAndUseIdSrv(app);
-            // MapAndUseWebApi(app);
             MapAndUseWebApp(app);
         }
 
@@ -66,25 +65,6 @@ namespace CRMCore.WebApp
             });
         }
 
-        private void MapAndUseWebApi(IApplicationBuilder app)
-        {
-            app.Map(Constants.ApiPrefix, appApi =>
-            {
-                if (Environment.IsDevelopment())
-                {
-                    appApi.UseDeveloperExceptionPage();
-                }
-
-                // TODO: Thang will map Swagger here
-                // TODO: ...
-
-                appApi.MapWhen(x => !IsIdentityRequest(x), mvcApp =>
-                {
-                    mvcApp.UseMvc();
-                });
-            });
-        }
-
         private void MapAndUseWebApp(IApplicationBuilder app)
         {
             if (Environment.IsDevelopment())
@@ -101,15 +81,21 @@ namespace CRMCore.WebApp
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseMvc(routes =>
+            app.MapWhen(x => !IsIdentityRequest(x), webApp =>
             {
-                routes.MapRoute(
+                // TODO: Thang will map Swagger here
+                // TODO: ...
+
+                webApp.UseMvc(routes =>
+                {
+                    routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+                    routes.MapSpaFallbackRoute(
+                        name: "spa-fallback",
+                        defaults: new { controller = "Home", action = "Index" });
+                });
             });
 
             app.UseStaticFiles();

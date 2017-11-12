@@ -11,11 +11,7 @@ namespace CRMCore.Mvc.Core.Extensions
         public static IServiceCollection AddMvcModules(this IServiceCollection services)
         {
             // services.TryAddSingleton(new ApplicationPartManager());
-            var mvcBuilder = services.AddMvc().AddViewLocalization();
-
-            // TODO: aPhuong considers to add mvcBuilder.AddApplicationPart
-            // TODO: ...
-
+            services.AddMvc().AddViewLocalization();
             AddModularRazorViewEngine(services);
             AddMvcModuleCoreServices(services);
             return services;
