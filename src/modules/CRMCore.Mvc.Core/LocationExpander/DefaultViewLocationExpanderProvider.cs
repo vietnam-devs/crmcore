@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CRMCore.Mvc.Core.LocationExpander
 {
-    public class DefaultViewLocationExpanderProvider:IViewLocationExpanderProvider
+    public class DefaultViewLocationExpanderProvider : IViewLocationExpanderProvider
     {
         public int Priority => 0;
 
@@ -17,7 +14,7 @@ namespace CRMCore.Mvc.Core.LocationExpander
 
         public void PopulateValues(ViewLocationExpanderContext context)
         {
-            
+
         }
     }
 }

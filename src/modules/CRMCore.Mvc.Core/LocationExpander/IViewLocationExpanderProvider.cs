@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc.Razor;
+﻿using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace CRMCore.Mvc.Core.LocationExpander
 {
-    public interface IViewLocationExpanderProvider:IViewLocationExpander
+    public interface IViewLocationExpanderProvider : IViewLocationExpander
     {
         int Priority { get; }
     }

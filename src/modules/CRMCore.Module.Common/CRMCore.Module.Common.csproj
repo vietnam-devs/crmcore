@@ -11,8 +11,6 @@
     <ProjectReference Include="..\CRMCore.Mvc.Core\CRMCore.Mvc.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\" />
-    <Folder Include="Views\Home\" />
-    <Folder Include="Controllers\" />
+    <Folder Include="Views\Common\" />
   </ItemGroup>
 </Project>

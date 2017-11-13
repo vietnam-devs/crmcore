@@ -1,4 +1,4 @@
-﻿using CRMCore.Mvc.Core.LocationExpander;
+using CRMCore.Mvc.Core.LocationExpander;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 
