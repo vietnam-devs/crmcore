@@ -16,6 +16,5 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\targets\CRMCore.Application.Crm.targets\CRMCore.Application.Crm.targets.csproj" />
-		<ProjectReference Include="..\..\modules\CRMCore.Mvc.Core\CRMCore.Mvc.Core.csproj" />
 	</ItemGroup>
 </Project>
