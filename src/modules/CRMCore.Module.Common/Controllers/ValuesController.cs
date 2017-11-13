@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRMCore.Module.Common.Controllers
 {
-    [Route("api/common/[controller]")]
+    [Area("CRMCore.Module.Common")]
+    [Route("api/[controller]")]
     public class ValuesController : Controller
     {
         // GET api/values

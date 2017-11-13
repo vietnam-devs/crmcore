@@ -1,7 +1,7 @@
 ﻿using System;
 namespace CRMCore.Mvc.Core.Extensions
 {
-    public interface IExtensionInfo
+    public interface IExtensionProvider
     {
     }
 }

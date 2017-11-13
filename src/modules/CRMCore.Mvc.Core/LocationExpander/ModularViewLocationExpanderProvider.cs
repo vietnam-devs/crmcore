@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CRMCore.Mvc.Core.Extensions;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,13 +8,27 @@ namespace CRMCore.Mvc.Core.LocationExpander
 {
     public class ModularViewLocationExpanderProvider : IViewLocationExpanderProvider
     {
+        private readonly IExtensionManager _extensionManager;
+
+        public ModularViewLocationExpanderProvider(IExtensionManager extensionManager)
+        {
+            _extensionManager = extensionManager;
+        }
+
         public int Priority => 10;
 
         public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations)
         {
+            // Get Extension, and then add in the relevant views.
+            var extension = _extensionManager.GetExtension(context.AreaName);
+            if (!extension.Exists)
+            {
+                return viewLocations;
+            }
+
             var result = new List<string>();
 
-            var extensionViewsPath = "./Packages/CRMCore.Module.Common" + "/Views";
+            var extensionViewsPath = '/' + extension.SubPath + "/Views";
             result.Add(extensionViewsPath + "/{1}/{0}" + RazorViewEngine.ViewExtension);
             result.Add(extensionViewsPath + "/Shared/{0}" + RazorViewEngine.ViewExtension);
 
