@@ -38,8 +38,8 @@ namespace CRMCore.Mvc.Core.Extensions
         {
             EnsureInitialized();
 
-            ExtensionEntry extension;
-            if (!String.IsNullOrEmpty(extensionId) && _extensions.TryGetValue(extensionId, out extension))
+            if (!String.IsNullOrEmpty(extensionId) 
+                && _extensions.TryGetValue(extensionId, out ExtensionEntry extension))
             {
                 return extension.ExtensionInfo;
             }
@@ -71,6 +71,7 @@ namespace CRMCore.Mvc.Core.Extensions
                 var extensions = HarvestExtensions();
 
                 var loadedExtensions = new ConcurrentDictionary<string, ExtensionEntry>();
+
                 // Load all extensions in parallel
                 Parallel.ForEach(extensions, (extension) =>
                 {

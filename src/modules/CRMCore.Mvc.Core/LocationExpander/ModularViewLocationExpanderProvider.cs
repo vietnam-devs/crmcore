@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using CRMCore.Mvc.Core.Extensions;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CRMCore.Mvc.Core.LocationExpander
 {
@@ -21,7 +19,7 @@ namespace CRMCore.Mvc.Core.LocationExpander
         {
             // Get Extension, and then add in the relevant views.
             var extension = _extensionManager.GetExtension(context.AreaName);
-            if (!extension.Exists)
+            if (extension == null)
             {
                 return viewLocations;
             }
