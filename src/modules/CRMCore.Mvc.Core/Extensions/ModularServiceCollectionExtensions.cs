@@ -28,6 +28,7 @@ namespace CRMCore.Mvc.Core.Extensions
         {
             services.AddSingleton<IExtensionManager, ExtensionManager>();
 
+            services.Replace(ServiceDescriptor.Scoped<IModularTenantRouteBuilder, ModularTenantRouteBuilder>());
             services.AddScoped<IViewLocationExpanderProvider, DefaultViewLocationExpanderProvider>();
             services.AddScoped<IViewLocationExpanderProvider, ModularViewLocationExpanderProvider>();
         }

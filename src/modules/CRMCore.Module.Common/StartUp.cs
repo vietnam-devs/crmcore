@@ -15,12 +15,7 @@ namespace CRMCore.Module.Common
 
         public override void Configure(IApplicationBuilder builder, IRouteBuilder routes, IServiceProvider serviceProvider)
         {
-            //routes.MapAreaRoute(
-            //    name: "Common",
-            //    areaName: "CRMCore.Module.Common",
-            //    template: "Common",
-            //    defaults: new { controller = "Common", action = "Index" }
-            //);
+            
         }
     }
 }

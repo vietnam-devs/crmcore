@@ -64,18 +64,19 @@ namespace CRMCore.Mvc.Core.Middlewares
             // OrderBy performs a stable sort so order is preserved among equal Order values.
             startups = startups.OrderBy(s => s.Order);
 
+            var tenantRouteBuilder = serviceProvider.GetService<IModularTenantRouteBuilder>();
             var appBuilder = new ApplicationBuilder(serviceProvider);
-            var routeBuilder = new RouteBuilder(appBuilder)
-            {
-                DefaultHandler = serviceProvider.GetRequiredService<MvcRouteHandler>()
-            };
+            var routeBuilder = tenantRouteBuilder.Build();
+
             foreach (var startup in startups)
             {
                 startup.Configure(appBuilder, routeBuilder, serviceProvider);
             }
 
 
-           var router = routeBuilder.Build();
+            tenantRouteBuilder.Configure(routeBuilder);
+
+            var router = routeBuilder.Build();
 
             appBuilder.UseRouter(router);
 
