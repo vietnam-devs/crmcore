@@ -1,4 +1,4 @@
-using CRMCore.Mvc.Core.Extensions;
+using CRMCore.Framework.MvcCore.Extensions;
 using CRMCore.WebApp.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

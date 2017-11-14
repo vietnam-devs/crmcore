@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <Project Sdk="Microsoft.NET.Sdk">
+  
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 	</PropertyGroup>
+  
 	<ItemGroup>
 		<None Include="CRMCore.Application.Targets.targets" Pack="true">
 			<PackagePath>build\$(TargetFramework)\CRMCore.Application.Targets.targets</PackagePath>
 		</None>
 	</ItemGroup>
+  
 </Project>

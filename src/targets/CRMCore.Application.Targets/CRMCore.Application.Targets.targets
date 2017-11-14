@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Target Name="CopyPackageAssets" AfterTargets="Build">
-        <Message Text="$(ApplicationDirectory)/sss" Importance="high" />
-            <ItemGroup>
+    <ItemGroup>
       <ModuleProjectReferences
         Include="@(_MSBuildProjectReferenceExistent)"
         Condition="Exists('%(RootDir)%(Directory)Module.txt') Or Exists('%(RootDir)%(Directory)obj\Module.txt') Or

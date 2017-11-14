@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\modules\CRMCore.Module.Common\CRMCore.Module.Common.csproj" />
+    <ProjectReference Include="..\..\crm\CRMCore.Module.Common\CRMCore.Module.Common.csproj" />
+    <ProjectReference Include="..\..\crm\CRMCore.Module.Contact\CRMCore.Module.Contact.csproj" />
     <ProjectReference Include="..\CRMCore.Application.Targets\CRMCore.Application.Targets.csproj" />
   </ItemGroup>
+  
 </Project>
