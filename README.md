@@ -20,6 +20,7 @@
 ## Build Status
 
 Stable (master): 
+
 [![Build status](https://img.shields.io/appveyor/ci/tungphuong/crmcore/master.svg?label=appveyor&style=flat-square)](https://ci.appveyor.com/project/tungphuong/crmcore/branch/master)
 
 ## Table of contents
