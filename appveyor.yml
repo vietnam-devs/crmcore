@@ -12,6 +12,7 @@ install:
   - ps: $env:BuildNumber= $env:APPVEYOR_BUILD_NUMBER
   # Get yarn
   - ps: npm install yarn -g
+  - ps: npm install -g typescript
   - cd %APPVEYOR_BUILD_FOLDER%\src\hosts\CRMCore.WebApp & yarn install
 build_script:
   - dotnet --version
