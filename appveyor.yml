@@ -1,6 +1,6 @@
 image: Visual Studio 2017
 environment:
-  nodejs_version: "6.9.1" x64
+  nodejs_version: "6.9.2"
 # Install scripts. (runs after repo cloning)
 install:
   - set CI=true
@@ -8,12 +8,20 @@ install:
   - ps: $urlCurrent = "https://dotnetcli.azureedge.net/dotnet/Sdk/2.0.0/dotnet-sdk-2.0.0-win-x64.zip"
   - ps: $env:DOTNET_INSTALL_DIR = "$pwd\.dotnetsdk"
   # Get the latest stable version of Node.js or io.js
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Install-Product node $env:nodejs_version x64
   - ps: $env:BuildNumber= $env:APPVEYOR_BUILD_NUMBER
   # Get yarn
   - ps: npm install yarn typescript@2.5.3 -g
   - cd %APPVEYOR_BUILD_FOLDER%\src\hosts\CRMCore.WebApp & yarn install
+branches:
+  only:
+    - master
+    - release
+    - dev
+    - /^(.*\/)?ci-.*$/
+    - /^rel\/.*/
 build_script:
   - dotnet --version
   - tsc -v
   - dotnet build
+os: Visual Studio 2017
