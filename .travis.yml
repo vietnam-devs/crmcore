@@ -24,4 +24,4 @@ script:
       docker build -t crmcore/crm-linux:latest .
       docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
       docker push crmcore/crm-linux
-  fi;
+   fi
