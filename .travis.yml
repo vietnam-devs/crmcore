@@ -22,6 +22,6 @@ script:
         dotnet publish -c Release -o ../../../build/release
         cd $TRAVIS_BUILD_DIR
         docker build -t crmcore/crm-linux:latest .
-        docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
+        docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
         docker push crmcore/crm-linux
     fi;
