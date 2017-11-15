@@ -28,8 +28,8 @@ build_script:
       cd $env:APPVEYOR_BUILD_FOLDER\src\hosts\CRMCore.WebApp
       dotnet publish -c Release -o ../../../build/release
       cd $env:APPVEYOR_BUILD_FOLDER
-      docker build -t crmcore/crm:latest .
+      docker build -t crmcore/crm-window:latest .
       docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
-      docker push crmcore/crm
+      docker push crmcore/crm-window
 test: off
 os: Visual Studio 2017
