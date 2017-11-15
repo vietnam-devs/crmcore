@@ -16,7 +16,6 @@ before_script:
   - npm install yarn typescript@2.5.3 -gm
 script:
   - if test "$TRAVIS_OS_NAME" == "linux"; then dotnet restore; fi
-  - if test "$TRAVIS_OS_NAME" == "osx"; then dotnet restore --disable-parallel; fi
   - dotnet build -c Release
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.WebApp;
