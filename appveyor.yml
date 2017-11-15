@@ -1,6 +1,6 @@
 image: Visual Studio 2017
 environment:
-  nodejs_version: "6.9.1"
+  nodejs_version: "6.9.1" x64
 # Install scripts. (runs after repo cloning)
 install:
   - set CI=true
@@ -16,5 +16,4 @@ install:
 build_script:
   - dotnet --version
   - tsc -v
-  - cd c:\ && dir /s tsc.exe
   - dotnet build
