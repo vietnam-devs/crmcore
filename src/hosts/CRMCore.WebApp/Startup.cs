@@ -1,12 +1,12 @@
-using CRMCore.Framework.MvcCore.Extensions;
-using CRMCore.WebApp.Config;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.SpaServices.Webpack;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Linq;
+using CRMCore.WebApp.Config;
+using CRMCore.Framework.MvcCore.Extensions;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace CRMCore.WebApp
 {
@@ -39,6 +39,7 @@ namespace CRMCore.WebApp
         {
             MapAndUseIdSrv(app);
             MapAndUseWebApp(app);
+            MapAndUseFrontend(app);
 
             app.UseModules();
         }
@@ -69,36 +70,46 @@ namespace CRMCore.WebApp
 
         private void MapAndUseWebApp(IApplicationBuilder app)
         {
-            if (Environment.IsDevelopment())
+            app.Map(Constants.ApiPrefix, appApi =>
             {
-                app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                if (Environment.IsDevelopment())
                 {
-                    HotModuleReplacement = true,
-                    ReactHotModuleReplacement = true
-                });
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-
-            app.MapWhen(x => !IsIdentityRequest(x), webApp =>
-            {
-                // TODO: Thang will map Swagger here
-                // TODO: ...
-
-                webApp.UseMvc(routes =>
+                    appApi.UseDeveloperExceptionPage();
+                }
+                else
                 {
-                    routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    appApi.UseExceptionHandler("/Home/Error");
+                }
 
-                    routes.MapSpaFallbackRoute(
-                        name: "spa-fallback",
-                        defaults: new { controller = "Home", action = "Index" });
+                appApi.MapWhen(x => !IsIdentityRequest(x), webApp =>
+                {
+                    // TODO: Thang will map Swagger here
+                    // TODO: ...
+
+                    webApp.UseMvc(routes =>
+                        {
+                            routes.MapRoute(
+                            name: "default",
+                            template: "{controller=Home}/{action=Index}/{id?}");
+
+                            routes.MapSpaFallbackRoute(
+                                name: "spa-fallback",
+                                defaults: new { controller = "Home", action = "Index" });
+                        });
                 });
             });
+        }
+
+        private void MapAndUseFrontend(IApplicationBuilder app)
+        {
+            /*app.Use((context, next) =>
+            {
+                if (!Path.HasExtension(context.Request.Path.Value))
+                {
+                    context.Request.Path = new PathString("/index.html");
+                }
+                return next();
+            });*/
 
             app.UseStaticFiles();
         }
