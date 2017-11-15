@@ -80,6 +80,12 @@ dotnet restore
 yarn install
 ```
 
+## Docker
+
+```bash
+docker run -it --rm -p 80:5000  crmcore/crm-linux
+```
+
 ## Contributors
 
 *N/A*
