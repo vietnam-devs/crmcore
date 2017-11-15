@@ -59,7 +59,8 @@
     "webpack": "^3.8.1",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-hot-middleware": "^2.20.0",
-    "webpack-merge": "4.1.0"
+    "webpack-merge": "4.1.0",
+    "eslint-config-react-tools":"^1.0.10"
   },
   "description": "The web application for crm-core project",
   "main": "index.js",
