@@ -16,4 +16,5 @@ install:
 build_script:
   - dotnet --version
   - tsc -v
+  - cd c:\ && dir /s tsc.exe
   - dotnet build
