@@ -12,8 +12,6 @@ env:
     - DOTNET_CLI_TELEMETRY_OPTOUT: 1   
 os:
   - linux
-  - osx
-osx_image: xcode8.3
 before_script:
   - npm install yarn typescript@2.5.3 -gm
 script:
@@ -25,7 +23,7 @@ script:
       yarn install;
       rm -rf ../../../build/release;
       dotnet publish -c Release -o ../../../build/release;
-      cp -R ./packages ../../../build/release;
+      cp -R packages ../../../build/release;
       cd $TRAVIS_BUILD_DIR;
       docker build -t crmcore/crm-linux:latest .;
       docker login -u="$DOCKER_USER" -p="$DOCKER_PASS";
