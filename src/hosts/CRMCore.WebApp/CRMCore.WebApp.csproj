@@ -25,6 +25,7 @@
     </Exec>
     <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
     <Message Importance="high" Text="Performing first-run Webpack build..." />
+    <Exec WorkingDirectory="..\ClientApp\" Command="yarn install" />
     <Exec WorkingDirectory="..\ClientApp\" Command="yarn build" />
     <Exec WorkingDirectory="..\ClientApp\" Command="xcopy.exe  build ..\CRMCore.WebApp\wwwroot /S /R /Y /E" />
   </Target>
