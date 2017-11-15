@@ -42,7 +42,9 @@
 
 ### Docker
 
-*Coming soon...*
+```bash
+docker run -p 80:5000 --name crmcore  crmcore/crm-linux
+```
 
 ## What's included
 
@@ -78,12 +80,6 @@ cd crmcore
 ```bash
 dotnet restore
 yarn install
-```
-
-## Docker
-
-```bash
-docker run -it --rm -p 80:5000  crmcore/crm-linux
 ```
 
 ## Contributors
