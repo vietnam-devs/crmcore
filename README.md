@@ -3,6 +3,7 @@
 </p>
 
 <p align="center">
+  <a href="https://ci.appveyor.com/project/tungphuong/crmcore/branch/master"><img src="https://img.shields.io/appveyor/ci/tungphuong/crmcore/master.svg?label=appveyor&style=flat-square" alt="Build status" data-canonical-src="https://img.shields.io/appveyor/ci/tungphuong/crmcore/master.svg?label=appveyor&amp;style=flat-square" style="max-width:100%;"></a>
   <a href="https://github.com/crm-core/crmcore/blob/master/LICENSE"><img src="https://img.shields.io/badge/price-FREE-0098f7.svg" alt="Price"></a>
 </p>
 
@@ -16,12 +17,6 @@
 </p>
 
 **CRM-Core** makes it easy to create and manage a **Lightweigh-CRM Web Application** efficiently.
-
-## Build Status
-
-Stable (master): 
-
-[![Build status](https://img.shields.io/appveyor/ci/tungphuong/crmcore/master.svg?label=appveyor&style=flat-square)](https://ci.appveyor.com/project/tungphuong/crmcore/branch/master)
 
 ## Table of contents
 - [Quick start](https://github.com/crm-core/crmcore#quick-start)
