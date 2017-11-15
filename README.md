@@ -17,6 +17,11 @@
 
 **CRM-Core** makes it easy to create and manage a **Lightweigh-CRM Web Application** efficiently.
 
+## Build Status
+
+Stable (master): 
+[![Build status](https://img.shields.io/appveyor/ci/tungphuong/crmcore/master.svg?label=appveyor&style=flat-square)](https://ci.appveyor.com/project/tungphuong/crmcore/branch/master)
+
 ## Table of contents
 - [Quick start](https://github.com/crm-core/crmcore#quick-start)
 - [What's included](https://github.com/crm-core/crmcore#whats-included)
