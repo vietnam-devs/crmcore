@@ -21,6 +21,7 @@ branches:
     - /^(.*\/)?ci-.*$/
     - /^rel\/.*/
 build_script:
+  - docker images
   - dotnet --version
   - tsc -v
   - dotnet build
