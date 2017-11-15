@@ -21,15 +21,15 @@ branches:
     - /^(.*\/)?ci-.*$/
     - /^rel\/.*/
 build_script:
-  - docker images
+  - docker --version
   - dotnet --version
   - tsc -v
   - ps: |
       cd $env:APPVEYOR_BUILD_FOLDER\src\hosts\CRMCore.WebApp
       dotnet publish -c Release -o ../../../build/release
       cd $env:APPVEYOR_BUILD_FOLDER
-      docker build -t crmcore:latest .
+      docker build -t crmcore/crm:latest .
       docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
-      docker push crmcore/crmcore-dev
+      docker push crmcore/crm
 test: off
 os: Visual Studio 2017
