@@ -34,6 +34,7 @@
     "humps": "^2.0.1",
     "json-loader": "^0.5.7",
     "node-sass": "^4.6.1",
+    "node-noop": "1.0.0",
     "react": "^16.0.0",
     "react-addons-css-transition-group": "^16.0.0-alpha.3",
     "react-addons-transition-group": "^16.0.0-alpha.3",
