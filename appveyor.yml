@@ -15,5 +15,5 @@ build_script:
   - dotnet --version
   - ps: |
       cd $env:APPVEYOR_BUILD_FOLDER\src\hosts\CRMCore.WebApp
-      yarn install
+      # yarn install
   - dotnet build
