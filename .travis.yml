@@ -19,11 +19,12 @@ script:
   - if test "$TRAVIS_OS_NAME" == "osx"; then dotnet restore --disable-parallel; fi
   - dotnet build -c Release
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      cd $TRAVIS_BUILD_DIR\src\hosts\CRMCore.WebApp;
+      cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.WebApp;
       yarn install;
       rm -rf ../../../build/release;
       dotnet publish -c Release -o ../../../build/release;
-      cd $TRAVIS_BUILD_DIR\src\hosts\CRMCore.WebApp;
+      ls;
+      cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.WebApp;
       ls;
       cp -R packages ../../../build/release;
       cd $TRAVIS_BUILD_DIR;
