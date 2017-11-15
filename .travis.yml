@@ -17,11 +17,11 @@ script:
   - if test "$TRAVIS_OS_NAME" == "linux"; then dotnet restore; fi
   - if test "$TRAVIS_OS_NAME" == "osx"; then dotnet restore --disable-parallel; fi
   - dotnet build -c Release
-  - if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_OS_NAME" == "linux" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then
-        cd $TRAVIS_BUILD_DIR\src\hosts\CRMCore.WebApp
-        dotnet publish -c Release -o ../../../build/release
-        cd $TRAVIS_BUILD_DIR
-        docker build -t crmcore/crm-linux:latest .
-        docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-        docker push crmcore/crm-linux
-    fi;
+  - if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      cd $TRAVIS_BUILD_DIR\src\hosts\CRMCore.WebApp
+      dotnet publish -c Release -o ../../../build/release
+      cd $TRAVIS_BUILD_DIR
+      docker build -t crmcore/crm-linux:latest .
+      docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+      docker push crmcore/crm-linux
+  fi;
