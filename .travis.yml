@@ -23,7 +23,9 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       cd $TRAVIS_BUILD_DIR\src\hosts\CRMCore.WebApp;
       yarn install;
+      rm -rf ../../../build/release;
       dotnet publish -c Release -o ../../../build/release;
+      cp -R ./packages ../../../build/release;
       cd $TRAVIS_BUILD_DIR;
       docker build -t crmcore/crm-linux:latest .;
       docker login -u="$DOCKER_USER" -p="$DOCKER_PASS";
