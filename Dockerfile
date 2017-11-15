@@ -1,11 +1,10 @@
 FROM microsoft/dotnet:2.0-sdk
 
 ENV ASPNETCORE_URLS http://+:5000
-ENV ASPNETCORE_ENVIRONMENT Development
 
 WORKDIR /app
 
 COPY build/release .
+COPY src/hosts/CRMCore.WebApp/packages .
 
-#ENTRYPOINT ["dotnet", "CRMCore.WebApp.dll"]
-ENTRYPOINT [ "bash" ]
+ENTRYPOINT ["dotnet", "CRMCore.WebApp.dll"]

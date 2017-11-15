@@ -16,25 +16,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Targets", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{77413DBB-9C3A-4094-8A67-8FA6B2E40A34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.WebApp", "src\hosts\CRMCore.WebApp\CRMCore.WebApp.csproj", "{679E4C9F-8D3C-4D94-819B-114208B73A30}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C6A94DA-F9EE-48E7-94E8-A068C594BD2E}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
 		global.json = global.json
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Framework.Entities", "src\framework\CRMCore.Framework.Entities\CRMCore.Framework.Entities.csproj", "{21CC0341-8CAD-4DFD-A405-26A093858855}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Framework.Entities", "src\framework\CRMCore.Framework.Entities\CRMCore.Framework.Entities.csproj", "{21CC0341-8CAD-4DFD-A405-26A093858855}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.Identity", "src\modules\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj", "{D889EBBB-846D-4283-8370-7966F554A07C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Identity", "src\modules\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj", "{D889EBBB-846D-4283-8370-7966F554A07C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Framework.MvcCore", "src\framework\CRMCore.Framework.MvcCore\CRMCore.Framework.MvcCore.csproj", "{96045E78-5C10-4956-B0EF-8806C8722F18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.Data", "src\modules\CRMCore.Module.Data\CRMCore.Module.Data.csproj", "{FDD180F8-80B7-440D-94D5-46FE416CF0AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Data", "src\modules\CRMCore.Module.Data\CRMCore.Module.Data.csproj", "{FDD180F8-80B7-440D-94D5-46FE416CF0AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.Setup", "src\modules\CRMCore.Module.Setup\CRMCore.Module.Setup.csproj", "{A0606C0C-07CF-41A6-80AB-DBD0A0702973}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Setup", "src\modules\CRMCore.Module.Setup\CRMCore.Module.Setup.csproj", "{A0606C0C-07CF-41A6-80AB-DBD0A0702973}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Communication", "src\modules\CRMCore.Module.Communication\CRMCore.Module.Communication.csproj", "{EF45240D-3236-4E24-9B4B-A8F8D8CAA598}"
 EndProject
@@ -45,6 +44,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Contact", "src\crm\CRMCore.Module.Contact\CRMCore.Module.Contact.csproj", "{E1AA719F-4619-4F95-A2B6-037FA4006683}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Framework.CqrsLite", "src\framework\CRMCore.Framework.CqrsLite\CRMCore.Framework.CqrsLite.csproj", "{AD414459-BE54-449E-B42D-81A0980C671C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.WebApp", "src\hosts\CRMCore.WebApp\CRMCore.WebApp.csproj", "{F9FEFFA8-47B5-4A80-AD50-D5C516DCADBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,10 +65,6 @@ Global
 		{6851B274-D743-4F6E-AEED-08D4CEC7ABA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6851B274-D743-4F6E-AEED-08D4CEC7ABA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6851B274-D743-4F6E-AEED-08D4CEC7ABA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{679E4C9F-8D3C-4D94-819B-114208B73A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{679E4C9F-8D3C-4D94-819B-114208B73A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{679E4C9F-8D3C-4D94-819B-114208B73A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{679E4C9F-8D3C-4D94-819B-114208B73A30}.Release|Any CPU.Build.0 = Release|Any CPU
 		{21CC0341-8CAD-4DFD-A405-26A093858855}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{21CC0341-8CAD-4DFD-A405-26A093858855}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21CC0341-8CAD-4DFD-A405-26A093858855}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -104,6 +101,10 @@ Global
 		{AD414459-BE54-449E-B42D-81A0980C671C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD414459-BE54-449E-B42D-81A0980C671C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD414459-BE54-449E-B42D-81A0980C671C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9FEFFA8-47B5-4A80-AD50-D5C516DCADBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9FEFFA8-47B5-4A80-AD50-D5C516DCADBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9FEFFA8-47B5-4A80-AD50-D5C516DCADBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9FEFFA8-47B5-4A80-AD50-D5C516DCADBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,7 +113,6 @@ Global
 		{4D9E1B42-374D-4C6A-B7FA-08681EF5F259} = {801A9F75-24F6-4D8C-A884-98C6BE76986B}
 		{84B858B7-8758-4430-A971-3AC3A107F0B8} = {801A9F75-24F6-4D8C-A884-98C6BE76986B}
 		{6851B274-D743-4F6E-AEED-08D4CEC7ABA9} = {801A9F75-24F6-4D8C-A884-98C6BE76986B}
-		{679E4C9F-8D3C-4D94-819B-114208B73A30} = {62C7829F-E191-4104-AD01-8E110FD44D67}
 		{21CC0341-8CAD-4DFD-A405-26A093858855} = {77413DBB-9C3A-4094-8A67-8FA6B2E40A34}
 		{D889EBBB-846D-4283-8370-7966F554A07C} = {74D2F004-44D9-4BEE-AEA7-51DFA9FD027C}
 		{96045E78-5C10-4956-B0EF-8806C8722F18} = {77413DBB-9C3A-4094-8A67-8FA6B2E40A34}
@@ -122,6 +122,7 @@ Global
 		{8EAA1F1E-9FE4-460A-B75A-700E0859C784} = {837B5FF2-B91A-4DA7-9D9E-9837F5B715C2}
 		{E1AA719F-4619-4F95-A2B6-037FA4006683} = {837B5FF2-B91A-4DA7-9D9E-9837F5B715C2}
 		{AD414459-BE54-449E-B42D-81A0980C671C} = {77413DBB-9C3A-4094-8A67-8FA6B2E40A34}
+		{F9FEFFA8-47B5-4A80-AD50-D5C516DCADBA} = {62C7829F-E191-4104-AD01-8E110FD44D67}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3171C67F-EFB1-46FF-A566-6DC6C1E80FC5}
