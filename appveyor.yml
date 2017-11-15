@@ -3,6 +3,7 @@ environment:
   nodejs_version: "6.9.1"
 # Install scripts. (runs after repo cloning)
 install:
+  - set CI=true
   # Download .NET Core 2.0 SDK and add to PATH
   - ps: $urlCurrent = "https://dotnetcli.azureedge.net/dotnet/Sdk/2.0.0/dotnet-sdk-2.0.0-win-x64.zip"
   - ps: $env:DOTNET_INSTALL_DIR = "$pwd\.dotnetsdk"
@@ -13,7 +14,7 @@ install:
   - ps: npm install yarn -g
 build_script:
   - dotnet --version
-  - cmd: |
+  - ps: |
       cd $env:APPVEYOR_BUILD_FOLDER\src\hosts\CRMCore.WebApp
       yarn install
   - dotnet build
