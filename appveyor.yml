@@ -9,9 +9,11 @@ install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version
   - ps: $env:BuildNumber= $env:APPVEYOR_BUILD_NUMBER
+  # Get yarn
+  - ps: npm install yarn -g
 build_script:
   - dotnet --version
   - ps: |
       cd $env:APPVEYOR_BUILD_FOLDER\src\hosts\CRMCore.WebApp
-      npm i
+      yarn install
   - dotnet build
