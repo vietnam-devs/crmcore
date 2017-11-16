@@ -30,7 +30,7 @@
     <Message Importance="high" Text="[CRMCore] Yarn is building..." />
     <Exec WorkingDirectory="..\ClientApp\" Command="yarn build" />
     <Message Importance="high" Text="[CRMCore] Copying asset to Host project..." />
-    <Exec WorkingDirectory="..\ClientApp\" Condition=" '$(OS)' != 'Windows_NT'" Command="cp -rf  build/* ..\CRMCore.WebApp\wwwroot" />
+    <Exec WorkingDirectory="..\ClientApp\" Condition=" '$(OS)' != 'Windows_NT'" Command="cp -rfv  build/* ..\CRMCore.WebApp\wwwroot" />
     <Exec WorkingDirectory="..\ClientApp\" Condition=" '$(OS)' == 'Windows_NT'" Command="xcopy.exe  build ..\CRMCore.WebApp\wwwroot /S /R /Y /E" />
   </Target>
 
