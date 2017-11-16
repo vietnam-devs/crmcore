@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using CRMCore.WebApp.Config;
 using CRMCore.Framework.MvcCore.Extensions;
 using Microsoft.Extensions.Configuration;
-using System.IO;
+using System.Text.Encodings.Web;
 
 namespace CRMCore.WebApp
 {
@@ -32,6 +32,7 @@ namespace CRMCore.WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(JavaScriptEncoder.Default);
             services.AddMvcModules();
         }
 

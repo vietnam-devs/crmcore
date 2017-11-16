@@ -1,0 +1,30 @@
+language: csharp
+sudo: required
+services:
+  - docker
+dist: trusty
+mono: none
+dotnet: 2.0.0
+node_js: 8.6.0
+env:
+  global:
+    - DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+    - DOTNET_CLI_TELEMETRY_OPTOUT: 1   
+os:
+  - linux
+before_script:
+  - npm install yarn typescript@2.5.3 -gm
+script:
+  - if test "$TRAVIS_OS_NAME" == "linux"; then dotnet restore; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.WebApp;
+      yarn install;
+      rm -rf ../../../build/release;
+      dotnet publish -c Release -o ../../../build/release;
+      pwd;
+      cp -R packages ../../../build/release;
+      cd $TRAVIS_BUILD_DIR;
+      docker build -t crmcore/crm-linux:latest .;
+      docker login -u="$DOCKER_USER" -p="$DOCKER_PASS";
+      docker push crmcore/crm-linux;
+   fi;

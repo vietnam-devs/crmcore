@@ -10,11 +10,11 @@
 	</ItemGroup>
 	<Target Name="CopyPackageAssetFiles">
 		<ItemGroup>
-			<ApplicationAssetFiles Include="$(ApplicationDirectory)\Packages\$(MSBuildProjectName)\**\*" />
+			<ApplicationAssetFiles Include="$(ApplicationDirectory)\packages\$(MSBuildProjectName)\**\*" />
 		</ItemGroup>
 		<Delete Files="@(ApplicationAssetFiles)" Condition="!Exists('%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="true" />
 		<Message Text="Packaging asset files: $(MSBuildProjectName)" Importance="high" />
-		<Copy SourceFiles="@(PackageAssetFiles)" DestinationFolder="$(ApplicationDirectory)\Packages\$(MSBuildProjectName)\%(RecursiveDir)" />
-		<Copy SourceFiles="obj\$(ModuleType).txt" DestinationFolder="$(ApplicationDirectory)\Packages\$(MSBuildProjectName)" Condition="!Exists('$(ModuleType).txt')" />
+		<Copy SourceFiles="@(PackageAssetFiles)" DestinationFolder="$(ApplicationDirectory)\packages\$(MSBuildProjectName)\%(RecursiveDir)" />
+		<Copy SourceFiles="obj\$(ModuleType).txt" DestinationFolder="$(ApplicationDirectory)\packages\$(MSBuildProjectName)" Condition="!Exists('$(ModuleType).txt')" />
 	</Target>
 </Project>
