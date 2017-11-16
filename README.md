@@ -34,17 +34,27 @@
 
 ## Quick start
 
+### Docker
+
+#### Linux / Unix
+
+```bash
+docker run -p 80:5000 --name crmcore  crmcore/crm-linux
+```
+
+#### Windows
+
+```bash
+docker run -p 80:5000 --name crmcore  crmcore/crm-window
+```
+
+For more information, you can check out [CRM Core on Docker Hub](https://hub.docker.com/u/crmcore)
+
 ### Manual
 
 - Download the latest .NET SDK (2.x) & NodeJS
 - Clone the repo: `git clone [https://github.com/crm-core/crmcore.git](https://github.com/crm-core/crmcore.git)`
 - Change location to `\crmcore\src\Hosts\CRMCore.WebApp`, then run command `dotnet run`
-
-### Docker
-
-```bash
-docker run -p 80:5000 --name crmcore  crmcore/crm-linux
-```
 
 ## What's included
 
