@@ -46,7 +46,7 @@ namespace CRMCore.WebApp
             MapAndUseWebApp(app);
             MapAndUseFrontend(app);
 
-            // app.UseModules();
+            app.UseModules();
         }
 
         private void MapAndUseIdSrv(IApplicationBuilder app)
