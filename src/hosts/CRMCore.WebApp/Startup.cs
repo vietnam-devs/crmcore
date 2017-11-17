@@ -7,6 +7,8 @@ using CRMCore.WebApp.Config;
 using CRMCore.Framework.MvcCore.Extensions;
 using Microsoft.Extensions.Configuration;
 using System.Text.Encodings.Web;
+using System;
+using System.Threading.Tasks;
 
 namespace CRMCore.WebApp
 {
@@ -103,14 +105,23 @@ namespace CRMCore.WebApp
 
         private void MapAndUseFrontend(IApplicationBuilder app)
         {
-            /*app.Use((context, next) =>
+            app.Use((context, next) =>
             {
-                if (!Path.HasExtension(context.Request.Path.Value))
+                Console.WriteLine($"[CRMCore]: {context.Request.Path.Value}");
+                if(context.Request.Path.Value == "/" || context.Request.Path.Value == "")
                 {
                     context.Request.Path = new PathString("/index.html");
+                    // return Task.FromResult(0);
+                    return next();
                 }
-                return next();
-            });*/
+
+                /*if (!Path.HasExtension(context.Request.Path.Value))
+                {
+                    context.Request.Path = new PathString("/index.html");
+                } */
+
+                return next(); 
+            });
 
             app.UseStaticFiles();
         }

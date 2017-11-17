@@ -26,12 +26,12 @@
     </Exec>
     <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
     <Message Importance="high" Text="[CRMCore] Performing first-run Webpack build... Yarn is installing..." />
-    <Exec WorkingDirectory="..\ClientApp\" Command="yarn install" />
+    <Exec WorkingDirectory="..\CRMCore.ClientApp\" Command="yarn install" />
     <Message Importance="high" Text="[CRMCore] Yarn is building..." />
-    <Exec WorkingDirectory="..\ClientApp\" Command="yarn build" />
-    <Message Importance="high" Text="[CRMCore] Copying asset to Host project..." />
-    <Exec WorkingDirectory="..\ClientApp\" Condition=" '$(OS)' != 'Windows_NT'" Command="cp -rfv  build/* ../CRMCore.WebApp/wwwroot/" />
-    <Exec WorkingDirectory="..\ClientApp\" Condition=" '$(OS)' == 'Windows_NT'" Command="xcopy.exe  build ..\CRMCore.WebApp\wwwroot /S /R /Y /E" />
+    <Exec WorkingDirectory="..\CRMCore.ClientApp\" Command="yarn build" />
+    <Message Importance="high" Text="[CRMCore] Copying assets to Host project..." />
+    <Exec WorkingDirectory="..\CRMCore.ClientApp\" Condition=" '$(OS)' != 'Windows_NT'" Command="cp -rfv  build/* ../CRMCore.WebApp/wwwroot/" />
+    <Exec WorkingDirectory="..\CRMCore.ClientApp\" Condition=" '$(OS)' == 'Windows_NT'" Command="xcopy.exe /S /R /Y /E build ..\CRMCore.WebApp\wwwroot" />
   </Target>
 
   <ItemGroup>
