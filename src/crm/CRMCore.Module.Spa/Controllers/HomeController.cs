@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.IO;
 using System.Net.Http.Headers;
 
 namespace CRMCore.Module.Spa.Controllers
@@ -9,7 +10,8 @@ namespace CRMCore.Module.Spa.Controllers
     {
         public IActionResult Index()
         {
-            var _htmlContent = System.IO.File.ReadAllText("wwwroot\\index.html");
+            var indexFilePath = Path.Combine("wwwroot\\index.html");
+            var _htmlContent = System.IO.File.ReadAllText(indexFilePath);
             return Content(_htmlContent, new MediaTypeHeaderValue("text/html").ToString());
         }
     }
