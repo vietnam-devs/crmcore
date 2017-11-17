@@ -1,8 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import {HashRouter, Route, Switch} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
+
+// Containers
+import Full from './containers/Layout/Full';
+
+// Styles
+// Import Font Awesome Icons Set
+import 'font-awesome/css/font-awesome.min.css';
+// Import Simple Line Icons Set
+import 'simple-line-icons/css/simple-line-icons.css';
+// Import Main styles for this application
+import './scss/style.scss'
+
 // import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const history = createBrowserHistory();
+
+ReactDOM.render((
+  <HashRouter history={history}>
+    <Switch>
+      <Route path="/" name="Home" component={Full}/>
+    </Switch>
+  </HashRouter>
+), document.getElementById('root'));
+
 // registerServiceWorker();

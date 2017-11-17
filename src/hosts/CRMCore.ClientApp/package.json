@@ -1,5 +1,10 @@
 {
-  "name": "ClientApp",
+  "name": "crm-core-client-app",
+  "description": "A lightweigh CRM Web Application builds with a clean modern architecture and technology",
+  "main": "index.js",
+  "repository": "https://github.com/crmcore/crm-core",
+  "author": "phuongle, thangchung",
+  "license": "MIT",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -7,7 +12,28 @@
   },
   "dependencies": {
     "react": "^16.1.1",
-    "react-dom": "^16.1.1"
+    "react-dom": "^16.1.1",
+    "babel-polyfill": "^6.26.0",
+    "chart.js": "^2.7.0",
+    "font-awesome": "^4.7.0",
+    "history": "^4.7.2",
+    "humps": "^2.0.1",
+    "react-addons-css-transition-group": "^16.0.0-alpha.3",
+    "react-addons-transition-group": "^16.0.0-alpha.3",
+    "react-chartjs-2": "^2.6.4",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "5.0.0-alpha.6",
+    "react-table": "^6.6.0",
+    "react-transition-group": "^2.2.1",
+    "reactstrap": "^5.0.0-alpha.3",
+    "redux": "^3.7.2",
+    "redux-form": "^7.1.2",
+    "redux-observable": "^0.17.0",
+    "rxjs": "^5.5.2",
+    "simple-line-icons": "^2.4.1",
+    "moment": "^2.18.1",
+    "prop-types": "^15.6.0"
   },
   "scripts": {
     "start": "react-scripts start",
