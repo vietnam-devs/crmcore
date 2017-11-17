@@ -14,4 +14,34 @@
             ContinueOnError="true">
         </MSBuild>
     </Target>
+
+      <Target Name="CleanPackageAssets" AfterTargets="Clean"
+          Condition="'$(IgnorePackageAssets)' != 'true' And Exists('packages')">
+        <ItemGroup>
+          <AllPackageAssetFiles Include="packages\**" />
+        </ItemGroup>
+        <Delete
+          Files="@(AllPackageAssetFiles)"
+          ContinueOnError="true" />
+        <RemoveDir
+          Directories="packages\%(AllPackageAssetFiles.RecursiveDir)"
+          ContinueOnError="true" />
+    </Target>
+
+    <PropertyGroup>
+        <MvcRazorExcludeViewFilesFromPublish>false</MvcRazorExcludeViewFilesFromPublish>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="packages\**" />
+        <Content Remove="packages\**" />
+        <EmbeddedResource Remove="packages\**" />
+        <None Remove="packages\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ResolvedFileToPublish Include="packages\**">
+          <RelativePath>Packages\%(RecursiveDir)%(Filename)%(Extension)</RelativePath>
+        </ResolvedFileToPublish>
+    </ItemGroup>
 </Project> 

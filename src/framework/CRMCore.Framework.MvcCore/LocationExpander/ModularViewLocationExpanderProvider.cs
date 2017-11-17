@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CRMCore.Framework.MvcCore.Extensions;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CRMCore.Framework.MvcCore.LocationExpander
 {
@@ -17,6 +19,22 @@ namespace CRMCore.Framework.MvcCore.LocationExpander
 
         public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations)
         {
+            if (context.ActionContext.ActionDescriptor is PageActionDescriptor page)
+            {
+                var pageViewLocations = PageViewLocations().ToList();
+                pageViewLocations.AddRange(viewLocations);
+                return pageViewLocations;
+
+                IEnumerable<string> PageViewLocations()
+                {
+                    if (page.RelativePath.Contains("/Pages/") && !page.RelativePath.StartsWith("/Pages/"))
+                    {
+                        yield return page.RelativePath.Substring(0, page.RelativePath.IndexOf("/Pages/"))
+                            + "/Views/Shared/{0}" + RazorViewEngine.ViewExtension;
+                    }
+                }
+            }
+
             // Get Extension, and then add in the relevant views.
             var extension = _extensionManager.GetExtension(context.AreaName);
             if (extension == null)

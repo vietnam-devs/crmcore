@@ -6,4 +6,18 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Pages\" />
+    <Folder Include="Pages\Login\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.csproj" />
+    <ProjectReference Include="..\..\framework\CRMCore.Framework.MvcCore\CRMCore.Framework.MvcCore.csproj" />
+  </ItemGroup>
 </Project>

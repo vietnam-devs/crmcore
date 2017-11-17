@@ -12,4 +12,7 @@
 		</None>
 	</ItemGroup>
   
+	<ItemGroup>
+	  <ProjectReference Include="..\..\modules\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj" />
+	</ItemGroup>
 </Project>

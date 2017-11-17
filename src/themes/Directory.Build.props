@@ -1,0 +1,4 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="..\targets\CRMCore.Theme.Targets\CRMCore.Theme.Targets.xml" />
+  <Import Project="..\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.xml" />
+</Project>

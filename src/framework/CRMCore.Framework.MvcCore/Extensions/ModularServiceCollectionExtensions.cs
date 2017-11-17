@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using CRMCore.Framework.MvcCore.LocationExpander;
 using CRMCore.Framework.MvcCore.Options;
+using CRMCore.Framework.MvcCore.RazorPages;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -14,11 +15,13 @@ namespace CRMCore.Framework.MvcCore.Extensions
         {
             services.AddExtensionLocation("packages");
 
-            services.AddMvc().AddViewLocalization();
+            var builder = services.AddMvc().AddViewLocalization();
             AddModularRazorViewEngine(services);
             AddMvcModuleCoreServices(services);
 
             AddModule(services);
+
+            builder.AddModularRazorPages();
 
             return services;
         }
@@ -60,6 +63,7 @@ namespace CRMCore.Framework.MvcCore.Extensions
                 service.AddSingleton(typeof(IStartup), dependency);
             }
 
+            serviceProvider = service.BuildServiceProvider(true);
             var startups = serviceProvider.GetServices<IStartup>();
 
             // IStartup instances are ordered by module dependency with an Order of 0 by default.

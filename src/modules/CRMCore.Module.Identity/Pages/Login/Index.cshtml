@@ -1,0 +1,18 @@
+﻿@page
+
+@using Microsoft.AspNetCore.Http;
+
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env;
+
+<!--@{
+    Layout = "~/packages/CRMCore.Theme/Views/_Layout";
+}-->
+
+
+@{
+    
+
+    ViewData["Title"] = env.WebRootPath;
+}
+
+<h2>@ViewData["Title"].</h2>
