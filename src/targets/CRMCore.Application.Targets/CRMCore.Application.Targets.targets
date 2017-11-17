@@ -28,10 +28,6 @@
           ContinueOnError="true" />
     </Target>
 
-    <PropertyGroup>
-        <MvcRazorExcludeViewFilesFromPublish>false</MvcRazorExcludeViewFilesFromPublish>
-    </PropertyGroup>
-
     <ItemGroup>
         <Compile Remove="packages\**" />
         <Content Remove="packages\**" />
