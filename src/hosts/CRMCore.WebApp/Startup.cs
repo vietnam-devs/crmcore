@@ -7,8 +7,7 @@ using CRMCore.WebApp.Config;
 using CRMCore.Framework.MvcCore.Extensions;
 using Microsoft.Extensions.Configuration;
 using System.Text.Encodings.Web;
-using System;
-using System.Threading.Tasks;
+using AspNetCore.RouteAnalyzer;
 
 namespace CRMCore.WebApp
 {
@@ -36,15 +35,18 @@ namespace CRMCore.WebApp
         {
             services.AddSingleton(JavaScriptEncoder.Default);
             services.AddMvcModules();
+            services.AddRouteAnalyzer();
         }
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseStaticFiles();
+
             MapAndUseIdSrv(app);
             MapAndUseWebApp(app);
             MapAndUseFrontend(app);
 
-            app.UseModules();
+            // app.UseModules();
         }
 
         private void MapAndUseIdSrv(IApplicationBuilder app)
@@ -63,11 +65,10 @@ namespace CRMCore.WebApp
                 // TODO: aPhuong will add more configurations for IdSrv 
                 // TODO: ...
 
-                identityApp.UseStaticFiles();
-                identityApp.MapWhen(x => IsIdentityRequest(x), mvcApp =>
+                /*identityApp.MapWhen(x => IsIdentityRequest(x), mvcApp =>
                 {
                     mvcApp.UseMvc();
-                });
+                });*/
             });
         }
 
@@ -84,7 +85,7 @@ namespace CRMCore.WebApp
                     appApi.UseExceptionHandler("/Home/Error");
                 }
 
-                appApi.MapWhen(x => !IsIdentityRequest(x), webApp =>
+                /*appApi.MapWhen(x => !IsIdentityRequest(x), webApp =>
                 {
                     // TODO: Thang will map Swagger here
                     // TODO: ...
@@ -99,7 +100,7 @@ namespace CRMCore.WebApp
                                 name: "spa-fallback",
                                 defaults: new { controller = "Home", action = "Index" });
                         });
-                });
+                });*/
             });
         }
 
@@ -107,23 +108,26 @@ namespace CRMCore.WebApp
         {
             app.Use((context, next) =>
             {
-                Console.WriteLine($"[CRMCore]: {context.Request.Path.Value}");
-                if(context.Request.Path.Value == "/" || context.Request.Path.Value == "")
+                if (context.Request.Path.Value == "/")
                 {
-                    context.Request.Path = new PathString("/index.html");
-                    // return Task.FromResult(0);
-                    return next();
+                    context.Request.Path = new PathString("/home");
                 }
-
-                /*if (!Path.HasExtension(context.Request.Path.Value))
-                {
-                    context.Request.Path = new PathString("/index.html");
-                } */
-
-                return next(); 
+                return next();
             });
 
-            app.UseStaticFiles();
+            app.UseMvc(routes =>
+            {
+                routes.MapRouteAnalyzer("/routes");
+
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action}/{id?}",
+                    defaults: new { controller = "Home", action = "Index" });
+
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Home", action = "Index" });
+            });
         }
 
         private static bool IsIdentityRequest(HttpContext context)

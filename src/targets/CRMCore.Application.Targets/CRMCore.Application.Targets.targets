@@ -37,7 +37,7 @@
 
     <ItemGroup>
         <ResolvedFileToPublish Include="packages\**">
-          <RelativePath>Packages\%(RecursiveDir)%(Filename)%(Extension)</RelativePath>
+          <RelativePath>packages\%(RecursiveDir)%(Filename)%(Extension)</RelativePath>
         </ResolvedFileToPublish>
     </ItemGroup>
 </Project> 

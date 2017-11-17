@@ -8,6 +8,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\crm\CRMCore.Module.Common\CRMCore.Module.Common.csproj" />
     <ProjectReference Include="..\..\crm\CRMCore.Module.Contact\CRMCore.Module.Contact.csproj" />
+    <ProjectReference Include="..\..\crm\CRMCore.Module.Setup\CRMCore.Module.Setup.csproj" />
+    <ProjectReference Include="..\..\crm\CRMCore.Module.Spa\CRMCore.Module.Spa.csproj" />
     <ProjectReference Include="..\CRMCore.Application.Targets\CRMCore.Application.Targets.csproj" />
     <ProjectReference Include="..\..\themes\CRMCore.Theme\CRMCore.Theme.csproj" />
   </ItemGroup>
