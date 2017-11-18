@@ -1,6 +1,6 @@
+@import '../_core-variables'; // [CRMCore]
+
 .breadcrumb {
   position: relative;
-  margin: $breadcrumb-margin;
-
   @include borders($breadcrumb-borders);
 }

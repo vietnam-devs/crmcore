@@ -1,7 +1,8 @@
+import 'babel-polyfill';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter, Route, Switch} from 'react-router-dom';
-import {createBrowserHistory} from 'history';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
 // Containers
 import Full from './containers/Layout/Full';
@@ -12,18 +13,19 @@ import 'font-awesome/css/font-awesome.min.css';
 // Import Simple Line Icons Set
 import 'simple-line-icons/css/simple-line-icons.css';
 // Import Main styles for this application
-import './scss/style.scss'
+import './scss/style.css';
+// Temp fix for reactstrap
+// import './scss/core/_dropdown-menu-right.scss';
 
 // import registerServiceWorker from './registerServiceWorker';
 
-const history = createBrowserHistory();
-
-ReactDOM.render((
-  <HashRouter history={history}>
+ReactDOM.render(
+  <HashRouter>
     <Switch>
-      <Route path="/" name="Home" component={Full}/>
+      <Route path="/" name="Home" component={Full} />
     </Switch>
-  </HashRouter>
-), document.getElementById('root'));
+  </HashRouter>,
+  document.getElementById('root')
+);
 
 // registerServiceWorker();

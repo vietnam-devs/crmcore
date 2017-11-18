@@ -662,11 +662,11 @@ $popover-body-color:               $body-color !default;
 $popover-body-padding-y:           9px !default;
 $popover-body-padding-x:           14px !default;
 
-$popover-arrow-width:                 10px !default;
+$popover-arrow-width:                 10rem !default;
 $popover-arrow-height:                5px !default;
 $popover-arrow-color:                 $popover-bg !default;
 
-$popover-arrow-outer-width:           ($popover-arrow-width + 1px) !default;
+$popover-arrow-outer-width:           ($popover-arrow-width + 1rem) !default;
 $popover-arrow-outer-color:           fade-in($popover-border-color, .05) !default;
 
 

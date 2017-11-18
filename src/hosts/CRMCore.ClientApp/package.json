@@ -8,19 +8,24 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "1.0.17"
+    "babel-polyfill": "^6.26.0",
+    "node-sass-chokidar": "^0.0.3",
+    "react-scripts": "1.0.17",
+    "npm-run-all": "^4.1.2"
   },
   "dependencies": {
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1",
-    "babel-polyfill": "^6.26.0",
+    "bootstrap": "^4.0.0-beta",
     "chart.js": "^2.7.0",
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",
     "humps": "^2.0.1",
+    "moment": "^2.18.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.1.1",
     "react-addons-css-transition-group": "^16.0.0-alpha.3",
     "react-addons-transition-group": "^16.0.0-alpha.3",
     "react-chartjs-2": "^2.6.4",
+    "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "5.0.0-alpha.6",
@@ -31,14 +36,20 @@
     "redux-form": "^7.1.2",
     "redux-observable": "^0.17.0",
     "rxjs": "^5.5.2",
-    "simple-line-icons": "^2.4.1",
-    "moment": "^2.18.1",
-    "prop-types": "^15.6.0"
+    "simple-line-icons": "^2.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p build-css start-js",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 5.0.0"
   }
 }
