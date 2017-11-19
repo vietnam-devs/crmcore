@@ -1,5 +1,3 @@
-@import '../_core-variables'; // [CRMCore]
-
 @mixin button-social-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
   padding: $padding-y $padding-x;
   font-size: $font-size;
@@ -8,8 +6,8 @@
   @include border-radius($border-radius);
 
   &::before {
-    // width: ($padding-y * 2) + ($font-size * $line-height); // [CRMCore]
-    // height: ($padding-y * 2) + ($font-size * $line-height); // [CRMCore]
+    width: ($padding-y * 2) + ($font-size * $line-height);
+    height: ($padding-y * 2) + ($font-size * $line-height);
     padding: $padding-y 0;
     font-size: $font-size;
     line-height: $line-height;
@@ -17,12 +15,12 @@
   }
 
   span {
-    // margin-left: ($padding-y * 2) + ($font-size * $line-height); // [CRMCore]
+    margin-left: ($padding-y * 2) + ($font-size * $line-height);
   }
 
   &.icon {
-    // [CRMCore]width: ($padding-y * 2) + ($font-size * $line-height);
-    // [CRMCore]height: ($padding-y * 2) + ($font-size * $line-height);
+    width: ($padding-y * 2) + ($font-size * $line-height);
+    height: ($padding-y * 2) + ($font-size * $line-height);
   }
 }
 

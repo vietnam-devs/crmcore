@@ -1,9 +1,8 @@
-// scss-lint:disable all
-// Core Admin Variables
-@import '../_core-variables'; // [CRMCore]
-
 // Import Bootstrap source files
 @import "../bootstrap/bootstrap.scss";
+
+// scss-lint:disable all
+// Core Admin Variables
 
 $enable-sidebar-nav-rounded:          false !default;
 

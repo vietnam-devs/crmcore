@@ -1,5 +1,3 @@
-@import '../_core-variables'; // [CRMCore]
-
 @each $color, $value in $theme-colors {
   .modal-#{$color} {
 

@@ -1,5 +1,3 @@
-@import '../_core-variables'; // [CRMCore]
-
 @mixin switch-size($width, $height, $font-size, $handle-margin) {
   width: $width;
   height: $height;
