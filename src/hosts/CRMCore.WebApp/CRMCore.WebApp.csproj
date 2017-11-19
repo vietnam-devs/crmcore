@@ -29,8 +29,8 @@
   </Target>
 
   <Target Name="CopyAssetToOutput" AfterTargets="Build">
-    <Message Importance="high" Text="[CRMCore] Yarn is installing..." />
-    <Exec WorkingDirectory="..\CRMCore.ClientApp\" Condition=" !Exists('wwwroot/index.html') " Command="yarn install" />
+    <!-- <Message Importance="high" Text="[CRMCore] Yarn is installing..." />
+    <Exec WorkingDirectory="..\CRMCore.ClientApp\" Condition=" !Exists('wwwroot/index.html') " Command="yarn install" /> -->
     <Message Importance="high" Text="[CRMCore] Yarn is building..." />
     <Exec WorkingDirectory="..\CRMCore.ClientApp\" Condition=" !Exists('wwwroot/index.html') " Command="yarn build" />
     <Message Importance="high" Text="[CRMCore] Copying assets to Host project..." />
