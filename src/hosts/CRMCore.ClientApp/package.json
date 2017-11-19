@@ -1,6 +1,6 @@
 {
   "name": "crm-core-client-app",
-  "description": "A lightweigh CRM Web Application builds with a clean modern architecture and technology",
+  "description": "A lightweight CRM Web Application builds with a clean modern architecture and technology",
   "main": "index.js",
   "repository": "https://github.com/crmcore/crm-core",
   "author": "phuongle, thangchung",
