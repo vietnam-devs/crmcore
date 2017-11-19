@@ -6,8 +6,7 @@ import { Container } from 'reactstrap';
 import { Header, Sidebar, Breadcrumb, Aside, Footer } from 'components';
 
 // containers
-import Dashboard from 'containers/Dashboard/Dashboard';
-import { FieldMgt, EntityMgt } from 'containers';
+import { Dashboard, FieldMgt, EntityMgt } from 'containers';
 
 class Full extends Component {
   render() {

@@ -22,9 +22,11 @@ const store = createStore();
 ReactDOM.render(
   <Provider store={store} key="provider">
     <ConnectedRouter history={routerHistory}>
+      <HashRouter>
         <Switch>
           <Route path="/" name="Home" component={Full} />
         </Switch>
+      </HashRouter>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
