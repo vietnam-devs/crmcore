@@ -1,4 +1,4 @@
-<p align="center">
+﻿<p align="center">
   <img align="center" class="image" src="https://github.com/crm-core/crmcore/blob/master/art/logo.png" width="150px">  
 </p>
 
@@ -18,7 +18,7 @@
 <img width='46px' src="http://browserbadge.com/chrome/39">
 </p>
 
-**CRM-Core** makes it easy to create and manage a **Lightweigh-CRM Web Application** efficiently.
+**CRM-Core** makes it easy to create and manage a **Lightweight-CRM Web Application** efficiently.
 
 ## Table of contents
 - [Quick start](https://github.com/crm-core/crmcore#quick-start)
@@ -74,23 +74,107 @@ Get updates on CRMCore' development and chat with the project maintainers and co
 
 ## Development
 
-#### Get code
+1. Get code
 
 ```bash
 git clone git@github.com:crm-core/crmcore.git
 cd crmcore
 ```
 
-### Development environment
+2. Back-end Development environment
 
-*Coming soon...*
+**You’ll need to have .NET SDK 2.x on your machine.**
 
-#### Install dependencies and run project
+It will be organized the initial project structure and install the transitive dependencies:
+
+```
+crm-core
+├── README.md
+├── LICENSE
+├── .gitignore
+├── global.json
+├── Dockerfile
+├── .travis.yml
+├── appveyor.yml
+├── crmcore.sln
+├── art
+└── src
+    └── crm
+        └── CRMCore.Module.Common
+        └── CRMCore.Module.Contact
+        └── CRMCore.Module.Setup
+        └── CRMCore.Module.Spa
+        └── Directory.Build.props
+    └── framework
+        └── CRMCore.Framework.CqrsLite
+        └── CRMCore.Framework.Entities
+        └── CRMCore.Framework.MvcCore
+    └── hosts
+        └── CRMCore.ClientApp
+        └── CRMCore.WebApp
+    └── modules
+        └── CRMCore.Module.Communication
+        └── CRMCore.Module.Data
+        └── CRMCore.Module.Identity
+    └── targets
+        └── CRMCore.Application.Crm.targets
+        └── CRMCore.Application.Targets
+        └── CRMCore.Module.Targets
+        └── CRMCore.Theme.Targets
+    └── themes
+        └── CRMCore.Theme
+```
+
+3. Front-end Development environment
+
+**You’ll need to have Node >= 6 on your machine.**
+
+It will organized the initial project structure and install the transitive dependencies:
+
+```
+crm-core\src\hosts\CRMCore.ClientApp
+├── node_modules
+├── package.json
+├── yarn.lock
+├── .gitignore
+├── public
+│   └── favicon.ico
+│   └── index.html
+│   └── manifest.json
+└── src
+    └── components
+    └── configs
+    └── containers
+    └── redux
+        └── middlewares
+        └── modules
+    └── styles
+        └── bootstrap
+        └── core
+        └── vendors
+        └── images
+        └── style.scss
+    └── index.js
+    └── logo.svg
+    └── registerServiceWorker.js
+```
+
+4. Install dependencies and run project
 
 ```bash
+
+cd <your path>crmcore\src\hosts\CRMCore.WebApp
 dotnet restore
+dotnet run
+
+cd <your path>crmcore\src\hosts\CRMCore.ClientApp
 yarn install
+yarn start
+
 ```
+
+> When you build **CRMCore.WebApp**, then it will call MSBuild script inside to automatically build the assets for the front-end.
+> You need to remove the **index.html** inside wwwroot folder to make it happen.
 
 ## Contributors
 
