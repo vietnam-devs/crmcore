@@ -20,6 +20,9 @@ before_script:
 script:
   - if test "$TRAVIS_OS_NAME" == "linux"; then dotnet restore; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then    
+      cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.ClientApp;
+      yarn build;
+      cp -rfv  build/* ../CRMCore.WebApp/wwwroot/
       cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.WebApp;
       dotnet build;
       dotnet publish -c Release -o ../../../build/release;
@@ -27,6 +30,4 @@ script:
       docker build -t crmcore/crm-linux:latest .;
       docker login -u="$DOCKER_USER" -p="$DOCKER_PASS";
       docker push crmcore/crm-linux;
-      cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.ClientApp;
-      npm build;
    fi;
