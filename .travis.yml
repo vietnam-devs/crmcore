@@ -15,14 +15,14 @@ os:
 before_script:
   - npm install yarn typescript@2.5.3 -gm
   - npm install -g create-react-app npm-run-all node-sass-chokidar
-  - cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.ClientApp & npm install 
   - rm -rf $TRAVIS_BUILD_DIR/build/release
 script:
   - if test "$TRAVIS_OS_NAME" == "linux"; then dotnet restore; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then    
       cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.ClientApp;
+      yarn install;
       yarn build;
-      cp -rfv  build/* ../CRMCore.WebApp/wwwroot/
+      cp -rfv build/* ../CRMCore.WebApp/wwwroot/;
       cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.WebApp;
       dotnet build;
       dotnet publish -c Release -o ../../../build/release;
