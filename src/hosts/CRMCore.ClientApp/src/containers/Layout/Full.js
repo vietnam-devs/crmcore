@@ -3,14 +3,11 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 // components
-import Header from 'components/Header/';
-import Sidebar from 'components/Sidebar/';
-import Breadcrumb from 'components/Breadcrumb/';
-import Aside from 'components/Aside/';
-import Footer from 'components/Footer/';
+import { Header, Sidebar, Breadcrumb, Aside, Footer } from 'components';
 
 // containers
 import Dashboard from 'containers/Dashboard/Dashboard';
+import { FieldMgt, EntityMgt } from 'containers';
 
 class Full extends Component {
   render() {
@@ -28,6 +25,8 @@ class Full extends Component {
                   name="Dashboard"
                   component={Dashboard}
                 />
+                <Route path="/fields" name="Fields" component={FieldMgt} />
+                <Route path="/entities" name="Entities" component={EntityMgt} />
                 <Redirect from="/" to="/dashboard" />
               </Switch>
             </Container>
