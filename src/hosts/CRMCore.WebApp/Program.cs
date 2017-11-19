@@ -13,7 +13,7 @@ namespace CRMCore.WebApp
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                //.UseKestrel(k => { k.AddServerHeader = false; })
+                .UseKestrel(k => { k.AddServerHeader = false; })
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build();
