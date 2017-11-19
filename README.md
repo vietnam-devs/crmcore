@@ -62,8 +62,10 @@ For more information, you can check out [CRM Core on Docker Hub](https://hub.doc
 Have a bug or a feature request? Please first read the issue guidelines and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/crm-core/crmcore/issues/new).
 
 ## Dependencies
-*Coming soon: Technologies and frameworks*
 
+- [.NET Core SDK 2.0](https://www.microsoft.com/net/download)
+- [Create-React-App](https://github.com/facebookincubator/create-react-app)
+- [React CoreUI](https://github.com/mrholek/CoreUI-React)
 
 ## Community
 Get updates on CRMCore' development and chat with the project maintainers and community members:
