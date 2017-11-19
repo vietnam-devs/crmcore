@@ -6,4 +6,4 @@ WORKDIR /app
 
 COPY build/release .
 
-ENTRYPOINT [ "dotnet", "CRMCore.WebApp.dll" ]
+# ENTRYPOINT [ "dotnet", "CRMCore.WebApp.dll" ]
