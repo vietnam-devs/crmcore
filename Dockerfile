@@ -6,4 +6,6 @@ WORKDIR /app
 
 COPY build/release .
 
-ENTRYPOINT ["dotnet", "CRMCore.WebApp.dll"]
+CMD dotnet --version
+
+ENTRYPOINT dotnet CRMCore.WebApp.dll
