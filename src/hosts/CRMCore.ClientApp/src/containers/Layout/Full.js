@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
-// Components
-import Header from '../../components/Header/';
-import Sidebar from '../../components/Sidebar/';
-import Breadcrumb from '../../components/Breadcrumb/';
-import Aside from '../../components/Aside/';
-import Footer from '../../components/Footer/';
+// components
+import Header from 'components/Header/';
+import Sidebar from 'components/Sidebar/';
+import Breadcrumb from 'components/Breadcrumb/';
+import Aside from 'components/Aside/';
+import Footer from 'components/Footer/';
 
-import Dashboard from './../Dashboard/Dashboard';
+// containers
+import Dashboard from 'containers/Dashboard/Dashboard';
 
 class Full extends Component {
   render() {

@@ -5,6 +5,41 @@ export default {
       url: '/dashboard',
       icon: 'icon-speedometer',
       badge: {
+        variant: 'info'
+      }
+    },
+    {
+      name: 'Contacts',
+      url: '/contacts',
+      icon: 'icon-people',
+      badge: {
+        variant: 'info',
+        text: 'NEW'
+      }
+    },
+    {
+      name: 'Customers',
+      url: '/customers',
+      icon: 'icon-diamond',
+      badge: {
+        variant: 'info',
+        text: 'NEW'
+      }
+    },
+    {
+      name: 'Lead Sources',
+      url: '/lead-sources',
+      icon: 'icon-user',
+      badge: {
+        variant: 'info',
+        text: 'NEW'
+      }
+    },
+    {
+      name: 'Pipeline',
+      url: '/pipeline',
+      icon: 'icon-directions',
+      badge: {
         variant: 'info',
         text: 'NEW'
       }
