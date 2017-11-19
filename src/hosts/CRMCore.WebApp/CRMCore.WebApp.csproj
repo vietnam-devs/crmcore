@@ -31,11 +31,11 @@
   <Target Name="CopyAssetToOutput" AfterTargets="Build">
     <!-- <Message Importance="high" Text="[CRMCore] Yarn is installing..." />
     <Exec WorkingDirectory="..\CRMCore.ClientApp\" Condition=" !Exists('wwwroot/index.html') " Command="yarn install" /> -->
-    <Message Importance="high" Text="[CRMCore] Yarn is building..." />
+    <!-- <Message Importance="high" Text="[CRMCore] Yarn is building..." />
     <Exec WorkingDirectory="..\CRMCore.ClientApp\" Condition=" !Exists('wwwroot/index.html') " Command="yarn build" />
     <Message Importance="high" Text="[CRMCore] Copying assets to Host project..." />
     <Exec WorkingDirectory="../CRMCore.ClientApp/" Condition=" '$(OS)' != 'Windows_NT' And !Exists('wwwroot/index.html') " Command="cp -rfv  build/* ../CRMCore.WebApp/wwwroot/" />
-    <Exec WorkingDirectory="..\CRMCore.ClientApp\" Condition=" '$(OS)' == 'Windows_NT' And !Exists('wwwroot\index.html') " Command="xcopy.exe /S /R /Y /E build ..\CRMCore.WebApp\wwwroot" />
+    <Exec WorkingDirectory="..\CRMCore.ClientApp\" Condition=" '$(OS)' == 'Windows_NT' And !Exists('wwwroot\index.html') " Command="xcopy.exe /S /R /Y /E build ..\CRMCore.WebApp\wwwroot" /> -->
   </Target>
 
   <ItemGroup>
