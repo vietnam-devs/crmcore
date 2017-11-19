@@ -26,5 +26,6 @@ script:
       docker build -t crmcore/crm-linux:latest .;
       docker login -u="$DOCKER_USER" -p="$DOCKER_PASS";
       docker push crmcore/crm-linux;
-      cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.ClientApp & yarn build
+      cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.ClientApp;
+      yarn build;
    fi;
