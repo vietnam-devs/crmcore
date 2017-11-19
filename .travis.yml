@@ -14,7 +14,7 @@ os:
   - linux
 before_script:
   - npm install yarn typescript@2.5.3 -gm
-  - npm install -g create-react-app
+  - npm install -g create-react-app npm-run-all
   - cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.ClientApp & yarn install 
   - rm -rf $TRAVIS_BUILD_DIR/build/release
 script:
@@ -22,10 +22,13 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then    
       cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.WebApp;          
       dotnet publish -c Release -o ../../../build/release;
+      cd $TRAVIS_BUILD_DIR/build/release;
+      ls;
       cd $TRAVIS_BUILD_DIR;
       docker build -t crmcore/crm-linux:latest .;
       docker login -u="$DOCKER_USER" -p="$DOCKER_PASS";
       docker push crmcore/crm-linux;
       cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.ClientApp;
       yarn build;
+      npm build;
    fi;
