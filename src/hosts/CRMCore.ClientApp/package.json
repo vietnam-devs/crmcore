@@ -1,6 +1,7 @@
 {
   "name": "crm-core-client-app",
-  "description": "A lightweight CRM Web Application builds with a clean modern architecture and technology",
+  "description":
+    "A lightweight CRM Web Application builds with a clean modern architecture and technology",
   "main": "index.js",
   "repository": "https://github.com/crmcore/crm-core",
   "author": "phuongle, thangchung",
@@ -9,9 +10,10 @@
   "private": true,
   "devDependencies": {
     "babel-polyfill": "^6.26.0",
+    "cpx": "^1.5.0",
     "node-sass-chokidar": "^0.0.3",
-    "react-scripts": "1.0.17",
-    "npm-run-all": "^4.1.2"
+    "npm-run-all": "^4.1.2",
+    "react-scripts": "1.0.17"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-beta",
@@ -39,12 +41,15 @@
     "simple-line-icons": "^2.4.1"
   },
   "scripts": {
+    "copy-styles": "cpx \"src/**/*.css\" \"public/\"",
+    "copy-images": "cpx \"./src/**/*.{png,jpg}\" \"./public/\"",
+    "copy-assets": "npm-run-all copy-styles copy-images",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
+    "start": "npm-run-all -p watch-css copy-assets start-js",
     "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js",
+    "build": "npm-run-all build-css copy-assets build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
