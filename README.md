@@ -74,18 +74,18 @@ Get updates on CRMCore' development and chat with the project maintainers and co
 
 ## Development
 
-1. Get code
+### Get code
 
 ```bash
 git clone git@github.com:crm-core/crmcore.git
 cd crmcore
 ```
 
-2. Back-end Development environment
+### Back-end Development environment
 
 **You’ll need to have .NET SDK 2.x on your machine.**
 
-It will be organized the initial project structure and install the transitive dependencies:
+It will be organize the initial project structure and install the transitive dependencies:
 
 ```
 crm-core
@@ -125,11 +125,19 @@ crm-core
         └── CRMCore.Theme
 ```
 
-3. Front-end Development environment
+```bash
+
+cd <your path>crmcore\src\hosts\CRMCore.WebApp
+dotnet restore
+dotnet run
+
+```
+
+### Front-end Development environment
 
 **You’ll need to have Node >= 6 on your machine.**
 
-It will organized the initial project structure and install the transitive dependencies:
+It will organize the initial project structure and install the transitive dependencies:
 
 ```
 crm-core\src\hosts\CRMCore.ClientApp
@@ -159,13 +167,17 @@ crm-core\src\hosts\CRMCore.ClientApp
     └── registerServiceWorker.js
 ```
 
-4. Install dependencies and run project
+We need several packages that were installed in global scope as following commands
 
 ```bash
 
-cd <your path>crmcore\src\hosts\CRMCore.WebApp
-dotnet restore
-dotnet run
+npm i react-scripts npm-run-all cpx node-sass-chokidar
+
+```
+
+Then, we can run following commands
+
+```bash
 
 cd <your path>crmcore\src\hosts\CRMCore.ClientApp
 yarn install
