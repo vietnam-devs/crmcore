@@ -4,12 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using CQRSlite.Commands;
-using CQRSlite.Events;
-using CQRSlite.Infrastructure;
-using CQRSlite.Routing.Exception;
+using CRMCore.Framework.CqrsLite.Commands;
+using CRMCore.Framework.CqrsLite.Events;
+using CRMCore.Framework.CqrsLite.Infrastructure;
+using CRMCore.Framework.CqrsLite.Routing.Exception;
 
-namespace CQRSlite.Routing
+namespace CRMCore.Framework.CqrsLite.Routing
 {
     /// <summary>
     /// Automatic registration of all handlers in assembly

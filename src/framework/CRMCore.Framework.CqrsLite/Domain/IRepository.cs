@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CQRSlite.Domain
+namespace CRMCore.Framework.CqrsLite.Domain
 {
     /// <summary>
     /// Defines a repository where aggregates should be saved to and fetched from.

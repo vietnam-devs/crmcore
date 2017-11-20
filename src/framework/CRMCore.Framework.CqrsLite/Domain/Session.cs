@@ -1,11 +1,11 @@
-﻿using CQRSlite.Domain.Exception;
+﻿using CRMCore.Framework.CqrsLite.Domain.Exception;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CQRSlite.Domain
+namespace CRMCore.Framework.CqrsLite.Domain
 {
     /// <summary>
     /// Implementation of unit of work for aggregates.

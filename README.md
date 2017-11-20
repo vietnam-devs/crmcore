@@ -32,6 +32,10 @@
 
 ## Quick start
 
+### Real world demo
+
+You can access your application at http://52.230.125.209
+
 ### Docker
 
 #### Linux / Unix
@@ -51,7 +55,7 @@ For more information, you can check out [CRM Core on Docker Hub](https://hub.doc
 ### Manual
 
 - Download the latest .NET SDK (2.x) & NodeJS
-- Clone the repo: `git clone [https://github.com/crm-core/crmcore.git](https://github.com/crm-core/crmcore.git)`
+- Clone the repo: `git clone https://github.com/crm-core/crmcore.git`
 - Change location to `\crmcore\src\Hosts\CRMCore.WebApp`, then run command `dotnet run`
 
 ## What's included

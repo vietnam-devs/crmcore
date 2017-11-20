@@ -1,6 +1,6 @@
-﻿using CQRSlite.Messages;
+﻿using CRMCore.Framework.CqrsLite.Messages;
 
-namespace CQRSlite.Events
+namespace CRMCore.Framework.CqrsLite.Events
 {
     /// <summary>
     /// Defines a handler for an event.

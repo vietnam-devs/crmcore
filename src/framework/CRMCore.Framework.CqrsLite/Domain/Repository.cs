@@ -1,12 +1,12 @@
-using CQRSlite.Domain.Exception;
-using CQRSlite.Domain.Factories;
-using CQRSlite.Events;
+using CRMCore.Framework.CqrsLite.Domain.Exception;
+using CRMCore.Framework.CqrsLite.Domain.Factories;
+using CRMCore.Framework.CqrsLite.Events;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CQRSlite.Domain
+namespace CRMCore.Framework.CqrsLite.Domain
 {
     /// <summary>
     /// Repository gets and saves aggregates from event store.

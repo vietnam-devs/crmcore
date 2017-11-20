@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace CQRSlite.Messages
+namespace CRMCore.Framework.CqrsLite.Messages
 {
     /// <summary>
     /// Defines a handler for a message with a cancellation token.

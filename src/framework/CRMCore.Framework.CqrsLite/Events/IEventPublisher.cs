@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace CQRSlite.Events
+namespace CRMCore.Framework.CqrsLite.Events
 {
     /// <summary>
     /// Defines an event publisher

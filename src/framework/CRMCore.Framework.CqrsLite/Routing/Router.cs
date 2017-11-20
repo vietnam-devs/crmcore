@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CQRSlite.Commands;
-using CQRSlite.Events;
-using CQRSlite.Messages;
+using CRMCore.Framework.CqrsLite.Commands;
+using CRMCore.Framework.CqrsLite.Events;
+using CRMCore.Framework.CqrsLite.Messages;
 
-namespace CQRSlite.Routing
+namespace CRMCore.Framework.CqrsLite.Routing
 {
     /// <summary>
     /// Default router implementation for sending commands and publishing events.

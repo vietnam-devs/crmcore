@@ -1,7 +1,7 @@
-﻿using CQRSlite.Messages;
+﻿using CRMCore.Framework.CqrsLite.Messages;
 using System;
 
-namespace CQRSlite.Events
+namespace CRMCore.Framework.CqrsLite.Events
 {
     /// <summary>
     /// Defines an event with required fields.

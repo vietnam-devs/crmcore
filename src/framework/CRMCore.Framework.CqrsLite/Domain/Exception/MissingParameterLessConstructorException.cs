@@ -1,6 +1,6 @@
 using System;
 
-namespace CQRSlite.Domain.Exception
+namespace CRMCore.Framework.CqrsLite.Domain.Exception
 {
     public class MissingParameterLessConstructorException : System.Exception
     {

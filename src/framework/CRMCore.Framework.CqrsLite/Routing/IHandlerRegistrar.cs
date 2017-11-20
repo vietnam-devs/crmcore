@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CQRSlite.Messages;
+using CRMCore.Framework.CqrsLite.Messages;
 
-namespace CQRSlite.Routing
+namespace CRMCore.Framework.CqrsLite.Routing
 {
     /// <summary>
     /// Interface for handle registation.

@@ -1,11 +1,11 @@
-﻿using CQRSlite.Domain.Exception;
-using CQRSlite.Events;
-using CQRSlite.Infrastructure;
+﻿using CRMCore.Framework.CqrsLite.Domain.Exception;
+using CRMCore.Framework.CqrsLite.Events;
+using CRMCore.Framework.CqrsLite.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CQRSlite.Domain
+namespace CRMCore.Framework.CqrsLite.Domain
 {
     /// <summary>
     /// Class to inherit all aggregates from

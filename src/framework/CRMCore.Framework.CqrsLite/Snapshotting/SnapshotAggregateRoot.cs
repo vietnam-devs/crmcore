@@ -1,6 +1,6 @@
-﻿using CQRSlite.Domain;
+﻿using CRMCore.Framework.CqrsLite.Domain;
 
-namespace CQRSlite.Snapshotting
+namespace CRMCore.Framework.CqrsLite.Snapshotting
 {
     /// <summary>
     /// Class to inherit aggregates that should be snapshotted from.

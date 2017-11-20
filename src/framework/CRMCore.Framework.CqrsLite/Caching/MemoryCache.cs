@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CQRSlite.Domain;
+using CRMCore.Framework.CqrsLite.Domain;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace CQRSlite.Caching
+namespace CRMCore.Framework.CqrsLite.Caching
 {
     /// <summary>
     /// A cache implementation that has cache in memory and 15 minutes sliding expiration.

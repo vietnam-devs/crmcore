@@ -1,4 +1,4 @@
-﻿namespace CQRSlite.Messages
+﻿namespace CRMCore.Framework.CqrsLite.Messages
 {
     /// <summary>
     /// Marker interface for a message

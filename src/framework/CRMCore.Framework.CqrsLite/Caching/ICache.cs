@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CQRSlite.Domain;
+using CRMCore.Framework.CqrsLite.Domain;
 
-namespace CQRSlite.Caching
+namespace CRMCore.Framework.CqrsLite.Caching
 {
     /// <summary>
     /// Defines a cache implementation

@@ -1,12 +1,12 @@
-﻿using CQRSlite.Domain;
-using CQRSlite.Events;
+﻿using CRMCore.Framework.CqrsLite.Domain;
+using CRMCore.Framework.CqrsLite.Events;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CQRSlite.Caching
+namespace CRMCore.Framework.CqrsLite.Caching
 {
     /// <summary>
     /// Thread safe repository decorator that can cache aggregates.

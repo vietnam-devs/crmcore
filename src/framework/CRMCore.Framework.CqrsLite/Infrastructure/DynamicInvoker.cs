@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace CQRSlite.Infrastructure
+namespace CRMCore.Framework.CqrsLite.Infrastructure
 {
     internal static class DynamicInvoker
     {

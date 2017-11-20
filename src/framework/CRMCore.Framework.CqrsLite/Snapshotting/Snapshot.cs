@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CQRSlite.Snapshotting
+namespace CRMCore.Framework.CqrsLite.Snapshotting
 {
     /// <summary>
     /// A memento object of a aggregate in a version.

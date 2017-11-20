@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CQRSlite.Domain
+namespace CRMCore.Framework.CqrsLite.Domain
 {
     /// <summary>
     /// Defines unit of work that handles several aggregates.

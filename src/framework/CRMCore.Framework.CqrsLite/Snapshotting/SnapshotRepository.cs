@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CQRSlite.Domain;
-using CQRSlite.Domain.Factories;
-using CQRSlite.Events;
-using CQRSlite.Infrastructure;
+using CRMCore.Framework.CqrsLite.Domain;
+using CRMCore.Framework.CqrsLite.Domain.Factories;
+using CRMCore.Framework.CqrsLite.Events;
+using CRMCore.Framework.CqrsLite.Infrastructure;
 
-namespace CQRSlite.Snapshotting
+namespace CRMCore.Framework.CqrsLite.Snapshotting
 {
     /// <summary>
     /// Repository decorator that can snapshot aggregates.

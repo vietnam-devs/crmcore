@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CQRSlite.Routing.Exception
+namespace CRMCore.Framework.CqrsLite.Routing.Exception
 {
     public class HandlerNotResolvedException : ArgumentNullException
     {

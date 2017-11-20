@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CQRSlite.Snapshotting
+namespace CRMCore.Framework.CqrsLite.Snapshotting
 {
     /// <summary>
     /// Defines the methods needed from the snapshot store.

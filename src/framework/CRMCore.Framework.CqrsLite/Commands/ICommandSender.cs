@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace CQRSlite.Commands
+namespace CRMCore.Framework.CqrsLite.Commands
 {
     /// <summary>
     /// Defines a command sender.

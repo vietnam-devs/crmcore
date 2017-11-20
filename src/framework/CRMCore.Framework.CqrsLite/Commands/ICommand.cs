@@ -1,6 +1,6 @@
-﻿using CQRSlite.Messages;
+﻿using CRMCore.Framework.CqrsLite.Messages;
 
-namespace CQRSlite.Commands
+namespace CRMCore.Framework.CqrsLite.Commands
 {
     /// <summary>
     /// Defines an command with required fields.

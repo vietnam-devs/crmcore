@@ -1,7 +1,7 @@
 using System;
-using CQRSlite.Domain;
+using CRMCore.Framework.CqrsLite.Domain;
 
-namespace CQRSlite.Snapshotting
+namespace CRMCore.Framework.CqrsLite.Snapshotting
 {
     /// <summary>
     /// Defines strategy for when to take snapshot.

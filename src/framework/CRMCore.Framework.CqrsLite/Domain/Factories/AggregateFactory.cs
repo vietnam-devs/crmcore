@@ -1,7 +1,7 @@
-﻿using CQRSlite.Domain.Exception;
+﻿using CRMCore.Framework.CqrsLite.Domain.Exception;
 using System;
 
-namespace CQRSlite.Domain.Factories
+namespace CRMCore.Framework.CqrsLite.Domain.Factories
 {
     internal static class AggregateFactory
     {

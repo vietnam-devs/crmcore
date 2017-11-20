@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
-using CQRSlite.Domain;
+using CRMCore.Framework.CqrsLite.Domain;
 
-namespace CQRSlite.Snapshotting
+namespace CRMCore.Framework.CqrsLite.Snapshotting
 {
     /// <summary>
     /// Default implementaion of snapshot strategy interface/

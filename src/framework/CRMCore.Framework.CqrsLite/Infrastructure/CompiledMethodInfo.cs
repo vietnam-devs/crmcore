@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace CQRSlite.Infrastructure
+namespace CRMCore.Framework.CqrsLite.Infrastructure
 {
     internal class CompiledMethodInfo
     {
