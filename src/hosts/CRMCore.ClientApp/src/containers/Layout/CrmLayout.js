@@ -6,9 +6,9 @@ import { Container } from 'reactstrap';
 import { Header, Sidebar, Breadcrumb, Aside, Footer } from 'components';
 
 // containers
-import { Dashboard, FieldMgt, EntityMgt } from 'containers';
+import { CrmDashboard } from 'containers';
 
-class Full extends Component {
+class CrmLayout extends Component {
   render() {
     return (
       <div className="app">
@@ -20,13 +20,11 @@ class Full extends Component {
             <Container fluid>
               <Switch>
                 <Route
-                  path="/dashboard"
-                  name="Dashboard"
-                  component={Dashboard}
+                  path="/crm/dashboard"
+                  name="CRM Dashboard"
+                  component={CrmDashboard}
                 />
-                <Route path="/fields" name="Fields" component={FieldMgt} />
-                <Route path="/entities" name="Entities" component={EntityMgt} />
-                <Redirect from="/" to="/dashboard" />
+                <Redirect from="/crm" to="/crm/dashboard" />
               </Switch>
             </Container>
           </main>
@@ -38,4 +36,4 @@ class Full extends Component {
   }
 }
 
-export default Full;
+export default CrmLayout;

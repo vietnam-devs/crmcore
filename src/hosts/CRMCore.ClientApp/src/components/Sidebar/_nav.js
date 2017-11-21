@@ -14,7 +14,7 @@ export default {
       children: [
         {
           name: 'Contacts',
-          url: '/contacts',
+          url: '/crm/contacts',
           icon: 'icon-people',
           badge: {
             variant: 'info'
@@ -22,7 +22,7 @@ export default {
         },
         {
           name: 'Customers',
-          url: '/customers',
+          url: '/crm/customers',
           icon: 'icon-diamond',
           badge: {
             variant: 'info'
@@ -30,7 +30,7 @@ export default {
         },
         {
           name: 'Lead Sources',
-          url: '/lead-sources',
+          url: '/crm/lead-sources',
           icon: 'icon-user',
           badge: {
             variant: 'info'
@@ -38,7 +38,7 @@ export default {
         },
         {
           name: 'Pipeline',
-          url: '/pipeline',
+          url: '/crm/pipeline',
           icon: 'icon-directions',
           badge: {
             variant: 'info',
@@ -53,15 +53,15 @@ export default {
       children: [
         {
           name: 'Fields',
-          url: '/fields',
+          url: '/metadata/fields',
           icon: 'icon-doc',
           badge: {
             variant: 'info'
           }
         },
         {
-          name: 'Entities',
-          url: '/entities',
+          name: 'Schemas',
+          url: '/metadata/schemas',
           icon: 'icon-docs',
           badge: {
             variant: 'info'

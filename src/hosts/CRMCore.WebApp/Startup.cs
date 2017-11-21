@@ -34,6 +34,16 @@ namespace CRMCore.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(JavaScriptEncoder.Default);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    policy => policy.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
+
             services.AddMvcModules();
             services.AddRouteAnalyzer();
         }
@@ -84,6 +94,8 @@ namespace CRMCore.WebApp
                 {
                     appApi.UseExceptionHandler("/Home/Error");
                 }
+
+                app.UseCors("CorsPolicy");
 
                 /*appApi.MapWhen(x => !IsIdentityRequest(x), webApp =>
                 {

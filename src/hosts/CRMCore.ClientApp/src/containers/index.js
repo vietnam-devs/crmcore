@@ -1,3 +1,11 @@
-export { default as Dashboard } from './Dashboard/Dashboard';
+export { default as FullLayout } from './Layout/FullLayout';
+export { default as FullDashboard } from './Dashboard/FullDashboard';
+
+export { default as CrmLayout } from './Layout/CrmLayout';
+export { default as CrmDashboard } from './Dashboard/CrmDashboard';
+
+export { default as MetadataLayout } from './Layout/MetadataLayout';
+export { default as MetadataDashboard } from './Dashboard/MetadataDashboard';
+
 export { default as FieldMgt } from './Field/FieldMgt';
-export { default as EntityMgt } from './Entity/EntityMgt';
+export { default as SchemaMgt } from './Schema/SchemaMgt';

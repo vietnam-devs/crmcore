@@ -64,6 +64,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Spa", "src\c
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_RootFolders", "_RootFolders", "{D702221E-5229-4637-A4C1-AF187D973DBD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Schema", "src\modules\CRMCore.Module.Schema\CRMCore.Module.Schema.csproj", "{2B197BB9-B76D-4CE6-BF74-B013DEF683DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -134,6 +136,10 @@ Global
 		{4E8DD3CB-A2D9-44DF-AD04-B2A2FC46E988}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E8DD3CB-A2D9-44DF-AD04-B2A2FC46E988}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E8DD3CB-A2D9-44DF-AD04-B2A2FC46E988}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B197BB9-B76D-4CE6-BF74-B013DEF683DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B197BB9-B76D-4CE6-BF74-B013DEF683DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B197BB9-B76D-4CE6-BF74-B013DEF683DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B197BB9-B76D-4CE6-BF74-B013DEF683DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,6 +162,7 @@ Global
 		{5015C00D-00CF-4C7D-B745-63B8F5361F2B} = {801A9F75-24F6-4D8C-A884-98C6BE76986B}
 		{0CB57AF1-801B-48AA-91E8-10C08A539A55} = {837B5FF2-B91A-4DA7-9D9E-9837F5B715C2}
 		{4E8DD3CB-A2D9-44DF-AD04-B2A2FC46E988} = {837B5FF2-B91A-4DA7-9D9E-9837F5B715C2}
+		{2B197BB9-B76D-4CE6-BF74-B013DEF683DF} = {74D2F004-44D9-4BEE-AEA7-51DFA9FD027C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3171C67F-EFB1-46FF-A566-6DC6C1E80FC5}

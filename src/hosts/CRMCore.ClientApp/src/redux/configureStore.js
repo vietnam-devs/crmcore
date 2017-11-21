@@ -1,12 +1,17 @@
 import { createStore as _createStore, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
+import { createEpicMiddleware } from 'redux-observable';
 import createHistory from 'history/createBrowserHistory';
-import reducers from './modules/reducers';
+
+import reducers, { rootEpic } from './modules/reducers';
 
 export const routerHistory = createHistory();
 
+// Combine all epics and instantiate the app-wide store instance
+const epicMiddleware = createEpicMiddleware(rootEpic);
+
 export default function createStore() {
-  const middlewares = [routerMiddleware(routerHistory)];
+  const middlewares = [routerMiddleware(routerHistory), epicMiddleware];
 
   const store = _createStore(
     reducers,

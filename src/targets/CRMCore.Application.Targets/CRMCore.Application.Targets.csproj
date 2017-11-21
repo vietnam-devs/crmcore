@@ -14,5 +14,6 @@
   
 	<ItemGroup>
 	  <ProjectReference Include="..\..\modules\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj" />
+	  <ProjectReference Include="..\..\modules\CRMCore.Module.Schema\CRMCore.Module.Schema.csproj" />
 	</ItemGroup>
 </Project>
