@@ -1,29 +1,42 @@
 ﻿@page
 
-@using Microsoft.AspNetCore.Http;
-
-@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env;
+@model CRMCore.Module.Identity.ViewModels.LoginViewModel;
 
 @{
-    Layout = "packages/CRMCore.Theme/Views/_Layout";
+    Layout = "packages/CRMCore.Theme/Views/_SimpleLayout";
+    ViewData["Title"] = "SignIn";
 }
 
-
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-8">
-		<section>
-			 <form method="post" class="form-horizontal">
-                <h4></h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label"></label>
-                    <div class="col-md-9">
-                        <input class="form-control" autofocus />
-                        <span  class="text-danger"></span>
-                    </div>
-                </div>
-			</form>
-		</section>
-	</div>
+        <div class="card-group">
+            <div class="card p-4">
+                <div class="card-body">
+					<form method="post">
+                        <h1>Login</h1>
+                        <p class="text-muted">Sign In to your account</p>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-addon"><i class="icon-user"></i></span>
+                            <input asp-for="UserName" type="text" class="form-control" placeholder="Username" autofocus />
+						<span asp-validation-for="UserName" class="text-danger"></span>
+                      </div>
+                      <div class="input-group mb-4">
+                        <span class="input-group-addon"><i class="icon-lock"></i></span>
+                        <input type="password" class="form-control" placeholder="Password">
+                      </div>
+                        <div class="row">
+                        <div class="col-6">
+                          <button type="submit" class="btn btn-primary px-4">Login</button>
+                        </div>
+                        <div class="col-6 text-right">
+                          <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                        </div>
+                      </div>
+                   </form>
+                </div>     		
+            </div>
+        </div>	
+    </div>
 </div>
+

@@ -4,34 +4,14 @@
 	<head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - MvcSandbox</title>
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css" />
-        <style>
-            .body-content {
-                margin-top: 50px;
-            }
-        </style>
+        <title>CRM Core - @ViewData["Title"]</title>
+
+		<link rel="stylesheet" href="http://coreui.io/demo/Static_Demo/vendors/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="http://coreui.io/demo/Static_Demo/vendors/css/simple-line-icons.min.css" />
+        <link rel="stylesheet" href="~/styles/style.css" />
     </head>
-	<body>
-		 <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">MvcSandbox</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="container body-content">
+	<body class="app flex-row align-items-center">
+        <div class="container">
             @RenderBody()
             <hr />
             <footer>
