@@ -8,6 +8,7 @@ using CRMCore.Framework.MvcCore.Extensions;
 using Microsoft.Extensions.Configuration;
 using System.Text.Encodings.Web;
 using AspNetCore.RouteAnalyzer;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace CRMCore.WebApp
 {
@@ -46,6 +47,17 @@ namespace CRMCore.WebApp
 
             services.AddMvcModules();
             services.AddRouteAnalyzer();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.DescribeAllEnumsAsStrings();
+                options.SwaggerDoc("v1", new Info
+                {
+                    Title = "CRM-Core",
+                    Version = "v1",
+                    Description = "CRM-Core API set."
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -96,6 +108,12 @@ namespace CRMCore.WebApp
                 }
 
                 app.UseCors("CorsPolicy");
+
+                app.UseSwagger().UseSwaggerUI(
+                    c =>
+                    {
+                        c.SwaggerEndpoint("/swagger/v1/swagger.json", "CRM-Core API set.");
+                    });
 
                 /*appApi.MapWhen(x => !IsIdentityRequest(x), webApp =>
                 {

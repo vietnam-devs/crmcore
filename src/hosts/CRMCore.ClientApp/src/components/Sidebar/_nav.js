@@ -75,6 +75,16 @@ export default {
       icon: 'icon-star',
       children: [
         {
+          name: 'Docs',
+          url: '/docs/',
+          icon: 'icon-star'
+        },
+        {
+          name: 'Swagger',
+          url: '/swagger',
+          icon: 'icon-star'
+        },
+        {
           name: 'Login',
           url: '/login',
           icon: 'icon-star'

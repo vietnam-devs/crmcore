@@ -1,7 +1,6 @@
 {
   "name": "crm-core-client-app",
-  "description":
-    "A lightweight CRM Web Application builds with a clean modern architecture and technology",
+  "description": "A lightweight CRM Web Application builds with a clean modern architecture and technology",
   "main": "index.js",
   "repository": "https://github.com/crmcore/crm-core",
   "author": "phuongle, thangchung",
@@ -34,6 +33,7 @@
     "react-table": "^6.6.0",
     "react-transition-group": "^2.2.1",
     "reactstrap": "^5.0.0-alpha.3",
+    "redoc": "^1.19.3",
     "redux": "^3.7.2",
     "redux-form": "^7.1.2",
     "redux-observable": "^0.17.0",
@@ -41,9 +41,12 @@
     "simple-line-icons": "^2.4.1"
   },
   "scripts": {
+    "copy-redoc": "cpx \"node_modules/redoc/dist/**\" \"public/vendors/redoc\"",
+    "copy-font-awesome-styles": "cpx \"node_modules/font-awesome/css/**/*.css\" \"public/styles/vendors/\"",
+    "copy-font-simple-styles": "cpx \"node_modules/simple-line-icons/css/**/*.css\" \"public/styles/vendors/\"",
     "copy-styles": "cpx \"src/**/*.css\" \"public/\"",
     "copy-images": "cpx \"./src/**/*.{png,jpg}\" \"./public/\"",
-    "copy-assets": "npm-run-all copy-styles copy-images",
+    "copy-assets": "npm-run-all copy-styles copy-images copy-font-awesome-styles copy-font-simple-styles copy-redoc",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
