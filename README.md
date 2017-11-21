@@ -34,7 +34,7 @@
 
 ### Real world demo
 
-You can access your application at http://52.230.125.209
+You can access to the application on Azure at http://52.230.125.209
 
 ### Docker
 
