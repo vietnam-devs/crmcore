@@ -10,11 +10,14 @@ import createStore, { routerHistory } from 'redux/configureStore';
 // import registerServiceWorker from './registerServiceWorker';
 
 // Containers
-import Full from './containers/Layout/Full';
+import FullLayout from './containers/Layout/FullLayout';
+import CrmLayout from './containers/Layout/CrmLayout';
+import MetadataLayout from './containers/Layout/MetadataLayout';
 
 // Styles
 import 'font-awesome/css/font-awesome.min.css';
 import 'simple-line-icons/css/simple-line-icons.css';
+import 'react-table/react-table.css';
 import './styles/style.css';
 
 const store = createStore();
@@ -24,7 +27,9 @@ ReactDOM.render(
     <ConnectedRouter history={routerHistory}>
       <HashRouter>
         <Switch>
-          <Route path="/" name="Home" component={Full} />
+          <Route path="/metadata" name="Metadata" component={MetadataLayout} />
+          <Route path="/crm" name="Crm" component={CrmLayout} />
+          <Route path="/" name="Home" component={FullLayout} />
         </Switch>
       </HashRouter>
     </ConnectedRouter>

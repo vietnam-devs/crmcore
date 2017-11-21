@@ -10,7 +10,7 @@ namespace CRMCore.Framework.CqrsLite.Events
     /// </summary>
     public interface IEventStore
     {
-        /// <summary>
+        /// <summary>                          u
         /// Save events
         /// </summary>
         /// <param name="events">Events to be saved</param>

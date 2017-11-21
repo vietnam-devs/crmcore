@@ -175,7 +175,7 @@ We need several packages that were installed in global scope as following comman
 
 ```bash
 
-npm i react-scripts npm-run-all cpx node-sass-chokidar
+npm i react-scripts npm-run-all cpx node-sass-chokidar -g
 
 ```
 

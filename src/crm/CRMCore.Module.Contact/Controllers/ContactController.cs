@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace CRMCore.Module.Contact.Controllers
 {
     [Area("CRMCore.Module.Contact")]
-    [Route("contact/api/[controller]")]
-    public class ContactsController : Controller
+    [Route("contact/api/contacts")]
+    public class ContactController : Controller
     {
         // GET api/values
         [HttpGet]
