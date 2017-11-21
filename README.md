@@ -34,7 +34,10 @@
 
 ### Real world demo
 
-You can access to the application on Azure at http://52.230.125.209
+You can access to the application on Azure as following links:
+- http://52.187.186.33
+- http://52.187.186.33/swagger
+- http://52.187.186.33/docs
 
 ### Docker
 
