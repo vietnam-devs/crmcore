@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*using Microsoft.AspNetCore.Mvc;
 
 namespace CRMCore.Module.ReDoc.Controllers
 {
@@ -14,4 +14,4 @@ namespace CRMCore.Module.ReDoc.Controllers
             return View(nameof(Docs), vm);
         }
     }
-}
+} */
