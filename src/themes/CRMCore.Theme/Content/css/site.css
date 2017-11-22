@@ -1,0 +1,15 @@
+.crm-core .form-control{
+    border-left-width: 4px;
+}
+
+.crm-core .form-control:focus{
+    box-shadow: none;
+}
+
+.crm-core .form-control.valid {
+    border-left-color: green;
+}
+
+.crm-core .form-control.input-validation-error {
+    border-left-color: red; !important;
+}

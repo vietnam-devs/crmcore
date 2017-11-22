@@ -1,42 +1,48 @@
 ﻿@page
 
-@model CRMCore.Module.Identity.ViewModels.LoginViewModel;
+@using CRMCore.Module.Identity.Pages.Login
+
+@model IndexModel
+
 
 @{
-    Layout = "packages/CRMCore.Theme/Views/_SimpleLayout";
     ViewData["Title"] = "SignIn";
 }
 
-<div class="row justify-content-center">
+<div class="row justify-content-center crm-core">
     <div class="col-md-8">
         <div class="card-group">
             <div class="card p-4">
                 <div class="card-body">
-					<form method="post">
+                    <form method="POST">
                         <h1>Login</h1>
                         <p class="text-muted">Sign In to your account</p>
                         <div asp-validation-summary="All" class="text-danger"></div>
+                        
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-user"></i></span>
-                            <input asp-for="UserName" type="text" class="form-control" placeholder="Username" autofocus />
-						<span asp-validation-for="UserName" class="text-danger"></span>
-                      </div>
-                      <div class="input-group mb-4">
-                        <span class="input-group-addon"><i class="icon-lock"></i></span>
-                        <input type="password" class="form-control" placeholder="Password">
-                      </div>
+                            <input asp-for="LoginVM.UserName" type="text" class="form-control" placeholder="Username" autofocus />
+                        </div>
+                        
+                        <div class="input-group mb-4">
+                            <span class="input-group-addon"><i class="icon-lock"></i></span>
+                            <input asp-for="LoginVM.Password" type="password" class="form-control" placeholder="Password">
+                        </div>
+                        
                         <div class="row">
-                        <div class="col-6">
-                          <button type="submit" class="btn btn-primary px-4">Login</button>
+                            <div class="col-6">
+                                <button type="submit" asp-page-handler="Login" class="btn btn-primary px-4">Login</button>
+                            </div>
+                            <div class="col-6 text-right">
+                                <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                            </div>
                         </div>
-                        <div class="col-6 text-right">
-                          <button type="button" class="btn btn-link px-0">Forgot password?</button>
-                        </div>
-                      </div>
-                   </form>
-                </div>     		
+                    </form>
+                </div>          
             </div>
-        </div>	
+        </div>  
     </div>
 </div>
+
+
 
