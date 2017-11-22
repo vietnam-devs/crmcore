@@ -1,10 +1,10 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity;
+
 namespace CRMCore.Framework.Entities.Models
 {
-    public class ApplicationUser
+    public class ApplicationUser: IdentityUser
     {
-        public ApplicationUser()
-        {
-        }
+       
     }
 }

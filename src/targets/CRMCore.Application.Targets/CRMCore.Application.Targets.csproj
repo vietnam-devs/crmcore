@@ -16,5 +16,7 @@
 	  <ProjectReference Include="..\..\modules\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj" />
 	  <ProjectReference Include="..\..\modules\CRMCore.Module.ReDoc\CRMCore.Module.ReDoc.csproj" />
 	  <ProjectReference Include="..\..\modules\CRMCore.Module.Schema\CRMCore.Module.Schema.csproj" />
+	  <ProjectReference Include="..\..\framework\CRMCore.Framework.Entities\CRMCore.Framework.Entities.csproj" />
+	  <ProjectReference Include="..\..\modules\CRMCore.Module.Data\CRMCore.Module.Data.csproj" />
 	</ItemGroup>
 </Project>

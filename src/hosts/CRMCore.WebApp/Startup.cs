@@ -9,6 +9,12 @@ using Microsoft.Extensions.Configuration;
 using System.Text.Encodings.Web;
 using AspNetCore.RouteAnalyzer;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using System;
+using CRMCore.Module.Data;
+using CRMCore.Framework.Entities.Models;
+using System.Reflection;
 
 namespace CRMCore.WebApp
 {
@@ -22,10 +28,25 @@ namespace CRMCore.WebApp
             "/error"
         };
 
-        public Startup(IHostingEnvironment env, IConfiguration config)
+        public Startup(IHostingEnvironment env)
         {
             Environment = env;
-            Configuration = config;
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+
+            if (env.IsDevelopment())
+            {
+                // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
+                builder.AddUserSecrets<Startup>();
+            }
+
+            builder.AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -34,6 +55,12 @@ namespace CRMCore.WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Default")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
             services.AddSingleton(JavaScriptEncoder.Default);
 
             services.AddCors(options =>

@@ -5,16 +5,24 @@
 		<ExcludedFiles>**\*.cs;*.csproj*;obj\**;bin\**;Assets.json;Assets\**;Properties\**;*.props;*.targets;.vs\**</ExcludedFiles>
 		<ModuleType Condition="'$(ModuleType)' == ''">Module</ModuleType>
 	</PropertyGroup>
-	<ItemGroup>
-		<PackageAssetFiles Include="**\*" Exclude="$(ExcludedFiles)" />
-	</ItemGroup>
+	
 	<Target Name="CopyPackageAssetFiles">
+		<ItemGroup>
+			<PackageAssetFiles Include="**\*" Exclude="$(ExcludedFiles);Content\**" />
+		</ItemGroup>
 		<ItemGroup>
 			<ApplicationAssetFiles Include="$(ApplicationDirectory)\packages\$(MSBuildProjectName)\**\*" />
 		</ItemGroup>
 		<Delete Files="@(ApplicationAssetFiles)" Condition="!Exists('%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="true" />
-		<Message Text="Packaging asset files: $(MSBuildProjectName)" Importance="high" />
+		<Message Text="Packaging module: $(MSBuildProjectName)" Importance="high" />
 		<Copy SourceFiles="@(PackageAssetFiles)" DestinationFolder="$(ApplicationDirectory)\packages\$(MSBuildProjectName)\%(RecursiveDir)" />
 		<Copy SourceFiles="obj\$(ModuleType).txt" DestinationFolder="$(ApplicationDirectory)\packages\$(MSBuildProjectName)" Condition="!Exists('$(ModuleType).txt')" />
+	</Target>
+	<Target Name="CopyModuleAssetFiles" AfterTargets="CopyPackageAssetFiles">
+		<ItemGroup>
+			<PackageContentFiles Include="Content\**\*" Exclude="$(ExcludedFiles)"/>
+		</ItemGroup>
+		<Message Text="Packaging module: $(MSBuildProjectName)" Importance="high" />
+		<Copy SourceFiles="@(PackageContentFiles)" DestinationFolder="$(ApplicationDirectory)\wwwroot\packages\$(MSBuildProjectName)\%(RecursiveDir)" />
 	</Target>
 </Project>
