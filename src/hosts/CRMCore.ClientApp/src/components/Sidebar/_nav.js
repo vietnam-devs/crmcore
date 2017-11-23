@@ -1,3 +1,5 @@
+import { globalConfig } from "configs";
+
 export default {
   items: [
     {
@@ -76,22 +78,22 @@ export default {
       children: [
         {
           name: 'Common',
-          url: 'http://localhost:5000/common/',
+          url: `${globalConfig.apiServer}/common`,
           icon: 'icon-star'
         },
         {
           name: 'Docs',
-          url: 'http://localhost:5000/docs/',
+          url: `${globalConfig.apiServer}/docs`,
           icon: 'icon-star'
         },
         {
           name: 'Swagger',
-          url: 'http://localhost:5000/swagger',
+          url: `${globalConfig.apiServer}/swagger`,
           icon: 'icon-star'
         },
         {
           name: 'Login',
-          url: 'http://localhost:5000/identity/login',
+          url: `${globalConfig.apiServer}/identity/login`,
           icon: 'icon-star'
         },
         {
