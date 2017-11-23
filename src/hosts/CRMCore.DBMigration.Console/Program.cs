@@ -11,7 +11,9 @@ namespace CRMCore.DBMigration.Console
         public static void Main(string[] args)
         {
             BuildWebHost(args)
-                .MigrateDbContext<PersistedGrantDbContext>((_, __) => { });
+                .MigrateDbContext<PersistedGrantDbContext>((_, __) => { })
+                .MigrateDbContext<ConfigurationDbContext>((_, __) => { })
+                .MigrateDbContext<CRMCore.Module.Data.ApplicationDbContext>((_, __) => { });
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
