@@ -6,11 +6,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const extractCSS = new ExtractTextPlugin('vendor.css');
-const OUTPUT_PATH = '/wwwroot/';
+
+const PACKAGES_PATH = path.resolve(__dirname, 'packages');
+const WWWROOT_PATH = path.resolve(__dirname, 'wwwroot');
+const NODE_PACKAGES_PATH = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
   entry: {
-    crmcore: __dirname + '/packages/index.js',
+    crmcore: path.resolve(__dirname, 'index.js'),
     vendors: [
       'jquery',
       'jquery-validation',
@@ -21,7 +24,7 @@ module.exports = {
   },
 
   output: {
-    path: __dirname + OUTPUT_PATH + 'server',
+    path: WWWROOT_PATH + '/server',
     filename: '[name].js',
     library: '[name]_[hash]'
   },
@@ -30,7 +33,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: [path.resolve(__dirname, 'packages')],
+        include: [PACKAGES_PATH],
         exclude: /(node_modules|wwwroot)/,
         use: ['babel-loader']
       },
@@ -61,9 +64,9 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        context: path.resolve(__dirname, 'node_modules/redoc/dist'),
+        context: NODE_PACKAGES_PATH + '/redoc/dist',
         from: '**/*',
-        to: path.resolve(__dirname, 'wwwroot/server/vendors/redoc')
+        to: WWWROOT_PATH + '/server/vendors/redoc'
       }
     ])
   ],
