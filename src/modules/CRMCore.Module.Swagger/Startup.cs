@@ -9,6 +9,8 @@ namespace CRMCore.Module.Swagger
 {
     public class Startup : StartupBase
     {
+        public override int Order => 100;
+
         public override void ConfigureServices(IServiceCollection services)
         {
             services.AddSwaggerGen(options =>

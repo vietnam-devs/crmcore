@@ -8,6 +8,7 @@ namespace CRMCore.Module.Common
 {
     public class Startup : StartupBase
     {
+        
         public override void ConfigureServices(IServiceCollection services)
         {
         }

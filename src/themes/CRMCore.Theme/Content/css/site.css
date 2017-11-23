@@ -11,5 +11,5 @@
 }
 
 .crm-core .form-control.input-validation-error {
-    border-left-color: red; !important;
+    border-left-color: red !important;
 }

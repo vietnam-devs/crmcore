@@ -75,13 +75,23 @@ export default {
       icon: 'icon-star',
       children: [
         {
+          name: 'Common',
+          url: 'http://localhost:5000/common/',
+          icon: 'icon-star'
+        },
+        {
+          name: 'Login',
+          url: 'http://localhost:5000/identity/login',
+          icon: 'icon-star'
+        },
+        {
           name: 'Docs',
-          url: '/docs/',
+          url: 'http://localhost:5000/docs/',
           icon: 'icon-star'
         },
         {
           name: 'Swagger',
-          url: '/swagger',
+          url: 'http://localhost:5000/swagger',
           icon: 'icon-star'
         },
         {

@@ -6,7 +6,7 @@
     <ProjectReference Include="..\..\targets\CRMCore.Theme.Targets\CRMCore.Theme.Targets.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\js\vendors" />
+    <Folder Include="Content\js\" />
     <Folder Include="Views\" />
   </ItemGroup>
 </Project>

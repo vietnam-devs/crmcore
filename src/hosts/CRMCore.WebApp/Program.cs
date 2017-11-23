@@ -22,6 +22,10 @@ namespace CRMCore.WebApp
                     options.Sources.Clear();
                     options.AddJsonFile("appsettings.json", true, true);
                     options.AddJsonFile($"appsettings.{hostContext.HostingEnvironment.EnvironmentName}.json", true);
+                    if (hostContext.HostingEnvironment.IsDevelopment())
+                    {
+                        options.AddUserSecrets<Startup>();
+                    }
                     options.AddEnvironmentVariables();
                     options.AddCommandLine(args);
                 })

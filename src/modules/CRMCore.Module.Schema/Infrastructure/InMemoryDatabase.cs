@@ -1,4 +1,4 @@
-﻿using CRMCore.Module.Schema.Domain;
+﻿using CRMCore.Module.Schema.Model;
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +9,7 @@ namespace CRMCore.Module.Schema.Infrastructure
         static InMemoryDatabase()
         {
             // Contact schema
-            var contactSchema = new Domain.Schema("Contact");
+            var contactSchema = new Model.Schema("Contact");
 
             contactSchema.Publish();
 
@@ -45,7 +45,7 @@ namespace CRMCore.Module.Schema.Infrastructure
                 }));
 
             // Customer schema
-            var customerSchema = new Domain.Schema("Customer");
+            var customerSchema = new Model.Schema("Customer");
 
             customerSchema.Publish();
 
@@ -85,6 +85,6 @@ namespace CRMCore.Module.Schema.Infrastructure
             SchemaItems.Add(Guid.NewGuid(), customerSchema);
         }
 
-        public static readonly Dictionary<Guid, Domain.Schema> SchemaItems = new Dictionary<Guid, Domain.Schema>();
+        public static readonly Dictionary<Guid, Model.Schema> SchemaItems = new Dictionary<Guid, Model.Schema>();
     }
 }
