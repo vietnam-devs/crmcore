@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Shared\" />
+    <Folder Include="Views\Docs\" />
   </ItemGroup>
 
 </Project>

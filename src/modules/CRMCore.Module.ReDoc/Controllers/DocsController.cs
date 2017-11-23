@@ -1,17 +1,17 @@
-﻿/*using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace CRMCore.Module.ReDoc.Controllers
 {
+    [Area("CRMCore.Module.ReDoc")]
+    [Route("[controller]")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class DocsController : Controller
     {
-        // [HttpGet]
-        // [Route("docs/")]
-        public IActionResult Docs()
+        public IActionResult Index()
         {
             var vm = new DocsViewModel { Specification = "~/swagger/v1/swagger.json" };
 
-            return View(nameof(Docs), vm);
+            return View(nameof(Index), vm);
         }
     }
-} */
+}
