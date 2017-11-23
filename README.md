@@ -197,6 +197,25 @@ yarn start
 > When you build **CRMCore.WebApp**, then it will call MSBuild script inside to automatically build the assets for the front-end.
 > You need to remove the **index.html** inside wwwroot folder to make it happen.
 
+### Database Development environment
+
+#### Setup connection string
+```bash
+dotnet user-secrets ConnectionStrings:Default <connection string>
+```
+
+#### Init database
+```bash
+cd <your path>crmcore\src\hosts\CRMCore.DBMigration.Console
+ASPNETCORE_ENVIRONMENT=Development dotnet run
+```
+
+#### Add New Changes via Migration
+```bash
+cd <your path>crmcore\src\hosts\CRMCore.DBMigration.Console
+dotnet ef migrations add <message>  -c ApplicationDbContext  -o Data/Migrations/CRMCore
+```
+
 ## Contributors
 
 *N/A*
