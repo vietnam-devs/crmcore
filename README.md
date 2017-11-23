@@ -142,6 +142,8 @@ dotnet run
 
 ```
 
+![Server Project Structure](https://raw.githubusercontent.com/crm-core/crmcore/master/art/server-project-structure.PNG)
+
 ### Front-end Development environment
 
 **You’ll need to have Node >= 6 on your machine.**
@@ -193,6 +195,8 @@ yarn install
 yarn start
 
 ```
+
+![Client Project Structure](https://raw.githubusercontent.com/crm-core/crmcore/master/art/client-project-structure.PNG)
 
 > When you build **CRMCore.WebApp**, then it will call MSBuild script inside to automatically build the assets for the front-end.
 > You need to remove the **index.html** inside wwwroot folder to make it happen.
