@@ -7,6 +7,12 @@
   "author": "Phuong Le, Thang Chung",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "copy-webpack-plugin": "^4.2.3",
     "css-hot-loader": "^1.3.2",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
@@ -23,17 +29,12 @@
     "webpack-merge": "4.1.0"
   },
   "dependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "bootstrap": "^3.3.7",
-    "copy-webpack-plugin": "^4.2.3",
+    "bootstrap": "4.0.0-beta.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "jquery-validation": "^1.17.0",
     "jquery-validation-unobtrusive": "^3.2.6",
+    "popper.js": "^1.12.9",
     "redoc": "^1.19.3",
     "simple-line-icons": "^2.4.1"
   },

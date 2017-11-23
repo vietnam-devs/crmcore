@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CRMCore.Module.Identity.Services
 {
-    public class LoginService:ILoginService<ApplicationUser>
+    public class LoginService : ILoginService<ApplicationUser>
     {
         UserManager<ApplicationUser> _userManager;
 

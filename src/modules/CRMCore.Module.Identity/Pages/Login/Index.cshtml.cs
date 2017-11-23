@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CRMCore.Framework.Entities.Models;
-using CRMCore.Module.Data;
 using CRMCore.Module.Identity.Services;
 using CRMCore.Module.Identity.ViewModels;
 using IdentityServer4.Services;
@@ -23,17 +19,17 @@ namespace CRMCore.Module.Identity.Pages.Login
         private readonly ILogger<IndexModel> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public IndexModel(ILoginService<ApplicationUser> loginService,
-            IIdentityServerInteractionService interaction,
+        public IndexModel(/*ILoginService<ApplicationUser> loginService,
+            IIdentityServerInteractionService interaction, 
             IClientStore clientStore,
             ILogger<IndexModel> logger,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager*/)
         {
-            _loginService = loginService;
-            _interaction = interaction;
-            _clientStore = clientStore;
-            _logger = logger;
-            _userManager = userManager;
+            // _loginService = loginService;
+            // _interaction = interaction;
+            // _clientStore = clientStore;
+            // _logger = logger;
+            // _userManager = userManager;
         }
 
         [BindProperty]
