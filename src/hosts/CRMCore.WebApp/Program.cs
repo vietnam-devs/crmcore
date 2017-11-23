@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace CRMCore.WebApp
 {
@@ -16,6 +17,14 @@ namespace CRMCore.WebApp
                 .UseKestrel(k => { k.AddServerHeader = false; })
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
+                .ConfigureAppConfiguration((hostContext, options) =>
+                {
+                    options.Sources.Clear();
+                    options.AddJsonFile("appsettings.json", true, true);
+                    options.AddJsonFile($"appsettings.{hostContext.HostingEnvironment.EnvironmentName}.json", true);
+                    options.AddEnvironmentVariables();
+                    options.AddCommandLine(args);
+                })
                 .Build();
     }
 }
