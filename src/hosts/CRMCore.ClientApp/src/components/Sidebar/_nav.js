@@ -80,11 +80,6 @@ export default {
           icon: 'icon-star'
         },
         {
-          name: 'Login',
-          url: 'http://localhost:5000/identity/login',
-          icon: 'icon-star'
-        },
-        {
           name: 'Docs',
           url: 'http://localhost:5000/docs/',
           icon: 'icon-star'
@@ -96,7 +91,7 @@ export default {
         },
         {
           name: 'Login',
-          url: '/login',
+          url: 'http://localhost:5000/identity/login',
           icon: 'icon-star'
         },
         {
