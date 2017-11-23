@@ -35,9 +35,9 @@
 ### Real world demo
 
 You can access to the application on Azure as following links:
-- http://52.187.186.33
-- http://52.187.186.33/swagger
-- http://52.187.186.33/docs
+- http://crmcore.southeastasia.cloudapp.azure.com
+- http://crmcore.southeastasia.cloudapp.azure.com/swagger
+- http://crmcore.southeastasia.cloudapp.azure.com/docs
 
 ### Docker
 
