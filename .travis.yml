@@ -25,6 +25,7 @@ script:
       cp -rfv build/* ../CRMCore.WebApp/wwwroot/;
       cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.WebApp;
       dotnet build;
+      yarn install;
       yarn build;      
       dotnet publish -c Release -o ../../../build/release;
       cd $TRAVIS_BUILD_DIR;
