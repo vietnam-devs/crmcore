@@ -1,4 +1,4 @@
-﻿using CRMCore.Module.Schema.Features.GetSchemaItems.Dtos;
+﻿using CRMCore.Module.Schema.Dtos;
 using System.Collections.Generic;
 
 namespace CRMCore.Module.Schema.ReadSide
@@ -6,5 +6,6 @@ namespace CRMCore.Module.Schema.ReadSide
     public interface IReadModelFacade
     {
         IEnumerable<SchemaDto> GetSchemaItems();
+        SchemaDetailsItemDto GetSchemaDetailsItem(string name);
     }
 }

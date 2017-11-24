@@ -9,3 +9,4 @@ export { default as MetadataDashboard } from './Dashboard/MetadataDashboard';
 
 export { default as FieldMgt } from './Field/FieldMgt';
 export { default as SchemaMgt } from './Schema/SchemaMgt';
+export { default as SchemaForm } from './Schema/SchemaForm';

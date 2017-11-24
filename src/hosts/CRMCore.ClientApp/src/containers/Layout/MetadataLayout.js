@@ -6,7 +6,7 @@ import { Container } from 'reactstrap';
 import { Header, Sidebar, Breadcrumb, Aside, Footer } from 'components';
 
 // containers
-import { MetadataDashboard, FieldMgt, SchemaMgt } from 'containers';
+import { MetadataDashboard, FieldMgt, SchemaMgt, SchemaForm } from 'containers';
 
 class MetadataLayout extends Component {
   render() {
@@ -26,6 +26,7 @@ class MetadataLayout extends Component {
                 />
                 <Route path="/metadata/fields" name="Fields" component={FieldMgt} />
                 <Route path="/metadata/schemas" name="Schemas" component={SchemaMgt} />
+                <Route path="/metadata/schema-form/:name" name="SchemaForm" component={SchemaForm} />
                 <Redirect from="/metadata" to="/metadata/dashboard" />
               </Switch>
             </Container>

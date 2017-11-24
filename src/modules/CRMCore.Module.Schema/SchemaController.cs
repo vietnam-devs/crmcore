@@ -1,13 +1,11 @@
-﻿using CRMCore.Module.Schema.Features.GetSchemaItems.Dtos;
+﻿using CRMCore.Module.Schema.Dtos;
 using CRMCore.Module.Schema.ReadSide;
 using CRMCore.Module.Schema.ReadSide.Impl;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace CRMCore.Module.Schema
 {
     [Area("CRMCore.Module.Schema")]
-    [Route("schema/api/schemas")]
     public class SchemaController : Controller
     {                                      
         private readonly IReadModelFacade _readmodel;
@@ -18,9 +16,21 @@ namespace CRMCore.Module.Schema
         }
 
         [HttpGet]
-        public IEnumerable<SchemaDto> Get()
+        [Route("schema/api/orgs/{org}/schemas")]
+        [ProducesResponseType(typeof(SchemaDto[]), 200)]
+        public IActionResult GetSchemas(string org)
         {
-            return _readmodel.GetSchemaItems();
+            return Ok(_readmodel.GetSchemaItems());
+        }
+
+        [HttpGet]
+        [Route("schema/api/orgs/{org}/schemas/{name}/")]
+        [ProducesResponseType(typeof(SchemaDetailsItemDto), 200)]
+        public IActionResult GetSchema(string org, string name)
+        {
+            SchemaDetailsItemDto dto = _readmodel.GetSchemaDetailsItem(name);
+
+            return Ok(dto);
         }
     }
 }

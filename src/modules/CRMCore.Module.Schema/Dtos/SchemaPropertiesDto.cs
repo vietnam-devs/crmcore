@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CRMCore.Module.Schema.Features.GetSchemaItems.Dtos
+namespace CRMCore.Module.Schema.Dtos
 {
     public sealed class SchemaPropertiesDto
     {
