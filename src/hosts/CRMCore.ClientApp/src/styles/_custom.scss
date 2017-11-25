@@ -5,19 +5,23 @@
 
   .b-panel-title {
     font-size: 1.5em;
-    margin-top: 15px;
-    height: 35px;
-  }
+    height: 15px;
 
-  .b-icon {
-    margin: .2rem 0.5rem;
+    .b-icon {
+      margin-right: 5px;
+    }
   }
 
   .b-panel-actions {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    margin: 12px;
+    top: 3px;
+    right: 0px;
+    margin: 11px;
+
+    .b-icon {
+      margin-right: 3px;
+      margin-top: -4px;
+    }
   }
 }
 

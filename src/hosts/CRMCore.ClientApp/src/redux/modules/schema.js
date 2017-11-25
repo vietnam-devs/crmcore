@@ -142,7 +142,7 @@ export default function reducer(state = initialState, action = {}) {
       console.log(action);
       return {
         ...state,
-        schemaSelected: action.data,
+        schemaSelected: action.schemaDetailsItem,
         loaded: true,
         loading: false
       };

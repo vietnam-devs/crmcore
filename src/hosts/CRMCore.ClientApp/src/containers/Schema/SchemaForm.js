@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
 import {
   Card,
@@ -13,19 +13,133 @@ import {
 } from 'reactstrap';
 
 import * as SchemaStore from 'redux/modules/schema';
+import { TextBoxField, NumberField, CheckboxField } from 'components';
 
 class SchemaForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      canDelete: false,
+      showConfirm: false
+    };
+    this.deleteBlog = this.deleteBlog.bind(this);
+    this.onConfirmationCancel = this.onConfirmationCancel.bind(this);
+  }
+
+  deleteBlog(e) {
+    e.preventDefault();
+  }
+
+  onConfirmationCancel(showConfirm) {
+    this.setState({ showConfirm: showConfirm });
+  }
+
   componentDidMount() {
     const { match } = this.props;
-    console.log(match);
     if (match.params && match.params.name) {
       this.props.loadSpecificSchema(match.params.name);
     }
   }
 
   render() {
-    const { match } = this.props;
-    return <Form>{match.params.name}</Form>;
+    const { error, handleSubmit, pristine, reset, submitting } = this.props;
+    return (
+      <div className="animated fadeIn">
+        <Card className="b-panel">
+          <CardHeader>
+            <h3 className="b-panel-title">
+              <i className="icon-notebook b-icon" />
+              Add a new Schema
+            </h3>
+          </CardHeader>
+          <CardBody className="card-body">
+            <Form className="b-form">
+              <FormGroup>
+                <Label for="name">Name</Label>
+                <Field
+                  name="name"
+                  placeholder="Name"
+                  type="text"
+                  component={TextBoxField}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="properties.label">Label (props)</Label>
+                <Field
+                  name="properties.label"
+                  placeholder="Label"
+                  type="text"
+                  component={TextBoxField}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="properties.hints">Hints (props)</Label>
+                <Field
+                  name="properties.hints"
+                  placeholder="Hints"
+                  type="text"
+                  component={TextBoxField}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="isPublished">Published?</Label>
+                <Field
+                  name="isPublished"
+                  placeholder="Published"
+                  type="checkbox"
+                  component={CheckboxField}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="version">Version</Label>
+                <Field
+                  name="version"
+                  placeholder="Version"
+                  type="number"
+                  component={NumberField}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Button
+                  color="primary"
+                  type="submit"
+                  disabled={pristine || submitting}
+                >
+                  <i className="icon-paper-plane b-icon" />Save
+                </Button>&nbsp;
+                <Button
+                  color="info"
+                  disabled={pristine || submitting}
+                  onClick={reset}
+                >
+                  <i className="icon-reload b-icon" />Reset
+                </Button>&nbsp;
+                <Button
+                  color="danger"
+                  disabled={!this.state.canDelete}
+                  onClick={() => {
+                    this.setState({
+                      showConfirm: !this.state.showConfirm
+                    });
+                  }}
+                >
+                  <i className="icon-trash b-icon" />Delete
+                </Button>&nbsp;
+                <Button
+                  color="warning"
+                  disabled={!pristine}
+                  onClick={() => {
+                    this.props.history.replace('/metadata/schemas');
+                  }}
+                >
+                  <i className="icon-arrow-left b-icon" />Back
+                </Button>
+              </FormGroup>
+            </Form>
+          </CardBody>
+        </Card>
+      </div>
+    );
   }
 }
 

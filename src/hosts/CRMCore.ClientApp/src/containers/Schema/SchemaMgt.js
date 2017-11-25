@@ -14,15 +14,10 @@ class SchemaMgt extends Component {
   }
 
   addRow() {
-    this.props.history.replace('/metadata/schemas/add');
+    this.props.history.push('/metadata/schema-form/$');
   }
 
   render() {
-    console.log(this.props);
-    /*const schemas = this.props.schemas.map((id, idx) => {
-      return this.props.fieldsById[id];
-    });*/
-
     var table = (
       <SchemaTable
         totalPages={this.props.totalPages || 1}

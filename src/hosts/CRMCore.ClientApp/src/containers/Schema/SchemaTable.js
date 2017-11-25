@@ -93,7 +93,6 @@ export default class BlogTable extends Component {
   }
 
   render() {
-    console.log(this.props.schemas);
     const columns = columnsRender(
       this.state.selectAll,
       this.state.selected,
@@ -122,8 +121,6 @@ export default class BlogTable extends Component {
         getTdProps={(state, rowInfo, column, instance) => {
           return {
             onClick: (event, handleOriginal) => {
-              console.log(rowInfo.original.name);
-              console.log(this.props.history);
               this.props.history.push(
                 `/metadata/schema-form/${rowInfo.original.name}`
               );

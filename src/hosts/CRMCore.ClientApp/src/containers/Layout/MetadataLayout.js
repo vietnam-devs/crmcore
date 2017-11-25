@@ -25,8 +25,8 @@ class MetadataLayout extends Component {
                   component={MetadataDashboard}
                 />
                 <Route path="/metadata/fields" name="Fields" component={FieldMgt} />
-                <Route path="/metadata/schemas" name="Schemas" component={SchemaMgt} />
-                <Route path="/metadata/schema-form/:name" name="SchemaForm" component={SchemaForm} />
+                <Route exact path="/metadata/schemas" name="Schemas" component={SchemaMgt} />
+                <Route exact path="/metadata/schema-form/:name" name="SchemaForm" component={SchemaForm} />
                 <Redirect from="/metadata" to="/metadata/dashboard" />
               </Switch>
             </Container>
