@@ -19,9 +19,9 @@ namespace CRMCore.DBMigration.Console
                 {
                     var env = services.GetService<IHostingEnvironment>();
                     var logger = services.GetService<ILogger<ApplicationDbContextSeed>>();
-
+                    var configuration = services.GetService<IConfiguration>();
                     new ConfigurationDbContextSeed()
-                        .SeedAsync(context)
+                        .SeedAsync(context, configuration)
                         .Wait();
                 })
                 .MigrateDbContext<CRMCore.Module.Data.ApplicationDbContext>((context, services) =>
