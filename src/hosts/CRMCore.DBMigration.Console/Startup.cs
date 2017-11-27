@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using CRMCore.Module.Data;
+using Microsoft.Extensions.Logging;
 
 namespace CRMCore.DBMigration.Console
 {
@@ -30,9 +31,10 @@ namespace CRMCore.DBMigration.Console
             // Adds IdentityServer             services.AddIdentityServer(x => x.IssuerUri = "null")                 .AddConfigurationStore(options =>                 {                     options.ConfigureDbContext = builder => builder.UseMySql(Configuration.GetConnectionString("Default"), mySqlOptionsAction: sqlOptions =>                         {                             sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");                         });                 })                 .AddOperationalStore(options =>                 {                     options.ConfigureDbContext = builder => builder.UseMySql(Configuration.GetConnectionString("Default"), mySqlOptionsAction: sqlOptions =>                     {                         sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");                     });                 });
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
         }
     }
 }

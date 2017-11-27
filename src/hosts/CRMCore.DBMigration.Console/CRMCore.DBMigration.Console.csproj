@@ -25,4 +25,8 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\targets\CRMCore.Application.Crm.targets\CRMCore.Application.Crm.targets.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Seeder\" />
+	  <Folder Include="Data\Migrations\CRMCore\" />
+	</ItemGroup>
 </Project>

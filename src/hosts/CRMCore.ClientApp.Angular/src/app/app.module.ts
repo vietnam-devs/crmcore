@@ -40,8 +40,28 @@ const APP_COMPONENTS = [
   APP_SIDEBAR_NAV
 ];
 
+// Import directives
+import {
+  AsideToggleDirective,
+  NAV_DROPDOWN_DIRECTIVES,
+  ReplaceDirective,
+  SIDEBAR_TOGGLE_DIRECTIVES
+} from './directives';
+
+const APP_DIRECTIVES = [
+  AsideToggleDirective,
+  NAV_DROPDOWN_DIRECTIVES,
+  ReplaceDirective,
+  SIDEBAR_TOGGLE_DIRECTIVES
+]
+
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, ...APP_COMPONENTS],
+  declarations: [
+    AppComponent, 
+    ...APP_CONTAINERS, 
+    ...APP_COMPONENTS,
+    ...APP_DIRECTIVES
+  ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpModule],
   providers: [
     {

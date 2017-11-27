@@ -11,8 +11,8 @@ using System;
 namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171123154509_initDB")]
-    partial class initDB
+    [Migration("20171127051936_init database")]
+    partial class initdatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,10 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
