@@ -1,4 +1,4 @@
-﻿using CRMCore.Module.Schema.Model;
+﻿using CRMCore.Framework.Entities.Schema;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;

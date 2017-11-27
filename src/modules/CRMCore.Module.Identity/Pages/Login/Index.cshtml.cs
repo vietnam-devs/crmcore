@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using CRMCore.Framework.Entities.Models;
 using CRMCore.Module.Identity.Services;
 using CRMCore.Module.Identity.ViewModels;
 using IdentityServer4.Services;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using CRMCore.Framework.Entities.Identity;
 
 namespace CRMCore.Module.Identity.Pages.Login
 {

@@ -17,7 +17,7 @@ namespace CRMCore.Module.Common.Controllers
         }
     }
 
-    public class TestEntity : BaseEntity, IEntity
+    public class TestEntity : BaseEntity
     {
 
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CRMCore.Module.Schema.Model
+namespace CRMCore.Framework.Entities.Schema
 {
     public abstract class Field
     {

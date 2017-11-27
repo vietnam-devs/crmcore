@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 {
-    public partial class initdatabase : Migration
+    public partial class InitCrmCore : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,6 +48,34 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "crm_Morphisms",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    ContentStr = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    SchemaStr = table.Column<string>(nullable: true),
+                    Updated = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_crm_Morphisms", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "crm_TestEntitys",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Updated = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_crm_TestEntitys", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -210,6 +238,12 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "crm_Morphisms");
+
+            migrationBuilder.DropTable(
+                name: "crm_TestEntitys");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

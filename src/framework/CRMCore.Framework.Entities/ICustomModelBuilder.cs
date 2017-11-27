@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace CRMCore.Module.Data.Mapping
+namespace CRMCore.Framework.Entities
 {
     public interface ICustomModelBuilder
     {

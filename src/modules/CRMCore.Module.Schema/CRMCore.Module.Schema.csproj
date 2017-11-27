@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\framework\CRMCore.Framework.CqrsLite\CRMCore.Framework.CqrsLite.csproj" />
+    <ProjectReference Include="..\..\framework\CRMCore.Framework.Entities\CRMCore.Framework.Entities.csproj" />
     <ProjectReference Include="..\..\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.csproj" />
     <ProjectReference Include="..\..\framework\CRMCore.Framework.MvcCore\CRMCore.Framework.MvcCore.csproj" />
   </ItemGroup>

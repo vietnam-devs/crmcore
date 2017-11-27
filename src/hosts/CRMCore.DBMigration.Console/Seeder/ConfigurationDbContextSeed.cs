@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using IdentityServer4.EntityFramework.DbContexts;
-using IdentityServer4.EntityFramework.Entities;
-using Microsoft.Extensions.Configuration;
-using System.Linq;
+using IdentityServer4.Models;
 
 namespace CRMCore.DBMigration.Console.Seeder
 {

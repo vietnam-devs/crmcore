@@ -1,6 +1,7 @@
-﻿using CRMCore.Module.Schema.Model;
+﻿using CRMCore.Module.Schema.Entity;
 using System;
 using System.Collections.Generic;
+using SchemaModel = CRMCore.Framework.Entities.Schema;
 
 namespace CRMCore.Module.Schema.Infrastructure
 {
@@ -8,83 +9,89 @@ namespace CRMCore.Module.Schema.Infrastructure
     {
         static InMemoryDatabase()
         {
-            // Contact schema
-            var contactSchema = new Model.Schema("Contact");
+            // Contact
+            var contactSchema = new SchemaModel.Schema("Contact");
 
             contactSchema.Publish();
 
-            contactSchema.Update(new SchemaProperties {
+            contactSchema.Update(new SchemaModel.SchemaProperties
+            {
                 Label = "Contact",
                 Hints = "Contact entity in CRM-Core."
             });
 
-            contactSchema.AddField(new StringField(
+            contactSchema.AddField(new SchemaModel.StringField(
                 Guid.NewGuid(),
                 "Firstname",
-                new StringFieldProperties
+                new SchemaModel.StringFieldProperties
                 {
                     Label = "FirstName",
                     IsRequired = true,
-                    FieldType = StringFieldType.Input,
+                    FieldType = SchemaModel.StringFieldType.Input,
                     Hints = "Please input FirstName.",
                     Placeholder = "Input FirstName...",
                     DefaultValue = "Phuong"
                 }));
 
-            contactSchema.AddField(new StringField(
+            contactSchema.AddField(new SchemaModel.StringField(
                 Guid.NewGuid(), 
                 "Lastname",
-                new StringFieldProperties
+                new SchemaModel.StringFieldProperties
                 {
                     Label = "LastName",
                     IsRequired = true,
-                    FieldType = StringFieldType.Input,
+                    FieldType = SchemaModel.StringFieldType.Input,
                     Hints = "Please input LastName.",
                     Placeholder = "Input LastName...",
                     DefaultValue = "Le"
                 }));
 
-            // Customer schema
-            var customerSchema = new Model.Schema("Customer");
+            var contact = new Morphism("Contact", contactSchema);
+
+            // Customer
+            var customerSchema = new SchemaModel.Schema("Customer");
 
             customerSchema.Publish();
 
-            customerSchema.Update(new SchemaProperties
+            customerSchema.Update(new SchemaModel.SchemaProperties
             {
                 Label = "Customer",
                 Hints = "Customer entity in CRM-Core."
             });
 
-            customerSchema.AddField(new StringField(
+            customerSchema.AddField(new SchemaModel.StringField(
                 Guid.NewGuid(),
                 "Firstname",
-                new StringFieldProperties
+                new SchemaModel.StringFieldProperties
                 {
                     Label = "FirstName",
                     IsRequired = true,
-                    FieldType = StringFieldType.Input,
+                    FieldType = SchemaModel.StringFieldType.Input,
                     Hints = "Please input FirstName.",
                     Placeholder = "Input FirstName...",
                     DefaultValue = "Lena"
                 }));
 
-            customerSchema.AddField(new StringField(
+            customerSchema.AddField(new SchemaModel.StringField(
                 Guid.NewGuid(),
                 "Lastname",
-                new StringFieldProperties
+                new SchemaModel.StringFieldProperties
                 {
                     Label = "LastName",
                     IsRequired = true,
-                    FieldType = StringFieldType.Input,
+                    FieldType = SchemaModel.StringFieldType.Input,
                     Hints = "Please input LastName.",
                     Placeholder = "Input LastName...",
                     DefaultValue = "Cao"
                 }));
 
-            SchemaItems.Add(Guid.NewGuid(), contactSchema);
-            SchemaItems.Add(Guid.NewGuid(), customerSchema);
+            var customer = new Morphism("Customer", customerSchema);
+
+            // init
+            SchemaItems.Add(Guid.NewGuid(), contact);
+            SchemaItems.Add(Guid.NewGuid(), customer);
         }
 
-        public static readonly Dictionary<Guid, Model.Schema> SchemaItems = new Dictionary<Guid, Model.Schema>();
+        public static readonly Dictionary<Guid, Morphism> SchemaItems = new Dictionary<Guid, Morphism>();
     }
 }

@@ -20,10 +20,10 @@ namespace CRMCore.Module.Schema.ReadSide.Impl
                 IsPublished = schemaKeyValue.Value.IsPublished,
                 Properties = new SchemaPropertiesDto
                 {
-                    Label = schemaKeyValue.Value.Properties.Label,
-                    Hints = schemaKeyValue.Value.Properties.Hints
+                    Label = schemaKeyValue.Value.Schema.Properties.Label,
+                    Hints = schemaKeyValue.Value.Schema.Properties.Hints
                 },
-                Fields = schemaKeyValue.Value.Fields.Select(x=> new FieldDto {
+                Fields = schemaKeyValue.Value.Schema.Fields.Select(x=> new FieldDto {
                     FieldId = x.Id,
                     Name = x.Name,
                     IsDisabled = x.IsDisabled,
@@ -52,8 +52,8 @@ namespace CRMCore.Module.Schema.ReadSide.Impl
                     Version = 1,
                     Properties = new SchemaPropertiesDto
                     {
-                        Label = x.Value.Properties.Label,
-                        Hints = x.Value.Properties.Hints
+                        Label = x.Value.Schema.Properties.Label,
+                        Hints = x.Value.Schema.Properties.Hints
                     }
                 };
             });

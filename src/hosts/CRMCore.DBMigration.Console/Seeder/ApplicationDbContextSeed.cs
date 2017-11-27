@@ -1,12 +1,12 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
-using CRMCore.Framework.Entities.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
 using System.Threading.Tasks;
 using CRMCore.Module.Data;
 using System.Collections.Generic;
 using System.Linq;
+using CRMCore.Framework.Entities.Identity;
 
 namespace CRMCore.DBMigration.Console.Seeder
 {

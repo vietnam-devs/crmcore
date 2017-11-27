@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace CRMCore.Framework.Entities.Models
+namespace CRMCore.Framework.Entities.Identity
 {
     public class ApplicationUser : IdentityUser, IEntity
     {

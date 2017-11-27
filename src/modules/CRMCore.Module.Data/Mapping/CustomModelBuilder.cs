@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CRMCore.Framework.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRMCore.Module.Data.Mapping
 {

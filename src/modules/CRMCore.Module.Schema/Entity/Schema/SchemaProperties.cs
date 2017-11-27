@@ -1,4 +1,4 @@
-﻿namespace CRMCore.Module.Schema.Model
+﻿namespace CRMCore.Framework.Entities.Schema
 {
     public sealed class SchemaProperties : NamedElementPropertiesBase
     {

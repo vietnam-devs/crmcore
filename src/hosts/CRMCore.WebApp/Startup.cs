@@ -1,5 +1,5 @@
 ﻿using AspNetCore.RouteAnalyzer;
-using CRMCore.Framework.Entities.Models;
+using CRMCore.Framework.Entities.Identity;
 using CRMCore.Framework.MvcCore.Extensions;
 using CRMCore.Module.Data;
 using CRMCore.WebApp.Config;

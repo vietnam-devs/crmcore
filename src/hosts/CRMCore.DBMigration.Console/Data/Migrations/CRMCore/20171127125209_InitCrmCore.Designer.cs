@@ -11,8 +11,8 @@ using System;
 namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171127051936_init database")]
-    partial class initdatabase
+    [Migration("20171127125209_InitCrmCore")]
+    partial class InitCrmCore
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
-            modelBuilder.Entity("CRMCore.Framework.Entities.Models.ApplicationUser", b =>
+            modelBuilder.Entity("CRMCore.Framework.Entities.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -73,6 +73,38 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("CRMCore.Module.Common.Controllers.TestEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<DateTime>("Updated");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("crm_TestEntitys");
+                });
+
+            modelBuilder.Entity("CRMCore.Module.Schema.Entity.Morphism", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ContentStr");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("SchemaStr");
+
+                    b.Property<DateTime>("Updated");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("crm_Morphisms");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -192,7 +224,7 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("CRMCore.Framework.Entities.Models.ApplicationUser")
+                    b.HasOne("CRMCore.Framework.Entities.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -200,7 +232,7 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("CRMCore.Framework.Entities.Models.ApplicationUser")
+                    b.HasOne("CRMCore.Framework.Entities.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -213,7 +245,7 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CRMCore.Framework.Entities.Models.ApplicationUser")
+                    b.HasOne("CRMCore.Framework.Entities.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -221,7 +253,7 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("CRMCore.Framework.Entities.Models.ApplicationUser")
+                    b.HasOne("CRMCore.Framework.Entities.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

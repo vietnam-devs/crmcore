@@ -1,7 +1,7 @@
 ﻿using System;
-using CRMCore.Module.Schema.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using CRMCore.Framework.Entities.Schema;
 
 namespace CRMCore.Module.Schema.Dtos
 {

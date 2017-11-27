@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using CRMCore.Framework.Entities.Models;
 using Microsoft.AspNetCore.Identity;
+using CRMCore.Framework.Entities.Identity;
 
 namespace CRMCore.Module.Identity.Services
 {

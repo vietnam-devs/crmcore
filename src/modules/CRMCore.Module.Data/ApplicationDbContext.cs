@@ -1,5 +1,5 @@
 ﻿using CRMCore.Framework.Entities;
-using CRMCore.Framework.Entities.Models;
+using CRMCore.Framework.Entities.Identity;
 using CRMCore.Framework.MvcCore.Extensions;
 using CRMCore.Module.Data.Mapping;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -39,8 +39,7 @@ namespace CRMCore.Module.Data
         {
             // TODO: will optimize this more
             var types = typeToRegisters.Where(x => typeof(IEntity).IsAssignableFrom(x) &&
-                !x.GetTypeInfo().IsAbstract &&
-                x.GetTypeInfo().BaseType == typeof(BaseEntity));
+                !x.GetTypeInfo().IsAbstract);
 
             foreach(var type in types)
             {
