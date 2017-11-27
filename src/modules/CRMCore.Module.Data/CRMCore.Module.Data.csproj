@@ -13,5 +13,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\framework\CRMCore.Framework.Entities\CRMCore.Framework.Entities.csproj" />
+    <ProjectReference Include="..\..\framework\CRMCore.Framework.MvcCore\CRMCore.Framework.MvcCore.csproj" />
   </ItemGroup>
 </Project>

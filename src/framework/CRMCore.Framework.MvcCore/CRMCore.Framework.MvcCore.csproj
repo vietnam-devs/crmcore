@@ -10,7 +10,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="LocationExpander\" />
-    <Folder Include="Extensions\" />
     <Folder Include="Options\" />
     <Folder Include="Middlewares\" />
     <Folder Include="RazorPages\" />

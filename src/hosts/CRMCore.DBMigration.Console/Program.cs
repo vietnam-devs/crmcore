@@ -13,7 +13,7 @@ namespace CRMCore.DBMigration.Console
             BuildWebHost(args)
                 .MigrateDbContext<PersistedGrantDbContext>((_, __) => { })
                 .MigrateDbContext<ConfigurationDbContext>((_, __) => { })
-                .MigrateDbContext<CRMCore.Module.Data.ApplicationDbContext>((_, __) => { });
+                .MigrateDbContext<Module.Data.ApplicationDbContext>((_, __) => { });
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

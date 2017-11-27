@@ -1,11 +1,13 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using CRMCore.Module.Data;
+using System.Reflection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CRMCore.DBMigration.Console
 {
@@ -23,11 +25,27 @@ namespace CRMCore.DBMigration.Console
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Default"), mySqlOptionsAction: sqlOptions=>{
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Default"), mySqlOptionsAction: sqlOptions =>
+            {
                 sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");
             }));
 
-            // Adds IdentityServer             services.AddIdentityServer(x => x.IssuerUri = "null")                 .AddConfigurationStore(options =>                 {                     options.ConfigureDbContext = builder => builder.UseMySql(Configuration.GetConnectionString("Default"), mySqlOptionsAction: sqlOptions =>                         {                             sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");                         });                 })                 .AddOperationalStore(options =>                 {                     options.ConfigureDbContext = builder => builder.UseMySql(Configuration.GetConnectionString("Default"), mySqlOptionsAction: sqlOptions =>                     {                         sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");                     });                 });
+            // Adds IdentityServer
+            services.AddIdentityServer(x => x.IssuerUri = "null")
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = builder => builder.UseMySql(Configuration.GetConnectionString("Default"), mySqlOptionsAction: sqlOptions =>
+                        {
+                            sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");
+                        });
+                })
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = builder => builder.UseMySql(Configuration.GetConnectionString("Default"), mySqlOptionsAction: sqlOptions =>
+                    {
+                        sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");
+                    });
+                });
         }
 
         public void Configure(IApplicationBuilder app)
