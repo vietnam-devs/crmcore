@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CRMCore.Framework.Entities;
+using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace CRMCore.Module.Common.Controllers
@@ -8,14 +9,16 @@ namespace CRMCore.Module.Common.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class CommonController : Controller
     {
-        public CommonController()
-        {
-        }
-
         public IActionResult Index()
         {
             @ViewBag.Time = DateTime.Now.ToString();
+            
             return View();
         }
+    }
+
+    public class TestEntity : BaseEntity, IEntity
+    {
+
     }
 }
