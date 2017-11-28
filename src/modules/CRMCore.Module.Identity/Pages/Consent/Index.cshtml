@@ -1,0 +1,21 @@
+﻿@page
+
+@using CRMCore.Module.Identity.Pages.Consent
+
+@model IndexModel
+@{
+}
+
+<div class="container page-consent">
+    <div class="row page-header">
+        <div class="col-sm-10">
+            @if (Model.ConsentVM.ClientLogoUrl != null)
+            {
+                <div class="client-logo"><img src="@Model.ConsentVM.ClientLogoUrl"></div>
+            }
+            <h1>
+                @Model.ConsentVM.ClientName
+                <small>is requesting your permission</small>
+            </h1>
+        </div>
+    </div>

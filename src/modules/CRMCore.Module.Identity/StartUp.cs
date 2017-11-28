@@ -26,7 +26,8 @@ namespace CRMCore.Module.Identity
 
         public override void Configure(IApplicationBuilder builder, IRouteBuilder routes, IServiceProvider serviceProvider)
         {
-            
+            builder.UseAuthentication();
+            builder.UseIdentityServer();
         }
     }
 }

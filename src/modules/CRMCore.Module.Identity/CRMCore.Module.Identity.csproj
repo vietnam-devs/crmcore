@@ -9,6 +9,10 @@
     <Folder Include="Pages\Login\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Services\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Pages\Consent\" />
+    <Folder Include="Content\" />
+    <Folder Include="Content\css\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
@@ -26,6 +30,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Pages\Login\Index.cshtml.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Consent\Index.cshtml.cs">
       <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
   </ItemGroup>

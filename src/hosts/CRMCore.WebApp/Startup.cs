@@ -1,19 +1,19 @@
 ﻿using AspNetCore.RouteAnalyzer;
-using CRMCore.Framework.Entities.Identity;
-using CRMCore.Framework.MvcCore.Extensions;
-using CRMCore.Module.Data;
-using CRMCore.WebApp.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Reflection;
 using System.Text.Encodings.Web;
+
+using CRMCore.Framework.MvcCore.Extensions;
+using CRMCore.WebApp.Config;
+using CRMCore.Module.Identity.Extensions;
+using CRMCore.Module.Data;
+using CRMCore.Framework.Entities.Identity;
 
 namespace CRMCore.WebApp
 {
@@ -39,44 +39,26 @@ namespace CRMCore.WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // clear any handler for JWT
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-            services.AddSingleton(JavaScriptEncoder.Default);
-
             var connectionString = Configuration.GetConnectionString("Default");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionString));
+            services.AddSingleton(JavaScriptEncoder.Default);
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    policy => policy.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials());
-            });
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionString));
 
             services.AddMvcModules();
             services.AddRouteAnalyzer();
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-            // Adds IdentityServer
-            services.AddIdentityServer(x => x.IssuerUri = "null")
-                .AddDeveloperSigningCredential()
-                .AddAspNetIdentity<ApplicationUser>()
-                .AddConfigurationStore(options =>
+            services.RegisterIdentityAndID4(
+                options =>
                 {
                     options.ConfigureDbContext = builder =>
                         builder.UseMySql(connectionString, sqlOptions =>
                         {
                             sqlOptions.MigrationsAssembly(migrationsAssembly);
                         });
-                })
-                .AddOperationalStore(options =>
+                },
+                options =>
                 {
                     options.ConfigureDbContext = builder =>
                         builder.UseMySql(connectionString, sqlOptions =>
@@ -87,17 +69,14 @@ namespace CRMCore.WebApp
         }
 
         public void Configure(IApplicationBuilder app)
-        {
+        {           
             app.UseStaticFiles();
 
-            app.UseAuthentication();
-            app.UseIdentityServer();
+            app.UseModules();
 
             MapAndUseIdSrv(app);
             MapAndUseWebApp(app);
             MapAndUseFrontend(app);
-
-            app.UseModules();
         }
 
         private void MapAndUseIdSrv(IApplicationBuilder app)

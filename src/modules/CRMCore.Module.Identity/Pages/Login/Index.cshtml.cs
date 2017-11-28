@@ -28,16 +28,16 @@ namespace CRMCore.Module.Identity.Pages.Login
 
         public IndexModel(ILoginService<ApplicationUser> loginService,
                           SignInManager<ApplicationUser> signInManager,
-            IIdentityServerInteractionService interaction, 
+            IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             ILogger<IndexModel> logger,
             UserManager<ApplicationUser> userManager)
         {
-             _loginService = loginService;
-             _interaction = interaction;
-             _clientStore = clientStore;
-             _logger = logger;
-             _userManager = userManager;
+            _loginService = loginService;
+            _interaction = interaction;
+            _clientStore = clientStore;
+            _logger = logger;
+            _userManager = userManager;
             _signInManager = signInManager;
         }
 
@@ -64,7 +64,7 @@ namespace CRMCore.Module.Identity.Pages.Login
             if (ModelState.IsValid)
             {
                 var user = await _loginService.FindByUsername(LoginVM.UserName);
-                          
+
                 if (await _loginService.ValidateCredentials(user, LoginVM.Password))
                 {
                     AuthenticationProperties props = null;
@@ -80,12 +80,12 @@ namespace CRMCore.Module.Identity.Pages.Login
                     await _loginService.SignIn(user);
 
                     // make sure the returnUrl is still valid, and if yes - redirect back to authorize endpoint
-                    //if (_interaction.IsValidReturnUrl(LoginVM.ReturnUrl))
-                    //{
+                    if (_interaction.IsValidReturnUrl(LoginVM.ReturnUrl) || Url.IsLocalUrl(LoginVM.ReturnUrl))
+                    {
                         return Redirect(LoginVM.ReturnUrl);
-                   // }
+                    }
 
-                    //return Redirect("~/");
+                    return Redirect("~/");
                 }
 
                 ModelState.AddModelError("", "Invalid username or password.");
