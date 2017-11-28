@@ -10,11 +10,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Reflection;
 using System.IdentityModel.Tokens.Jwt;
-using IdentityServer4.Services;
+using System.Linq;
+using System.Reflection;
+using System.Text.Encodings.Web;
 
 namespace CRMCore.WebApp
 {
@@ -42,13 +41,12 @@ namespace CRMCore.WebApp
         {
             // clear any handler for JWT
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            services.AddSingleton(JavaScriptEncoder.Default);
 
             var connectionString = Configuration.GetConnectionString("Default");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionString));
-
-            services.AddSingleton(JavaScriptEncoder.Default);
 
             services.AddCors(options =>
             {
@@ -72,17 +70,19 @@ namespace CRMCore.WebApp
                 .AddAspNetIdentity<ApplicationUser>()
                 .AddConfigurationStore(options =>
                 {
-                    options.ConfigureDbContext = builder => builder.UseMySql(connectionString, mySqlOptionsAction: sqlOptions =>
-                                                                                                                    {
-                                                                                                                        sqlOptions.MigrationsAssembly(migrationsAssembly);
-                                                                                                                    });
+                    options.ConfigureDbContext = builder =>
+                        builder.UseMySql(connectionString, sqlOptions =>
+                        {
+                            sqlOptions.MigrationsAssembly(migrationsAssembly);
+                        });
                 })
                 .AddOperationalStore(options =>
                 {
-                    options.ConfigureDbContext = builder => builder.UseMySql(connectionString, mySqlOptionsAction: sqlOptions =>
-                                                                                                                     {
-                                                                                                                         sqlOptions.MigrationsAssembly(migrationsAssembly);
-                                                                                                                     });
+                    options.ConfigureDbContext = builder =>
+                        builder.UseMySql(connectionString, sqlOptions =>
+                        {
+                            sqlOptions.MigrationsAssembly(migrationsAssembly);
+                        });
                 });
         }
 
@@ -90,10 +90,7 @@ namespace CRMCore.WebApp
         {
             app.UseStaticFiles();
 
-
             app.UseAuthentication();
-
-            // Adds IdentityServer
             app.UseIdentityServer();
 
             MapAndUseIdSrv(app);

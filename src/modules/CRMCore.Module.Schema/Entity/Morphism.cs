@@ -2,6 +2,7 @@
 using CRMCore.Framework.Entities.Content;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations.Schema;
+using SchemaModel = CRMCore.Framework.Entities.Schema;
 
 namespace CRMCore.Module.Schema.Entity
 {
@@ -18,10 +19,10 @@ namespace CRMCore.Module.Schema.Entity
         {
         }
 
-        public Morphism(string name, Framework.Entities.Schema.Schema schema)
+        public Morphism(string name, SchemaModel.Schema schema)
         {
             Name = name;
-            _schema = schema.ToString();
+            _schema = JsonConvert.SerializeObject(schema);
         }
 
         public string Name { get; }
@@ -31,11 +32,11 @@ namespace CRMCore.Module.Schema.Entity
         public bool IsDeleted { get; } = false;
         
         [NotMapped]
-        public Framework.Entities.Schema.Schema Schema
+        public SchemaModel.Schema Schema
         {
             get
             {
-                return JsonConvert.DeserializeObject<Framework.Entities.Schema.Schema>(string.IsNullOrEmpty(_schema) ? "{}" : _schema);
+                return JsonConvert.DeserializeObject<SchemaModel.Schema>(string.IsNullOrEmpty(_schema) ? "{}" : _schema);
             }
             set
             {
@@ -44,8 +45,8 @@ namespace CRMCore.Module.Schema.Entity
         }
 
         private string _schema;
-        // public Framework.Entities.Schema.Schema Schema { get; }
-        
+        // public SchemaModel.Schema Schema { get; }
+
         [NotMapped]
         public IdContentData Content
         {

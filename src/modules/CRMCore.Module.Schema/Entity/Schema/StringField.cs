@@ -4,6 +4,12 @@ namespace CRMCore.Framework.Entities.Schema
 {
     public class StringField : Field<StringFieldProperties>
     {
+        /// <summary>
+        /// This constructor for JsonSerializer only.
+        /// </summary>
+        internal StringField() : this(Guid.NewGuid(), "")
+        { }
+        
         public StringField(Guid id, string name)
             : base(id, name, new StringFieldProperties())
         {

@@ -13,17 +13,20 @@ namespace CRMCore.DBMigration.Console.Seeder
     {
         public async Task SeedAsync(ConfigurationDbContext context, IConfiguration configuration)
         {
-            await context.Clients.AddRangeAsync(GetClients(configuration)
-                                                     .Where(x => !context.Clients.Any(y => y.ClientId == x.ClientId))
-                                                     .Select(x => x.ToEntity()));
+            await context.Clients.AddRangeAsync(
+                GetClients(configuration)
+                    .Where(x => !context.Clients.Any(y => y.ClientId == x.ClientId))
+                    .Select(x => x.ToEntity()));
             
-            await context.IdentityResources.AddRangeAsync(GetResources()
-                                                     .Where(x => !context.IdentityResources.Any(y => y.Name == x.Name))
-                                                     .Select(x => x.ToEntity()));
+            await context.IdentityResources.AddRangeAsync(
+                GetResources()
+                    .Where(x => !context.IdentityResources.Any(y => y.Name == x.Name))
+                    .Select(x => x.ToEntity()));
 
-            await context.ApiResources.AddRangeAsync(GetApis()
-                                                     .Where(x=> !context.ApiResources.Any(y => y.Name == x.Name))
-                                                     .Select(x=>x.ToEntity()));  
+            await context.ApiResources.AddRangeAsync(
+                GetApis()
+                    .Where(x=> !context.ApiResources.Any(y => y.Name == x.Name))
+                    .Select(x=>x.ToEntity()));  
             
             await context.SaveChangesAsync();
         }

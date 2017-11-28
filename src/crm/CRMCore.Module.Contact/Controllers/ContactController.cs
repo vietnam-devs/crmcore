@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CRMCore.Module.Contact.Controllers
 {
+    [Authorize]
     [Area("CRMCore.Module.Contact")]
     [Route("contact/api/contacts")]
     public class ContactController : Controller

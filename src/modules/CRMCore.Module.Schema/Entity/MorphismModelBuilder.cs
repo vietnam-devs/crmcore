@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRMCore.Module.Schema.Entity
 {
-    public class SchemaModelBuilder : ICustomModelBuilder
+    public class MorphismModelBuilder : ICustomModelBuilder
     {
         public void Build(ModelBuilder modelBuilder)
         {

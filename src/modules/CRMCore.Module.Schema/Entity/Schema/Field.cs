@@ -1,7 +1,12 @@
-﻿using System;
+﻿using CRMCore.Module.Schema.Converters;
+using Newtonsoft.Json;
+using System;
+using System.Runtime.Serialization;
 
 namespace CRMCore.Framework.Entities.Schema
 {
+    [JsonConverter(typeof(JsonInheritanceConverter), "fieldType")]
+    [KnownType(typeof(StringField))]
     public abstract class Field
     {
         private readonly Guid fieldId;

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CRMCore.Module.Common.Controllers
 {
+    [Authorize]
     [Area("CRMCore.Module.Common")]
     [Route("common/api/[controller]")]
     public class ValuesController : Controller

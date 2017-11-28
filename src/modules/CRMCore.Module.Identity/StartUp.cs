@@ -1,11 +1,9 @@
 ﻿using System;
 using CRMCore.Framework.Entities.Identity;
 using CRMCore.Framework.MvcCore;
-using CRMCore.Module.Data;
 using CRMCore.Module.Identity.Services;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
