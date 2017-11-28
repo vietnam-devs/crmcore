@@ -12,6 +12,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Text.Encodings.Web;
+using System.Reflection;
+using System.IdentityModel.Tokens.Jwt;
+using IdentityServer4.Services;
 
 namespace CRMCore.WebApp
 {
@@ -37,11 +40,13 @@ namespace CRMCore.WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Default")));
-            
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            // clear any handler for JWT
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            var connectionString = Configuration.GetConnectionString("Default");
+            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionString));
 
             services.AddSingleton(JavaScriptEncoder.Default);
 
@@ -56,11 +61,40 @@ namespace CRMCore.WebApp
 
             services.AddMvcModules();
             services.AddRouteAnalyzer();
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            // Adds IdentityServer
+            services.AddIdentityServer(x => x.IssuerUri = "null")
+                .AddDeveloperSigningCredential()
+                .AddAspNetIdentity<ApplicationUser>()
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = builder => builder.UseMySql(connectionString, mySqlOptionsAction: sqlOptions =>
+                                                                                                                    {
+                                                                                                                        sqlOptions.MigrationsAssembly(migrationsAssembly);
+                                                                                                                    });
+                })
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = builder => builder.UseMySql(connectionString, mySqlOptionsAction: sqlOptions =>
+                                                                                                                     {
+                                                                                                                         sqlOptions.MigrationsAssembly(migrationsAssembly);
+                                                                                                                     });
+                });
         }
 
         public void Configure(IApplicationBuilder app)
         {
             app.UseStaticFiles();
+
+
+            app.UseAuthentication();
+
+            // Adds IdentityServer
+            app.UseIdentityServer();
 
             MapAndUseIdSrv(app);
             MapAndUseWebApp(app);

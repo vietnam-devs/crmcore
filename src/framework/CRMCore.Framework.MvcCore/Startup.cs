@@ -7,7 +7,7 @@ namespace CRMCore.Framework.MvcCore
 {
     public abstract class StartupBase : IStartup
     {
-        public virtual int Order => 0;
+        public virtual int Order => 100;
 
         public virtual void ConfigureServices(IServiceCollection services)
         {

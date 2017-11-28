@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace CRMCore.Framework.Entities.Identity
 {
-    public class ApplicationUser : IdentityUser, IEntity
+    public class ApplicationUser : IdentityUser<Guid>, IEntity
     {
         public string LastName
         {

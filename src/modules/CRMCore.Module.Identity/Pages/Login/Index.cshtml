@@ -14,7 +14,8 @@
         <div class="card-group">
             <div class="card p-4">
                 <div class="card-body">
-                    <form method="POST">
+                    <form method="POST" asp-route-returnurl="@ViewData["ReturnUrl"]">
+						<input type="hidden" asp-for="LoginVM.ReturnUrl" />
                         <h1>Login</h1>
                         <p class="text-muted">Sign In to your account</p>
                         <div asp-validation-summary="All" class="text-danger"></div>

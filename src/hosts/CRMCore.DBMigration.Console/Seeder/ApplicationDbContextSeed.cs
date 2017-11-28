@@ -41,6 +41,7 @@ namespace CRMCore.DBMigration.Console.Seeder
                 UserName = "demouser@nomail.com",
                 NormalizedEmail = "DEMOUSER@NOMAIL.COM",
                 NormalizedUserName = "DEMOUSER@NOMAIL.COM",
+                SecurityStamp = Guid.NewGuid().ToString("D")
             };
 
             user.PasswordHash = _passwordHasher.HashPassword(user, "P@ssw0rd");

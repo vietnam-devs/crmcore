@@ -4,7 +4,6 @@ using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.Models;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
-using IdentityServer4.Models;
 using IdentityServer4.EntityFramework.Mappers;
 using IdentityServer4;
 
@@ -73,6 +72,40 @@ namespace CRMCore.DBMigration.Console.Seeder
                         "Notifications",
                         "Contacts"
                     }    
+                },
+                new Client
+                {
+                    ClientId = "b45a3635-a865-4c48-944d-9c46d1009167",
+                    ClientName = "CRM Core SPA-Angular OpenId Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris =           { $"{clientUrls["SpaAngularClient"]}/" },
+                    RequireConsent = false,
+                    PostLogoutRedirectUris = { $"{clientUrls["SpaAngularClient"]}/" },
+                    AllowedCorsOrigins =     { $"{clientUrls["SpaAngularClient"]}" },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "Notifications",
+                        "Contacts"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "5b811d87-75e0-49af-ac1c-1fe7ebd73f60",
+                    ClientName = "CRM Core API Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { $"{clientUrls["CrmCoreApi"]}/swagger/o2c.html" },
+                    PostLogoutRedirectUris = { $"{clientUrls["CrmCoreApi"]}/swagger/" },
+
+                    AllowedScopes =
+                    {
+                        "Notifications",
+                        "Contacts"
+                    }
                 }
             }; 
         }
