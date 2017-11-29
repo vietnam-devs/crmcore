@@ -201,17 +201,19 @@ namespace CRMCore.Module.Identity.Controllers
 
             // delete authentication cookie
             await HttpContext.SignOutAsync(IdentityServerConstants.DefaultCookieAuthenticationScheme);
-            // delete authentication cookie
-            await _signInManager.SignOutAsync();
-
+           
             // set this so UI rendering sees an anonymous user
             HttpContext.User = new ClaimsPrincipal(new ClaimsIdentity());
 
             // get context information (client name, post logout redirect URI and iframe for federated signout)
             var logout = await _interaction.GetLogoutContextAsync(model.LogoutId);
 
-            //return Redirect(logout?.PostLogoutRedirectUri);
-            return Redirect("~/");
+            if(!string.IsNullOrEmpty(logout?.PostLogoutRedirectUri)){
+                return Redirect(logout?.PostLogoutRedirectUri);   
+            }
+            else{
+                return Redirect("~/");   
+            }
         }
 
         async Task<LoginViewModel> BuildLoginViewModelAsync(string returnUrl, AuthorizationRequest context)

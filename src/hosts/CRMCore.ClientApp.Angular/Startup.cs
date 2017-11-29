@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using CRMCore.ClientApp.Angular.ViewModel;
+
 namespace CRMCore.ClientApp.Angular
 {
     public class Startup
@@ -19,6 +21,7 @@ namespace CRMCore.ClientApp.Angular
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ClientAppSettings>(Configuration.GetSection("ClientAppSettings"));
             services.AddMvc();
         }
 
