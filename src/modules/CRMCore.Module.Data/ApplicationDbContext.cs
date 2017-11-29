@@ -1,14 +1,12 @@
 ﻿using CRMCore.Framework.Entities;
 using CRMCore.Framework.Entities.Identity;
 using CRMCore.Framework.MvcCore.Extensions;
-using CRMCore.Module.Data.Mapping;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Microsoft.AspNetCore.Identity;
 
 namespace CRMCore.Module.Data
 {

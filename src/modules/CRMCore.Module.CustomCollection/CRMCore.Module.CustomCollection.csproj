@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="WriteSide\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\framework\CRMCore.Framework.CqrsLite\CRMCore.Framework.CqrsLite.csproj" />
+    <ProjectReference Include="..\..\framework\CRMCore.Framework.Entities\CRMCore.Framework.Entities.csproj" />
+    <ProjectReference Include="..\..\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.csproj" />
+    <ProjectReference Include="..\..\framework\CRMCore.Framework.MvcCore\CRMCore.Framework.MvcCore.csproj" />
+    <ProjectReference Include="..\CRMCore.Module.Data\CRMCore.Module.Data.csproj" />
+  </ItemGroup>
+
+</Project>

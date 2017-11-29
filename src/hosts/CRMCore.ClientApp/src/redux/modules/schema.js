@@ -19,6 +19,7 @@ const LOAD_SPECIFIC_SCHEMA_FAILED = 'LOAD_SPECIFIC_SCHEMA_FAILED';
 const initialState = {
   loading: true,
   loaded: false,
+  schemaByIds: [],
   schemas: [],
   schemaSelected: null,
   error: null,
@@ -116,7 +117,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loaded: true,
         loading: false,
-        schemas: action.data,
+        schemaByIds: action.data.map(schema => schema.id),
+        schemas: action.data.reduce((obj, schema) => {
+          obj[schema.id] = schema;
+          return obj;
+        }, {}),
         page: action.page || 0
       };
 

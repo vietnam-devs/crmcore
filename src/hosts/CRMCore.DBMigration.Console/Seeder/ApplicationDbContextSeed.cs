@@ -1,12 +1,14 @@
-﻿using System;
+﻿using CRMCore.Framework.Entities.Identity;
+using CRMCore.Module.CustomCollection.Entity;
+using CRMCore.Module.CustomCollection.Entity.Schema;
+using CRMCore.Module.Data;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Hosting;
-using System.Threading.Tasks;
-using CRMCore.Module.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using CRMCore.Framework.Entities.Identity;
+using System.Threading.Tasks;
 
 namespace CRMCore.DBMigration.Console.Seeder
 {
@@ -19,9 +21,16 @@ namespace CRMCore.DBMigration.Console.Seeder
             logger.LogInformation("Begin Seed data - Application DB context");
             try
             {
-                if(!context.Users.Any()){
-                    context.Users.AddRange(GetDefaultUser());
+                if (!context.Users.Any())
+                {
+                    await context.Users.AddRangeAsync(GetDefaultUser());
                 }
+
+                if (!context.Set<Morphism>().Any())
+                {
+                    await context.Set<Morphism>().AddRangeAsync(GetDefaultMorphisms());
+                }
+
                 await context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -50,6 +59,102 @@ namespace CRMCore.DBMigration.Console.Seeder
             {
                 user
             };
+        }
+
+        private IEnumerable<Morphism> GetDefaultMorphisms()
+        {
+            // Account
+            var accountSchema = new Schema("account");
+
+            accountSchema.Publish();
+
+            accountSchema.Update(new SchemaProperties
+            {
+                Label = "Account",
+                Hints = "Account entity in CRM-Core."
+            });
+
+            var account = new Morphism("account", accountSchema);
+
+            // Contact
+            var contactSchema = new Schema("contact");
+
+            contactSchema.Publish();
+
+            contactSchema.Update(new SchemaProperties
+            {
+                Label = "Contact",
+                Hints = "Contact entity in CRM-Core."
+            });
+
+            contactSchema.AddField(new StringField(
+                Guid.NewGuid(),
+                "firstName",
+                new StringFieldProperties
+                {
+                    Label = "FirstName",
+                    IsRequired = true,
+                    FieldType = StringFieldType.Input,
+                    Hints = "Please input first name.",
+                    Placeholder = "Input first name...",
+                    DefaultValue = "Phuong"
+                }));
+
+            contactSchema.AddField(new StringField(
+                Guid.NewGuid(),
+                "lastName",
+                new StringFieldProperties
+                {
+                    Label = "LastName",
+                    IsRequired = true,
+                    FieldType = StringFieldType.Input,
+                    Hints = "Please input last name.",
+                    Placeholder = "Input last name...",
+                    DefaultValue = "Le"
+                }));
+
+            var contact = new Morphism("contact", contactSchema);
+
+            // Customer
+            var customerSchema = new Schema("customer");
+
+            customerSchema.Publish();
+
+            customerSchema.Update(new SchemaProperties
+            {
+                Label = "Customer",
+                Hints = "Customer entity in CRM-Core."
+            });
+
+            customerSchema.AddField(new StringField(
+                Guid.NewGuid(),
+                "firstName",
+                new StringFieldProperties
+                {
+                    Label = "FirstName",
+                    IsRequired = true,
+                    FieldType = StringFieldType.Input,
+                    Hints = "Please input first name.",
+                    Placeholder = "Input first name...",
+                    DefaultValue = "Lena"
+                }));
+
+            customerSchema.AddField(new StringField(
+                Guid.NewGuid(),
+                "lastName",
+                new StringFieldProperties
+                {
+                    Label = "LastName",
+                    IsRequired = true,
+                    FieldType = StringFieldType.Input,
+                    Hints = "Please input last name.",
+                    Placeholder = "Input last name...",
+                    DefaultValue = "Cao"
+                }));
+
+            var customer = new Morphism("customer", customerSchema);
+
+            return new[] { account, contact, customer };
         }
     }
 }

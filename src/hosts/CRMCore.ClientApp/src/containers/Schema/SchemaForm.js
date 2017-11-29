@@ -34,24 +34,11 @@ class SchemaForm extends React.Component {
     this.setState({ showConfirm: showConfirm });
   }
 
-  componentDidMount() {
-    const { match } = this.props;
-    if (match.params && match.params.name) {
-      this.props.loadSpecificSchema(match.params.name);
-    }
-  }
-
   render() {
     const { error, handleSubmit, pristine, reset, submitting } = this.props;
     return (
       <div className="animated fadeIn">
         <Card className="b-panel">
-          <CardHeader>
-            <h3 className="b-panel-title">
-              <i className="icon-notebook b-icon" />
-              Add a new Schema
-            </h3>
-          </CardHeader>
           <CardBody className="card-body">
             <Form className="b-form">
               <FormGroup>
@@ -108,7 +95,7 @@ class SchemaForm extends React.Component {
                   <i className="icon-paper-plane b-icon" />Save
                 </Button>&nbsp;
                 <Button
-                  color="info"
+                  color="warning"
                   disabled={pristine || submitting}
                   onClick={reset}
                 >
@@ -124,15 +111,6 @@ class SchemaForm extends React.Component {
                   }}
                 >
                   <i className="icon-trash b-icon" />Delete
-                </Button>&nbsp;
-                <Button
-                  color="warning"
-                  disabled={!pristine}
-                  onClick={() => {
-                    this.props.history.replace('/metadata/schemas');
-                  }}
-                >
-                  <i className="icon-arrow-left b-icon" />Back
                 </Button>
               </FormGroup>
             </Form>
@@ -159,11 +137,11 @@ export default connect(initData, SchemaStore.actionCreators)(
     validate,
     onSubmit: (values, dispatch, props) => {
       const { match } = props;
-      if (match.params && !match.params.id) {
+      // if (match.params && !match.params.id) {
         // props.addSchema(values);
-      } else {
+      // } else {
         // props.updateSchema(values);
-      }
+      // }
     }
   })(SchemaForm)
 );

@@ -1,21 +1,43 @@
 ﻿using AspNetCore.RouteAnalyzer;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using CRMCore.Framework.MvcCore.Extensions;
+using CRMCore.Module.Data;
+using CRMCore.Module.Data.Impl;
+using CRMCore.Module.Identity.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Text.Encodings.Web;
 
-using CRMCore.Framework.MvcCore.Extensions;
-using CRMCore.WebApp.Config;
-using CRMCore.Module.Identity.Extensions;
-using CRMCore.Module.Data;
-
 namespace CRMCore.WebApp
 {
+    public static class Constants
+    {
+        public static readonly string ApiPrefix = "/api";
+        public static readonly string IdentityPrefix = "/idsrv";
+    }
+
+    public static class ServiceCollectionExtensions
+    {
+        public static IServiceProvider InitServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterGeneric(typeof(EfRepository<>))
+                .As(typeof(IEfRepository<>));
+
+            builder.Populate(services);
+            return builder.Build().Resolve<IServiceProvider>();
+        }
+    }
+
     public class Startup
     {
         private static readonly string[] IdSrvPaths =
@@ -36,7 +58,7 @@ namespace CRMCore.WebApp
             Configuration = config;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("Default");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
@@ -65,10 +87,12 @@ namespace CRMCore.WebApp
                             sqlOptions.MigrationsAssembly(migrationsAssembly);
                         });
                 });
+
+            return services.InitServices(Configuration);
         }
 
         public void Configure(IApplicationBuilder app)
-        {           
+        {
             app.UseStaticFiles();
 
             MapAndUseIdSrv(app);
