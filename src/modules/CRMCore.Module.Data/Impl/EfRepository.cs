@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace CRMCore.Module.Data.Impl
 {
-    public class EfRepository<TEntity> : EfRepository<ApplicationDbContext, TEntity>, IEfRepository<TEntity>
+    public class EfRepositoryAsync<TEntity> : EfRepositoryAsync<ApplicationDbContext, TEntity>, IEfRepositoryAsync<TEntity>
         where TEntity : EntityBase
     {
-        public EfRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public EfRepositoryAsync(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
     }
 
-    public class EfRepository<TDbContext, TEntity> : IEfRepository<TDbContext, TEntity>
+    public class EfRepositoryAsync<TDbContext, TEntity> : IEfRepositoryAsync<TDbContext, TEntity>
         where TDbContext : DbContext
         where TEntity : EntityBase
     {
         public TDbContext DbContext { get; private set; }
 
-        public EfRepository(TDbContext dbContext)
+        public EfRepositoryAsync(TDbContext dbContext)
         {
             DbContext = dbContext;
             DbContext.ChangeTracker.AutoDetectChangesEnabled = false;

@@ -1,6 +1,7 @@
 ﻿using AspNetCore.RouteAnalyzer;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using CRMCore.Framework.Entities;
 using CRMCore.Framework.MvcCore.Extensions;
 using CRMCore.Module.Data;
 using CRMCore.Module.Data.Impl;
@@ -30,8 +31,14 @@ namespace CRMCore.WebApp
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterGeneric(typeof(EfRepository<>))
-                .As(typeof(IEfRepository<>));
+            builder.RegisterGeneric(typeof(EfRepositoryAsync<>))
+                .As(typeof(IEfRepositoryAsync<>));
+
+            builder.Register(x => new EfUnitOfWork(
+                    x.Resolve<ApplicationDbContext>(),
+                    x.Resolve<IServiceProvider>()))
+                .As(typeof(IUnitOfWorkAsync))
+                .SingleInstance();
 
             builder.Populate(services);
             return builder.Build().Resolve<IServiceProvider>();

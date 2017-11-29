@@ -10,7 +10,7 @@ namespace CRMCore.Module.Data.Extensions
     public static class EfRepositoryExtensions
     {
         public static async Task<PaginatedItem<TResponse>> QueryAsync<TDbContext, TEntity, TResponse>(
-            this IEfRepository<TDbContext, TEntity> repo,
+            this IEfRepositoryAsync<TDbContext, TEntity> repo,
             Criterion criterion,
             Expression<Func<TEntity, TResponse>> selector,
             params Expression<Func<TEntity, object>>[] includeProperties)
@@ -21,7 +21,7 @@ namespace CRMCore.Module.Data.Extensions
         }
 
         public static async Task<PaginatedItem<TResponse>> FindAllAsync<TDbContext, TEntity, TResponse>(
-            this IEfRepository<TDbContext, TEntity> repo,
+            this IEfRepositoryAsync<TDbContext, TEntity> repo,
             Criterion criterion,
             Expression<Func<TEntity, TResponse>> selector,
             Expression<Func<TEntity, bool>> filter,
@@ -33,7 +33,7 @@ namespace CRMCore.Module.Data.Extensions
         }
 
         public static async Task<TEntity> FindOneAsync<TDbContext, TEntity>(
-            this IEfRepository<TDbContext, TEntity> repo,
+            this IEfRepositoryAsync<TDbContext, TEntity> repo,
             Expression<Func<TEntity, bool>> filter,
             params Expression<Func<TEntity, object>>[] includeProperties)
             where TDbContext : DbContext
@@ -49,7 +49,7 @@ namespace CRMCore.Module.Data.Extensions
         }
 
         private static async Task<PaginatedItem<TResponse>> GetDataAsync<TDbContext, TEntity, TResponse>(
-            IEfRepository<TDbContext, TEntity> repo,
+            IEfRepositoryAsync<TDbContext, TEntity> repo,
             Criterion criterion,
             Expression<Func<TEntity, TResponse>> selector,
             Expression<Func<TEntity, bool>> filter = null,
@@ -66,9 +66,11 @@ namespace CRMCore.Module.Data.Extensions
             var totalRecord = await queryable.CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalRecord / criterion.PageSize);
 
-            foreach (var includeProperty in includeProperties)
+            if (includeProperties != null && includeProperties.Count() > 0)
             {
-                queryable = queryable.Include(includeProperty);
+                queryable = includeProperties.Aggregate(
+                    queryable,
+                    (current, include) => current.Include(include));
             }
 
             if (filter != null)

@@ -1,4 +1,5 @@
-﻿using CRMCore.Module.CustomCollection.Dtos;
+﻿using CRMCore.Framework.Entities;
+using CRMCore.Module.CustomCollection.Dtos;
 using CRMCore.Module.CustomCollection.Entity;
 using CRMCore.Module.Data;
 using CRMCore.Module.Data.Extensions;
@@ -10,11 +11,13 @@ namespace CRMCore.Module.CustomCollection
     [Area("CRMCore.Module.CustomCollection")]
     public class CustomCollectionController : Controller
     {                                      
-        private readonly IEfRepository<Morphism> _morphismRepository;
+        private readonly IEfRepositoryAsync<Morphism> _morphismRepository;
+        private readonly IUnitOfWorkAsync _unitOfWork;
 
-        public CustomCollectionController(IEfRepository<Morphism> morphismRepository)
+        public CustomCollectionController(IUnitOfWorkAsync unitOfWork)
         {
-            _morphismRepository = morphismRepository;
+            _unitOfWork = unitOfWork;
+            _morphismRepository = _unitOfWork.Repository<Morphism>() as IEfRepositoryAsync<Morphism>;
         }
 
         [HttpGet]

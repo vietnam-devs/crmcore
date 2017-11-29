@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRMCore.Module.Data
 {
-    public interface IEfRepository<TEntity> : IEfRepository<ApplicationDbContext, TEntity>
+    public interface IEfRepositoryAsync<TEntity> : IEfRepositoryAsync<ApplicationDbContext, TEntity>
         where TEntity : EntityBase
     {
     }
 
-    public interface IEfRepository<TDbContext, TEntity> : IRepository<TEntity>
+    public interface IEfRepositoryAsync<TDbContext, TEntity> : IRepositoryAsync<TEntity>
         where TDbContext : DbContext
         where TEntity : EntityBase
     {
