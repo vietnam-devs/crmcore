@@ -7,6 +7,11 @@ namespace CRMCore.Module.Identity.ViewModels
 {
     public class ConsentViewModel : ConsentInputModel
     {
+        public ConsentViewModel()
+        {
+
+        }
+
         public ConsentViewModel(ConsentInputModel model, string returnUrl, AuthorizationRequest request, Client client, Resources resources)
         {
             RememberConsent = model?.RememberConsent ?? true;

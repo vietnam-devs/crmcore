@@ -5,14 +5,15 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Pages\" />
-    <Folder Include="Pages\Login\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Services\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Pages\Consent\" />
     <Folder Include="Content\" />
     <Folder Include="Content\css\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\Consent\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
@@ -29,10 +30,7 @@
     <ProjectReference Include="..\..\framework\CRMCore.Framework.Entities\CRMCore.Framework.Entities.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Pages\Login\Index.cshtml.cs">
-      <DependentUpon>Index.cshtml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\Consent\Index.cshtml.cs">
+    <Compile Update="Views\Consent\Index.cshtml.cs">
       <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
   </ItemGroup>
