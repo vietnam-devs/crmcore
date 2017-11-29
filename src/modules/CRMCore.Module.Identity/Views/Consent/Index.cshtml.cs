@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CRMCore.Module.Identity.ViewModels;
+using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +18,7 @@ namespace CRMCore.Module.Identity.Pages.Consent
         private readonly IClientStore _clientStore;
         private readonly IResourceStore _resourceStore;
         private readonly IIdentityServerInteractionService _interaction;
+
 
         public IndexModel(
             ILogger<IndexModel> logger,
@@ -34,6 +38,52 @@ namespace CRMCore.Module.Identity.Pages.Consent
         public async Task<IActionResult> OnGet(string returnUrl)
         {
             ConsentVM = await BuildViewModelAsync(returnUrl);
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            var request = await _interaction.GetAuthorizationContextAsync(ConsentVM.ReturnUrl);
+            ConsentResponse response = null;
+
+            // user clicked 'no' - send back the standard 'access_denied' response
+            if (ConsentVM.Button == "no")
+            {
+                response = ConsentResponse.Denied;
+            }
+            // user clicked 'yes' - validate the data
+            else if (ConsentVM.Button == "yes" && ConsentVM != null)
+            {
+                // if the user consented to some scope, build the response model
+                if (ConsentVM.ScopesConsented != null && ConsentVM.ScopesConsented.Any())
+                {
+                    response = new ConsentResponse
+                    {
+                        RememberConsent = ConsentVM.RememberConsent,
+                        ScopesConsented = ConsentVM.ScopesConsented
+                    };
+                }
+                else
+                {
+                    ModelState.AddModelError("", "You must pick at least one permission.");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid Selection");
+            }
+
+            if (response != null)
+            {
+                // communicate outcome of consent back to identityserver
+                await _interaction.GrantConsentAsync(request, response);
+
+                // redirect back to authorization endpoint
+                return Redirect(ConsentVM.ReturnUrl);
+            }
+
+            ConsentVM = await BuildViewModelAsync(ConsentVM.ReturnUrl, ConsentVM);
 
             return Page();
         }

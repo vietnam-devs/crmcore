@@ -95,6 +95,10 @@ namespace CRMCore.WebApp
         {
             app.UseStaticFiles();
 
+            //Todo: need to refactor code, need to use authentication before MVC
+            app.UseAuthentication();
+            app.UseIdentityServer();
+
             MapAndUseIdSrv(app);
             MapAndUseWebApp(app);
             MapAndUseFrontend(app);

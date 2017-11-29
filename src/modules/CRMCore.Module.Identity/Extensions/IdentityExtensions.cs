@@ -26,8 +26,8 @@ namespace CRMCore.Module.Identity.Extensions
             services.AddIdentityServer(x =>
             {
                 x.IssuerUri = "null";
-                x.UserInteraction.LoginUrl = "/identity/login";
-                x.UserInteraction.ConsentUrl = "/identity/consent";
+                x.UserInteraction.LoginUrl = "/identity/account/login";
+                x.UserInteraction.ConsentUrl = "/identity/consent/index";
             })
             .AddDeveloperSigningCredential()
             .AddAspNetIdentity<ApplicationUser>()
