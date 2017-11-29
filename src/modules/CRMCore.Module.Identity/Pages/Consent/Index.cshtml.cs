@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using CRMCore.Module.Identity.ViewModels;
 using IdentityServer4.Services;
@@ -17,7 +15,6 @@ namespace CRMCore.Module.Identity.Pages.Consent
         private readonly IClientStore _clientStore;
         private readonly IResourceStore _resourceStore;
         private readonly IIdentityServerInteractionService _interaction;
-
 
         public IndexModel(
             ILogger<IndexModel> logger,

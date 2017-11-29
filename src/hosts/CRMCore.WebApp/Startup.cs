@@ -13,7 +13,6 @@ using CRMCore.Framework.MvcCore.Extensions;
 using CRMCore.WebApp.Config;
 using CRMCore.Module.Identity.Extensions;
 using CRMCore.Module.Data;
-using CRMCore.Framework.Entities.Identity;
 
 namespace CRMCore.WebApp
 {
@@ -72,11 +71,12 @@ namespace CRMCore.WebApp
         {           
             app.UseStaticFiles();
 
-            app.UseModules();
-
             MapAndUseIdSrv(app);
             MapAndUseWebApp(app);
             MapAndUseFrontend(app);
+
+            // TODO: consider moving this up
+            app.UseModules();
         }
 
         private void MapAndUseIdSrv(IApplicationBuilder app)

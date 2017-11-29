@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const extractCSS = new ExtractTextPlugin('vendor.css');
+const extractCSS = new ExtractTextPlugin('all.css');
 
 const PACKAGES_PATH = path.resolve(__dirname, 'packages');
 const WWWROOT_PATH = path.resolve(__dirname, 'wwwroot');
@@ -51,7 +51,8 @@ module.exports = {
       {
         test: /\.(woff|woff2|eot|ttf)(\?|$)/,
         use: 'file-loader?name=fonts/[name].[ext]'
-      }
+      },
+      { test: /\.(cshtml|txt)$/, loader: 'ignore-loader' }
     ]
   },
 
