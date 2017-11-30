@@ -61,9 +61,6 @@
     <ProjectReference Include="..\..\targets\CRMCore.Application.Crm.targets\CRMCore.Application.Crm.targets.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="CRMCertificate.pfx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="CRMCertificate.pfx" />
   </ItemGroup>
 </Project>

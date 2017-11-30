@@ -36,7 +36,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ResolvedFileToPublish Include="packages\**">
+        <ResolvedFileToPublish Include="packages\**; CRMCertificate.pfx">
           <RelativePath>packages\%(RecursiveDir)%(Filename)%(Extension)</RelativePath>
         </ResolvedFileToPublish>
     </ItemGroup>
