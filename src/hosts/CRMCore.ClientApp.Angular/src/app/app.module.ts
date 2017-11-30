@@ -1,17 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { HttpClientModule,HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule,HttpClient } from '@angular/common/http';
 
+import { AuthModule,OidcSecurityService,OpenIDImplicitFlowConfiguration} from 'angular-auth-oidc-client';
 
-import {
-  AuthModule,
-  OidcSecurityService,
-  OpenIDImplicitFlowConfiguration
-} from 'angular-auth-oidc-client';
+import { AuthInterceptorProvider } from './interceptors/auth.interceptor';
+import { ErrorInterceptorProvider } from './interceptors/error.interceptor';
 
 import { AppComponent } from './app.component';
-
 // Import routing module
 import { AppRoutingModule } from './app.routing';
 
@@ -65,7 +62,7 @@ const APP_DIRECTIVES = [
   SIDEBAR_TOGGLE_DIRECTIVES
 ];
 
-import { AuthInterceptor } from './interceptors/Auth.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -85,12 +82,9 @@ import { AuthInterceptor } from './interceptors/Auth.interceptor';
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
-    OidcSecurityService
+     AuthInterceptorProvider,
+     ErrorInterceptorProvider,        
+     OidcSecurityService
   ],
   bootstrap: [AppComponent]
 })
