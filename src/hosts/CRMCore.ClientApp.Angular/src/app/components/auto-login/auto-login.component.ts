@@ -3,7 +3,7 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
     selector: 'app-auto-component',
-    template: '.<div>redirecting to login</div>'
+    template: '<div>redirecting to login</div>'
 })
 
 export class AutoLoginComponent implements OnInit, OnDestroy {

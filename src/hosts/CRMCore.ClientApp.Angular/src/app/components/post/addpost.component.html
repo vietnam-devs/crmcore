@@ -1,0 +1,28 @@
+<div class="card animated fadeIn" *ngIf="toggleAddPost" >
+        <div class="card-header">
+          <strong>Add post</strong>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="postForm">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input   id="title" [(ngModel)]="post.title"  formControlName="title" class="form-control" placeholder="Enter Title..">    
+               <div *ngIf="postForm.controls['title'].dirty  && postForm.controls['title'].errors" class="alert alert-danger">                 
+                    <p *ngIf="postForm.controls['title'].errors.required"> Please enter title</p>
+                </div>          
+            </div>
+
+            <div class="form-group">
+              <label for="nf-password">Description</label>
+              <input id="description" [(ngModel)]="post.description" formControlName="description" class="form-control" placeholder="Enter Description.."> 
+               <div *ngIf="postForm.controls['description'].dirty  && postForm.controls['description'].errors" class="alert alert-danger">                 
+                    <p *ngIf="postForm.controls['description'].errors.required"> Please enter description</p>
+                </div>                       
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-sm btn-primary" (click)="createPost()" [disabled] ="!postForm.valid"><i class="fa fa-dot-circle-o"></i> Submit</button>
+          <button type="reset" class="btn btn-sm btn-danger" (click)="reset()"><i class="fa fa-ban"></i> Reset</button>
+        </div>
+</div>
