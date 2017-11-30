@@ -4,6 +4,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const extractCSS = new ExtractTextPlugin('all.css');
 
@@ -57,6 +58,11 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin([WWWROOT_PATH + '/server'],
+      {
+        verbose: true,
+        dry: false
+      }),
     extractCSS,
     new webpack.ProvidePlugin({
       $: 'jquery',
