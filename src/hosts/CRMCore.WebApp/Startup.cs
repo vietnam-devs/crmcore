@@ -16,6 +16,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Text.Encodings.Web;
+using Microsoft.Extensions.Logging;
 
 namespace CRMCore.WebApp
 {
@@ -78,6 +79,7 @@ namespace CRMCore.WebApp
             services.AddRouteAnalyzer();
 
             services.RegisterIdentityAndID4(
+                Configuration.GetSection("Certificate"),
                 options =>
                 {
                     options.ConfigureDbContext = builder =>
