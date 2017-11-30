@@ -2,7 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { PostService } from '../../components/post/post.service';
-import { Post } from '../../model/post.model'
+import { Post } from '../../core/models/post.model';
 
 @Component({
   templateUrl: 'dashboard.component.html'

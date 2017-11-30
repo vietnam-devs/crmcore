@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 
-import { Post } from '../../model/post.model'
-import { ConfigService } from '../../services/config.service';
+import { Post } from '../../core/models/post.model';
+import { ConfigService } from '../../core/services/config.service';
 
 @Injectable()
 export class PostService {

@@ -8,7 +8,7 @@ import { AddPostComponent } from '../../components/post/addpost.component';
 import { SearchPostComponent } from '../../components/post/searchpost.component';
 
 import { PostService } from '../../components/post/post.service';
-import { FilterPipe} from '../../pipe/filter.pipe'
+import { FilterPipe} from '../../shared/pipe/filter.pipe'
 
 @NgModule({
     imports: [ DashboardRoutingModule,SharedModule],

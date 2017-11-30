@@ -235,3 +235,4 @@ _Pvt_Extensions
 package-lock.json
 /wwwroot/dist/
 wwwroot/**/*
+!CRMCertificate.pfx

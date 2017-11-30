@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 import { PostService } from '../../components/post/post.service';
-import { Post } from '../../model/post.model';
+import { Post } from '../../core/models/post.model';
 
 @Component({
     selector: 'posts',

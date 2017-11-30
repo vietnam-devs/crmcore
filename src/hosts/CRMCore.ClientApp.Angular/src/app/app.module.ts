@@ -56,7 +56,7 @@ import {
   NAV_DROPDOWN_DIRECTIVES,
   ReplaceDirective,
   SIDEBAR_TOGGLE_DIRECTIVES
-} from './directives';
+} from './shared/directives';
 
 const APP_DIRECTIVES = [
   AsideToggleDirective,

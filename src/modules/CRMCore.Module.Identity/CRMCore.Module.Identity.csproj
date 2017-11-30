@@ -22,6 +22,7 @@
     <PackageReference Include="IdentityServer4" Version="2.0.4" />
 	<PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.0.0" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="2.1.0" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.csproj" />
