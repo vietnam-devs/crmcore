@@ -60,5 +60,8 @@
     <ProjectReference Include="..\..\framework\CRMCore.Framework.MvcCore\CRMCore.Framework.MvcCore.csproj" />
     <ProjectReference Include="..\..\targets\CRMCore.Application.Crm.targets\CRMCore.Application.Crm.targets.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="CRMCertificate.pfx" />
+  </ItemGroup>
 </Project>
 
