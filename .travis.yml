@@ -14,7 +14,7 @@ os:
   - linux
 before_script:
   - npm install yarn typescript@2.5.3 -g
-  - npm install -g webpack create-react-app npm-run-all cpx node-sass-chokidar
+  - npm install -g create-react-app npm-run-all cpx node-sass-chokidar
   - rm -rf $TRAVIS_BUILD_DIR/build/release
 script:
   - if test "$TRAVIS_OS_NAME" == "linux"; then dotnet restore; fi
