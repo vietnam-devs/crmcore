@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule,HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 import {
   AuthModule,
@@ -77,8 +76,7 @@ import { AuthInterceptor } from './interceptors/Auth.interceptor';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule,
+    AppRoutingModule,    
     HttpClientModule,
     AuthModule.forRoot()
   ],
