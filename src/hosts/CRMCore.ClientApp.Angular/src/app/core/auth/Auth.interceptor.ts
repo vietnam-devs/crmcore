@@ -1,10 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import {
-  HttpEvent,
-  HttpInterceptor,
-  HttpHandler,
-  HttpRequest
-} from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 
@@ -19,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let requestToForward = req;
-
+    debugger;
     if (this.oidcSecurityService === undefined) {
       this.oidcSecurityService = this.injector.get(OidcSecurityService);
     }
@@ -38,3 +33,9 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(requestToForward);
   }
 }
+
+export const AuthInterceptorProvider = {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+};
