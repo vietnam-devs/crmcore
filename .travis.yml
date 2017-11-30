@@ -20,11 +20,11 @@ script:
   - if test "$TRAVIS_OS_NAME" == "linux"; then dotnet restore; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then    
       cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.ClientApp;
-      yarn install;
+      yarn install --production;
       yarn build;
       cp -rfv build/* ../CRMCore.WebApp/wwwroot/;
       cd $TRAVIS_BUILD_DIR/src/hosts/CRMCore.WebApp;
-      yarn install;
+      yarn install --production;
       dotnet build;
       yarn build;      
       dotnet publish -c Release -o ../../../build/release;
