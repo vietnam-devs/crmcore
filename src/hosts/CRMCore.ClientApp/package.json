@@ -17,7 +17,6 @@
   "dependencies": {
     "bootstrap": "^4.0.0-beta",
     "chart.js": "^2.7.0",
-    "clean-webpack-plugin": "^0.1.17",
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",
     "humps": "^2.0.1",
@@ -41,7 +40,7 @@
     "simple-line-icons": "^2.4.1"
   },
   "scripts": {
-    "copy-images": "cpx \"./src/**/*.{png,jpg}\" \"./public/server/\"",
+    "copy-images": "cpx \"./src/**/*.{png,jpg}\" \"./public/\"",
     "copy-styles": "cpx \"./src/**/*.css\" \"./public/server/\"",
     "copy-assets": "npm-run-all copy-styles copy-images",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",

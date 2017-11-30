@@ -58,11 +58,11 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin([WWWROOT_PATH + '/server'],
+    /*new CleanWebpackPlugin([WWWROOT_PATH + '/server'],
       {
         verbose: true,
         dry: false
-      }),
+      }),*/
     extractCSS,
     new webpack.ProvidePlugin({
       $: 'jquery',
