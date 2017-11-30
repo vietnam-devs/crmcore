@@ -8,8 +8,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-root',
-  //templateUrl: './app.component.html',
-  template: '<router-outlet></router-outlet>',
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnDestroy {
@@ -22,17 +21,17 @@ export class AppComponent implements OnDestroy {
     public router: Router
   ) {
     if (this.oidcSecurityService.moduleSetup) {
-      this.onOidcModuleSetup();
+      // this.onOidcModuleSetup();
     } else {
       this.oidcSecurityService.onModuleSetup.subscribe(() => {
-        this.onOidcModuleSetup();
+        // this.onOidcModuleSetup();
       });
     }
 
     this.router.events
       .filter((event: any) => event instanceof NavigationStart)
       .subscribe((data: NavigationStart) => {
-        if (data.url == '/id_token') {
+        if (data.url === '/id_token') {
           this.hash = window.location.hash;
           this.router.navigate([]);
         }
@@ -80,7 +79,7 @@ export class AppComponent implements OnDestroy {
     const path = this.read('redirect');
     if (authorizationResult === AuthorizationResult.authorized) {
       this.router.navigate([path]);
-    } 
+    }
   }
 
   private read(key: string): any {

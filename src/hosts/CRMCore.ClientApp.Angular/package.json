@@ -32,7 +32,11 @@
     "rxjs": "^5.5.2",
     "simple-line-icons": "^2.4.1",
     "ts-helpers": "1.1.2",
-    "zone.js": "^0.8.14"
+    "zone.js": "^0.8.14",
+    "@ngrx/effects": "4.1.0",
+    "@ngrx/router-store": "4.1.0",
+    "@ngrx/store": "4.1.0",
+    "@ngrx/store-devtools": "4.0.0"
   },
   "devDependencies": {
     "@angular/cli": "1.5.4",

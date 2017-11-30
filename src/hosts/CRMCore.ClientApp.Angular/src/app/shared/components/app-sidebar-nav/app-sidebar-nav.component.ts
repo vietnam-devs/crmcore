@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 
 // Import navigation elements
-import { navigation } from '../../../_nav';
+import { navigation } from '../../../../_nav';
 
 @Component({
   selector: 'app-sidebar-nav',
