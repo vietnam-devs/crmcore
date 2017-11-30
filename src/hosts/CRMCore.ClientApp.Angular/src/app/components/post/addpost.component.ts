@@ -2,7 +2,7 @@ import { Component ,Input, Output,OnInit, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { PostService } from '../../components/post/post.service';
-import { Post } from '../../model/post.model';
+import { Post } from '../../core/models/post.model';
 
 @Component({
     selector: 'add-post',
