@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { HttpClientModule,HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import {
   AuthModule,
@@ -14,71 +13,30 @@ import { AppComponent } from './app.component';
 
 // Import routing module
 import { AppRoutingModule } from './app.routing';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
-// Import containers
-import { LayoutComponent } from './containers';
-const APP_CONTAINERS = [LayoutComponent];
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
-// Import components
-import {
-  AppAsideComponent,
-  AppBreadcrumbsComponent,
-  AppFooterComponent,
-  AppHeaderComponent,
-  AppSidebarComponent,
-  AppSidebarFooterComponent,
-  AppSidebarFormComponent,
-  AppSidebarHeaderComponent,
-  AppSidebarMinimizerComponent,
-  APP_SIDEBAR_NAV,
-  AutoLoginComponent,
-  UnauthorizedComponent
-} from './components';
-
-const APP_COMPONENTS = [
-  AppAsideComponent,
-  AppBreadcrumbsComponent,
-  AppFooterComponent,
-  AppHeaderComponent,
-  AppSidebarComponent,
-  AppSidebarFooterComponent,
-  AppSidebarFormComponent,
-  AppSidebarHeaderComponent,
-  AppSidebarMinimizerComponent,
-  APP_SIDEBAR_NAV,
-  AutoLoginComponent,
-  UnauthorizedComponent
-];
-
-// Import directives
-import {
-  AsideToggleDirective,
-  NAV_DROPDOWN_DIRECTIVES,
-  ReplaceDirective,
-  SIDEBAR_TOGGLE_DIRECTIVES
-} from './shared/directives';
-
-const APP_DIRECTIVES = [
-  AsideToggleDirective,
-  NAV_DROPDOWN_DIRECTIVES,
-  ReplaceDirective,
-  SIDEBAR_TOGGLE_DIRECTIVES
-];
-
-import { AuthInterceptor } from './interceptors/Auth.interceptor';
+import { AuthInterceptor } from './core/auth/Auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ...APP_CONTAINERS,
-    ...APP_COMPONENTS,
-    ...APP_DIRECTIVES
+    AppRoutingModule.components
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,    
+    AppRoutingModule,
     HttpClientModule,
-    AuthModule.forRoot()
+    SharedModule,
+    CoreModule.forRoot(),
+    AuthModule.forRoot(),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({ maxAge: 25 })
   ],
   providers: [
     {
@@ -104,12 +62,16 @@ export class AppModule {
     this.configClient().subscribe((config: any) => {
       this.clientConfiguration = config;
 
-      let openIDImplicitFlowConfiguration = new OpenIDImplicitFlowConfiguration();
+      const openIDImplicitFlowConfiguration = new OpenIDImplicitFlowConfiguration();
 
       openIDImplicitFlowConfiguration.stsServer = this.clientConfiguration.stsServer;
       openIDImplicitFlowConfiguration.redirect_url = this.clientConfiguration.redirect_url;
-      // The Client MUST validate that the aud (audience) Claim contains its client_id value registered at the Issuer identified by the iss (issuer) Claim as an audience.
-      // The ID Token MUST be rejected if the ID Token does not list the Client as a valid audience, or if it contains additional audiences not trusted by the Client.
+      // The Client MUST validate that the aud (audience)
+      // Claim contains its client_id value registered at the Issuer
+      // identified by the iss (issuer) Claim as an audience.
+      // The ID Token MUST be rejected if the ID Token does not list
+      // the Client as a valid audience, or if it contains additional
+      // audiences not trusted by the Client.
       openIDImplicitFlowConfiguration.client_id = this.clientConfiguration.client_id;
       openIDImplicitFlowConfiguration.response_type = this.clientConfiguration.response_type;
       openIDImplicitFlowConfiguration.scope = this.clientConfiguration.scope;
@@ -125,7 +87,8 @@ export class AppModule {
       openIDImplicitFlowConfiguration.log_console_debug_active = this.clientConfiguration.log_console_debug_active;
       // id_token C8: The iat Claim can be used to reject tokens that were issued too far away from the current time,
       // limiting the amount of time that nonces need to be stored to prevent attacks.The acceptable range is Client specific.
-      openIDImplicitFlowConfiguration.max_id_token_iat_offset_allowed_in_seconds = this.clientConfiguration.max_id_token_iat_offset_allowed_in_seconds;
+      openIDImplicitFlowConfiguration.max_id_token_iat_offset_allowed_in_seconds =
+      this.clientConfiguration.max_id_token_iat_offset_allowed_in_seconds;
 
       this.oidcSecurityService.setupModule(openIDImplicitFlowConfiguration);
     });

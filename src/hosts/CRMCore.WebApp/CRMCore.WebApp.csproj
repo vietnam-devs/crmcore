@@ -47,7 +47,7 @@
     <Exec WorkingDirectory="..\CRMCore.ClientApp\" Command="xcopy.exe /S /R /Y /E build ..\CRMCore.WebApp\wwwroot" />
   </Target>
 
-  <Target Name="CopyAssetToOutputLinux" AfterTargets="Build" Condition="'$(BuildingInsideVisualStudio)' == 'true' And '$(OS)' != 'Windows_NT' And !Exists('wwwroot/index.html') ">
+  <Target Name="CopyAssetToOutputLinux" AfterTargets="Build" Condition="'$(OS)' != 'Windows_NT' And !Exists('wwwroot/index.html') ">
     <Message Importance="high" Text="[CRMCore][Not Windows] Yarn is installing..." />
     <Exec WorkingDirectory="../CRMCore.ClientApp/" Command="yarn install" />
     <Message Importance="high" Text="[CRMCore][Not Windows] Yarn is building..." />

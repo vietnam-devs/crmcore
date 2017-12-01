@@ -1,12 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { UnauthorizedComponent, AutoLoginComponent } from './components';
-
-// Import Containers
-import {
-  LayoutComponent,  
-} from './containers';
+import { UnauthorizedComponent, AutoLoginComponent } from './containers';
 
 export const routes: Routes = [
   { path: 'unauthorized', component: UnauthorizedComponent },
@@ -17,17 +12,12 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: '',
-    component: LayoutComponent,
-    data: {
-      title: 'Home'
-    },
-    children: [
-      {
-        path: 'dashboard',
-        loadChildren: './containers/dashboard/dashboard.module#DashboardModule'
-      }
-    ]
+    path: 'dashboard',
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
+  },
+  {
+    path: 'posts',
+    loadChildren: './posts/posts.module#PostsModule'
   }
 ];
 
@@ -35,4 +25,6 @@ export const routes: Routes = [
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+  static components = [ UnauthorizedComponent, AutoLoginComponent, ];
+}
