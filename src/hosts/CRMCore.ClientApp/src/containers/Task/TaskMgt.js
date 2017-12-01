@@ -57,11 +57,11 @@ export default class TaskMgt extends Component {
         <Card className="b-panel">
           <CardHeader>
             <h3 className="b-panel-title">
-              <i className="icon-notebook b-icon" />
+              <i className="icon-magic-wand b-icon" />
               Search parameters
             </h3>
             <span className="b-panel-actions">
-              <i className="icon-plus b-icon" onClick={this.toggle} />
+              <i className="icon-arrow-down b-icon" onClick={this.toggle} />
             </span>
           </CardHeader>
 
@@ -278,7 +278,7 @@ export default class TaskMgt extends Component {
             </h3>
             <span className="b-panel-actions">
               <Button
-                color="success"
+                color="primary"
                 className="pull-right"
                 onClick={this.createTask}
               >
@@ -299,6 +299,11 @@ export default class TaskMgt extends Component {
                     <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
                     7:00PM
                   </ListGroupItem>
+                  <ListGroupItem>
+                    <div className="text-center">
+                      <a href="#">Load more...</a>
+                    </div>
+                  </ListGroupItem>
                 </ListGroup>
                 <hr />
                 <h5>As Soon As Possible</h5>
@@ -315,9 +320,13 @@ export default class TaskMgt extends Component {
                     <Badge pill color="success" className="pull-left">
                       Presentation
                     </Badge>
-                    &nbsp;<a href="#">Lena</a>: Do a presentation about
-                    ReactJS for the team - 2 day late, was due on Nov 22 at
-                    6:30PM
+                    &nbsp;<a href="#">Lena</a>: Do a presentation about ReactJS
+                    for the team - 2 day late, was due on Nov 22 at 6:30PM
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <div className="text-center">
+                      <a href="#">Load more...</a>
+                    </div>
                   </ListGroupItem>
                 </ListGroup>
                 <hr />
@@ -335,10 +344,15 @@ export default class TaskMgt extends Component {
                     <Badge pill color="danger" className="pull-left">
                       Follow-up
                     </Badge>
-                    &nbsp;<a href="#">Chris</a>: Et exercitationem eaque
-                    commodi dolorem tenetur aut re:{' '}
+                    &nbsp;<a href="#">Chris</a>: Et exercitationem eaque commodi
+                    dolorem tenetur aut re:{' '}
                     <a href="#"> Officiis distinctio est nam illum official</a>{' '}
                     - about 2 months late, was due on Oct 10 at 12:00AM
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <div className="text-center">
+                      <a href="#">Load more...</a>
+                    </div>
                   </ListGroupItem>
                 </ListGroup>
                 <hr />
@@ -354,12 +368,17 @@ export default class TaskMgt extends Component {
                   </ListGroupItem>
                   <ListGroupItem className="justify-content-between">
                     <Badge pill color="warning" className="pull-left">
-                      Follow-up
+                      Lunch
                     </Badge>
-                    &nbsp;<a href="#">Lena</a>: Et exercitationem eaque
-                    commodi dolorem tenetur aut re:{' '}
+                    &nbsp;<a href="#">Lena</a>: Et exercitationem eaque commodi
+                    dolorem tenetur aut re:{' '}
                     <a href="#"> Officiis distinctio est nam illum official</a>{' '}
                     - about 2 months late, was due on Oct 10 at 12:00AM
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <div className="text-center">
+                      <a href="#">Load more...</a>
+                    </div>
                   </ListGroupItem>
                 </ListGroup>
               </Col>
