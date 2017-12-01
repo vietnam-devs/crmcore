@@ -1,4 +1,5 @@
-﻿using CRMCore.Framework.Entities.Identity;
+﻿using CRMCore.Framework.Entities.Helpers;
+using CRMCore.Framework.Entities.Identity;
 using CRMCore.Module.CustomCollection.Entity;
 using CRMCore.Module.CustomCollection.Entity.Schema;
 using CRMCore.Module.Data;
@@ -31,6 +32,11 @@ namespace CRMCore.DBMigration.Console.Seeder
                     await context.Set<Morphism>().AddRangeAsync(GetDefaultMorphisms());
                 }
 
+                if(!context.Set<Module.Task.Domain.Task>().Any())
+                {
+                    await context.Set<Module.Task.Domain.Task>().AddRangeAsync(GetDefaultTasks()); 
+                }
+
                 await context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -43,6 +49,7 @@ namespace CRMCore.DBMigration.Console.Seeder
         {
             var user = new ApplicationUser()
             {
+                Id = IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"),
                 Email = "demouser@nomail.com",
                 LastName = "DemoLastName",
                 FirstName = "DemoUser",
@@ -155,6 +162,32 @@ namespace CRMCore.DBMigration.Console.Seeder
             var customer = new Morphism("customer", customerSchema);
 
             return new[] { account, contact, customer };
+        }
+
+        private IEnumerable<Module.Task.Domain.Task> GetDefaultTasks()
+        {
+            return new[] {
+                Module.Task.Domain.Task.CreateInstance(
+                    "Implementing Repository in Task module.", 
+                    Module.Task.Domain.DueType.NextWeek, 
+                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"), 
+                    Module.Task.Domain.CategoryType.Call),
+                Module.Task.Domain.Task.CreateInstance(
+                    "Implementing Controller in Task module.",
+                    Module.Task.Domain.DueType.NextWeek,
+                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"),
+                    Module.Task.Domain.CategoryType.FollowUp),
+                Module.Task.Domain.Task.CreateInstance(
+                    "Implementing front-end in Task module.",
+                    Module.Task.Domain.DueType.NextWeek,
+                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"),
+                    Module.Task.Domain.CategoryType.Meeting),
+                Module.Task.Domain.Task.CreateInstance(
+                    "Implementing Mobile in Task module.",
+                    Module.Task.Domain.DueType.NextWeek,
+                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"),
+                    Module.Task.Domain.CategoryType.Presentation)
+            };
         }
     }
 }

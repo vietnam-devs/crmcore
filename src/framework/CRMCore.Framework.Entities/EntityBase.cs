@@ -1,15 +1,52 @@
-﻿using System;
+﻿using CRMCore.Framework.Entities.Helpers;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CRMCore.Framework.Entities
 {
-    public interface IEntity { }
+    public interface IEntity : IIdentity
+    { }
 
     public abstract class EntityBase : IEntity
     {
-        public Guid Id { get; set; }
+        protected List<IDomainEvent> Events = new List<IDomainEvent>();
 
-        public DateTime Created { get; set; }
+        protected EntityBase() : this(IdHelper.GenerateId())
+        {
+        }
 
-        public DateTime Updated { get; set; }
+        protected EntityBase(Guid id)
+        {
+            Id = id;
+            Created = DateTimeHelper.GenerateDateTime();
+        }
+
+        [Key]
+        public Guid Id { get; protected set; }
+
+        public DateTime Created { get; protected set; }
+
+        public DateTime Updated { get; protected set; }
+
+        public List<IDomainEvent> GetEvents()
+        {
+            return Events;
+        }
+
+        public EntityBase RemoveEvent(IDomainEvent @event)
+        {
+            if (Events.Find(e => e == @event) != null)
+            {
+                Events.Remove(@event);
+            }
+            return this;
+        }
+
+        public EntityBase RemoveAllEvents()
+        {
+            Events = new List<IDomainEvent>();
+            return this;
+        }
     }
 }

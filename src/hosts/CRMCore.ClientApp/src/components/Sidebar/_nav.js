@@ -120,7 +120,7 @@ export default {
         },
         {
           name: 'Login',
-          url: `${globalConfig.apiServer}/identity/login`,
+          url: `${globalConfig.apiServer}/identity/account/login`,
           icon: 'icon-star'
         },
         {

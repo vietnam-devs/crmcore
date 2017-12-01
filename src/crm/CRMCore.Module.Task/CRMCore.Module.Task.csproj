@@ -2,17 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <ApplicationIcon />
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\framework\CRMCore.Framework.Entities\CRMCore.Framework.Entities.csproj" />
     <ProjectReference Include="..\..\framework\CRMCore.Framework.MvcCore\CRMCore.Framework.MvcCore.csproj" />
+    <ProjectReference Include="..\..\modules\CRMCore.Module.Data\CRMCore.Module.Data.csproj" />
     <ProjectReference Include="..\..\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Views\Common\" />
-  </ItemGroup>
+
 </Project>
