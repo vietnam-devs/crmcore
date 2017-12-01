@@ -21,10 +21,10 @@ export class AppComponent implements OnDestroy {
     public router: Router
   ) {
     if (this.oidcSecurityService.moduleSetup) {
-      // this.onOidcModuleSetup();
+       this.onOidcModuleSetup();
     } else {
       this.oidcSecurityService.onModuleSetup.subscribe(() => {
-        // this.onOidcModuleSetup();
+        this.onOidcModuleSetup();
       });
     }
 

@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 
-import { PostService } from '../services/post.service';
-import { Post } from '../../core/models/post.model';
+import { PostService } from '../../services/post.service';
+import { Post } from '../../models/post.model';
 
 @Component({
     selector: 'app-post-edit',

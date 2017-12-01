@@ -1,14 +1,14 @@
-import { Component ,Input, Output,OnInit, EventEmitter } from '@angular/core';
+import { Component , Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { PostService } from '../services/post.service';
-import { Post } from '../../core/models/post.model';
+import { PostService } from '../../services/post.service';
+import { Post } from '../../models/post.model';
 
 @Component({
     selector: 'app-add-post',
     templateUrl: './addpost.component.html'
 })
-export class AddPostComponent  implements OnInit{
+export class AddPostComponent  implements OnInit {
   @Input() toggleAddPost;
   @Output() postCreatedEvent = new EventEmitter();
 

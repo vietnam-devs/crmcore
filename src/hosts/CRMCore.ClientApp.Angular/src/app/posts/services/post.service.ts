@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 
-import { Post } from '../../core/models/post.model';
+import { Post } from '../models/post.model';
 import { ConfigService } from '../../core/services/config.service';
 
 @Injectable()
