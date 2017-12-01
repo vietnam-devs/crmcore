@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Row, Col, Card, CardHeader, CardBody, Button } from 'reactstrap';
+import {
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  CardBody,
+  Button,
+} from 'reactstrap';
+import classnames from 'classnames';
 
 import { actionCreators as schemaActionCreators } from 'redux/modules/schema';
 import SchemaTable from './SchemaTable';
@@ -11,6 +19,7 @@ import SchemaForm from './SchemaForm';
 class SchemaMgt extends Component {
   constructor(props) {
     super(props);
+
     this.addRow = this.addRow.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
@@ -48,7 +57,7 @@ class SchemaMgt extends Component {
           <CardHeader>
             <h3 className="b-panel-title">
               <i className="icon-notebook b-icon" />
-              Schema Page
+              Schema page
             </h3>
             <span className="b-panel-actions">
               <Button

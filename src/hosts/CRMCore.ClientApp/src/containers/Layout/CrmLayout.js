@@ -6,7 +6,7 @@ import { Container } from 'reactstrap';
 import { Header, Sidebar, Breadcrumb, Aside, Footer } from 'components';
 
 // containers
-import { CrmDashboard } from 'containers';
+import { CrmDashboard, TaskMgt } from 'containers';
 
 class CrmLayout extends Component {
   render() {
@@ -24,6 +24,7 @@ class CrmLayout extends Component {
                   name="CRM Dashboard"
                   component={CrmDashboard}
                 />
+                <Route path="/crm/tasks" name="CRM Tasks" component={TaskMgt} />
                 <Redirect from="/crm" to="/crm/dashboard" />
               </Switch>
             </Container>

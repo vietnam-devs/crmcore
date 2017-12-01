@@ -15,32 +15,59 @@ export default {
       icon: 'icon-credit-card',
       children: [
         {
-          name: 'Contacts',
-          url: '/crm/contacts',
+          name: 'Tasks',
+          url: '/crm/tasks',
           icon: 'icon-people',
           badge: {
             variant: 'info'
           }
         },
         {
-          name: 'Customers',
-          url: '/crm/customers',
+          name: 'Campaigns',
+          url: '/crm/campaigns',
           icon: 'icon-diamond',
           badge: {
             variant: 'info'
           }
         },
         {
-          name: 'Lead Sources',
-          url: '/crm/lead-sources',
+          name: 'Leads',
+          url: '/crm/leads',
           icon: 'icon-user',
           badge: {
             variant: 'info'
           }
         },
         {
-          name: 'Pipeline',
-          url: '/crm/pipeline',
+          name: 'Accounts',
+          url: '/crm/accounts',
+          icon: 'icon-directions',
+          badge: {
+            variant: 'info',
+            text: 'NEW'
+          }
+        },
+        {
+          name: 'Contacts',
+          url: '/crm/contacts',
+          icon: 'icon-directions',
+          badge: {
+            variant: 'info',
+            text: 'NEW'
+          }
+        },
+        {
+          name: 'Opportunities',
+          url: '/crm/opportunities',
+          icon: 'icon-directions',
+          badge: {
+            variant: 'info',
+            text: 'NEW'
+          }
+        },
+        {
+          name: 'Team',
+          url: '/crm/team',
           icon: 'icon-directions',
           badge: {
             variant: 'info',
