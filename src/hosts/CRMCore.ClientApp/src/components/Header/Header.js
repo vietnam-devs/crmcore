@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   Nav,
@@ -8,12 +8,21 @@ import {
   NavLink,
   Badge
 } from 'reactstrap';
+import * as screenfull from 'screenfull';
+
 import HeaderDropdown from './HeaderDropdown';
 
 class Header extends Component {
-
   constructor(props) {
     super(props);
+
+    this.fullscreen = this.fullscreen.bind(this);
+  }
+
+  fullscreen() {
+    if (screenfull.enabled) {
+      screenfull.toggle();
+    }
   }
 
   sidebarToggle(e) {
@@ -40,20 +49,29 @@ class Header extends Component {
     return (
       <header className="app-header navbar">
         <NavbarToggler className="d-lg-none" onClick={this.mobileSidebarToggle}>
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon" />
         </NavbarToggler>
-        <NavbarBrand href="#"></NavbarBrand>
+        <NavbarBrand href="#" />
         <NavbarToggler className="d-md-down-none" onClick={this.sidebarToggle}>
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon" />
         </NavbarToggler>
         <Nav className="ml-auto" navbar>
           <NavItem className="d-md-down-none">
-            <NavLink href="#"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
+            <NavLink href="#">
+              <i
+                className="icon-frame b-icon"
+                onClick={this.fullscreen}
+              />&nbsp;&nbsp;
+              <i className="icon-bell" />
+              <Badge pill color="danger">
+                5
+              </Badge>
+            </NavLink>
           </NavItem>
-          <HeaderDropdown/>
+          <HeaderDropdown />
         </Nav>
         <NavbarToggler className="d-md-down-none" onClick={this.asideToggle}>
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon" />
         </NavbarToggler>
       </header>
     );
