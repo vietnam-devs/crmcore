@@ -47,7 +47,7 @@ namespace CRMCore.Module.Identity.Extensions
 
         public static IIdentityServerBuilder AddCertificateFromFile( this IIdentityServerBuilder builder, IConfigurationSection options)
         {
-            /* var keyFilePath = options.GetValue<string>("FileName");
+            var keyFilePath = options.GetValue<string>("FileName");
             var keyFilePassword = options.GetValue<string>("Password");
 
             if (File.Exists(keyFilePath))
@@ -59,7 +59,7 @@ namespace CRMCore.Module.Identity.Extensions
             else
             {
                 throw new Exception($"SigninCredentialExtension cannot find key file {keyFilePath}");
-            } */
+            }
 
             return builder;
         }
