@@ -1,14 +1,36 @@
 ﻿using CRMCore.Framework.MvcCore;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
 
 namespace CRMCore.Module.Swagger
 {
+    public class FooController : Controller
+    {
+        [SwaggerOperation(Tags = new[] { "foo-group" })]
+        [HttpGet("foo/test")]
+        public IActionResult Get()
+        {
+            return Ok("foo");
+        }
+    }
+
+    public class BarController : Controller
+    {
+        [SwaggerOperation(Tags = new[] { "foo-group" })]
+        [HttpGet("foo/bar/test")]
+        public IActionResult Get()
+        {
+            return Ok("bar");
+        }
+    }
+
     public class Startup : StartupBase
     {
         public override int Order => 100;

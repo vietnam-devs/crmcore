@@ -37,31 +37,46 @@ namespace CRMCore.Module.Task.Domain
 
         public Task ChangeName(string name)
         {
-            Name = name;
+            if (!string.IsNullOrEmpty(name) && Name != name)
+            {
+                Name = name;
+            }
             return this;
         }
 
         public Task ChangeDueType(DueType dueType)
         {
-            DueType = dueType;
+            if (dueType != DueType)
+            {
+                DueType = dueType;
+            }
             return this;
         }
 
         public Task ChangeAssignedTo(Guid id)
         {
-            AssignedTo = id;
+            if (id != Guid.Empty && id != AssignedTo)
+            {
+                AssignedTo = id;
+            }
             return this;
         }
 
         public Task ChangeCategoryType(CategoryType categoryType)
         {
-            CategoryType = categoryType;
+            if (categoryType != CategoryType)
+            {
+                CategoryType = categoryType;
+            }
             return this;
         }
 
         public Task ChangeTaskStatus(TaskStatus status)
         {
-            TaskStatus = status;
+            if (status != TaskStatus)
+            {
+                TaskStatus = status;
+            }
             return this;
         }
 

@@ -4,6 +4,6 @@
     {
         Pending = 1,
         Assigned = 2,
-        Completed = 4
+        Completed = 3
     }
 }

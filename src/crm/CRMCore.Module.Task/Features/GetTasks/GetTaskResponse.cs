@@ -9,5 +9,14 @@ namespace CRMCore.Module.Task.Features.GetTasks
         public string DueType { get; set; }
         public Guid AssignedTo { get; set; }
         public string CategoryType { get; set; }
+        public string Status { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Updated { get; set; }
+    }
+
+    public class KeyValueResponse<TKey>
+    {
+        public TKey Key { get; set; }
+        public string Value { get; set; }
     }
 }
