@@ -49,6 +49,7 @@ export default class TaskMgt extends Component {
 
   createTask() {
     console.log('Create task...');
+    this.props.history.push('/crm/task-form/$');
   }
 
   render() {

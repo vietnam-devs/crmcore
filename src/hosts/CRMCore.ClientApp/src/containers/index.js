@@ -5,6 +5,7 @@ export { default as CrmLayout } from './Layout/CrmLayout';
 export { default as CrmDashboard } from './Dashboard/CrmDashboard';
 
 export { default as TaskMgt } from './Task/TaskMgt';
+export { default as TaskForm } from './Task/TaskForm';
 
 export { default as MetadataLayout } from './Layout/MetadataLayout';
 export { default as MetadataDashboard } from './Dashboard/MetadataDashboard';

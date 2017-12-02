@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CRMCore.Module.Task.Features
 {
-    [Authorize]
+    // [Authorize]
     [Area("CRMCore.Module.Task")]
     [Route("task-module/api/tasks")]
     public class TaskController : Controller

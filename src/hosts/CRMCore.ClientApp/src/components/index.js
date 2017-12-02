@@ -10,4 +10,8 @@ export {
   renderSingleSelectField as SingleSelectField
 } from './Form/InputText';
 
+export {
+  renderSelect as SelectField  
+} from './Form/Select';
+
 export { default as CheckboxField } from './Form/InputCheckbox';
