@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlogCore.Core
+namespace CRMCore.Framework.Entities
 {
     public class CoreException : Exception
     {

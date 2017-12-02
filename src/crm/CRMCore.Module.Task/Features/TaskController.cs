@@ -1,5 +1,4 @@
-﻿using BlogCore.Core;
-using CRMCore.Framework.Entities;
+﻿using CRMCore.Framework.Entities;
 using CRMCore.Module.Data;
 using CRMCore.Module.Task.Features.CreateTask;
 using CRMCore.Module.Task.Features.DeleteTask;
@@ -12,18 +11,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CRMCore.Module.Common.Controllers
+namespace CRMCore.Module.Task.Features
 {
     [Authorize]
     [Area("CRMCore.Module.Task")]
     [Route("task-module/api/tasks")]
     public class TaskController : Controller
     {
-        private readonly IEfRepositoryAsync<Task.Domain.Task> _taskRepository;
+        private readonly IEfRepositoryAsync<Domain.Task> _taskRepository;
 
         public TaskController(IUnitOfWorkAsync unitOfWork)
         {
-            _taskRepository = unitOfWork.Repository<Task.Domain.Task>() as IEfRepositoryAsync<Task.Domain.Task>;
+            _taskRepository = unitOfWork.Repository<Domain.Task>() as IEfRepositoryAsync<Domain.Task>;
         }
 
         [HttpGet]
@@ -63,11 +62,11 @@ namespace CRMCore.Module.Common.Controllers
         public async Task<AddTaskResponse> Add([FromBody] AddTaskRequest request)
         {
             var response = await _taskRepository.AddAsync(
-                Task.Domain.Task.CreateInstance(
+                Domain.Task.CreateInstance(
                     request.Name,
-                    (Task.Domain.DueType)request.DueType,
+                    (Domain.DueType)request.DueType,
                     request.AssignedTo,
-                    (Task.Domain.CategoryType)request.CategoryType
+                    (Domain.CategoryType)request.CategoryType
                     ));
             return new AddTaskResponse();
         }
@@ -76,10 +75,13 @@ namespace CRMCore.Module.Common.Controllers
         public async Task<UpdateTaskResponse> Update(Guid id, [FromBody] UpdateTaskRequest request)
         {
             var oldOne = await _taskRepository.GetByIdAsync(id);
+            if (oldOne == null)
+                throw new CoreException($"Could not delete item #{id}.");
+
             oldOne.ChangeName(request.Name)
                 .ChangeAssignedTo(request.AssignedTo)
-                .ChangeDueType((Task.Domain.DueType)request.DueType)
-                .ChangeCategoryType((Task.Domain.CategoryType)request.CategoryType);
+                .ChangeDueType((Domain.DueType)request.DueType)
+                .ChangeCategoryType((Domain.CategoryType)request.CategoryType);
 
             var response = await _taskRepository.UpdateAsync(oldOne);
             return new UpdateTaskResponse();
@@ -99,13 +101,13 @@ namespace CRMCore.Module.Common.Controllers
         [HttpGet("due-types")]
         public IEnumerable<KeyValueResponse<int>> GetDueTypes()
         {
-            return EnumHelper.GetEnumKeyValue<Task.Domain.DueType, int>();
+            return EnumHelper.GetEnumKeyValue<Domain.DueType, int>();
         }
 
         [HttpGet("category-types")]
         public IEnumerable<KeyValueResponse<int>> GetCategoryTypes()
         {
-            return EnumHelper.GetEnumKeyValue<Task.Domain.CategoryType, int>();
+            return EnumHelper.GetEnumKeyValue<Domain.CategoryType, int>();
         }
     }
 
