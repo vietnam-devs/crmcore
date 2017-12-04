@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 
 class SidebarFooter extends Component {
-
   render() {
-    return null
+    return null;
     // Uncomment following code lines to add Sidebar Footer
     // return (
     //   <div className="sidebar-footer"></div>

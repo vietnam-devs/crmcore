@@ -4,7 +4,6 @@ import { Field, reduxForm } from 'redux-form';
 
 import {
   Card,
-  CardHeader,
   CardBody,
   Form,
   FormGroup,
@@ -35,7 +34,7 @@ class SchemaForm extends React.Component {
   }
 
   render() {
-    const { error, handleSubmit, pristine, reset, submitting } = this.props;
+    const { pristine, reset, submitting } = this.props;
     return (
       <div className="animated fadeIn">
         <Card className="b-panel">
@@ -136,7 +135,7 @@ export default connect(initData, SchemaStore.actionCreators)(
     enableReinitialize: true,
     validate,
     onSubmit: (values, dispatch, props) => {
-      const { match } = props;
+      // const { match } = props;
       // if (match.params && !match.params.id) {
         // props.addSchema(values);
       // } else {

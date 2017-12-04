@@ -10,10 +10,9 @@ import {
   CardBody,
   Button,
 } from 'reactstrap';
-import classnames from 'classnames';
 
 import { actionCreators as schemaActionCreators } from 'redux/modules/schema';
-import SchemaTable from './SchemaTable';
+//import SchemaTable from './SchemaTable';
 import SchemaForm from './SchemaForm';
 
 class SchemaMgt extends Component {
@@ -49,7 +48,7 @@ class SchemaMgt extends Component {
     );*/
 
     console.log(this.props);
-    const { schemaByIds, schemas, schemaSelected } = this.props;
+    const { schemaByIds, schemas } = this.props;
 
     return (
       <div className="animated fadeIn">

@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 
-import { get, post, put, del } from './../client';
-import { actionCreators as commonActionCreators } from './common';
+import { get } from './../client';
 import { globalConfig as GlobalConfig } from './../../configs';
 
 const SCHEMAS_URL = `${GlobalConfig.apiServer}/schema/api`;

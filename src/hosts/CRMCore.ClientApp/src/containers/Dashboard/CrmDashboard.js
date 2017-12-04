@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardHeader, CardBody, CardFooter, CardTitle } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
 
 export default class CrmDashboard extends Component {
   render() {

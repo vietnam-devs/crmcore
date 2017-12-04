@@ -2,26 +2,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Form,
-  FormGroup,
-  Label,
-  Button
-} from 'reactstrap';
+import { Card, CardBody, Form, FormGroup, Label, Button } from 'reactstrap';
 
-import * as TaskStore from 'redux/modules/task';
+// import * as TaskStore from 'redux/modules/task';
 import { SelectField } from 'components';
 
 class TaskForm extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    const { error, handleSubmit, pristine, reset, submitting } = this.props;
+    const { /*error, handleSubmit,*/ pristine, reset, submitting } = this.props;
     return (
       <div className="animated fadeIn">
         <Card className="b-panel">
@@ -83,7 +71,7 @@ export default connect(initData, null)(
     enableReinitialize: true,
     validate,
     onSubmit: (values, dispatch, props) => {
-      const { match } = props;
+      //const { match } = props;
     }
   })(TaskForm)
 );

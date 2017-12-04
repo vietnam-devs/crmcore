@@ -50,7 +50,6 @@ class HeaderDropdown extends Component {
   }
 
   render() {
-    const {...attributes} = this.props;
     return (
       this.dropAccnt()
     );

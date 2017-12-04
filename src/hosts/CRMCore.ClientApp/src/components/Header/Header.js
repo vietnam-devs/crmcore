@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import {
   Nav,
   NavbarBrand,
@@ -58,10 +57,7 @@ class Header extends Component {
         <Nav className="ml-auto" navbar>
           <NavItem className="d-md-down-none">
             <NavLink href="#">
-              <i
-                className="icon-frame b-icon"
-                onClick={this.fullscreen}
-              />&nbsp;&nbsp;
+              <i className="icon-frame b-icon" onClick={this.fullscreen} />&nbsp;&nbsp;
               <i className="icon-bell" />
               <Badge pill color="danger">
                 5

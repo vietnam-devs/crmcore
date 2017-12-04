@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import {
-  Badge,
   Row,
   Col,
   Progress,
@@ -10,7 +9,6 @@ import {
   DropdownMenu,
   DropdownItem,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   CardTitle,
@@ -19,14 +17,13 @@ import {
   ButtonGroup,
   ButtonDropdown,
   Label,
-  Input,
-  Table
+  Input
 } from 'reactstrap';
 
 const brandPrimary = '#20a8d8';
 const brandSuccess = '#4dbd74';
 const brandInfo = '#63c2de';
-const brandWarning = '#f8cb00';
+//const brandWarning = '#f8cb00';
 const brandDanger = '#f86c6b';
 
 // Card Chart 1
@@ -214,14 +211,14 @@ const cardChartOpts4 = {
 };
 
 // Social Box Chart
-const socialBoxData = [
+/*const socialBoxData = [
   { data: [65, 59, 84, 84, 51, 55, 40], label: 'facebook' },
   { data: [1, 13, 9, 17, 34, 41, 38], label: 'twitter' },
   { data: [78, 81, 80, 45, 34, 12, 40], label: 'linkedin' },
   { data: [35, 23, 56, 22, 97, 23, 64], label: 'google' }
-];
+];*/
 
-const makeSocialBoxData = dataSetNo => {
+/*const makeSocialBoxData = dataSetNo => {
   const dataset = socialBoxData[dataSetNo];
   const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -237,9 +234,9 @@ const makeSocialBoxData = dataSetNo => {
     ]
   };
   return () => data;
-};
+}; */
 
-const socialChartOpts = {
+/*const socialChartOpts = {
   responsive: true,
   maintainAspectRatio: false,
   legend: {
@@ -265,10 +262,10 @@ const socialChartOpts = {
       hoverBorderWidth: 3
     }
   }
-};
+}; */
 
 // sparkline charts
-const sparkLineChartData = [
+/*const sparkLineChartData = [
   {
     data: [35, 23, 56, 22, 97, 23, 64],
     label: 'New Clients'
@@ -293,9 +290,9 @@ const sparkLineChartData = [
     data: [1, 13, 9, 17, 34, 41, 38],
     label: 'Bounce Rate'
   }
-];
+];*/
 
-const makeSparkLineData = (dataSetNo, variant) => {
+/*const makeSparkLineData = (dataSetNo, variant) => {
   const dataset = sparkLineChartData[dataSetNo];
   const data = {
     labels: [
@@ -317,9 +314,9 @@ const makeSparkLineData = (dataSetNo, variant) => {
     ]
   };
   return () => data;
-};
+};*/
 
-const sparklineChartOpts = {
+/*const sparklineChartOpts = {
   responsive: true,
   maintainAspectRatio: true,
   scales: {
@@ -348,7 +345,7 @@ const sparklineChartOpts = {
   legend: {
     display: false
   }
-};
+};*/
 
 // Main Chart
 
