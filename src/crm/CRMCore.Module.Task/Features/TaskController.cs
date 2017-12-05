@@ -1,4 +1,5 @@
 ﻿using CRMCore.Framework.Entities;
+using CRMCore.Framework.Entities.Helpers;
 using CRMCore.Module.Data;
 using CRMCore.Module.Task.Features.CreateTask;
 using CRMCore.Module.Task.Features.DeleteTask;
@@ -108,6 +109,17 @@ namespace CRMCore.Module.Task.Features
         public IEnumerable<KeyValueResponse<int>> GetCategoryTypes()
         {
             return EnumHelper.GetEnumKeyValue<Domain.CategoryType, int>();
+        }
+
+        [HttpGet("assign-users")]
+        public IEnumerable<KeyValueResponse<Guid>> GetAssignUsers() 
+        {
+            return new List<KeyValueResponse<Guid>> {
+                new KeyValueResponse<Guid>{
+                    Key = IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"),
+                    Value = "demouser@nomail.com"
+                }
+            };            
         }
     }
 

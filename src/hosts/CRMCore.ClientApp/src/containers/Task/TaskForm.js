@@ -35,7 +35,7 @@ class TaskForm extends React.Component {
               <Label for="assignTo">Assign to</Label>
               <Field
                 name="assignTo"
-                uri="user-module/api/users/"
+                uri="task-module/api/tasks/assign-users"
                 component={SelectField}
               />
             </FormGroup>

@@ -43,7 +43,7 @@
     "simple-line-icons": "^2.4.1"
   },
   "scripts": {
-    "copy-images": "cpx \"./src/**/*.{png,jpg}\" \"./public/server/\"",
+    "copy-images": "cpx \"./src/**/*.{png,jpg}\" \"./public/server/\" --clean",
     "copy-styles": "cpx \"./src/**/*.css\" \"./public/server/\"",
     "copy-assets": "npm-run-all copy-styles copy-images",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
