@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Text;
 
 namespace CRMCore.Module.Spa.Controllers
 {
+    // [Authorize]
     [Area("CRMCore.Module.Spa")]
     [Route("[controller]")]
     [ApiExplorerSettings(IgnoreApi = true)]

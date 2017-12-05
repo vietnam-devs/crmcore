@@ -16,9 +16,9 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 
-import { SearchPanel, MainPanel } from 'components';
+import { SearchPanel, StandardPanel } from 'components';
 
-class SearchPanelDetails extends Component {
+class SearchPanelWithContent extends Component {
   constructor(props) {
     super(props);
     this.tabToggle = this.tabToggle.bind(this);
@@ -258,115 +258,118 @@ export default class TaskMgt extends Component {
     );
 
     return (
-      <MainPanel
-        title="Tasks"
-        searchPanel={<SearchPanelDetails />}
-        actions={actions}
-      >
-        <Row>
-          <Col>
-            <h5>Overdue</h5>
-            <ListGroup>
-              <ListGroupItem className="justify-content-between">
-                <Badge pill className="pull-left">
-                  Meeting
-                </Badge>
-                &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
-                <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
-                7:00PM
-              </ListGroupItem>
+      <div className="animated fadeIn">
+        <StandardPanel title="Tasks" actions={actions}>
+          <Row>
+            <Col>
+              <SearchPanelWithContent />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <h5>Overdue</h5>
+              <ListGroup>
+                <ListGroupItem className="justify-content-between">
+                  <Badge pill className="pull-left">
+                    Meeting
+                  </Badge>
+                  &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
+                  <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
+                  7:00PM
+                </ListGroupItem>
 
-              <ListGroupItem>
-                <div className="text-center">
-                  <a href="#">Load more...</a>
-                </div>
-              </ListGroupItem>
-            </ListGroup>
-            <hr />
-            <h5>As Soon As Possible</h5>
-            <ListGroup>
-              <ListGroupItem className="justify-content-between">
-                <Badge pill className="pull-left">
-                  Meeting
-                </Badge>
-                &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
-                <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
-                7:00PM
-              </ListGroupItem>
+                <ListGroupItem>
+                  <div className="text-center">
+                    <a href="#">Load more...</a>
+                  </div>
+                </ListGroupItem>
+              </ListGroup>
+              <hr />
+              <h5>As Soon As Possible</h5>
+              <ListGroup>
+                <ListGroupItem className="justify-content-between">
+                  <Badge pill className="pull-left">
+                    Meeting
+                  </Badge>
+                  &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
+                  <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
+                  7:00PM
+                </ListGroupItem>
 
-              <ListGroupItem className="justify-content-between">
-                <Badge pill color="success" className="pull-left">
-                  Presentation
-                </Badge>
-                &nbsp;<a href="#">Lena</a>: Do a presentation about ReactJS for
-                the team - 2 day late, was due on Nov 22 at 6:30PM
-              </ListGroupItem>
+                <ListGroupItem className="justify-content-between">
+                  <Badge pill color="success" className="pull-left">
+                    Presentation
+                  </Badge>
+                  &nbsp;<a href="#">Lena</a>: Do a presentation about ReactJS
+                  for the team - 2 day late, was due on Nov 22 at 6:30PM
+                </ListGroupItem>
 
-              <ListGroupItem>
-                <div className="text-center">
-                  <a href="#">Load more...</a>
-                </div>
-              </ListGroupItem>
-            </ListGroup>
-            <hr />
-            <h5>Tomorrow</h5>
-            <ListGroup>
-              <ListGroupItem className="justify-content-between">
-                <Badge pill className="pull-left">
-                  Meeting
-                </Badge>
-                &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
-                <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
-                7:00PM
-              </ListGroupItem>
+                <ListGroupItem>
+                  <div className="text-center">
+                    <a href="#">Load more...</a>
+                  </div>
+                </ListGroupItem>
+              </ListGroup>
+              <hr />
+              <h5>Tomorrow</h5>
+              <ListGroup>
+                <ListGroupItem className="justify-content-between">
+                  <Badge pill className="pull-left">
+                    Meeting
+                  </Badge>
+                  &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
+                  <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
+                  7:00PM
+                </ListGroupItem>
 
-              <ListGroupItem className="justify-content-between">
-                <Badge pill color="danger" className="pull-left">
-                  Follow-up
-                </Badge>
-                &nbsp;<a href="#">Chris</a>: Et exercitationem eaque commodi
-                dolorem tenetur aut re:{' '}
-                <a href="#"> Officiis distinctio est nam illum official</a> -
-                about 2 months late, was due on Oct 10 at 12:00AM
-              </ListGroupItem>
+                <ListGroupItem className="justify-content-between">
+                  <Badge pill color="danger" className="pull-left">
+                    Follow-up
+                  </Badge>
+                  &nbsp;<a href="#">Chris</a>: Et exercitationem eaque commodi
+                  dolorem tenetur aut re:{' '}
+                  <a href="#"> Officiis distinctio est nam illum official</a> -
+                  about 2 months late, was due on Oct 10 at 12:00AM
+                </ListGroupItem>
 
-              <ListGroupItem>
-                <div className="text-center">
-                  <a href="#">Load more...</a>
-                </div>
-              </ListGroupItem>
-            </ListGroup>
-            <hr />
-            <h5>Sometime Later</h5>
-            <ListGroup>
-              <ListGroupItem className="justify-content-between">
-                <Badge pill className="pull-left">
-                  Meeting
-                </Badge>
-                &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
-                <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
-                7:00PM
-              </ListGroupItem>
+                <ListGroupItem>
+                  <div className="text-center">
+                    <a href="#">Load more...</a>
+                  </div>
+                </ListGroupItem>
+              </ListGroup>
+              <hr />
+              <h5>Sometime Later</h5>
+              <ListGroup>
+                <ListGroupItem className="justify-content-between">
+                  <Badge pill className="pull-left">
+                    Meeting
+                  </Badge>
+                  &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
+                  <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
+                  7:00PM
+                </ListGroupItem>
 
-              <ListGroupItem className="justify-content-between">
-                <Badge pill color="warning" className="pull-left">
-                  Lunch
-                </Badge>
-                &nbsp;<a href="#">Lena</a>: Et exercitationem eaque commodi
-                dolorem tenetur aut re:{' '}
-                <a href="#"> Officiis distinctio est nam illum official</a> -
-                about 2 months late, was due on Oct 10 at 12:00AM
-              </ListGroupItem>
+                <ListGroupItem className="justify-content-between">
+                  <Badge pill color="warning" className="pull-left">
+                    Lunch
+                  </Badge>
+                  &nbsp;<a href="#">Lena</a>: Et exercitationem eaque commodi
+                  dolorem tenetur aut re:{' '}
+                  <a href="#"> Officiis distinctio est nam illum official</a> -
+                  about 2 months late, was due on Oct 10 at 12:00AM
+                </ListGroupItem>
 
-              <ListGroupItem>
-                <div className="text-center">
-                  <a href="#">Load more...</a>
-                </div>
-              </ListGroupItem>
-            </ListGroup>
-          </Col>
-        </Row>
-      </MainPanel>
+                <ListGroupItem>
+                  <div className="text-center">
+                    <a href="#">Load more...</a>
+                  </div>
+                </ListGroupItem>
+              </ListGroup>
+            </Col>
+          </Row>
+        </StandardPanel>
+      </div>
     );
   }
 }

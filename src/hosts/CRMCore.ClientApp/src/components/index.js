@@ -5,7 +5,7 @@ export { default as Header } from './Header/Header';
 export { default as Sidebar } from './Sidebar/Sidebar';
 
 export { default as SearchPanel } from './Panel/SearchPanel';
-export { default as MainPanel } from './Panel/MainPanel';
+export { default as StandardPanel } from './Panel/StandardPanel';
 
 export {
   renderTextBoxField as TextBoxField,

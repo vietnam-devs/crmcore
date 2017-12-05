@@ -19,7 +19,7 @@ export default class SearchPanel extends Component {
         <CardHeader onClick={this.toggle}>
           <h3 className="b-panel-title">
             <i className="icon-magic-wand b-icon" />
-            {this.props.panelTitle || 'Search parameters'}
+            {this.props.panelTitle || 'Search'}
           </h3>
 
           <span className="b-panel-actions">
