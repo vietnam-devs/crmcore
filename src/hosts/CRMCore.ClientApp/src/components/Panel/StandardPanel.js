@@ -4,24 +4,33 @@ import {
   CardHeader,
   CardBody,
   ButtonDropdown,
-  DropdownToggle
+  DropdownToggle,
+  Collapse
 } from 'reactstrap';
 import classnames from 'classnames';
 
 export default class StandardPanel extends Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
+
+    this.dropdown = this.dropdown.bind(this);
+    this.collapse = this.collapse.bind(this);
     this.fullScreen = this.fullScreen.bind(this);
+
     this.state = {
-      dropdownOpen: false,
+      dropdown: false,
+      collapse: false,
       fullScreen: false
     };
   }
 
-  toggle() {
+  collapse() {
+    this.setState({ collapse: !this.state.collapse });
+  }
+
+  dropdown() {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      dropdown: !this.state.dropdown
     });
   }
 
@@ -39,24 +48,37 @@ export default class StandardPanel extends Component {
           'b-panel'
         )}
       >
-        <CardHeader>
+        <CardHeader onClick={this.collapse}>
           <h3 className="b-panel-title">
-            <i className="icon-notebook b-icon" />
+            <i
+              className={classnames(
+                { [`${this.props.icon}`]: this.props.icon },
+                { 'icon-notebook': !this.props.icon },
+                'b-icon'
+              )}
+            />
             {this.props.title || 'No title'}
           </h3>
 
-          {this.props.actions && (
-            <span className="b-panel-actions">
+          <span
+            className="b-panel-actions"
+            onClick={e => {
+              e.stopPropagation();
+            }}
+          >
+            {this.props.actions && (
               <ButtonDropdown
-                isOpen={this.state.dropdownOpen}
-                toggle={this.toggle}
+                isOpen={this.state.dropdown}
+                toggle={this.dropdown}
               >
-                <DropdownToggle caret color="primary" size="sm">
-                  Actions
+                <DropdownToggle color="link" size="xs">
+                  <i className="icon-arrow-down" />
                 </DropdownToggle>
 
                 {this.props.actions || ''}
-              </ButtonDropdown>&nbsp;&nbsp;
+              </ButtonDropdown>
+            )}
+            {this.props.showMaximize && (
               <i
                 className={classnames(
                   { 'icon-size-fullscreen': !this.state.fullScreen },
@@ -64,12 +86,16 @@ export default class StandardPanel extends Component {
                   'b-icon'
                 )}
                 onClick={this.fullScreen}
-              />{' '}
-            </span>
-          )}
+              />
+            )}
+            &nbsp;&nbsp;
+            <i className="icon-close b-icon" />
+          </span>
         </CardHeader>
 
-        <CardBody className="card-body">{this.props.children}</CardBody>
+        <Collapse isOpen={!this.state.collapse}>
+          <CardBody className="card-body">{this.props.children}</CardBody>
+        </Collapse>
       </Card>
     );
   }

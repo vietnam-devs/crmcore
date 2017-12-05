@@ -35,7 +35,7 @@ class SearchPanelWithContent extends Component {
 
   render() {
     return (
-      <SearchPanel>
+      <StandardPanel icon="icon-magic-wand" title="Search">
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -232,7 +232,7 @@ class SearchPanelWithContent extends Component {
         <div>
           <p className="text-muted">Total Pending Tasks: 100</p>
         </div>
-      </SearchPanel>
+      </StandardPanel>
     );
   }
 }
@@ -259,7 +259,7 @@ export default class TaskMgt extends Component {
 
     return (
       <div className="animated fadeIn">
-        <StandardPanel title="Tasks" actions={actions}>
+        <StandardPanel title="Tasks" actions={actions} showMaximize={true}>
           <Row>
             <Col>
               <SearchPanelWithContent />
