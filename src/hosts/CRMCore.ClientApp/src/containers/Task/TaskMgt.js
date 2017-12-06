@@ -11,12 +11,15 @@ import {
   ListGroup,
   ListGroupItem,
   Badge,
+  Button,
+  ButtonDropdown,
+  DropdownToggle,
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
 import classnames from 'classnames';
 
-import { SearchPanel, StandardPanel } from 'components';
+import { SearchPanel, StandardPanel, PageHeader } from 'components';
 
 class SearchPanelWithContent extends Component {
   constructor(props) {
@@ -249,22 +252,33 @@ export default class TaskMgt extends Component {
   }
 
   render() {
-    const actions = (
+    
+    const mainActions = (
+      <Button color="primary" onClick={this.createTask}>
+        <b>Create Task</b>
+      </Button>
+    );
+
+    const dropdownMenus = (
       <DropdownMenu>
-        <DropdownItem onClick={this.createTask}>
-          <i className="icon-plus b-icon" />Create Task
-        </DropdownItem>
+        <DropdownItem>Action</DropdownItem>
+        <DropdownItem>Another Action</DropdownItem>
+        <DropdownItem disabled>Another Action</DropdownItem>
       </DropdownMenu>
     );
 
     return (
       <div className="animated fadeIn">
-        <StandardPanel title="Tasks" actions={actions} showMaximize={true}>
-          <Row>
-            <Col>
-              <SearchPanelWithContent />
-            </Col>
-          </Row>
+
+        <PageHeader
+          title="Tasks"
+          mainActions={mainActions}
+          dropdownMenus={dropdownMenus}
+        />
+
+        <SearchPanelWithContent />
+
+        <StandardPanel className="clearfix" title="Details" showMaximize={true}>
           <Row>
             <Col>
               <h5>Overdue</h5>
@@ -369,6 +383,7 @@ export default class TaskMgt extends Component {
             </Col>
           </Row>
         </StandardPanel>
+
       </div>
     );
   }

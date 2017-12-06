@@ -5,14 +5,17 @@ import { Field, reduxForm } from 'redux-form';
 import { Card, CardBody, Form, FormGroup, Label, Button } from 'reactstrap';
 
 // import * as TaskStore from 'redux/modules/task';
-import { TextBoxField, SelectField, StandardPanel } from 'components';
+import { TextBoxField, SelectField, StandardPanel, PageHeader } from 'components';
 
 class TaskForm extends React.Component {
   render() {
     const { /*error, handleSubmit,*/ pristine, reset, submitting } = this.props;
     return (
       <div className="animated fadeIn">
-        <StandardPanel icon={`icon-plus`} title="Task Adding">
+
+        <PageHeader title="Task Adding" />
+
+        <StandardPanel noHeader>
           <Form className="b-form">
             <FormGroup>
               <Label for="name">Name</Label>
@@ -74,6 +77,7 @@ class TaskForm extends React.Component {
             </FormGroup>
           </Form>
         </StandardPanel>
+        
       </div>
     );
   }
