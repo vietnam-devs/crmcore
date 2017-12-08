@@ -7,15 +7,14 @@ import {
   DropdownToggle,
   Collapse
 } from 'reactstrap';
+
 import classnames from 'classnames';
+import autobind from 'class-autobind';
 
 export default class StandardPanel extends Component {
   constructor(props) {
     super(props);
-
-    this.dropdown = this.dropdown.bind(this);
-    this.collapse = this.collapse.bind(this);
-    this.fullScreen = this.fullScreen.bind(this);
+    autobind(this);
 
     this.state = {
       dropdown: false,
@@ -45,7 +44,8 @@ export default class StandardPanel extends Component {
       <Card
         className={classnames(
           { 'b-panel-fullscreen': this.state.fullScreen },
-          'b-panel'
+          'b-panel',
+          'clearfix'
         )}
       >
         {!this.props.noHeader && (

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { ButtonDropdown, DropdownToggle } from 'reactstrap';
+import autobind from 'class-autobind';
 
 export default class PageHeader extends Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
+    autobind(this);
     this.state = {
       dropdownOpen: false
     };
@@ -28,7 +29,9 @@ export default class PageHeader extends Component {
               isOpen={this.state.dropdownOpen}
               toggle={this.toggle}
             >
-              <DropdownToggle caret>Others</DropdownToggle>
+              <DropdownToggle caret>
+                <i class="fa fa-cogs" aria-hidden="true" />
+              </DropdownToggle>
               {this.props.dropdownMenus}
             </ButtonDropdown>
           )}

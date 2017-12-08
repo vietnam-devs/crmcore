@@ -1,6 +1,7 @@
 ﻿using CRMCore.Framework.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -9,37 +10,77 @@ namespace CRMCore.Module.Data.Extensions
 {
     public static class EfRepositoryExtensions
     {
-        public static async Task<PaginatedItem<TResponse>> QueryAsync<TDbContext, TEntity, TResponse>(
-            this IEfRepositoryAsync<TDbContext, TEntity> repo,
+        public static async Task<TEntity> GetByIdAsync<TDbContext, TEntity>(
+            this IEfQueryRepository<TDbContext, TEntity> repo, 
+            Guid id, 
+            params Expression<Func<TEntity, object>>[] includeProperties)
+                where TDbContext : DbContext
+                where TEntity : EntityBase
+
+        {
+            var queryable = repo.Queryable().AsNoTracking() as IQueryable<TEntity>;
+
+            if (includeProperties != null)
+            {
+                foreach (var includeProperty in includeProperties)
+                {
+                    queryable = queryable.Include(includeProperty);
+                }
+            }
+
+            return await queryable.SingleOrDefaultAsync(e => e.Id.Equals(id));
+        }
+
+        public static async Task<IReadOnlyList<TEntity>> ListAsync<TDbContext, TEntity>(
+            this IEfQueryRepository<TDbContext, TEntity> repo,
+            params Expression<Func<TEntity, object>>[] includeProperties)
+                where TDbContext : DbContext
+                where TEntity : EntityBase
+        {
+            var queryable = repo.Queryable().AsNoTracking() as IQueryable<TEntity>;
+
+            if (includeProperties != null)
+            {
+                foreach (var includeProperty in includeProperties)
+                {
+                    queryable = queryable.Include(includeProperty);
+                }
+            }
+
+            return await queryable.ToListAsync();
+        }
+
+        internal static async Task<PaginatedItem<TResponse>> QueryAsync<TDbContext, TEntity, TResponse>(
+            this IEfQueryRepository<TDbContext, TEntity> repo,
             Criterion criterion,
             Expression<Func<TEntity, TResponse>> selector,
             params Expression<Func<TEntity, object>>[] includeProperties)
-            where TDbContext : DbContext
-            where TEntity : EntityBase
+                where TDbContext : DbContext
+                where TEntity : EntityBase
         {
             return await GetDataAsync(repo, criterion, selector, null, includeProperties);
         }
 
-        public static async Task<PaginatedItem<TResponse>> FindAllAsync<TDbContext, TEntity, TResponse>(
-            this IEfRepositoryAsync<TDbContext, TEntity> repo,
+        internal static async Task<PaginatedItem<TResponse>> FindAllAsync<TDbContext, TEntity, TResponse>(
+            this IEfQueryRepository<TDbContext, TEntity> repo,
             Criterion criterion,
             Expression<Func<TEntity, TResponse>> selector,
             Expression<Func<TEntity, bool>> filter,
             params Expression<Func<TEntity, object>>[] includeProperties)
-            where TDbContext : DbContext
-            where TEntity : EntityBase
+                where TDbContext : DbContext
+                where TEntity : EntityBase
         {
             return await GetDataAsync(repo, criterion, selector, filter, includeProperties);
         }
 
-        public static async Task<TEntity> FindOneAsync<TDbContext, TEntity>(
-            this IEfRepositoryAsync<TDbContext, TEntity> repo,
+        internal static async Task<TEntity> FindOneAsync<TDbContext, TEntity>(
+            this IEfQueryRepository<TDbContext, TEntity> repo,
             Expression<Func<TEntity, bool>> filter,
             params Expression<Func<TEntity, object>>[] includeProperties)
-            where TDbContext : DbContext
-            where TEntity : EntityBase
+                where TDbContext : DbContext
+                where TEntity : EntityBase
         {
-            var dbSet = repo.DbContext.Set<TEntity>() as IQueryable<TEntity>;
+            var dbSet = repo.Queryable();
             foreach (var includeProperty in includeProperties)
             {
                 dbSet = dbSet.Include(includeProperty);
@@ -49,20 +90,20 @@ namespace CRMCore.Module.Data.Extensions
         }
 
         private static async Task<PaginatedItem<TResponse>> GetDataAsync<TDbContext, TEntity, TResponse>(
-            IEfRepositoryAsync<TDbContext, TEntity> repo,
+            IEfQueryRepository<TDbContext, TEntity> repo,
             Criterion criterion,
             Expression<Func<TEntity, TResponse>> selector,
             Expression<Func<TEntity, bool>> filter = null,
             params Expression<Func<TEntity, object>>[] includeProperties)
-            where TDbContext : DbContext
-            where TEntity : EntityBase
+                where TDbContext : DbContext
+                where TEntity : EntityBase
         {
             if (criterion.PageSize < 1 || criterion.PageSize > criterion.DefaultPagingOption.PageSize)
             {
                 criterion.SetPageSize(criterion.DefaultPagingOption.PageSize);
             }
 
-            var queryable = repo.DbContext.Set<TEntity>() as IQueryable<TEntity>;
+            var queryable = repo.Queryable();
             var totalRecord = await queryable.CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalRecord / criterion.PageSize);
 

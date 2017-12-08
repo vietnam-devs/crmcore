@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CRMCore.Module.Data.Impl
 {
-    public class EfUnitOfWork : IUnitOfWorkAsync
+    public class EfUnitOfWork : IUnitOfWorkAsync, IRepositoryFactory
     {
         private readonly DbContext _context;
         protected IDbContextTransaction Transaction;
@@ -76,6 +76,11 @@ namespace CRMCore.Module.Data.Impl
         public virtual void Rollback()
         {
             Transaction.Rollback();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

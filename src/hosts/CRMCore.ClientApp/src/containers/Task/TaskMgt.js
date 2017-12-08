@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import {
   Row,
@@ -12,19 +12,21 @@ import {
   ListGroupItem,
   Badge,
   Button,
-  ButtonDropdown,
-  DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Tooltip
 } from 'reactstrap';
+
 import classnames from 'classnames';
+import autobind from 'class-autobind';
 
-import { SearchPanel, StandardPanel, PageHeader } from 'components';
+import { StandardPanel, PageHeader } from 'components';
 
-class SearchPanelWithContent extends Component {
+class SearchPanelWithContent extends PureComponent {
   constructor(props) {
     super(props);
-    this.tabToggle = this.tabToggle.bind(this);
+    autobind(this);
+    
     this.state = { activeTab: '1' };
   }
 
@@ -240,10 +242,10 @@ class SearchPanelWithContent extends Component {
   }
 }
 
-export default class TaskMgt extends Component {
+export default class TaskMgt extends PureComponent {
   constructor(props) {
     super(props);
-    this.createTask = this.createTask.bind(this);
+    autobind(this);
   }
 
   createTask() {
@@ -252,10 +254,9 @@ export default class TaskMgt extends Component {
   }
 
   render() {
-    
     const mainActions = (
       <Button color="primary" onClick={this.createTask}>
-        <b>Create Task</b>
+        <i class="fa fa-plus" aria-hidden="true" /> Add
       </Button>
     );
 
@@ -269,7 +270,6 @@ export default class TaskMgt extends Component {
 
     return (
       <div className="animated fadeIn">
-
         <PageHeader
           title="Tasks"
           mainActions={mainActions}
@@ -278,7 +278,7 @@ export default class TaskMgt extends Component {
 
         <SearchPanelWithContent />
 
-        <StandardPanel className="clearfix" title="Details" showMaximize={true}>
+        <StandardPanel title="Details" showMaximize={true}>
           <Row>
             <Col>
               <h5>Overdue</h5>
@@ -383,7 +383,6 @@ export default class TaskMgt extends Component {
             </Col>
           </Row>
         </StandardPanel>
-
       </div>
     );
   }

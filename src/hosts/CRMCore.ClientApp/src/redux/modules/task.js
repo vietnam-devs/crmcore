@@ -1,10 +1,11 @@
-const initialState = {
-  
-};
+import { State } from 'jumpstate';
 
-export default function reducer(state = initialState, action = {}) {
-  switch (action.type) {
-    default:
-      return state;
+export default State('tasks', {
+  initial: {
+    loading: false
+  },
+
+  showLoading(state) {
+    return { loading: true, ...state };
   }
-}
+});

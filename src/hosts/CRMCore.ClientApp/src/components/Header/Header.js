@@ -7,15 +7,16 @@ import {
   NavLink,
   Badge
 } from 'reactstrap';
+
 import * as screenfull from 'screenfull';
+import autobind from 'class-autobind';
 
 import HeaderDropdown from './HeaderDropdown';
 
 class Header extends Component {
   constructor(props) {
     super(props);
-
-    this.fullscreen = this.fullscreen.bind(this);
+    autobind(this);
   }
 
   fullscreen() {

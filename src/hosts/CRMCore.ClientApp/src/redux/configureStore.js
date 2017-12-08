@@ -1,6 +1,7 @@
 import { createStore as _createStore, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { createEpicMiddleware } from 'redux-observable';
+import { CreateJumpstateMiddleware } from 'jumpstate';
 import createHistory from 'history/createBrowserHistory';
 
 import reducers, { rootEpic } from './modules/reducers';
@@ -11,7 +12,11 @@ export const routerHistory = createHistory();
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
 export default function createStore() {
-  const middlewares = [routerMiddleware(routerHistory), epicMiddleware];
+  const middlewares = [
+    routerMiddleware(routerHistory),
+    CreateJumpstateMiddleware(),
+    epicMiddleware
+  ];
 
   const store = _createStore(
     reducers,
@@ -19,5 +24,6 @@ export default function createStore() {
       window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(...middlewares)
   );
+
   return store;
 }

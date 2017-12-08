@@ -2,17 +2,21 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import { Card, CardBody, Form, FormGroup, Label, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Button } from 'reactstrap';
 
 // import * as TaskStore from 'redux/modules/task';
-import { TextBoxField, SelectField, StandardPanel, PageHeader } from 'components';
+import {
+  TextBoxField,
+  SelectField,
+  StandardPanel,
+  PageHeader
+} from 'components';
 
 class TaskForm extends React.Component {
   render() {
     const { /*error, handleSubmit,*/ pristine, reset, submitting } = this.props;
     return (
       <div className="animated fadeIn">
-
         <PageHeader title="Task Adding" />
 
         <StandardPanel noHeader>
@@ -77,7 +81,6 @@ class TaskForm extends React.Component {
             </FormGroup>
           </Form>
         </StandardPanel>
-        
       </div>
     );
   }

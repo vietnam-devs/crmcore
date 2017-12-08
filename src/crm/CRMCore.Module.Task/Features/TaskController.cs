@@ -1,15 +1,15 @@
 ﻿using CRMCore.Framework.Entities;
 using CRMCore.Framework.Entities.Helpers;
 using CRMCore.Module.Data;
+using CRMCore.Module.Data.Extensions;
 using CRMCore.Module.Task.Features.CreateTask;
 using CRMCore.Module.Task.Features.DeleteTask;
 using CRMCore.Module.Task.Features.GetTasks;
 using CRMCore.Module.Task.Features.UpdateTask;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CRMCore.Module.Task.Features
@@ -20,32 +20,49 @@ namespace CRMCore.Module.Task.Features
     public class TaskController : Controller
     {
         private readonly IEfRepositoryAsync<Domain.Task> _taskRepository;
+        private readonly IEfQueryRepository<Domain.Task> _taskQuery;
+        private readonly IOptions<PaginationOption> _paginationOption;
 
-        public TaskController(IUnitOfWorkAsync unitOfWork)
+        public TaskController(
+            IUnitOfWorkAsync unitOfWork, 
+            IEfQueryRepository<Domain.Task> taskQuery,
+            IOptions<PaginationOption> paginationOption)
         {
             _taskRepository = unitOfWork.Repository<Domain.Task>() as IEfRepositoryAsync<Domain.Task>;
+            _taskQuery = taskQuery;
+            _paginationOption = paginationOption;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<GetTaskResponse>> Get(GetTaskRequest request)
+        public async Task<PaginatedItem<GetTaskResponse>> Get(GetTaskRequest request, [FromQuery]int page, [FromQuery] int? pageSize)
         {
-            var responses = await _taskRepository.ListAsync();
-            return responses.Select(x => new GetTaskResponse {
-                Id = x.Id,
-                Name = x.Name,
-                DueType = x.DueType.ToString("D"),
-                AssignedTo = x.AssignedTo,
-                CategoryType = x.CategoryType.ToString("D"),
-                Status = x.TaskStatus.ToString("D"),
-                Created = x.Created,
-                Updated = x.Updated
-            });
+            return await _taskQuery
+                .Return<GetTaskResponse>()
+                .Criterion(new Criterion(
+                    page > 0 ? page : 1,
+                    pageSize.HasValue ? pageSize.Value : _paginationOption.Value.PageSize,
+                    _paginationOption.Value))
+                .Projection(x => new GetTaskResponse
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    DueType = x.DueType.ToString("D"),
+                    AssignedTo = x.AssignedTo,
+                    CategoryType = x.CategoryType.ToString("D"),
+                    Status = x.TaskStatus.ToString("D"),
+                    Created = x.Created,
+                    Updated = x.Updated
+                })
+                .ComplexQueryAsync();
         }
 
         [HttpGet("{id:guid}")]
         public async Task<GetTaskResponse> Get(Guid id)
         {
-            var response = await _taskRepository.GetByIdAsync(id);
+            var response = await _taskQuery
+                .Return<GetTaskResponse>(x => x.Id == id)
+                .ComplexFindOneAsync();
+
             return new GetTaskResponse
             {
                 Id = response.Id,
@@ -69,13 +86,14 @@ namespace CRMCore.Module.Task.Features
                     request.AssignedTo,
                     (Domain.CategoryType)request.CategoryType
                     ));
+
             return new AddTaskResponse();
         }
 
         [HttpPut("{id:guid}")]
         public async Task<UpdateTaskResponse> Update(Guid id, [FromBody] UpdateTaskRequest request)
         {
-            var oldOne = await _taskRepository.GetByIdAsync(id);
+            var oldOne = await _taskQuery.GetByIdAsync(id);
             if (oldOne == null)
                 throw new CoreException($"Could not delete item #{id}.");
 
@@ -91,7 +109,7 @@ namespace CRMCore.Module.Task.Features
         [HttpDelete("{id:guid}")]
         public async Task<DeleteTaskResponse> Delete(Guid id)
         {
-            var oldOne = await _taskRepository.GetByIdAsync(id);
+            var oldOne = await _taskQuery.GetByIdAsync(id);
             if (oldOne == null)
                 throw new CoreException($"Could not delete item #{id}.");
 
@@ -100,62 +118,26 @@ namespace CRMCore.Module.Task.Features
         }
 
         [HttpGet("due-types")]
-        public IEnumerable<KeyValueResponse<int>> GetDueTypes()
+        public IEnumerable<KeyValueObject<int>> GetDueTypes()
         {
             return EnumHelper.GetEnumKeyValue<Domain.DueType, int>();
         }
 
         [HttpGet("category-types")]
-        public IEnumerable<KeyValueResponse<int>> GetCategoryTypes()
+        public IEnumerable<KeyValueObject<int>> GetCategoryTypes()
         {
             return EnumHelper.GetEnumKeyValue<Domain.CategoryType, int>();
         }
 
         [HttpGet("assign-users")]
-        public IEnumerable<KeyValueResponse<Guid>> GetAssignUsers() 
+        public IEnumerable<KeyValueObject<Guid>> GetAssignUsers() 
         {
-            return new List<KeyValueResponse<Guid>> {
-                new KeyValueResponse<Guid>{
-                    Key = IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"),
-                    Value = "demouser@nomail.com"
-                }
+            return new List<KeyValueObject<Guid>> {
+                new KeyValueObject<Guid>(
+                    key: IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"),
+                    value: "demouser@nomail.com"
+                )
             };            
-        }
-    }
-
-    public class EnumHelper
-    {
-        public static IEnumerable<KeyValueResponse<TKey>> GetEnumKeyValue<TEnum, TKey>()
-        {
-            var metas = GetMetadata<TEnum, TKey>();
-            var results = metas.Item1.Zip(metas.Item2, (key, value) =>
-                new KeyValueResponse<TKey>
-                {
-                    Key = key,
-                    Value = value
-                }
-            );
-            return results;
-        }
-
-        public static (IEnumerable<TKey>, IEnumerable<string>) GetMetadata<TEnum, TKey>()
-        {
-            var keyArray = (TKey[])Enum.GetValues(typeof(TEnum));
-            var nameArray = Enum.GetNames(typeof(TEnum));
-
-            IList<TKey> keys = new List<TKey>();
-            foreach (TKey item in keyArray)
-            {
-                keys.Add(item);
-            }
-
-            IList<string> names = new List<string>();
-            foreach (var item in nameArray)
-            {
-                names.Add(item);
-            }
-
-            return (keys, names);
         }
     }
 }

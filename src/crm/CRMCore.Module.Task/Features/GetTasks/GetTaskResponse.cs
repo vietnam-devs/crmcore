@@ -13,10 +13,4 @@ namespace CRMCore.Module.Task.Features.GetTasks
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
     }
-
-    public class KeyValueResponse<TKey>
-    {
-        public TKey Key { get; set; }
-        public string Value { get; set; }
-    }
 }

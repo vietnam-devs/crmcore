@@ -1,17 +1,26 @@
 ﻿using CRMCore.Framework.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace CRMCore.Module.Data.Impl
 {
-    public class EfRepositoryAsync<TEntity> : EfRepositoryAsync<ApplicationDbContext, TEntity>, IEfRepositoryAsync<TEntity>
+    public class EfRepositoryAsync<TEntity> 
+        : EfRepositoryAsync<ApplicationDbContext, TEntity>, IEfRepositoryAsync<TEntity>
         where TEntity : EntityBase
     {
         public EfRepositoryAsync(ApplicationDbContext dbContext) : base(dbContext)
+        {
+        }
+    }
+
+    public class EfQueryRepository<TEntity> 
+        : EfQueryRepository<ApplicationDbContext, TEntity>, IEfQueryRepository<TEntity>
+        where TEntity : EntityBase
+    {
+        public EfQueryRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
     }
@@ -20,64 +29,58 @@ namespace CRMCore.Module.Data.Impl
         where TDbContext : DbContext
         where TEntity : EntityBase
     {
-        public TDbContext DbContext { get; private set; }
+        private readonly TDbContext _dbContext;
 
         public EfRepositoryAsync(TDbContext dbContext)
         {
-            DbContext = dbContext;
-            DbContext.ChangeTracker.AutoDetectChangesEnabled = false;
-        }
-
-        public virtual async Task<TEntity> GetByIdAsync(Guid id, params Expression<Func<TEntity, object>>[] includeProperties)
-        {
-            var queryable = DbContext.Set<TEntity>().AsNoTracking() as IQueryable<TEntity>;
-
-            if (includeProperties != null)
-            {
-                foreach (var includeProperty in includeProperties)
-                {
-                    queryable = queryable.Include(includeProperty);
-                }
-            }
-
-            return await queryable.SingleOrDefaultAsync(e => e.Id.Equals(id));
-        }
-
-        public async Task<IReadOnlyList<TEntity>> ListAsync(params Expression<Func<TEntity, object>>[] includeProperties)
-        {
-            var queryable = DbContext.Set<TEntity>().AsNoTracking() as IQueryable<TEntity>;
-
-            if (includeProperties != null)
-            {
-                foreach (var includeProperty in includeProperties)
-                {
-                    queryable = queryable.Include(includeProperty);
-                }
-            }
-
-            return await queryable.ToListAsync();
+            _dbContext = dbContext;
+            _dbContext.ChangeTracker.AutoDetectChangesEnabled = false;
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)
         {
-            var dbEntityEntry = DbContext.Entry(entity);
-            await DbContext.Set<TEntity>().AddAsync(entity);
-            await DbContext.SaveChangesAsync();
+            var dbEntityEntry = _dbContext.Entry(entity);
+            await _dbContext.Set<TEntity>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
             return entity;
         }
 
         public async Task<TEntity> DeleteAsync(TEntity entity)
         {
-            DbContext.Entry(entity).State = EntityState.Deleted;
-            await DbContext.SaveChangesAsync();
+            _dbContext.Entry(entity).State = EntityState.Deleted;
+            await _dbContext.SaveChangesAsync();
             return await Task.FromResult(entity);
         }
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            DbContext.Entry(entity).State = EntityState.Modified;
-            await DbContext.SaveChangesAsync();
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
             return await Task.FromResult(entity);
         }
+    }
+
+    public class EfQueryRepository<TDbContext, TEntity> : IEfQueryRepository<TDbContext, TEntity>
+        where TDbContext : DbContext
+        where TEntity : EntityBase
+    {
+        private readonly TDbContext _dbContext;
+
+        public EfQueryRepository(TDbContext dbContext)
+        {
+            _dbContext = dbContext;
+            _dbContext.ChangeTracker.AutoDetectChangesEnabled = false;
+        }
+
+        public IQueryFluent<TEntity, TResponse> Return<TResponse>(IQueryObject<TEntity> queryObject)
+            => new QueryFluent<TEntity, TResponse>(this as IEfQueryRepository<TEntity>, queryObject);
+
+        public IQueryFluent<TEntity, TResponse> Return<TResponse>(Expression<Func<TEntity, bool>> query)
+            => new QueryFluent<TEntity, TResponse>(this as IEfQueryRepository<TEntity>, query);
+
+        public IQueryFluent<TEntity, TResponse> Return<TResponse>() 
+            => new QueryFluent<TEntity, TResponse>(this as IEfQueryRepository<TEntity>);
+
+        public IQueryable<TEntity> Queryable() => _dbContext.Set<TEntity>();
     }
 }

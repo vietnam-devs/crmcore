@@ -1,6 +1,6 @@
 ﻿namespace CRMCore.Framework.Entities
 {
-    public class PagingOption
+    public class PaginationOption
     {
         public int PageSize { get; set; }
     }

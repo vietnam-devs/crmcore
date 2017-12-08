@@ -1,13 +1,12 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CRMCore.Framework.Entities
 {
-    public interface IUnitOfWorkAsync
+    public interface IUnitOfWorkAsync : IRepositoryFactory, IDisposable
     {
-        IRepositoryAsync<TEntity> Repository<TEntity>() where TEntity : EntityBase;
-
         int SaveChanges();
 
         int ExecuteSqlCommand(string sql, params object[] parameters);

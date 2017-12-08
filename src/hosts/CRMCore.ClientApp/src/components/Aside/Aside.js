@@ -9,13 +9,15 @@ import {
   Label,
   Input
 } from 'reactstrap';
+
 import classnames from 'classnames';
+import autobind from 'class-autobind';
 
 class Aside extends Component {
   constructor(props) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
+    autobind(this);
+    
     this.state = {
       activeTab: '1'
     };

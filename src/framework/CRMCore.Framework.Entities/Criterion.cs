@@ -5,7 +5,7 @@ namespace CRMCore.Framework.Entities
 {
     public class Criterion : ValueObjectBase
     {
-        public Criterion(int currentPage, int pageSize, PagingOption defaultPagingOption, string sortBy = "", string sortOrder = "")
+        public Criterion(int currentPage, int pageSize, PaginationOption defaultPagingOption, string sortBy = "", string sortOrder = "")
         {
             if (currentPage <= 0)
                 throw new Exception("CurrentPage could not be less than zero.");
@@ -24,7 +24,7 @@ namespace CRMCore.Framework.Entities
         public int PageSize { get; private set; }
         public string SortBy { get; private set; }
         public string SortOrder { get; private set; }
-        public PagingOption DefaultPagingOption { get; private set; }
+        public PaginationOption DefaultPagingOption { get; private set; }
 
         public Criterion SetPageSize(int pageSize)
         {

@@ -1,14 +1,11 @@
 ﻿using CRMCore.Framework.Entities;
 using CRMCore.Framework.MvcCore.Extensions;
 using CRMCore.Module.Data;
-using CRMCore.Module.Data.Impl;
 using CRMCore.Module.Identity.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Linq;
-using System.Reflection;
 using System.Text.Encodings.Web;
 
 namespace CRMCore.Application.Crm.targets
@@ -21,6 +18,9 @@ namespace CRMCore.Application.Crm.targets
             Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
         {
             services.AddSingleton(JavaScriptEncoder.Default);
+
+            services.AddOptions()
+                .Configure<PaginationOption>(config.GetSection("Pagination"));
 
             services.AddDbContext<ApplicationDbContext>(options => dbContextOptionsBuilderAction(options));
 
@@ -38,8 +38,10 @@ namespace CRMCore.Application.Crm.targets
                     options.ConfigureDbContext = builder => dbContextOptionsBuilderAction(builder);
                 });
 
+            services.AddGenericDataModule();
+
             // TODO: I think this one should move to CRMCore.Module.Data :))
-            var entityTypes = "CRMCore.Module.*".LoadAssemblyWithPattern()
+            /*var entityTypes = "CRMCore.Module.*".LoadAssemblyWithPattern()
                 .SelectMany(m => m.DefinedTypes)
                 .Where(x => typeof(IEntity)
                 .IsAssignableFrom(x) && !x.GetTypeInfo().IsAbstract);
@@ -48,14 +50,18 @@ namespace CRMCore.Application.Crm.targets
             {
                 var repoType = typeof(IEfRepositoryAsync<>).MakeGenericType(entity);
                 var implRepoType = typeof(EfRepositoryAsync<>).MakeGenericType(entity);
-                services.AddSingleton(repoType, implRepoType);
+                services.AddScoped(repoType, implRepoType);
+
+                var queryRepoType = typeof(IEfQueryRepository<>).MakeGenericType(entity);
+                var implQueryRepoType = typeof(EfQueryRepository<>).MakeGenericType(entity);
+                services.AddScoped(queryRepoType, implQueryRepoType);
             }
 
             services.AddSingleton(
                 typeof(IUnitOfWorkAsync), resolver =>
                 new EfUnitOfWork(
                     resolver.GetService<ApplicationDbContext>(),
-                    resolver.GetService<IServiceProvider>()));
+                    resolver.GetService<IServiceProvider>()));*/
 
             return services;
         }

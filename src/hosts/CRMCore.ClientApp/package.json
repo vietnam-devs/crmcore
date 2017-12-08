@@ -17,10 +17,12 @@
   "dependencies": {
     "bootstrap": "^4.0.0-beta",
     "chart.js": "^2.7.0",
+    "class-autobind": "^0.1.4",
     "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",
     "humps": "^2.0.1",
+    "jumpstate": "^2.2.2",
     "moment": "^2.18.1",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
