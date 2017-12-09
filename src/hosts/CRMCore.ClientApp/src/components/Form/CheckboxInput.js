@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React, { PureComponent } from 'react';
 import { Label, Input as ReactStrapInput, FormFeedback } from 'reactstrap';
 
-export default class Checkbox extends React.Component {
+export default class CheckboxInput extends PureComponent {
   render() {
     const { touched, error, warning, valid } = this.props.meta;
     return (

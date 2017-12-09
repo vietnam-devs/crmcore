@@ -6,20 +6,16 @@ import {
   DropdownToggle,
   Dropdown
 } from 'reactstrap';
-import autobind from 'class-autobind';
 
 class HeaderDropdown extends Component {
-
   constructor(props) {
     super(props);
-    autobind(this);
-    
     this.state = {
       dropdownOpen: false
     };
   }
 
-  toggle() {
+  toggle = () => {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });

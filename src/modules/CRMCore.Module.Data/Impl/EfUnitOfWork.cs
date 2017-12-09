@@ -80,7 +80,15 @@ namespace CRMCore.Module.Data.Impl
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (Transaction != null)
+            {
+                Transaction.Dispose();
+            }
+
+            if(_context != null)
+            {
+                _context.Dispose();
+            }
         }
     }
 }

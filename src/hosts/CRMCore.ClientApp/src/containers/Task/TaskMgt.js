@@ -13,34 +13,47 @@ import {
   Badge,
   Button,
   DropdownMenu,
-  DropdownItem,
-  Tooltip
+  DropdownItem
 } from 'reactstrap';
-
 import classnames from 'classnames';
-import autobind from 'class-autobind';
 
 import { StandardPanel, PageHeader } from 'components';
+
+import styled from 'styled-components';
+const TaskItemColorContent = styled.div`
+  color: #000;
+`;
 
 class SearchPanelWithContent extends PureComponent {
   constructor(props) {
     super(props);
-    autobind(this);
-    
     this.state = { activeTab: '1' };
   }
 
-  tabToggle(tab) {
+  tabToggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
       });
     }
-  }
+  };
 
   render() {
     return (
-      <StandardPanel icon="icon-magic-wand" title="Search">
+      <StandardPanel icon="icon-magic-wand" title="Search" collapse={true}>
+        <div className="form-group">
+          <label className="form-control-label">Task Name</label>
+          <div>
+            <input type="text" className="form-control" />{' '}
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="form-control-label">Assigned User</label>
+          <div>
+            <input type="text" className="form-control" />{' '}
+          </div>
+        </div>
+        <br />
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -51,7 +64,7 @@ class SearchPanelWithContent extends PureComponent {
                 this.tabToggle('1');
               }}
             >
-              Pending
+              Status
             </NavLink>
           </NavItem>
           <NavItem>
@@ -63,19 +76,7 @@ class SearchPanelWithContent extends PureComponent {
                 this.tabToggle('2');
               }}
             >
-              Assigned
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({
-                active: this.state.activeTab === '3'
-              })}
-              onClick={() => {
-                this.tabToggle('3');
-              }}
-            >
-              Completed
+              Category
             </NavLink>
           </NavItem>
         </Nav>
@@ -85,27 +86,15 @@ class SearchPanelWithContent extends PureComponent {
               <Col sm="6">
                 <ListGroup>
                   <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" defaultChecked /> &nbsp;Overdue{' '}
+                    <input type="checkbox" defaultChecked /> &nbsp;Not started{' '}
                     <Badge pill className="pull-right">
                       14
                     </Badge>
                   </ListGroupItem>
                   <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" /> &nbsp;As Soon As Possible{' '}
+                    <input type="checkbox" /> &nbsp;In progress{' '}
                     <Badge pill className="pull-right">
                       2
-                    </Badge>
-                  </ListGroupItem>
-                  <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" defaultChecked /> &nbsp;Today{' '}
-                    <Badge pill className="pull-right">
-                      1
-                    </Badge>
-                  </ListGroupItem>
-                  <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" /> &nbsp;Tomorrow{' '}
-                    <Badge pill className="pull-right">
-                      1
                     </Badge>
                   </ListGroupItem>
                 </ListGroup>
@@ -113,20 +102,13 @@ class SearchPanelWithContent extends PureComponent {
               <Col sm="6">
                 <ListGroup>
                   <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" /> &nbsp;This Week{' '}
+                    <input type="checkbox" defaultChecked /> &nbsp;Pending{' '}
                     <Badge pill className="pull-right">
                       1
                     </Badge>
                   </ListGroupItem>
                   <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" defaultChecked /> &nbsp;Next Week{' '}
-                    <Badge pill className="pull-right">
-                      1
-                    </Badge>
-                  </ListGroupItem>
-                  <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" defaultChecked /> &nbsp;Sometime
-                    Later{' '}
+                    <input type="checkbox" /> &nbsp;Done{' '}
                     <Badge pill className="pull-right">
                       1
                     </Badge>
@@ -140,75 +122,25 @@ class SearchPanelWithContent extends PureComponent {
               <Col sm="6">
                 <ListGroup>
                   <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" /> &nbsp;Overdue{' '}
+                    <input type="checkbox" /> &nbsp;Call{' '}
                     <Badge pill className="pull-right">
                       14
                     </Badge>
                   </ListGroupItem>
                   <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" defaultChecked /> &nbsp;As Soon As
-                    Possible{' '}
+                    <input type="checkbox" defaultChecked /> &nbsp;Email{' '}
                     <Badge pill className="pull-right">
                       2
                     </Badge>
                   </ListGroupItem>
                   <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" defaultChecked /> &nbsp;Today{' '}
+                    <input type="checkbox" defaultChecked /> &nbsp;Follow Up{' '}
                     <Badge pill className="pull-right">
                       1
                     </Badge>
                   </ListGroupItem>
                   <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" /> &nbsp;Tomorrow{' '}
-                    <Badge pill className="pull-right">
-                      1
-                    </Badge>
-                  </ListGroupItem>
-                </ListGroup>
-              </Col>
-              <Col sm="6">
-                <ListGroup>
-                  <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" defaultChecked /> &nbsp;This Week{' '}
-                    <Badge pill className="pull-right">
-                      1
-                    </Badge>
-                  </ListGroupItem>
-                  <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" /> &nbsp;Next Week{' '}
-                    <Badge pill className="pull-right">
-                      1
-                    </Badge>
-                  </ListGroupItem>
-                  <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" defaultChecked /> &nbsp;Sometime
-                    Later{' '}
-                    <Badge pill className="pull-right">
-                      1
-                    </Badge>
-                  </ListGroupItem>
-                </ListGroup>
-              </Col>
-            </Row>
-          </TabPane>
-          <TabPane tabId="3">
-            <Row>
-              <Col sm="6">
-                <ListGroup>
-                  <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" /> &nbsp;Today{' '}
-                    <Badge pill className="pull-right">
-                      14
-                    </Badge>
-                  </ListGroupItem>
-                  <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" defaultChecked /> &nbsp;Yesterday{' '}
-                    <Badge pill className="pull-right">
-                      2
-                    </Badge>
-                  </ListGroupItem>
-                  <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" /> &nbsp;Last week{' '}
+                    <input type="checkbox" /> &nbsp;Lunch{' '}
                     <Badge pill className="pull-right">
                       1
                     </Badge>
@@ -218,45 +150,293 @@ class SearchPanelWithContent extends PureComponent {
               <Col sm="6">
                 <ListGroup>
                   <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" /> &nbsp;This month{' '}
+                    <input type="checkbox" defaultChecked /> &nbsp;Meeting{' '}
                     <Badge pill className="pull-right">
                       1
                     </Badge>
                   </ListGroupItem>
                   <ListGroupItem className="justify-content-between">
-                    <input type="checkbox" defaultChecked /> &nbsp;Last month{' '}
+                    <input type="checkbox" /> &nbsp;Money{' '}
                     <Badge pill className="pull-right">
                       1
                     </Badge>
                   </ListGroupItem>
+                  <ListGroupItem className="justify-content-between">
+                    <input type="checkbox" defaultChecked /> &nbsp;Presentation{' '}
+                    <Badge pill className="pull-right">
+                      1
+                    </Badge>
+                  </ListGroupItem>
+                  <ListGroupItem className="justify-content-between">
+                  <input type="checkbox" defaultChecked /> &nbsp;Trip{' '}
+                  <Badge pill className="pull-right">
+                    1
+                  </Badge>
+                </ListGroupItem>
                 </ListGroup>
               </Col>
             </Row>
           </TabPane>
         </TabContent>
         <div>
-          <p className="text-muted">Total Pending Tasks: 100</p>
+          <p className="text-muted">Total tasks have found: 100</p>
         </div>
       </StandardPanel>
     );
   }
 }
 
-export default class TaskMgt extends PureComponent {
-  constructor(props) {
-    super(props);
-    autobind(this);
-  }
+class StatisticPanel extends PureComponent {
+  render() {
+    return (
+      <StandardPanel
+        title="Statistic"
+        showMaximize={true}
+        showIcon={false}
+        collapse={true}
+      >
+        <Row>
+          <Col>
+            <h5>Current status.</h5>
+            <p>Task (Not started): 100</p>
+            <p>Task (In progress): 2</p>
+            <p>Task (Pending): 10</p>
+            <p>Task (Done): 200</p>
+          </Col>
+          <Col>
+            <h5>10 latest tasks updated.</h5>
+            <ListGroup>
+              <ListGroupItem className="justify-content-between">
+                <Badge pill className="pull-left">
+                  Meeting
+                </Badge>
+                &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
+                <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
+                7:00PM
+              </ListGroupItem>
 
-  createTask() {
+              <ListGroupItem className="justify-content-between">
+                <Badge pill color="warning" className="pull-left">
+                  Lunch
+                </Badge>
+                &nbsp;<a href="#">Lena</a>: Et exercitationem eaque commodi
+                dolorem tenetur aut re:{' '}
+                <a href="#"> Officiis distinctio est nam illum official</a> -
+                about 2 months late, was due on Oct 10 at 12:00AM
+              </ListGroupItem>
+
+              <ListGroupItem className="justify-content-between">
+                <Badge pill color="warning" className="pull-left">
+                  Lunch
+                </Badge>
+                &nbsp;<a href="#">Lena</a>: Et exercitationem eaque commodi
+                dolorem tenetur aut re:{' '}
+                <a href="#"> Officiis distinctio est nam illum official</a> -
+                about 2 months late, was due on Oct 10 at 12:00AM
+              </ListGroupItem>
+
+              <ListGroupItem>
+                <div className="text-center">
+                  <a href="#">See more...</a>
+                </div>
+              </ListGroupItem>
+            </ListGroup>
+          </Col>
+        </Row>
+      </StandardPanel>
+    );
+  }
+}
+
+class NotStartedPanel extends PureComponent {
+  render() {
+    return (
+      <StandardPanel
+        className="bg-warning"
+        title="Not started"
+        showMaximize={true}
+        showIcon={false}
+      >
+        <TaskItemColorContent>
+          <ListGroup>
+            <ListGroupItem className="justify-content-between">
+              <Badge pill className="pull-left">
+                Meeting
+              </Badge>
+              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields -{' '}
+              <b>1 day late</b>, was due on Nov 29 at 7:00PM
+            </ListGroupItem>
+
+            <ListGroupItem className="justify-content-between">
+              <Badge pill className="pull-left">
+                Meeting
+              </Badge>
+              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields -{' '}
+              <b>1 day late</b>, was due on Nov 29 at 7:00PM
+            </ListGroupItem>
+
+            <ListGroupItem className="justify-content-between">
+              <Badge pill className="pull-left">
+                Meeting
+              </Badge>
+              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields -{' '}
+              <b>1 day late</b>, was due on Nov 29 at 7:00PM
+            </ListGroupItem>
+
+            <ListGroupItem className="justify-content-between">
+              <Badge pill className="pull-left">
+                Meeting
+              </Badge>
+              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields -{' '}
+              <b>1 day late</b>, was due on Nov 29 at 7:00PM
+            </ListGroupItem>
+
+            <ListGroupItem>
+              <div className="text-center">
+                <a href="#">Load more...</a>
+              </div>
+            </ListGroupItem>
+          </ListGroup>
+        </TaskItemColorContent>
+      </StandardPanel>
+    );
+  }
+}
+
+class InProgressPanel extends PureComponent {
+  render() {
+    return (
+      <StandardPanel
+        className="bg-info"
+        title="In progress"
+        showMaximize={true}
+        showIcon={false}
+      >
+        <TaskItemColorContent>
+          <ListGroup>
+            <ListGroupItem className="justify-content-between">
+              <Badge pill className="pull-left">
+                Meeting
+              </Badge>
+              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
+              <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
+              7:00PM
+            </ListGroupItem>
+
+            <ListGroupItem className="justify-content-between">
+              <Badge pill color="success" className="pull-left">
+                Presentation
+              </Badge>
+              &nbsp;<a href="#">Lena</a>: Do a presentation about ReactJS for
+              the team - 2 day late, was due on Nov 22 at 6:30PM
+            </ListGroupItem>
+
+            <ListGroupItem>
+              <div className="text-center">
+                <a href="#">Load more...</a>
+              </div>
+            </ListGroupItem>
+          </ListGroup>
+        </TaskItemColorContent>
+      </StandardPanel>
+    );
+  }
+}
+
+class PendingPanel extends PureComponent {
+  render() {
+    return (
+      <StandardPanel
+        className="bg-danger"
+        title="Pending"
+        showMaximize={true}
+        showIcon={false}
+      >
+        <TaskItemColorContent>
+          <ListGroup>
+            <ListGroupItem className="justify-content-between">
+              <Badge pill className="pull-left">
+                Meeting
+              </Badge>
+              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
+              <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
+              7:00PM
+            </ListGroupItem>
+
+            <ListGroupItem className="justify-content-between">
+              <Badge pill color="danger" className="pull-left">
+                Follow-up
+              </Badge>
+              &nbsp;<a href="#">Chris</a>: Et exercitationem eaque commodi
+              dolorem tenetur aut re:{' '}
+              <a href="#"> Officiis distinctio est nam illum official</a> -
+              about 2 months late, was due on Oct 10 at 12:00AM
+            </ListGroupItem>
+
+            <ListGroupItem>
+              <div className="text-center">
+                <a href="#">Load more...</a>
+              </div>
+            </ListGroupItem>
+          </ListGroup>
+        </TaskItemColorContent>
+      </StandardPanel>
+    );
+  }
+}
+
+class DonePanel extends PureComponent {
+  render() {
+    return (
+      <StandardPanel
+        className="bg-success"
+        title="Done"
+        showMaximize={true}
+        showIcon={false}
+      >
+        <TaskItemColorContent>
+          <ListGroup>
+            <ListGroupItem className="justify-content-between">
+              <Badge pill className="pull-left">
+                Meeting
+              </Badge>
+              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
+              <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
+              7:00PM
+            </ListGroupItem>
+
+            <ListGroupItem className="justify-content-between">
+              <Badge pill color="warning" className="pull-left">
+                Lunch
+              </Badge>
+              &nbsp;<a href="#">Lena</a>: Et exercitationem eaque commodi
+              dolorem tenetur aut re:{' '}
+              <a href="#"> Officiis distinctio est nam illum official</a> -
+              about 2 months late, was due on Oct 10 at 12:00AM
+            </ListGroupItem>
+
+            <ListGroupItem>
+              <div className="text-center">
+                <a href="#">Load more...</a>
+              </div>
+            </ListGroupItem>
+          </ListGroup>
+        </TaskItemColorContent>
+      </StandardPanel>
+    );
+  }
+}
+
+export default class TaskMgt extends PureComponent {
+  createTask = () => {
     console.log('Create task...');
     this.props.history.push('/crm/task-form/$');
-  }
+  };
 
   render() {
     const mainActions = (
       <Button color="primary" onClick={this.createTask}>
-        <i class="fa fa-plus" aria-hidden="true" /> Add
+        <i className="fa fa-plus" aria-hidden="true" /> Add
       </Button>
     );
 
@@ -276,113 +456,24 @@ export default class TaskMgt extends PureComponent {
           dropdownMenus={dropdownMenus}
         />
 
+        <StatisticPanel />
+
         <SearchPanelWithContent />
 
-        <StandardPanel title="Details" showMaximize={true}>
-          <Row>
-            <Col>
-              <h5>Overdue</h5>
-              <ListGroup>
-                <ListGroupItem className="justify-content-between">
-                  <Badge pill className="pull-left">
-                    Meeting
-                  </Badge>
-                  &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
-                  <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
-                  7:00PM
-                </ListGroupItem>
-
-                <ListGroupItem>
-                  <div className="text-center">
-                    <a href="#">Load more...</a>
-                  </div>
-                </ListGroupItem>
-              </ListGroup>
-              <hr />
-              <h5>As Soon As Possible</h5>
-              <ListGroup>
-                <ListGroupItem className="justify-content-between">
-                  <Badge pill className="pull-left">
-                    Meeting
-                  </Badge>
-                  &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
-                  <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
-                  7:00PM
-                </ListGroupItem>
-
-                <ListGroupItem className="justify-content-between">
-                  <Badge pill color="success" className="pull-left">
-                    Presentation
-                  </Badge>
-                  &nbsp;<a href="#">Lena</a>: Do a presentation about ReactJS
-                  for the team - 2 day late, was due on Nov 22 at 6:30PM
-                </ListGroupItem>
-
-                <ListGroupItem>
-                  <div className="text-center">
-                    <a href="#">Load more...</a>
-                  </div>
-                </ListGroupItem>
-              </ListGroup>
-              <hr />
-              <h5>Tomorrow</h5>
-              <ListGroup>
-                <ListGroupItem className="justify-content-between">
-                  <Badge pill className="pull-left">
-                    Meeting
-                  </Badge>
-                  &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
-                  <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
-                  7:00PM
-                </ListGroupItem>
-
-                <ListGroupItem className="justify-content-between">
-                  <Badge pill color="danger" className="pull-left">
-                    Follow-up
-                  </Badge>
-                  &nbsp;<a href="#">Chris</a>: Et exercitationem eaque commodi
-                  dolorem tenetur aut re:{' '}
-                  <a href="#"> Officiis distinctio est nam illum official</a> -
-                  about 2 months late, was due on Oct 10 at 12:00AM
-                </ListGroupItem>
-
-                <ListGroupItem>
-                  <div className="text-center">
-                    <a href="#">Load more...</a>
-                  </div>
-                </ListGroupItem>
-              </ListGroup>
-              <hr />
-              <h5>Sometime Later</h5>
-              <ListGroup>
-                <ListGroupItem className="justify-content-between">
-                  <Badge pill className="pull-left">
-                    Meeting
-                  </Badge>
-                  &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
-                  <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
-                  7:00PM
-                </ListGroupItem>
-
-                <ListGroupItem className="justify-content-between">
-                  <Badge pill color="warning" className="pull-left">
-                    Lunch
-                  </Badge>
-                  &nbsp;<a href="#">Lena</a>: Et exercitationem eaque commodi
-                  dolorem tenetur aut re:{' '}
-                  <a href="#"> Officiis distinctio est nam illum official</a> -
-                  about 2 months late, was due on Oct 10 at 12:00AM
-                </ListGroupItem>
-
-                <ListGroupItem>
-                  <div className="text-center">
-                    <a href="#">Load more...</a>
-                  </div>
-                </ListGroupItem>
-              </ListGroup>
-            </Col>
-          </Row>
-        </StandardPanel>
+        <Row>
+          <Col xs="12" sm="6" md="3">
+            <NotStartedPanel />
+          </Col>
+          <Col xs="12" sm="6" md="3">
+            <InProgressPanel />
+          </Col>
+          <Col md="3" className="d-md-down-none">
+            <PendingPanel />
+          </Col>
+          <Col md="3" className="d-md-down-none">
+            <DonePanel />
+          </Col>
+        </Row>
       </div>
     );
   }

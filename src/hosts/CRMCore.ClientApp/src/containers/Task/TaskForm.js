@@ -1,18 +1,19 @@
-import * as React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-
-import { Form, FormGroup, Label, Button } from 'reactstrap';
+import { Row, Col, Form, FormGroup, Label, Button } from 'reactstrap';
 
 // import * as TaskStore from 'redux/modules/task';
+
 import {
   TextBoxField,
   SelectField,
+  DateTimeField,
   StandardPanel,
   PageHeader
 } from 'components';
 
-class TaskForm extends React.Component {
+class TaskForm extends PureComponent {
   render() {
     const { /*error, handleSubmit,*/ pristine, reset, submitting } = this.props;
     return (
@@ -21,39 +22,75 @@ class TaskForm extends React.Component {
 
         <StandardPanel noHeader>
           <Form className="b-form">
-            <FormGroup>
-              <Label for="name">Name</Label>
-              <Field
-                name="name"
-                placeholder="Name"
-                type="text"
-                component={TextBoxField}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="dueType">Due</Label>
-              <Field
-                name="dueType"
-                uri="task-module/api/tasks/due-types"
-                component={SelectField}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="assignTo">Assign to</Label>
-              <Field
-                name="assignTo"
-                uri="task-module/api/tasks/assign-users"
-                component={SelectField}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="categoryType">Category</Label>
-              <Field
-                name="categoryType"
-                uri="task-module/api/tasks/category-types"
-                component={SelectField}
-              />
-            </FormGroup>
+            <Row>
+              <Col>
+                <FormGroup>
+                  <Label for="name">Name (*)</Label>
+                  <Field
+                    name="name"
+                    placeholder="Name"
+                    type="text"
+                    component={TextBoxField}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="start_date">Start Date</Label>
+                  <Field
+                    name="start_date"
+                    placeholder="Input start date time."
+                    type="text"
+                    formatDateTime={'m/d/Y, h:i K'}
+                    component={DateTimeField}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="due_date">Due Date</Label>
+                  <Field
+                    name="due_date"
+                    placeholder="Input due date time."
+                    type="text"
+                    formatDateTime={'m/d/Y, h:i K'}
+                    component={DateTimeField}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="categoryType">Category</Label>
+                  <Field
+                    name="categoryType"
+                    uri="task-module/api/tasks/category-types"
+                    component={SelectField}
+                  />
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup>
+                  <Label for="assignTo">Assigned User (*)</Label>
+                  <Field
+                    name="assignTo"
+                    uri="task-module/api/tasks/assign-users"
+                    component={SelectField}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="team">Team</Label>
+                  <Field
+                    name="team"
+                    uri="task-module/api/tasks/assign-users"
+                    component={SelectField}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="description">Description</Label>
+                  <Field
+                    name="description"
+                    placeholder="Description"
+                    type="textarea"
+                    component={TextBoxField}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+
             <FormGroup>
               <Button
                 color="primary"
@@ -88,6 +125,17 @@ class TaskForm extends React.Component {
 
 const validate = values => {
   const errors = {};
+
+  if (!values.name) {
+    errors.name = 'Required.';
+  } else if (values.name.length > 30) {
+    errors.name = 'Too long.';
+  }
+
+  if (!values.assignTo) {
+    errors.assignTo = 'Required.';
+  }
+  
   return errors;
 };
 

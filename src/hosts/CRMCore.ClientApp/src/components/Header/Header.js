@@ -9,38 +9,32 @@ import {
 } from 'reactstrap';
 
 import * as screenfull from 'screenfull';
-import autobind from 'class-autobind';
 
 import HeaderDropdown from './HeaderDropdown';
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-    autobind(this);
-  }
-
-  fullscreen() {
+  fullscreen = () => {
     if (screenfull.enabled) {
       screenfull.toggle();
     }
   }
 
-  sidebarToggle(e) {
+  sidebarToggle = (e) => {
     e.preventDefault();
     document.body.classList.toggle('sidebar-hidden');
   }
 
-  sidebarMinimize(e) {
+  sidebarMinimize = (e) => {
     e.preventDefault();
     document.body.classList.toggle('sidebar-minimized');
   }
 
-  mobileSidebarToggle(e) {
+  mobileSidebarToggle = (e) => {
     e.preventDefault();
     document.body.classList.toggle('sidebar-mobile-show');
   }
 
-  asideToggle(e) {
+  asideToggle = (e) => {
     e.preventDefault();
     document.body.classList.toggle('aside-menu-hidden');
   }
@@ -66,10 +60,11 @@ class Header extends Component {
             </NavLink>
           </NavItem>
           <HeaderDropdown />
+          <div>&nbsp;&nbsp;&nbsp;</div>
         </Nav>
-        <NavbarToggler className="d-md-down-none" onClick={this.asideToggle}>
+        {/*<NavbarToggler className="d-md-down-none" onClick={this.asideToggle}>
           <span className="navbar-toggler-icon" />
-        </NavbarToggler>
+         </NavbarToggler> */}
       </header>
     );
   }

@@ -11,19 +11,16 @@ import {
 } from 'reactstrap';
 
 import classnames from 'classnames';
-import autobind from 'class-autobind';
 
 class Aside extends Component {
   constructor(props) {
     super(props);
-    autobind(this);
-    
     this.state = {
       activeTab: '1'
     };
   }
 
-  toggle(tab) {
+  toggle = (tab) => {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab

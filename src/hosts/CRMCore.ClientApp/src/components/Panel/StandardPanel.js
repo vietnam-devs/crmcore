@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   Card,
   CardHeader,
@@ -7,37 +7,33 @@ import {
   DropdownToggle,
   Collapse
 } from 'reactstrap';
-
 import classnames from 'classnames';
-import autobind from 'class-autobind';
 
-export default class StandardPanel extends Component {
+export default class StandardPanel extends PureComponent {
   constructor(props) {
     super(props);
-    autobind(this);
-
     this.state = {
       dropdown: false,
-      collapse: false,
+      collapse: props.collapse || false,
       fullScreen: false
     };
   }
 
-  collapse() {
+  collapse = () => {
     this.setState({ collapse: !this.state.collapse });
-  }
+  };
 
-  dropdown() {
+  dropdown = () => {
     this.setState({
       dropdown: !this.state.dropdown
     });
-  }
+  };
 
-  fullScreen() {
+  fullScreen = () => {
     this.setState({
       fullScreen: !this.state.fullScreen
     });
-  }
+  };
 
   render() {
     return (
@@ -45,19 +41,22 @@ export default class StandardPanel extends Component {
         className={classnames(
           { 'b-panel-fullscreen': this.state.fullScreen },
           'b-panel',
-          'clearfix'
+          'clearfix',
+          this.props.className
         )}
       >
         {!this.props.noHeader && (
           <CardHeader onClick={this.collapse}>
             <h3 className="b-panel-title">
-              <i
-                className={classnames(
-                  { [`${this.props.icon}`]: this.props.icon },
-                  { 'icon-notebook': !this.props.icon },
-                  'b-icon'
-                )}
-              />
+              {this.props.showIcon && (
+                <i
+                  className={classnames(
+                    { [`${this.props.icon}`]: this.props.icon },
+                    { 'icon-notebook': !this.props.icon },
+                    'b-icon'
+                  )}
+                />
+              )}
               {this.props.title || 'No title'}
             </h3>
 
