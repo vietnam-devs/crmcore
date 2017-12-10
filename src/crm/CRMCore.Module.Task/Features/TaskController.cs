@@ -4,6 +4,7 @@ using CRMCore.Module.Data;
 using CRMCore.Module.Data.Extensions;
 using CRMCore.Module.Task.Features.CreateTask;
 using CRMCore.Module.Task.Features.DeleteTask;
+using CRMCore.Module.Task.Features.GetTask;
 using CRMCore.Module.Task.Features.GetTasks;
 using CRMCore.Module.Task.Features.UpdateTask;
 using Microsoft.AspNetCore.Mvc;
@@ -21,58 +22,43 @@ namespace CRMCore.Module.Task.Features
     {
         private readonly IEfRepositoryAsync<Domain.Task> _taskRepository;
         private readonly IEfQueryRepository<Domain.Task> _taskQuery;
+        private readonly IGetTasksService _getTasksService;
         private readonly IOptions<PaginationOption> _paginationOption;
 
         public TaskController(
             IUnitOfWorkAsync unitOfWork, 
             IEfQueryRepository<Domain.Task> taskQuery,
+            IGetTasksService getTasksService,
             IOptions<PaginationOption> paginationOption)
         {
             _taskRepository = unitOfWork.Repository<Domain.Task>() as IEfRepositoryAsync<Domain.Task>;
             _taskQuery = taskQuery;
+            _getTasksService = getTasksService;
             _paginationOption = paginationOption;
         }
 
-        [HttpGet]
-        public async Task<PaginatedItem<GetTaskResponse>> Get(GetTaskRequest request, [FromQuery]int page, [FromQuery] int? pageSize)
+        [HttpGet("by-statuses")]
+        public GetTasksResponse Get(GetTasksRequest request)
         {
-            return await _taskQuery
-                .Return<GetTaskResponse>()
-                .Criterion(new Criterion(
-                    page > 0 ? page : 1,
-                    pageSize.HasValue ? pageSize.Value : _paginationOption.Value.PageSize,
-                    _paginationOption.Value))
-                .Projection(x => new GetTaskResponse
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    DueType = x.DueType.ToString("D"),
-                    AssignedTo = x.AssignedTo,
-                    CategoryType = x.CategoryType.ToString("D"),
-                    Status = x.TaskStatus.ToString("D"),
-                    Created = x.Created,
-                    Updated = x.Updated
-                })
-                .ComplexQueryAsync();
+            return _getTasksService.GetTaskByStatus();
         }
 
         [HttpGet("{id:guid}")]
         public async Task<GetTaskResponse> Get(Guid id)
         {
-            var response = await _taskQuery
-                .Return<GetTaskResponse>(x => x.Id == id)
-                .ComplexFindOneAsync();
-
+            var response = await _taskQuery.GetByIdAsync(id);
             return new GetTaskResponse
             {
                 Id = response.Id,
                 Name = response.Name,
-                DueType = response.DueType.ToString("D"),
                 AssignedTo = response.AssignedTo,
-                CategoryType = response.CategoryType.ToString("D"),
-                Status = response.TaskStatus.ToString("D"),
-                Created = response.Created,
-                Updated = response.Updated
+                CategoryType = response.CategoryType,
+                CategoryTypeString = response.CategoryType.ToString("D"),
+                Status = response.TaskStatus,
+                StatusString = response.TaskStatus.ToString("D"),
+                LastUpdated = response.Updated == DateTime.MinValue
+                    ? response.Created
+                    : response.Updated
             };
         }
 
@@ -82,9 +68,7 @@ namespace CRMCore.Module.Task.Features
             var response = await _taskRepository.AddAsync(
                 Domain.Task.CreateInstance(
                     request.Name,
-                    (Domain.DueType)request.DueType,
-                    request.AssignedTo,
-                    (Domain.CategoryType)request.CategoryType
+                    request.AssignedTo
                     ));
 
             return new AddTaskResponse();
@@ -99,7 +83,6 @@ namespace CRMCore.Module.Task.Features
 
             oldOne.ChangeName(request.Name)
                 .ChangeAssignedTo(request.AssignedTo)
-                .ChangeDueType((Domain.DueType)request.DueType)
                 .ChangeCategoryType((Domain.CategoryType)request.CategoryType);
 
             var response = await _taskRepository.UpdateAsync(oldOne);
@@ -115,12 +98,6 @@ namespace CRMCore.Module.Task.Features
 
             var result = await _taskRepository.DeleteAsync(oldOne);
             return new DeleteTaskResponse();
-        }
-
-        [HttpGet("due-types")]
-        public IEnumerable<KeyValueObject<int>> GetDueTypes()
-        {
-            return EnumHelper.GetEnumKeyValue<Domain.DueType, int>();
         }
 
         [HttpGet("category-types")]

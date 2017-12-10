@@ -169,24 +169,16 @@ namespace CRMCore.DBMigration.Console.Seeder
             return new[] {
                 Module.Task.Domain.Task.CreateInstance(
                     "Implementing Repository in Task module.", 
-                    Module.Task.Domain.DueType.NextWeek, 
-                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"), 
-                    Module.Task.Domain.CategoryType.Call),
+                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e")),
                 Module.Task.Domain.Task.CreateInstance(
                     "Implementing Controller in Task module.",
-                    Module.Task.Domain.DueType.NextWeek,
-                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"),
-                    Module.Task.Domain.CategoryType.FollowUp),
+                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e")),
                 Module.Task.Domain.Task.CreateInstance(
                     "Implementing front-end in Task module.",
-                    Module.Task.Domain.DueType.NextWeek,
-                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"),
-                    Module.Task.Domain.CategoryType.Meeting),
+                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e")),
                 Module.Task.Domain.Task.CreateInstance(
                     "Implementing Mobile in Task module.",
-                    Module.Task.Domain.DueType.NextWeek,
-                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"),
-                    Module.Task.Domain.CategoryType.Presentation)
+                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"))
             };
         }
     }

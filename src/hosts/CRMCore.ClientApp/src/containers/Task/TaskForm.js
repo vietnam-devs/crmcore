@@ -1,19 +1,24 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Actions } from 'jumpstate';
+
 import { Field, reduxForm } from 'redux-form';
 import { Row, Col, Form, FormGroup, Label, Button } from 'reactstrap';
-
-// import * as TaskStore from 'redux/modules/task';
 
 import {
   TextBoxField,
   SelectField,
+  SingleSelectField,
   DateTimeField,
   StandardPanel,
   PageHeader
 } from 'components';
 
 class TaskForm extends PureComponent {
+  componentDidMount() {
+    Actions.tasks.loadCategoryTypes();
+  }
+
   render() {
     const { /*error, handleSubmit,*/ pristine, reset, submitting } = this.props;
     return (
@@ -58,8 +63,20 @@ class TaskForm extends PureComponent {
                   <Field
                     name="categoryType"
                     uri="task-module/api/tasks/category-types"
-                    component={SelectField}
-                  />
+                    component={SingleSelectField}
+                  >
+                    <option key="option_0">&nbsp;</option>
+                    {this.props.categoryKeys.map(catKey => {
+                      return (
+                        <option
+                          key={catKey}
+                          value={this.props.categoriesByKey[catKey].key}
+                        >
+                          {this.props.categoriesByKey[catKey].value}
+                        </option>
+                      );
+                    })}
+                  </Field>
                 </FormGroup>
               </Col>
               <Col>
@@ -135,11 +152,13 @@ const validate = values => {
   if (!values.assignTo) {
     errors.assignTo = 'Required.';
   }
-  
+
   return errors;
 };
 
 const initData = state => ({
+  categoryKeys: state.task.categoryKeys,
+  categoriesByKey: state.task.categoriesByKey,
   initialValues: {}
 });
 

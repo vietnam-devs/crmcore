@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 
 import {
   Row,
@@ -24,7 +25,7 @@ const TaskItemColorContent = styled.div`
   color: #000;
 `;
 
-class SearchPanelWithContent extends PureComponent {
+class AdvancedSearchPanel extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { activeTab: '1' };
@@ -40,13 +41,7 @@ class SearchPanelWithContent extends PureComponent {
 
   render() {
     return (
-      <StandardPanel icon="icon-magic-wand" title="Search" collapse={true}>
-        <div className="form-group">
-          <label className="form-control-label">Task Name</label>
-          <div>
-            <input type="text" className="form-control" />{' '}
-          </div>
-        </div>
+      <div>
         <div className="form-group">
           <label className="form-control-label">Assigned User</label>
           <div>
@@ -168,11 +163,11 @@ class SearchPanelWithContent extends PureComponent {
                     </Badge>
                   </ListGroupItem>
                   <ListGroupItem className="justify-content-between">
-                  <input type="checkbox" defaultChecked /> &nbsp;Trip{' '}
-                  <Badge pill className="pull-right">
-                    1
-                  </Badge>
-                </ListGroupItem>
+                    <input type="checkbox" defaultChecked /> &nbsp;Trip{' '}
+                    <Badge pill className="pull-right">
+                      1
+                    </Badge>
+                  </ListGroupItem>
                 </ListGroup>
               </Col>
             </Row>
@@ -181,6 +176,39 @@ class SearchPanelWithContent extends PureComponent {
         <div>
           <p className="text-muted">Total tasks have found: 100</p>
         </div>
+      </div>
+    );
+  }
+}
+
+class StandardSearchPanel extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = { collapse: true };
+  }
+
+  collapse = e => {
+    e.preventDefault();
+    this.setState({ collapse: !this.state.collapse });
+  };
+
+  render() {
+    return (
+      <StandardPanel icon="icon-magic-wand" title="Search" collapse={true}>
+        <div className="form-group">
+          <label className="form-control-label">Task Name</label>
+          <div>
+            <input type="text" className="form-control" />{' '}
+          </div>
+        </div>
+
+        <div className="form-group">
+          <a className="text-muted" href="#" onClick={this.collapse}>
+            Advanced search
+          </a>
+        </div>
+
+        {!this.state.collapse && <AdvancedSearchPanel />}
       </StandardPanel>
     );
   }
@@ -237,7 +265,7 @@ class StatisticPanel extends PureComponent {
 
               <ListGroupItem>
                 <div className="text-center">
-                  <a href="#">See more...</a>
+                  <a href="#">See all...</a>
                 </div>
               </ListGroupItem>
             </ListGroup>
@@ -293,7 +321,7 @@ class NotStartedPanel extends PureComponent {
 
             <ListGroupItem>
               <div className="text-center">
-                <a href="#">Load more...</a>
+                <a href="#">See all...</a>
               </div>
             </ListGroupItem>
           </ListGroup>
@@ -333,7 +361,7 @@ class InProgressPanel extends PureComponent {
 
             <ListGroupItem>
               <div className="text-center">
-                <a href="#">Load more...</a>
+                <a href="#">See all...</a>
               </div>
             </ListGroupItem>
           </ListGroup>
@@ -375,7 +403,7 @@ class PendingPanel extends PureComponent {
 
             <ListGroupItem>
               <div className="text-center">
-                <a href="#">Load more...</a>
+                <a href="#">See all...</a>
               </div>
             </ListGroupItem>
           </ListGroup>
@@ -417,7 +445,7 @@ class DonePanel extends PureComponent {
 
             <ListGroupItem>
               <div className="text-center">
-                <a href="#">Load more...</a>
+                <a href="#">See all...</a>
               </div>
             </ListGroupItem>
           </ListGroup>
@@ -427,7 +455,7 @@ class DonePanel extends PureComponent {
   }
 }
 
-export default class TaskMgt extends PureComponent {
+class TaskMgt extends PureComponent {
   createTask = () => {
     console.log('Create task...');
     this.props.history.push('/crm/task-form/$');
@@ -442,9 +470,10 @@ export default class TaskMgt extends PureComponent {
 
     const dropdownMenus = (
       <DropdownMenu>
-        <DropdownItem>Action</DropdownItem>
-        <DropdownItem>Another Action</DropdownItem>
-        <DropdownItem disabled>Another Action</DropdownItem>
+        <DropdownItem>Not Started Task</DropdownItem>
+        <DropdownItem>In Progress Task</DropdownItem>
+        <DropdownItem>Pending Task</DropdownItem>
+        <DropdownItem>Done Task</DropdownItem>
       </DropdownMenu>
     );
 
@@ -458,19 +487,19 @@ export default class TaskMgt extends PureComponent {
 
         <StatisticPanel />
 
-        <SearchPanelWithContent />
+        <StandardSearchPanel />
 
         <Row>
-          <Col xs="12" sm="6" md="3">
+          <Col xs="12" sm="6" lg="3">
             <NotStartedPanel />
           </Col>
-          <Col xs="12" sm="6" md="3">
+          <Col xs="12" sm="6" lg="3">
             <InProgressPanel />
           </Col>
-          <Col md="3" className="d-md-down-none">
+          <Col className="d-md-down-none">
             <PendingPanel />
           </Col>
-          <Col md="3" className="d-md-down-none">
+          <Col className="d-md-down-none">
             <DonePanel />
           </Col>
         </Row>
@@ -478,3 +507,5 @@ export default class TaskMgt extends PureComponent {
     );
   }
 }
+
+export default connect(null, null)(TaskMgt);

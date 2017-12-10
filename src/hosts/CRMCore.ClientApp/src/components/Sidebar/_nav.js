@@ -15,9 +15,17 @@ export default {
       icon: 'icon-credit-card',
       children: [
         {
+          name: 'Calendar',
+          url: '/crm/calendar',
+          icon: 'icon-calendar',
+          badge: {
+            variant: 'info'
+          }
+        },
+        {
           name: 'Tasks',
           url: '/crm/tasks',
-          icon: 'icon-people',
+          icon: 'icon-event',
           badge: {
             variant: 'info'
           }

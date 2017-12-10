@@ -1,4 +1,5 @@
 ﻿using CRMCore.Framework.MvcCore;
+using CRMCore.Module.Task.Features.GetTasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ namespace CRMCore.Module.Task
     {
         public override void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IGetTasksService, GetTasksService>();
         }
 
         public override void Configure(IApplicationBuilder builder, IRouteBuilder routes, IServiceProvider serviceProvider)

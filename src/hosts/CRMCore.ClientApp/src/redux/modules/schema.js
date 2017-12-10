@@ -1,9 +1,8 @@
 import { Observable } from 'rxjs/Observable';
 
 import { get } from './../client';
-import { globalConfig as GlobalConfig } from './../../configs';
 
-const SCHEMAS_URL = `${GlobalConfig.apiServer}/schema/api`;
+const SCHEMAS_URL = `schema/api`;
 
 // Load schemas
 const LOAD_SCHEMAS = 'LOAD_SCHEMAS';

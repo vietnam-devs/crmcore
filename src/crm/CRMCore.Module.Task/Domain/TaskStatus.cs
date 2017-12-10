@@ -1,9 +1,13 @@
-﻿namespace CRMCore.Module.Task.Domain
+﻿using System;
+
+namespace CRMCore.Module.Task.Domain
 {
-    public enum TaskStatus : int
+    [Flags]
+    public enum TaskStatus
     {
-        Pending = 1,
-        Assigned = 2,
-        Completed = 3
+        NotStarted = 1,
+        InProgress = 2,
+        Pending = 4,
+        Done = 8
     }
 }

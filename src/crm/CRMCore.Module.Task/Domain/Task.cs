@@ -8,31 +8,28 @@ namespace CRMCore.Module.Task.Domain
     public class Task : EntityBase
     {
         internal Task()
-        {
-        }
-
-        internal Task(string name, DueType dueType, Guid assignedTo, CategoryType categoryType)
-            : this(IdHelper.GenerateId(), name, dueType, assignedTo, categoryType)
         { }
 
-        internal Task(Guid id, string name, DueType dueType, Guid assignedTo, CategoryType categoryType) 
+        internal Task(string name, Guid assignedTo)
+            : this(IdHelper.GenerateId(), name, assignedTo)
+        { }
+
+        internal Task(Guid id, string name, Guid assignedTo) 
             : base(id)
         {
             Name = name;
-            DueType = dueType;
             AssignedTo = assignedTo;
-            CategoryType = categoryType;
             TaskStatus = TaskStatus.Pending;
         }
 
-        public static Task CreateInstance(Guid id, string name, DueType dueType, Guid assignedTo, CategoryType categoryType)
+        public static Task CreateInstance(Guid id, string name, Guid assignedTo)
         {
-            return new Task(id, name, dueType, assignedTo, categoryType);
+            return new Task(id, name, assignedTo);
         }
 
-        public static Task CreateInstance(string name, DueType dueType, Guid assignedTo, CategoryType categoryType)
+        public static Task CreateInstance(string name, Guid assignedTo)
         {
-            return Task.CreateInstance(IdHelper.GenerateId(), name, dueType, assignedTo, categoryType);
+            return Task.CreateInstance(IdHelper.GenerateId(), name, assignedTo);
         }
 
         public Task ChangeName(string name)
@@ -40,15 +37,6 @@ namespace CRMCore.Module.Task.Domain
             if (!string.IsNullOrEmpty(name) && Name != name)
             {
                 Name = name;
-            }
-            return this;
-        }
-
-        public Task ChangeDueType(DueType dueType)
-        {
-            if (dueType != DueType)
-            {
-                DueType = dueType;
             }
             return this;
         }
@@ -82,9 +70,6 @@ namespace CRMCore.Module.Task.Domain
 
         [Required]
         public string Name { get; private set; }
-
-        [Required]
-        public DueType DueType { get; private set; }
 
         [Required]
         public Guid AssignedTo { get; private set; }

@@ -4,7 +4,7 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 
 import schemaReducer, { schemaEpics } from './schema';
-import taskReducer from './task';
+import taskReducer, { taskEpics } from './task';
 import commonReducer from './common';
 
 const reducers = {
@@ -15,6 +15,6 @@ const reducers = {
   common: commonReducer
 };
 
-export const rootEpic = combineEpics(...schemaEpics);
+export const rootEpic = combineEpics(...schemaEpics, ...taskEpics);
 
 export default combineReducers(reducers);
