@@ -6,12 +6,8 @@ using Microsoft.Extensions.Options;
 using System.Linq.Expressions;
 using System;
 
-namespace CRMCore.Module.Task.Features.GetTasks
+namespace CRMCore.Module.Task.Features.GetTasks.Impl
 {
-    public interface IGetTasksService
-    {
-        GetTasksResponse GetTaskByStatus(int page = 1);
-    }
 
     public class GetTasksService : QueryServiceBase, IGetTasksService
     {
@@ -37,14 +33,16 @@ namespace CRMCore.Module.Task.Features.GetTasks
                 .Union(inProgressStatuses)
                 .Union(pendingStatuses)
                 .Union(doneStatuses)
+                .OrderByDescending(x => x.LastUpdated)
                 .ToList();
 
             return new GetTasksResponse
             {
-                NotStartedStatuses = result.Where(x => x.Status == Domain.TaskStatus.NotStarted).ToList(),
-                InProgressStatuses = result.Where(x => x.Status == Domain.TaskStatus.InProgress).ToList(),
-                PendingStatuses = result.Where(x => x.Status == Domain.TaskStatus.Pending).ToList(),
-                DoneStatuses = result.Where(x => x.Status == Domain.TaskStatus.Done).ToList()
+                Tasks = result
+                // NotStartedTasks = result.Where(x => x.Status == Domain.TaskStatus.NotStarted).ToList(),
+                // InProgressTasks = result.Where(x => x.Status == Domain.TaskStatus.InProgress).ToList(),
+                // PendingTasks = result.Where(x => x.Status == Domain.TaskStatus.Pending).ToList(),
+                // DoneTasks = result.Where(x => x.Status == Domain.TaskStatus.Done).ToList()
             };
         }
 

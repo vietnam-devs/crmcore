@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Actions } from 'jumpstate';
 
 import {
   Row,
@@ -19,11 +20,13 @@ import {
 import classnames from 'classnames';
 
 import { StandardPanel, PageHeader } from 'components';
-
-import styled from 'styled-components';
-const TaskItemColorContent = styled.div`
-  color: #000;
-`;
+import { taskSelectors } from 'redux/modules/task';
+import {
+  NotStartedPanel,
+  InProgressPanel,
+  PendingPanel,
+  DonePanel
+} from './TaskStatusPanel';
 
 class AdvancedSearchPanel extends PureComponent {
   constructor(props) {
@@ -276,188 +279,14 @@ class StatisticPanel extends PureComponent {
   }
 }
 
-class NotStartedPanel extends PureComponent {
-  render() {
-    return (
-      <StandardPanel
-        className="bg-warning"
-        title="Not started"
-        showMaximize={true}
-        showIcon={false}
-      >
-        <TaskItemColorContent>
-          <ListGroup>
-            <ListGroupItem className="justify-content-between">
-              <Badge pill className="pull-left">
-                Meeting
-              </Badge>
-              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields -{' '}
-              <b>1 day late</b>, was due on Nov 29 at 7:00PM
-            </ListGroupItem>
-
-            <ListGroupItem className="justify-content-between">
-              <Badge pill className="pull-left">
-                Meeting
-              </Badge>
-              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields -{' '}
-              <b>1 day late</b>, was due on Nov 29 at 7:00PM
-            </ListGroupItem>
-
-            <ListGroupItem className="justify-content-between">
-              <Badge pill className="pull-left">
-                Meeting
-              </Badge>
-              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields -{' '}
-              <b>1 day late</b>, was due on Nov 29 at 7:00PM
-            </ListGroupItem>
-
-            <ListGroupItem className="justify-content-between">
-              <Badge pill className="pull-left">
-                Meeting
-              </Badge>
-              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields -{' '}
-              <b>1 day late</b>, was due on Nov 29 at 7:00PM
-            </ListGroupItem>
-
-            <ListGroupItem>
-              <div className="text-center">
-                <a href="#">See all...</a>
-              </div>
-            </ListGroupItem>
-          </ListGroup>
-        </TaskItemColorContent>
-      </StandardPanel>
-    );
-  }
-}
-
-class InProgressPanel extends PureComponent {
-  render() {
-    return (
-      <StandardPanel
-        className="bg-info"
-        title="In progress"
-        showMaximize={true}
-        showIcon={false}
-      >
-        <TaskItemColorContent>
-          <ListGroup>
-            <ListGroupItem className="justify-content-between">
-              <Badge pill className="pull-left">
-                Meeting
-              </Badge>
-              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
-              <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
-              7:00PM
-            </ListGroupItem>
-
-            <ListGroupItem className="justify-content-between">
-              <Badge pill color="success" className="pull-left">
-                Presentation
-              </Badge>
-              &nbsp;<a href="#">Lena</a>: Do a presentation about ReactJS for
-              the team - 2 day late, was due on Nov 22 at 6:30PM
-            </ListGroupItem>
-
-            <ListGroupItem>
-              <div className="text-center">
-                <a href="#">See all...</a>
-              </div>
-            </ListGroupItem>
-          </ListGroup>
-        </TaskItemColorContent>
-      </StandardPanel>
-    );
-  }
-}
-
-class PendingPanel extends PureComponent {
-  render() {
-    return (
-      <StandardPanel
-        className="bg-danger"
-        title="Pending"
-        showMaximize={true}
-        showIcon={false}
-      >
-        <TaskItemColorContent>
-          <ListGroup>
-            <ListGroupItem className="justify-content-between">
-              <Badge pill className="pull-left">
-                Meeting
-              </Badge>
-              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
-              <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
-              7:00PM
-            </ListGroupItem>
-
-            <ListGroupItem className="justify-content-between">
-              <Badge pill color="danger" className="pull-left">
-                Follow-up
-              </Badge>
-              &nbsp;<a href="#">Chris</a>: Et exercitationem eaque commodi
-              dolorem tenetur aut re:{' '}
-              <a href="#"> Officiis distinctio est nam illum official</a> -
-              about 2 months late, was due on Oct 10 at 12:00AM
-            </ListGroupItem>
-
-            <ListGroupItem>
-              <div className="text-center">
-                <a href="#">See all...</a>
-              </div>
-            </ListGroupItem>
-          </ListGroup>
-        </TaskItemColorContent>
-      </StandardPanel>
-    );
-  }
-}
-
-class DonePanel extends PureComponent {
-  render() {
-    return (
-      <StandardPanel
-        className="bg-success"
-        title="Done"
-        showMaximize={true}
-        showIcon={false}
-      >
-        <TaskItemColorContent>
-          <ListGroup>
-            <ListGroupItem className="justify-content-between">
-              <Badge pill className="pull-left">
-                Meeting
-              </Badge>
-              &nbsp;<a href="#">Jacky</a>: Inpsect athletic fields re:{' '}
-              <a href="#">Account 1</a> - 1 day late, was due on Nov 29 at
-              7:00PM
-            </ListGroupItem>
-
-            <ListGroupItem className="justify-content-between">
-              <Badge pill color="warning" className="pull-left">
-                Lunch
-              </Badge>
-              &nbsp;<a href="#">Lena</a>: Et exercitationem eaque commodi
-              dolorem tenetur aut re:{' '}
-              <a href="#"> Officiis distinctio est nam illum official</a> -
-              about 2 months late, was due on Oct 10 at 12:00AM
-            </ListGroupItem>
-
-            <ListGroupItem>
-              <div className="text-center">
-                <a href="#">See all...</a>
-              </div>
-            </ListGroupItem>
-          </ListGroup>
-        </TaskItemColorContent>
-      </StandardPanel>
-    );
-  }
-}
-
 class TaskMgt extends PureComponent {
+  componentDidMount() {
+    Actions.tasks.loadCategoryTypes();
+    Actions.tasks.loadStatuses();
+    Actions.tasks.loadTasksByStatus();
+  }
+
   createTask = () => {
-    console.log('Create task...');
     this.props.history.push('/crm/task-form/$');
   };
 
@@ -491,16 +320,36 @@ class TaskMgt extends PureComponent {
 
         <Row>
           <Col xs="12" sm="6" lg="3">
-            <NotStartedPanel />
+            <NotStartedPanel
+              tasks={this.props.notStartedTasks}
+              taskByKeys={this.props.taskByKeys}
+              categoryByKeys={this.props.categoryByKeys}
+              loading={this.props.loading}
+            />
           </Col>
           <Col xs="12" sm="6" lg="3">
-            <InProgressPanel />
+            <InProgressPanel
+              tasks={this.props.inProgressTasks}
+              taskByKeys={this.props.taskByKeys}
+              categoryByKeys={this.props.categoryByKeys}
+              loading={this.props.loading}
+            />
           </Col>
           <Col className="d-md-down-none">
-            <PendingPanel />
+            <PendingPanel
+              tasks={this.props.pendingTasks}
+              taskByKeys={this.props.taskByKeys}
+              categoryByKeys={this.props.categoryByKeys}
+              loading={this.props.loading}
+            />
           </Col>
           <Col className="d-md-down-none">
-            <DonePanel />
+            <DonePanel
+              tasks={this.props.doneTasks}
+              taskByKeys={this.props.taskByKeys}
+              categoryByKeys={this.props.categoryByKeys}
+              loading={this.props.loading}
+            />
           </Col>
         </Row>
       </div>
@@ -508,4 +357,14 @@ class TaskMgt extends PureComponent {
   }
 }
 
-export default connect(null, null)(TaskMgt);
+const mapStateToProps = state => ({
+  loading: taskSelectors.getLoading(state),
+  categoryByKeys: taskSelectors.getCategoryByKeys(state),
+  taskByKeys: taskSelectors.getTaskByKeys(state),
+  notStartedTasks: taskSelectors.getNotStartedTasks(state),
+  inProgressTasks: taskSelectors.getInProgressTasks(state),
+  pendingTasks: taskSelectors.getPendingTasks(state),
+  doneTasks: taskSelectors.getDoneTasks(state)
+});
+
+export default connect(mapStateToProps)(TaskMgt);

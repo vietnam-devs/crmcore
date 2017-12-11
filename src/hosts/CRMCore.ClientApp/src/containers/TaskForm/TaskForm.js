@@ -62,7 +62,6 @@ class TaskForm extends PureComponent {
                   <Label for="categoryType">Category</Label>
                   <Field
                     name="categoryType"
-                    uri="task-module/api/tasks/category-types"
                     component={SingleSelectField}
                   >
                     <option key="option_0">&nbsp;</option>
@@ -70,9 +69,9 @@ class TaskForm extends PureComponent {
                       return (
                         <option
                           key={catKey}
-                          value={this.props.categoriesByKey[catKey].key}
+                          value={this.props.categoryByKeys[catKey].key}
                         >
-                          {this.props.categoriesByKey[catKey].value}
+                          {this.props.categoryByKeys[catKey].value}
                         </option>
                       );
                     })}
@@ -158,7 +157,7 @@ const validate = values => {
 
 const initData = state => ({
   categoryKeys: state.task.categoryKeys,
-  categoriesByKey: state.task.categoriesByKey,
+  categoryByKeys: state.task.categoryByKeys,
   initialValues: {}
 });
 

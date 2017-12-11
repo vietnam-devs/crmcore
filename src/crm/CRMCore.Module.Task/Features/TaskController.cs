@@ -37,7 +37,7 @@ namespace CRMCore.Module.Task.Features
             _paginationOption = paginationOption;
         }
 
-        [HttpGet("by-statuses")]
+        [HttpGet("tasks-by-statuses")]
         public GetTasksResponse Get(GetTasksRequest request)
         {
             return _getTasksService.GetTaskByStatus();
@@ -104,6 +104,12 @@ namespace CRMCore.Module.Task.Features
         public IEnumerable<KeyValueObject<int>> GetCategoryTypes()
         {
             return EnumHelper.GetEnumKeyValue<Domain.CategoryType, int>();
+        }
+
+        [HttpGet("task-statuses")]
+        public IEnumerable<KeyValueObject<int>> GetTaskStatuses()
+        {
+            return EnumHelper.GetEnumKeyValue<Domain.TaskStatus, int>();
         }
 
         [HttpGet("assign-users")]

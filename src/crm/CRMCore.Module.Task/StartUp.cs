@@ -1,5 +1,6 @@
 ﻿using CRMCore.Framework.MvcCore;
 using CRMCore.Module.Task.Features.GetTasks;
+using CRMCore.Module.Task.Features.GetTasks.Impl;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;

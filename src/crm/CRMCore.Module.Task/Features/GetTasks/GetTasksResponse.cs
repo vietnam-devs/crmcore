@@ -7,15 +7,17 @@ namespace CRMCore.Module.Task.Features.GetTasks
     {
         public GetTasksResponse()
         {
-            NotStartedStatuses = new List<GetTaskResponse>();
-            InProgressStatuses = new List<GetTaskResponse>();
-            PendingStatuses = new List<GetTaskResponse>();
-            DoneStatuses = new List<GetTaskResponse>();
+            // NotStartedTasks = new List<GetTaskResponse>();
+            // InProgressTasks = new List<GetTaskResponse>();
+            // PendingTasks = new List<GetTaskResponse>();
+            // DoneTasks = new List<GetTaskResponse>();
+            Tasks = new List<GetTaskResponse>();
         }
 
-        public List<GetTaskResponse> NotStartedStatuses { get; set; }
-        public List<GetTaskResponse> InProgressStatuses { get; set; }
-        public List<GetTaskResponse> PendingStatuses { get; set; }
-        public List<GetTaskResponse> DoneStatuses { get; set; }
+        public List<GetTaskResponse> Tasks { get; set; }
+        // public List<GetTaskResponse> NotStartedTasks { get; set; }
+        // public List<GetTaskResponse> InProgressTasks { get; set; }
+        // public List<GetTaskResponse> PendingTasks { get; set; }
+        // public List<GetTaskResponse> DoneTasks { get; set; }
     }
 }
