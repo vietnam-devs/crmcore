@@ -22,7 +22,7 @@ const userManagerConfig = {
   redirect_uri: `${clientUri}/callback`,
   response_type: 'token id_token',
   scope: 'openid profile Notifications Contacts',
-  authority: serverUri,
+  authority: authorityUri,
   silent_redirect_uri: `${clientUri}/silent_renew.html`,
   automaticSilentRenew: true,
   filterProtocolClaims: true,
