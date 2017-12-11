@@ -2,6 +2,9 @@
 using CRMCore.Framework.MvcCore.Extensions;
 using CRMCore.Module.Data;
 using CRMCore.Module.Identity.Extensions;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,8 +16,8 @@ namespace CRMCore.Application.Crm.targets
     public static class ServiceExtensions
     {
         public static IServiceCollection AddCrmCore(
-            this IServiceCollection services, 
-            IConfiguration config, 
+            this IServiceCollection services,
+            IConfiguration config,
             Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
         {
             services.AddSingleton(JavaScriptEncoder.Default);
@@ -24,10 +27,18 @@ namespace CRMCore.Application.Crm.targets
 
             services.AddDbContext<ApplicationDbContext>(options => dbContextOptionsBuilderAction(options));
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    policy => policy.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
+
             services.AddMvcModules();
 
             services.RegisterIdentityAndID4(
-                config.GetSection("Certificate"),
                 options =>
                 {
                     options.ConfigureDbContext = builder =>
@@ -40,30 +51,41 @@ namespace CRMCore.Application.Crm.targets
 
             services.AddGenericDataModule();
 
-            // TODO: I think this one should move to CRMCore.Module.Data :))
-            /*var entityTypes = "CRMCore.Module.*".LoadAssemblyWithPattern()
-                .SelectMany(m => m.DefinedTypes)
-                .Where(x => typeof(IEntity)
-                .IsAssignableFrom(x) && !x.GetTypeInfo().IsAbstract);
-
-            foreach (var entity in entityTypes)
-            {
-                var repoType = typeof(IEfRepositoryAsync<>).MakeGenericType(entity);
-                var implRepoType = typeof(EfRepositoryAsync<>).MakeGenericType(entity);
-                services.AddScoped(repoType, implRepoType);
-
-                var queryRepoType = typeof(IEfQueryRepository<>).MakeGenericType(entity);
-                var implQueryRepoType = typeof(EfQueryRepository<>).MakeGenericType(entity);
-                services.AddScoped(queryRepoType, implQueryRepoType);
-            }
-
-            services.AddSingleton(
-                typeof(IUnitOfWorkAsync), resolver =>
-                new EfUnitOfWork(
-                    resolver.GetService<ApplicationDbContext>(),
-                    resolver.GetService<IServiceProvider>()));*/
-
             return services;
+        }
+
+        public static IApplicationBuilder UseCrmCore(this IApplicationBuilder app, Action<IRouteBuilder> moreRouteAction)
+        {
+            app.UseAuthentication();
+            app.UseIdentityServer();
+
+            app.UseCors("CorsPolicy");
+
+            // override / route :((
+            app.Use((context, next) =>
+            {
+                if (context.Request.Path.Value == "/")
+                {
+                    context.Request.Path = new PathString("/home");
+                }
+                return next();
+            });
+
+            app.UseMvc(routes =>
+            {
+                moreRouteAction(routes);
+                
+
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action}/{id?}",
+                    defaults: new { controller = "Home", action = "Index" });
+            });
+
+            // TODO: consider moving this up
+            app.UseModules();
+
+            return app;
         }
     }
 }

@@ -6,7 +6,13 @@ import { Container } from 'reactstrap';
 import { Header, Sidebar, Breadcrumb, Aside, Footer } from 'components';
 
 // containers
-import { MetadataDashboard, FieldMgt, SchemaMgt, SchemaForm } from 'containers';
+import {
+  MetadataDashboard,
+  FieldMgt,
+  SchemaMgt,
+  SchemaForm,
+  Restricted
+} from 'containers';
 
 class MetadataLayout extends Component {
   render() {
@@ -22,11 +28,41 @@ class MetadataLayout extends Component {
                 <Route
                   path="/metadata/dashboard"
                   name="Metadata Dashboard"
-                  component={MetadataDashboard}
+                  render={routeProps => (
+                    <Restricted {...routeProps}>
+                      {React.createElement(MetadataDashboard)}
+                    </Restricted>
+                  )}
                 />
-                <Route path="/metadata/fields" name="Fields" component={FieldMgt} />
-                <Route exact path="/metadata/schemas" name="Schemas" component={SchemaMgt} />
-                <Route exact path="/metadata/schema-form/:name" name="SchemaForm" component={SchemaForm} />
+                <Route
+                  path="/metadata/fields"
+                  name="Fields"
+                  render={routeProps => (
+                    <Restricted {...routeProps}>
+                      {React.createElement(FieldMgt)}
+                    </Restricted>
+                  )}
+                />
+                <Route
+                  exact
+                  path="/metadata/schemas"
+                  name="Schemas"
+                  render={routeProps => (
+                    <Restricted {...routeProps}>
+                      {React.createElement(SchemaMgt)}
+                    </Restricted>
+                  )}
+                />
+                <Route
+                  exact
+                  path="/metadata/schema-form/:name"
+                  name="SchemaForm"
+                  render={routeProps => (
+                    <Restricted {...routeProps}>
+                      {React.createElement(SchemaForm)}
+                    </Restricted>
+                  )}
+                />
                 <Redirect from="/metadata" to="/metadata/dashboard" />
               </Switch>
             </Container>

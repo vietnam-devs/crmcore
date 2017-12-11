@@ -19,7 +19,7 @@ namespace CRMCore.Module.Task.Domain
         {
             Name = name;
             AssignedTo = assignedTo;
-            TaskStatus = TaskStatus.Pending;
+            TaskStatus = TaskStatus.NotStarted;
         }
 
         public static Task CreateInstance(Guid id, string name, Guid assignedTo)

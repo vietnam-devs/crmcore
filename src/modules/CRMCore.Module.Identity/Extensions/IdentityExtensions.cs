@@ -2,11 +2,12 @@
 using CRMCore.Module.Data;
 using CRMCore.Module.Identity.Services;
 using IdentityServer4.EntityFramework.Options;
+using IdentityServer4.Validation;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
@@ -16,7 +17,6 @@ namespace CRMCore.Module.Identity.Extensions
     {
         public static IServiceCollection RegisterIdentityAndID4(
             this IServiceCollection services,
-            IConfigurationSection options,
             Action<ConfigurationStoreOptions> configurationstoreOptionsAction,
             Action<OperationalStoreOptions> operationalStoreOptionsAction)
         {
@@ -28,7 +28,7 @@ namespace CRMCore.Module.Identity.Extensions
                 .AddDefaultTokenProviders();
 
             // Adds IdentityServer
-            services.AddIdentityServer(x =>
+            var identityServerBuilder = services.AddIdentityServer(x =>
             {
                 x.IssuerUri = "null";
                 x.UserInteraction.LoginUrl = "/identity/account/login";
@@ -36,11 +36,23 @@ namespace CRMCore.Module.Identity.Extensions
 
             })
             //.AddDeveloperSigningCredential()
-            .AddCertificateFromFile(options)
             .AddAspNetIdentity<ApplicationUser>()
             .AddConfigurationStore(configurationstoreOptionsAction)
             .AddOperationalStore(operationalStoreOptionsAction)
             .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
+
+            var env = services.BuildServiceProvider().GetService<IHostingEnvironment>();
+            if (env.IsDevelopment())
+            {
+                identityServerBuilder.AddDeveloperSigningCredential();
+            }
+            else
+            {
+                var options = services.BuildServiceProvider().GetService<IConfiguration>().GetSection("Certificate");
+                identityServerBuilder.AddCertificateFromFile(options);
+            }
+
+            services.AddTransient<IRedirectUriValidator, CustomRedirectUriValidator>();
 
             return services;
         }

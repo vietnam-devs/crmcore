@@ -9,12 +9,6 @@ namespace CRMCore.Module.Task.Features.CreateTask
         public string Name { get; set; }
 
         [Required]
-        public int DueType { get; set; }
-
-        [Required]
         public Guid AssignedTo { get; set; }
-
-        [Required]
-        public int CategoryType { get; set; }
     }
 }

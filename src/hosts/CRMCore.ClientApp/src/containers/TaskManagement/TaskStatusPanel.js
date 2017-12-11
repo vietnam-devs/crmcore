@@ -96,7 +96,7 @@ class TaskStatusPanel extends PureComponent {
         <TaskItemColorContent>
           {loading && (
             <div className="text-center">
-              <i class="fa fa-spinner fa-pulse fa-3x fa-fw" />
+              <i className="fa fa-spinner fa-pulse fa-3x fa-fw" />
             </div>
           )}
           {!loading && (

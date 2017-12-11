@@ -6,7 +6,7 @@ import { Container } from 'reactstrap';
 import { Header, Sidebar, Breadcrumb, Aside, Footer } from 'components';
 
 // containers
-import { CrmDashboard, TaskMgt, TaskForm } from 'containers';
+import { CrmDashboard, TaskMgt, TaskForm, Restricted } from 'containers';
 
 class CrmLayout extends Component {
   render() {
@@ -22,10 +22,31 @@ class CrmLayout extends Component {
                 <Route
                   path="/crm/dashboard"
                   name="crm-dashboard"
-                  component={CrmDashboard}
+                  render={routeProps => (
+                    <Restricted {...routeProps}>
+                      {React.createElement(CrmDashboard)}
+                    </Restricted>
+                  )}
                 />
-                <Route path="/crm/tasks" name="crm-tasks" component={TaskMgt} />
-                <Route exact path="/crm/task-form/:name" name="task-form" component={TaskForm} />
+                <Route
+                  path="/crm/tasks"
+                  name="crm-tasks"
+                  render={routeProps => (
+                    <Restricted {...routeProps}>
+                      {React.createElement(TaskMgt)}
+                    </Restricted>
+                  )}
+                />
+                <Route
+                  exact
+                  path="/crm/task-form/:name"
+                  name="task-form"
+                  render={routeProps => (
+                    <Restricted {...routeProps}>
+                      {React.createElement(TaskForm)}
+                    </Restricted>
+                  )}
+                />
                 <Redirect from="/crm" to="/crm/dashboard" />
               </Switch>
             </Container>

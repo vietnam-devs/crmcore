@@ -127,8 +127,6 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<int>("DueType");
-
                     b.Property<string>("Name")
                         .IsRequired();
 

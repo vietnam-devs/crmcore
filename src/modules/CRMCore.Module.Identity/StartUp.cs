@@ -1,4 +1,4 @@
-﻿using System;
+﻿using AutoMapper.Configuration;
 using CRMCore.Framework.Entities.Identity;
 using CRMCore.Framework.MvcCore;
 using CRMCore.Module.Identity.Services;
@@ -6,6 +6,7 @@ using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace CRMCore.Module.Identity
 {
@@ -18,6 +19,7 @@ namespace CRMCore.Module.Identity
                 return 1;
             }
         }
+
         public override void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ILoginService<ApplicationUser>, LoginService>();

@@ -15,7 +15,8 @@ import {
   Badge,
   Button,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Alert
 } from 'reactstrap';
 import classnames from 'classnames';
 
@@ -308,6 +309,10 @@ class TaskMgt extends PureComponent {
 
     return (
       <div className="animated fadeIn">
+        {this.props.error && (
+          <Alert color="danger">{this.props.error.message}</Alert>
+        )}
+
         <PageHeader
           title="Tasks"
           mainActions={mainActions}
@@ -364,7 +369,8 @@ const mapStateToProps = state => ({
   notStartedTasks: taskSelectors.getNotStartedTasks(state),
   inProgressTasks: taskSelectors.getInProgressTasks(state),
   pendingTasks: taskSelectors.getPendingTasks(state),
-  doneTasks: taskSelectors.getDoneTasks(state)
+  doneTasks: taskSelectors.getDoneTasks(state),
+  error: taskSelectors.getError(state)
 });
 
 export default connect(mapStateToProps)(TaskMgt);

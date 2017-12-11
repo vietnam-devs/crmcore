@@ -3,15 +3,24 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
 
 import { State, Actions } from 'jumpstate';
 import { createSelector } from 'reselect';
 import { get } from 'redux/client';
 
+export const TaskStatus = {
+  NOT_STARTED: 1,
+  IN_PROGRESS: 2,
+  PENDING: 4,
+  DONE: 8
+};
+
 export default State('tasks', {
   initial: {
     loading: false,
     loaded: false,
+    error: null,
     statusKeys: [],
     statusByKeys: {},
     categoryKeys: [],
@@ -97,19 +106,22 @@ export default State('tasks', {
         return obj;
       }, {}),
       notStartedTasks: tasks
-        .filter(task => task.status === 1)
+        .filter(task => task.status === TaskStatus.NOT_STARTED)
         .map(task => task.id),
       inProgressTasks: tasks
-        .filter(task => task.status === 2)
+        .filter(task => task.status === TaskStatus.IN_PROGRESS)
         .map(task => task.id),
       pendingTasks: tasks
-        .filter(task => task.status === 4)
+        .filter(task => task.status === TaskStatus.PENDING)
         .map(task => task.id),
-      doneTasks: tasks.filter(task => task.status === 8).map(task => task.id)
+      doneTasks: tasks
+        .filter(task => task.status === TaskStatus.DONE)
+        .map(task => task.id)
     };
   },
 
   loadTasksByStatusFailed(state, { error }) {
+    console.log(error);
     return {
       ...state,
       error: error,
@@ -128,6 +140,7 @@ export default State('tasks', {
 const getTaskState = state => state.task;
 export const taskSelectors = {
   getLoading: createSelector(getTaskState, task => task.loading),
+  getError: createSelector(getTaskState, task => task.error),
   getCategoryByKeys: createSelector(getTaskState, task => task.categoryByKeys),
   getTaskByKeys: createSelector(getTaskState, task => task.taskByKeys),
   getNotStartedTasks: createSelector(
@@ -162,7 +175,7 @@ export const taskEpics = [
             });
           })
           .catch(error =>
-            Observable.of(Actions.tasks.loadCategoryTypesFailed(error))
+            Observable.of(Actions.tasks.loadCategoryTypesFailed({ error }))
           )
       );
   },
@@ -180,7 +193,7 @@ export const taskEpics = [
             });
           })
           .catch(error =>
-            Observable.of(Actions.tasks.loadStatusesFailed(error))
+            Observable.of(Actions.tasks.loadStatusesFailed({ error }))
           )
       );
   },
@@ -197,9 +210,12 @@ export const taskEpics = [
               ...result.response
             });
           })
-          .catch(error =>
-            Observable.of(Actions.tasks.loadTasksByStatusFailed(error))
-          )
+          .catch(error => {
+            console.log(error);
+            return Observable.of(
+              Actions.tasks.loadTasksByStatusFailed({ error })
+            );
+          })
       );
   }
 ];

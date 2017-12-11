@@ -1,3 +1,7 @@
+export { default as Restricted } from './Auth/Restricted';
+export { default as Login } from './Auth/Login';
+export { default as Callback } from './Auth/Callback';
+
 export { default as FullLayout } from './Layout/FullLayout';
 export { default as FullDashboard } from './Dashboard/FullDashboard';
 

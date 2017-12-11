@@ -6,7 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
-    <Folder Include="Services\" />
     <Folder Include="Extensions\" />
     <Folder Include="Content\" />
     <Folder Include="Content\css\" />

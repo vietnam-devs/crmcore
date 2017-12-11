@@ -28,7 +28,7 @@ namespace CRMCore.Module.Data
                 services.AddScoped(queryRepoType, implQueryRepoType);
             }
 
-            services.AddSingleton(
+            services.AddScoped(
                 typeof(IUnitOfWorkAsync), resolver =>
                 new EfUnitOfWork(
                     resolver.GetService<ApplicationDbContext>(),

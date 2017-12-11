@@ -6,7 +6,7 @@ import { Container } from 'reactstrap';
 import { Header, Sidebar, Breadcrumb, Aside, Footer } from 'components';
 
 // containers
-import { FullDashboard } from 'containers';
+import { FullDashboard, Restricted } from 'containers';
 
 class FullLayout extends Component {
   render() {
@@ -22,7 +22,11 @@ class FullLayout extends Component {
                 <Route
                   path="/dashboard"
                   name="Dashboard"
-                  component={FullDashboard}
+                  render={routeProps => (
+                    <Restricted {...routeProps}>
+                      {React.createElement(FullDashboard)}
+                    </Restricted>
+                  )}
                 />
                 <Redirect from="/" to="/dashboard" />
               </Switch>
