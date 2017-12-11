@@ -39,10 +39,6 @@ namespace CRMCore.Module.Task.Features.GetTasks.Impl
             return new GetTasksResponse
             {
                 Tasks = result
-                // NotStartedTasks = result.Where(x => x.Status == Domain.TaskStatus.NotStarted).ToList(),
-                // InProgressTasks = result.Where(x => x.Status == Domain.TaskStatus.InProgress).ToList(),
-                // PendingTasks = result.Where(x => x.Status == Domain.TaskStatus.Pending).ToList(),
-                // DoneTasks = result.Where(x => x.Status == Domain.TaskStatus.Done).ToList()
             };
         }
 

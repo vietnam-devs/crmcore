@@ -1,5 +1,10 @@
-import { State, Actions } from 'jumpstate';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/catch';
+
+import { State, Actions } from 'jumpstate';
 import { createSelector } from 'reselect';
 import { get } from 'redux/client';
 
@@ -11,7 +16,7 @@ export default State('tasks', {
     statusByKeys: {},
     categoryKeys: [],
     categoryByKeys: {},
-    taskByKeys: [],
+    taskByKeys: {},
     notStartedTasks: {},
     inProgressTasks: {},
     pendingTasks: {},
@@ -83,7 +88,6 @@ export default State('tasks', {
   },
 
   loadTasksByStatusSuccess(state, { tasks }) {
-    console.log(tasks);
     return {
       ...state,
       loaded: true,
@@ -110,7 +114,12 @@ export default State('tasks', {
       ...state,
       error: error,
       loaded: true,
-      loading: false
+      loading: false,
+      taskByKeys: {},
+      notStartedTasks: {},
+      inProgressTasks: {},
+      pendingTasks: {},
+      doneTasks: {}
     };
   }
 });
@@ -132,32 +141,8 @@ export const taskSelectors = {
   getPendingTasks: createSelector(getTaskState, task => task.pendingTasks),
   getDoneTasks: createSelector(getTaskState, task => task.doneTasks)
 };
-export const getCategoryByKeys = createSelector(
-  getTaskState,
-  task => task.categoryByKeys
-);
-export const getTaskByKeys = createSelector(
-  getTaskState,
-  task => task.taskByKeys
-);
-export const getNotStartedTasks = createSelector(
-  getTaskState,
-  task => task.notStartedTasks
-);
-export const getInProgressTasks = createSelector(
-  getTaskState,
-  task => task.inProgressTasks
-);
-export const getPendingTasks = createSelector(
-  getTaskState,
-  task => task.pendingTasks
-);
-export const getDoneTasks = createSelector(
-  getTaskState,
-  task => task.doneTasks
-);
 
-const taskRequest = {
+const taskRequests = {
   loadCategoryTypes: () => get(`task-module/api/tasks/category-types`),
   loadStatuses: () => get(`task-module/api/tasks/task-statuses`),
   loadTasksByStatus: () => get(`task-module/api/tasks/tasks-by-statuses`)
@@ -169,7 +154,7 @@ export const taskEpics = [
       .ofType('tasks_loadCategoryTypes')
       .debounceTime(100)
       .switchMap(action =>
-        taskRequest
+        taskRequests
           .loadCategoryTypes()
           .map(result => {
             return Actions.tasks.loadCategoryTypesSuccess({
@@ -187,7 +172,7 @@ export const taskEpics = [
       .ofType('tasks_loadStatuses')
       .debounceTime(100)
       .switchMap(action =>
-        taskRequest
+        taskRequests
           .loadStatuses()
           .map(result => {
             return Actions.tasks.loadStatusesSuccess({
@@ -205,7 +190,7 @@ export const taskEpics = [
       .ofType('tasks_loadTasksByStatus')
       .debounceTime(100)
       .switchMap(action =>
-        taskRequest
+        taskRequests
           .loadTasksByStatus()
           .map(result => {
             return Actions.tasks.loadTasksByStatusSuccess({
