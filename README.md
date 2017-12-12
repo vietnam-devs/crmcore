@@ -35,9 +35,8 @@
 ### Real world demo
 
 You can access to the application on Azure as following links:
-- http://crmcore.southeastasia.cloudapp.azure.com
-- http://crmcore.southeastasia.cloudapp.azure.com/swagger
-- http://crmcore.southeastasia.cloudapp.azure.com/docs
+
+`Coming soon...`
 
 ### Docker
 
@@ -218,6 +217,18 @@ ASPNETCORE_ENVIRONMENT=Development dotnet run
 ```bash
 cd <your path>crmcore\src\hosts\CRMCore.DBMigration.Console
 dotnet ef migrations add <message>  -c ApplicationDbContext  -o Data/Migrations/CRMCore
+```
+
+> Notes
+
+In case we want to re-generate the schema for ID4, follow steps as below
+
+```bash
+dotnet ef migrations add InitialIdentityServerConfigurationDbMigration -c ConfigurationDbContext -o Data/Migrations/IdentityServer/ConfigurationDb
+```
+
+```bash
+dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/IdentityServer/PersistedGrantDb
 ```
 
 ## Contributors

@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\crm\CRMCore.Module.Common\CRMCore.Module.Common.csproj" />
     <ProjectReference Include="..\..\crm\CRMCore.Module.Contact\CRMCore.Module.Contact.csproj" />
     <ProjectReference Include="..\..\crm\CRMCore.Module.Setup\CRMCore.Module.Setup.csproj" />

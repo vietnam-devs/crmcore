@@ -21,7 +21,18 @@ namespace CRMCore.Module.Spa.Controllers
             _config = config;
         }
 
+        [Route("/callback")]
+        public IActionResult Callback()
+        {
+            return RenderIndexFile();
+        }
+
         public IActionResult Index()
+        {
+            return RenderIndexFile();
+        }
+
+        private IActionResult RenderIndexFile()
         {
             var indexFilePath = Path.Combine("wwwroot/index.html");
             var htmlContent = System.IO.File.ReadAllText(indexFilePath);

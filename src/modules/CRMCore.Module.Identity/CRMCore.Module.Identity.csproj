@@ -5,12 +5,9 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
     <Folder Include="Extensions\" />
     <Folder Include="Content\" />
     <Folder Include="Content\css\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Views\" />
     <Folder Include="Views\Consent\" />
     <Folder Include="Views\Account\" />
   </ItemGroup>
@@ -18,7 +15,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.1" />
-    <PackageReference Include="IdentityServer4" Version="2.0.4" />
+    <PackageReference Include="IdentityServer4" Version="2.0.5" />
 	<PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.0.0" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="2.1.0" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.1.0" />

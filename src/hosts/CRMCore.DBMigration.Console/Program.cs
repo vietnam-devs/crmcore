@@ -1,11 +1,11 @@
-﻿using System.IO;
-using CRMCore.DBMigration.Console.Seeder;
+﻿using CRMCore.DBMigration.Console.Seeder;
 using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.IO;
 
 namespace CRMCore.DBMigration.Console
 {
@@ -24,7 +24,7 @@ namespace CRMCore.DBMigration.Console
                         .SeedAsync(context, configuration)
                         .Wait();
                 })
-                .MigrateDbContext<CRMCore.Module.Data.ApplicationDbContext>((context, services) =>
+                .MigrateDbContext<Module.Data.ApplicationDbContext>((context, services) =>
                 {
                     var env = services.GetService<IHostingEnvironment>();
                     var logger = services.GetService<ILogger<ApplicationDbContextSeed>>();

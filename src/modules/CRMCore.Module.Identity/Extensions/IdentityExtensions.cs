@@ -33,13 +33,14 @@ namespace CRMCore.Module.Identity.Extensions
                 x.IssuerUri = "null";
                 x.UserInteraction.LoginUrl = "/identity/account/login";
                 x.UserInteraction.ConsentUrl = "/identity/consent/index";
-
+                x.UserInteraction.ErrorUrl = "/identity/home/error";
             })
-            //.AddDeveloperSigningCredential()
             .AddAspNetIdentity<ApplicationUser>()
             .AddConfigurationStore(configurationstoreOptionsAction)
             .AddOperationalStore(operationalStoreOptionsAction)
-            .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
+            .AddProfileService<IdentityWithAdditionalClaimsProfileService>()
+            .AddJwtBearerClientAuthentication()
+            .AddAppAuthRedirectUriValidator();
 
             var env = services.BuildServiceProvider().GetService<IHostingEnvironment>();
             if (env.IsDevelopment())
@@ -52,7 +53,7 @@ namespace CRMCore.Module.Identity.Extensions
                 identityServerBuilder.AddCertificateFromFile(options);
             }
 
-            services.AddTransient<IRedirectUriValidator, CustomRedirectUriValidator>();
+            // services.AddTransient<IRedirectUriValidator, CustomRedirectUriValidator>();
 
             return services;
         }

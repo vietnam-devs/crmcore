@@ -3,6 +3,7 @@ using CRMCore.Framework.MvcCore.Extensions;
 using CRMCore.Module.Data;
 using CRMCore.Module.Identity.Extensions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
@@ -50,41 +51,64 @@ namespace CRMCore.Application.Crm.targets
                 });
 
             services.AddGenericDataModule();
-
             return services;
         }
 
-        public static IApplicationBuilder UseCrmCore(this IApplicationBuilder app, Action<IRouteBuilder> moreRouteAction)
+        public static IApplicationBuilder UseCrmCore(this IApplicationBuilder app, Action<IRouteBuilder> preRouteAction)
         {
+            var env = app.ApplicationServices.GetService<IHostingEnvironment>();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // app.UseHsts();
+            }
+
+            app.UseStaticFiles();
+            // app.UseSpaStaticFiles();
+
             app.UseAuthentication();
             app.UseIdentityServer();
 
             app.UseCors("CorsPolicy");
 
             // override / route :((
-            app.Use((context, next) =>
+            app.Use(next => async context =>
             {
                 if (context.Request.Path.Value == "/")
                 {
                     context.Request.Path = new PathString("/home");
                 }
-                return next();
+
+                // let some other middlewares handle it
+                await next.Invoke(context);
             });
 
             app.UseMvc(routes =>
             {
-                moreRouteAction(routes);
-                
+                preRouteAction(routes);
 
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" });
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            // here you can see we make sure it doesn't start with /api, if it does, it'll 404 within .NET if it can't be found
+            app.MapWhen(x => !x.Request.Path.Value.Contains("/api"), builder =>
+            {
+                builder.UseMvc(routes =>
+                {
+                    routes.MapSpaFallbackRoute(
+                        name: "spa-fallback",
+                        defaults: new { controller = "Home", action = "Index" });
+                });
             });
 
             // TODO: consider moving this up
             app.UseModules();
-
             return app;
         }
     }

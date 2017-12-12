@@ -1,16 +1,15 @@
-﻿using System;
+﻿using CRMCore.Framework.Entities.Identity;
+using CRMCore.Module.Data;
+using CRMCore.Module.Identity.Services;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
-using CRMCore.Module.Data;
 using Microsoft.Extensions.Logging;
-using IdentityServer4.Services;
-using CRMCore.Module.Identity.Services;
-using CRMCore.Framework.Entities.Identity;
-using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace CRMCore.DBMigration.Console
 {
@@ -28,17 +27,45 @@ namespace CRMCore.DBMigration.Console
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(Configuration.GetConnectionString("Default"), mySqlOptionsAction: sqlOptions=>{
-                sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");
-            }));
+            Action<DbContextOptionsBuilder> optionsBuilderAction = (optionsBuilder) =>
+            {
+                if (!Environment.IsDevelopment())
+                {
+                    optionsBuilder.UseMySql(
+                        Configuration.GetConnectionString("Default"), 
+                        mySqlOptionsAction: sqlOptions =>
+                        {
+                            sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");
+                        });
+                } else
+                {
+                    optionsBuilder.UseSqlServer(
+                        Configuration.GetConnectionString("SqlServerDefault"),
+                        sqlOptions =>
+                        {
+                            sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");
+                        });
+                }
+            };
+
+            services.AddDbContext<ApplicationDbContext>(options => optionsBuilderAction(options));
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
               .AddEntityFrameworkStores<ApplicationDbContext>()
               .AddDefaultTokenProviders();
 
-            // Adds IdentityServer             services.AddIdentityServer(x => x.IssuerUri = "null")
-                .AddAspNetIdentity<ApplicationUser>()                 .AddConfigurationStore(options =>                 {                     options.ConfigureDbContext = builder => builder.UseMySql(Configuration.GetConnectionString("Default"), mySqlOptionsAction: sqlOptions =>                         {                             sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");                         });                 })                 .AddOperationalStore(options =>                 {                     options.ConfigureDbContext = builder => builder.UseMySql(Configuration.GetConnectionString("Default"), mySqlOptionsAction: sqlOptions =>                     {                         sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");                     });                 })
-                    .Services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();;
+            // Adds IdentityServer
+            services.AddIdentityServer(x => x.IssuerUri = "null")
+                .AddAspNetIdentity<ApplicationUser>()
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = builder => optionsBuilderAction(builder);
+                })
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = builder => optionsBuilderAction(builder);
+                })
+                .Services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>(); ;
         }
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)

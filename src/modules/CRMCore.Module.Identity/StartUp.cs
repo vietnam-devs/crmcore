@@ -1,5 +1,4 @@
-﻿using AutoMapper.Configuration;
-using CRMCore.Framework.Entities.Identity;
+﻿using CRMCore.Framework.Entities.Identity;
 using CRMCore.Framework.MvcCore;
 using CRMCore.Module.Identity.Services;
 using IdentityServer4.Services;

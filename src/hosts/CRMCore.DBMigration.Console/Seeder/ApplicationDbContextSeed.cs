@@ -27,10 +27,10 @@ namespace CRMCore.DBMigration.Console.Seeder
                     await context.Users.AddRangeAsync(GetDefaultUser());
                 }
 
-                if (!context.Set<Morphism>().Any())
+                /* if (!context.Set<Morphism>().Any())
                 {
                     await context.Set<Morphism>().AddRangeAsync(GetDefaultMorphisms());
-                }
+                } */
 
                 if(!context.Set<Module.Task.Domain.Task>().Any())
                 {
@@ -166,7 +166,16 @@ namespace CRMCore.DBMigration.Console.Seeder
 
         private IEnumerable<Module.Task.Domain.Task> GetDefaultTasks()
         {
-            return new[] {
+            var results = new List<Module.Task.Domain.Task>();
+            /*for (int i = 1; i < 400; i++)
+            {
+                results.Add(
+                    Module.Task.Domain.Task.CreateInstance(
+                        $"Task {i}: Need to do something.",
+                        IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e")));
+            } */
+
+            results.AddRange(new[] {
                 Module.Task.Domain.Task.CreateInstance(
                     "Implementing Repository in Task module.", 
                     IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e")),
@@ -179,7 +188,9 @@ namespace CRMCore.DBMigration.Console.Seeder
                 Module.Task.Domain.Task.CreateInstance(
                     "Implementing Mobile in Task module.",
                     IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"))
-            };
+            });
+
+            return results;
         }
     }
 }

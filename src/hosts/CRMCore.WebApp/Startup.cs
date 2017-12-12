@@ -24,35 +24,40 @@ namespace CRMCore.WebApp
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            return services
+            services
                 .AddCrmCore(
-                    Configuration, 
-                    builder => builder.UseMySql(
-                        Configuration.GetConnectionString("Default"), 
-                        sqlOptions =>
+                    Configuration,
+                    builder =>
+                    {
+                        if (!Environment.IsDevelopment())
                         {
-                            sqlOptions.MigrationsAssembly(
-                                typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
-                        }))
-                .AddRouteAnalyzer()
-                .BuildServiceProvider(false);
+                            builder.UseMySql(
+                               Configuration.GetConnectionString("Default"),
+                               sqlOptions =>
+                               {
+                                   sqlOptions.MigrationsAssembly(
+                                       typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                               });
+                        }
+                        else
+                        {
+                            builder.UseSqlServer(
+                               Configuration.GetConnectionString("SqlServerDefault"),
+                               sqlOptions =>
+                               {
+                                   sqlOptions.MigrationsAssembly(
+                                       typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                               });
+                        }
+                    })
+                .AddRouteAnalyzer();
+
+            return services.BuildServiceProvider(false);
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseStaticFiles();
-
-            if (Environment.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-
-            app.UseCrmCore(routes =>
-            {
+            app.UseCrmCore(preRouteAction: routes => {
                 routes.MapRouteAnalyzer("/routes");
             });
         }
