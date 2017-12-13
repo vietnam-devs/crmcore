@@ -61,8 +61,7 @@ For more information, you can check out [CRM Core on Docker Hub](https://hub.doc
 - Change location to `\crmcore\src\Hosts\CRMCore.WebApp`
 - Run following commands
   - `dotnet restore`
-  - `dotnet publish`
-  - `webpack`
+  - `dotnet build`
   - `dotnet run`
 
 ## What's included
@@ -165,8 +164,7 @@ crm-core
 
 cd <your path>crmcore\src\hosts\CRMCore.WebApp
 dotnet restore
-dotnet publish
-webpack
+dotnet build
 dotnet run
 
 ```

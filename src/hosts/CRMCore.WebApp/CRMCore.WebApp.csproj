@@ -59,6 +59,17 @@
     <Exec WorkingDirectory="$(SpaRoot)" Command="yarn install" />
   </Target>
 
+  <Target Name="BuildClientAppAssets" AfterTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)build') ">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="yarn install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="yarn run build" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="yarn run build:ssr" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+  </Target>
+
+  <Target Name="BuildServerAssets" AfterTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot/crmcore.js') ">
+    <Exec WorkingDirectory="." Command="webpack" />
+  </Target>
+
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="yarn install" />
