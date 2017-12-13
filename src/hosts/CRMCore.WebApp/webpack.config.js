@@ -24,7 +24,7 @@ module.exports = {
   },
 
   output: {
-    path: WWWROOT_PATH + '/server',
+    path: WWWROOT_PATH,
     filename: '[name].js',
     library: '[name]_[hash]'
   },
@@ -67,7 +67,7 @@ module.exports = {
       {
         context: NODE_PACKAGES_PATH + '/redoc/dist',
         from: '**/*',
-        to: WWWROOT_PATH + '/server/vendors/redoc'
+        to: WWWROOT_PATH + '/vendors/redoc'
       }
     ])
   ],

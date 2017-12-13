@@ -50,6 +50,11 @@ namespace CRMCore.Application.Crm.targets
                     options.ConfigureDbContext = builder => dbContextOptionsBuilderAction(builder);
                 });
 
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/build";
+            });
+
             services.AddGenericDataModule();
             return services;
         }
@@ -67,8 +72,9 @@ namespace CRMCore.Application.Crm.targets
                 // app.UseHsts();
             }
 
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
-            // app.UseSpaStaticFiles();
+            app.UseSpaStaticFiles();
 
             app.UseAuthentication();
             app.UseIdentityServer();
@@ -106,6 +112,17 @@ namespace CRMCore.Application.Crm.targets
                         defaults: new { controller = "Home", action = "Index" });
                 });
             });
+
+            // actually, we don't need this one :)
+            /*app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
+            });*/
 
             // TODO: consider moving this up
             app.UseModules();

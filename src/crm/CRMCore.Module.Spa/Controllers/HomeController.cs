@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -16,9 +16,12 @@ namespace CRMCore.Module.Spa.Controllers
     public class HomeController : Controller
     {
         private readonly IConfiguration _config;
-        public HomeController(IConfiguration config)
+        private readonly IHostingEnvironment _env;
+
+        public HomeController(IConfiguration config, IHostingEnvironment env)
         {
             _config = config;
+            _env = env;
         }
 
         [Route("/callback")]
@@ -34,7 +37,13 @@ namespace CRMCore.Module.Spa.Controllers
 
         private IActionResult RenderIndexFile()
         {
-            var indexFilePath = Path.Combine("wwwroot/index.html");
+            var indexFilePath = Path.Combine("ClientApp/build/index.html");
+
+            if (_env.IsDevelopment())
+            {
+                // indexFilePath = Path.Combine("ClientApp/public/index.html");
+            }
+
             var htmlContent = System.IO.File.ReadAllText(indexFilePath);
 
             var scriptIndex = htmlContent.IndexOf("<script", StringComparison.OrdinalIgnoreCase);

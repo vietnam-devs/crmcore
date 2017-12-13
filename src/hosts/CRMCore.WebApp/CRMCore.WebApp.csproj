@@ -4,14 +4,25 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(SpaRoot)node_modules\**;node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+
     <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
-	  <UserSecretsId>823fcfa2-80f6-4d8e-885c-91ac9d33246d</UserSecretsId>
-    <SpaRoot>wwwroot</SpaRoot>
+    <UserSecretsId>823fcfa2-80f6-4d8e-885c-91ac9d33246d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**;node_modules\**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**;node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,41 +37,42 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
-	<DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+	  <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
   </ItemGroup>
-
-  <Target Name="CheckNodeJS" BeforeTargets="Build">
-    <!-- Ensure Node.js is installed -->
-    <Exec Command="node --version" ContinueOnError="true">
-      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
-    </Exec>
-    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
-  </Target>
-  
-  <Target Name="CopyAssetToOutputWindow" AfterTargets="Build" Condition="'$(BuildingInsideVisualStudio)' == 'true' And '$(OS)' == 'Windows_NT' And !Exists('wwwroot\index.html') ">
-    <Message Importance="high" Text="[CRMCore][Windows] Yarn is installing..." />
-    <Exec WorkingDirectory="..\CRMCore.ClientApp\" Command="yarn install" />
-    <Message Importance="high" Text="[CRMCore][Windows] Yarn is building..." />
-    <Exec WorkingDirectory="..\CRMCore.ClientApp\" Command="yarn build" />
-    <Message Importance="high" Text="[CRMCore][Windows] Copying assets to Host project..." />
-    <Exec WorkingDirectory="..\CRMCore.ClientApp\" Command="xcopy.exe /S /R /Y /E build ..\CRMCore.WebApp\wwwroot" />
-  </Target>
-
-  <Target Name="CopyAssetToOutputLinux" AfterTargets="Build" Condition="'$(OS)' != 'Windows_NT' And !Exists('wwwroot/index.html') ">
-    <Message Importance="high" Text="[CRMCore][Not Windows] Yarn is installing..." />
-    <Exec WorkingDirectory="../CRMCore.ClientApp/" Command="yarn install" />
-    <Message Importance="high" Text="[CRMCore][Not Windows] Yarn is building..." />
-    <Exec WorkingDirectory="../CRMCore.ClientApp/" Command="yarn build" />
-    <Message Importance="high" Text="[CRMCore][Not Windows] Copying assets to Host project..." />
-    <Exec WorkingDirectory="../CRMCore.ClientApp/" Command="cp -rfv  build/* ../CRMCore.WebApp/wwwroot/" />
-  </Target>
 
   <ItemGroup>
     <ProjectReference Include="..\..\framework\CRMCore.Framework.MvcCore\CRMCore.Framework.MvcCore.csproj" />
     <ProjectReference Include="..\..\targets\CRMCore.Application.Crm.targets\CRMCore.Application.Crm.targets.csproj" />
   </ItemGroup>
+  
   <ItemGroup>
     <Content Include="CRMCertificate.pfx" />
   </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'yarn'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="yarn install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="yarn install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="yarn run build" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="yarn run build:ssr" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)build\**; $(SpaRoot)build-ssr\**" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
 </Project>
 

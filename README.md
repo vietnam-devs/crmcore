@@ -58,7 +58,12 @@ For more information, you can check out [CRM Core on Docker Hub](https://hub.doc
 
 - Download the latest .NET SDK (2.x) & NodeJS
 - Clone the repo: `git clone https://github.com/crm-core/crmcore.git`
-- Change location to `\crmcore\src\Hosts\CRMCore.WebApp`, then run command `dotnet run`
+- Change location to `\crmcore\src\Hosts\CRMCore.WebApp`
+- Run following commands
+  - `dotnet restore`
+  - `dotnet publish`
+  - `webpack`
+  - `dotnet run`
 
 ## What's included
 
@@ -129,14 +134,39 @@ crm-core
         └── CRMCore.Theme.Targets
     └── themes
         └── CRMCore.Theme
+└── ClientApp
+    ├── node_modules
+    ├── package.json
+    ├── yarn.lock
+    ├── .gitignore
+    ├── public
+    │   └── favicon.ico
+    │   └── index.html
+    │   └── manifest.json
+    └── src
+        └── components
+        └── configs
+        └── containers
+        └── redux
+            └── middlewares
+            └── modules
+        └── styles
+            └── bootstrap
+            └── core
+            └── vendors
+            └── images
+            └── style.scss
+        └── index.js
+        └── logo.svg
+        └── registerServiceWorker.js
 ```
 
 ```bash
 
 cd <your path>crmcore\src\hosts\CRMCore.WebApp
 dotnet restore
-yarn run build
-dotnet build
+dotnet publish
+webpack
 dotnet run
 
 ```
@@ -150,31 +180,32 @@ dotnet run
 It will organize the initial project structure and install the transitive dependencies:
 
 ```
-crm-core\src\hosts\CRMCore.ClientApp
-├── node_modules
-├── package.json
-├── yarn.lock
-├── .gitignore
-├── public
-│   └── favicon.ico
-│   └── index.html
-│   └── manifest.json
-└── src
-    └── components
-    └── configs
-    └── containers
-    └── redux
-        └── middlewares
-        └── modules
-    └── styles
-        └── bootstrap
-        └── core
-        └── vendors
-        └── images
-        └── style.scss
-    └── index.js
-    └── logo.svg
-    └── registerServiceWorker.js
+crm-core\src\hosts\CRMCore.WebApp
+├── ClientApp
+    ├── node_modules
+    ├── package.json
+    ├── yarn.lock
+    ├── .gitignore
+    ├── public
+    │   └── favicon.ico
+    │   └── index.html
+    │   └── manifest.json
+    └── src
+        └── components
+        └── configs
+        └── containers
+        └── redux
+            └── middlewares
+            └── modules
+        └── styles
+            └── bootstrap
+            └── core
+            └── vendors
+            └── images
+            └── style.scss
+        └── index.js
+        └── logo.svg
+        └── registerServiceWorker.js
 ```
 
 We need several packages that were installed in global scope as following commands
