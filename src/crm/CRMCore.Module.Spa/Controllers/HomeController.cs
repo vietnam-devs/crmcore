@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
@@ -24,12 +25,23 @@ namespace CRMCore.Module.Spa.Controllers
             _env = env;
         }
 
-        [Route("/callback")]
-        public IActionResult Callback()
+        [Route("/{*url}")]
+        [ResponseCache(NoStore = true)]
+        public IActionResult Error(string url)
         {
+            // fallback to SPA routes
             return RenderIndexFile();
         }
 
+        [Route("/callback")]
+        [ResponseCache(NoStore = true)]
+        public IActionResult Callback()
+        {
+            // This is for oclient.js processing
+            return RenderIndexFile();
+        }
+
+        [ResponseCache(NoStore = true)]
         public IActionResult Index()
         {
             return RenderIndexFile();
@@ -38,12 +50,6 @@ namespace CRMCore.Module.Spa.Controllers
         private IActionResult RenderIndexFile()
         {
             var indexFilePath = Path.Combine("ClientApp/build/index.html");
-
-            if (_env.IsDevelopment())
-            {
-                // indexFilePath = Path.Combine("ClientApp/public/index.html");
-            }
-
             var htmlContent = System.IO.File.ReadAllText(indexFilePath);
 
             var scriptIndex = htmlContent.IndexOf("<script", StringComparison.OrdinalIgnoreCase);

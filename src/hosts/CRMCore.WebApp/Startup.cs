@@ -24,35 +24,10 @@ namespace CRMCore.WebApp
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddCrmCore(
-                    Configuration,
-                    builder =>
-                    {
-                        if (!Environment.IsDevelopment())
-                        {
-                            builder.UseMySql(
-                               Configuration.GetConnectionString("Default"),
-                               sqlOptions =>
-                               {
-                                   sqlOptions.MigrationsAssembly(
-                                       typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
-                               });
-                        }
-                        else
-                        {
-                            builder.UseSqlServer(
-                               Configuration.GetConnectionString("SqlServerDefault"),
-                               sqlOptions =>
-                               {
-                                   sqlOptions.MigrationsAssembly(
-                                       typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
-                               });
-                        }
-                    })
-                .AddRouteAnalyzer();
-
-            return services.BuildServiceProvider(false);
+            return services
+                .AddCrmCore(Configuration, builder => RegisterDbSettings(builder))
+                .AddRouteAnalyzer()
+                .BuildServiceProvider(false);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -60,6 +35,30 @@ namespace CRMCore.WebApp
             app.UseCrmCore(preRouteAction: routes => {
                 routes.MapRouteAnalyzer("/routes");
             });
+        }
+
+        private void RegisterDbSettings(DbContextOptionsBuilder builder)
+        {
+            if (!Environment.IsDevelopment())
+            {
+                builder.UseMySql(
+                   Configuration.GetConnectionString("Default"),
+                   sqlOptions =>
+                   {
+                       sqlOptions.MigrationsAssembly(
+                           typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                   });
+            }
+            else
+            {
+                builder.UseSqlServer(
+                   Configuration.GetConnectionString("SqlServerDefault"),
+                   sqlOptions =>
+                   {
+                       sqlOptions.MigrationsAssembly(
+                           typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                   });
+            }
         }
     }
 }

@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <SpaRoot>ClientApp\</SpaRoot>
+    <WwwRoot>wwwroot\</WwwRoot>
     <DefaultItemExcludes>$(SpaRoot)node_modules\**;node_modules\**</DefaultItemExcludes>
 
     <!-- Set this to true if you enable server-side prerendering -->
@@ -59,15 +60,15 @@
     <Exec WorkingDirectory="$(SpaRoot)" Command="yarn install" />
   </Target>
 
-  <Target Name="BuildClientAppAssets" AfterTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)build') ">
+  <Target Name="BuildClientAssets" AfterTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)build') ">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="yarn install" />
     <Exec WorkingDirectory="$(SpaRoot)" Command="yarn run build" />
     <Exec WorkingDirectory="$(SpaRoot)" Command="yarn run build:ssr" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
   </Target>
 
-  <Target Name="BuildServerAssets" AfterTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot/crmcore.js') ">
-    <Exec WorkingDirectory="." Command="webpack" />
+  <Target Name="BuildServerAssets" AfterTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(WwwRoot)all.css') ">
+    <Exec WorkingDirectory="$(WwwRoot)" Command="webpack" />
   </Target>
 
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">

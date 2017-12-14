@@ -55,6 +55,7 @@
     "copy-assets": "npm-run-all copy-styles copy-images",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "watch": "node ./scripts/watch.js",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css copy-assets start-js",
     "build-js": "react-scripts build",
@@ -62,6 +63,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:5000",
   "engines": {
     "node": ">= 6.0.0",
     "npm": ">= 5.0.0"

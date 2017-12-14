@@ -47,7 +47,7 @@ class AdvancedSearchPanel extends PureComponent {
     return (
       <div>
         <div className="form-group">
-          <label className="form-control-label">Assigned User 1 </label>
+          <label className="form-control-label">Assigned User 1</label>
           <div>
             <input type="text" className="form-control" />{' '}
           </div>

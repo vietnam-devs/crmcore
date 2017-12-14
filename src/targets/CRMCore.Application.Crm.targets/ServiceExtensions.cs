@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,17 +18,16 @@ namespace CRMCore.Application.Crm.targets
 {
     public static class ServiceExtensions
     {
-        public static IServiceCollection AddCrmCore(
-            this IServiceCollection services,
+        public static IServiceCollection AddCrmCore(this IServiceCollection services,
             IConfiguration config,
-            Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
+            Action<DbContextOptionsBuilder> builderAction)
         {
             services.AddSingleton(JavaScriptEncoder.Default);
 
             services.AddOptions()
                 .Configure<PaginationOption>(config.GetSection("Pagination"));
 
-            services.AddDbContext<ApplicationDbContext>(options => dbContextOptionsBuilderAction(options));
+            services.AddDbContext<ApplicationDbContext>(options => builderAction(options));
 
             services.AddCors(options =>
             {
@@ -42,12 +43,11 @@ namespace CRMCore.Application.Crm.targets
             services.RegisterIdentityAndID4(
                 options =>
                 {
-                    options.ConfigureDbContext = builder =>
-                        dbContextOptionsBuilderAction(builder);
+                    options.ConfigureDbContext = builder => builderAction(builder);
                 },
                 options =>
                 {
-                    options.ConfigureDbContext = builder => dbContextOptionsBuilderAction(builder);
+                    options.ConfigureDbContext = builder => builderAction(builder);
                 });
 
             services.AddSpaStaticFiles(configuration =>
@@ -92,7 +92,7 @@ namespace CRMCore.Application.Crm.targets
                 // let some other middlewares handle it
                 await next.Invoke(context);
             });
-
+            
             app.UseMvc(routes =>
             {
                 preRouteAction(routes);
@@ -102,27 +102,16 @@ namespace CRMCore.Application.Crm.targets
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            // here you can see we make sure it doesn't start with /api, if it does, it'll 404 within .NET if it can't be found
-            app.MapWhen(x => !x.Request.Path.Value.Contains("/api"), builder =>
-            {
-                builder.UseMvc(routes =>
-                {
-                    routes.MapSpaFallbackRoute(
-                        name: "spa-fallback",
-                        defaults: new { controller = "Home", action = "Index" });
-                });
-            });
-
             // actually, we don't need this one :)
-            /*app.UseSpa(spa =>
+            app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
+                    spa.UseReactDevelopmentServer(npmScript: "watch");
                 }
-            });*/
+            });
 
             // TODO: consider moving this up
             app.UseModules();
