@@ -25,19 +25,19 @@ namespace CRMCore.Module.Spa.Controllers
             _env = env;
         }
 
+        // fallback to SPA routes
         [Route("/{*url}")]
         [ResponseCache(NoStore = true)]
         public IActionResult Error(string url)
         {
-            // fallback to SPA routes
             return RenderIndexFile();
         }
 
+        // This is for oclient.js processing
         [Route("/callback")]
         [ResponseCache(NoStore = true)]
         public IActionResult Callback()
         {
-            // This is for oclient.js processing
             return RenderIndexFile();
         }
 

@@ -102,7 +102,7 @@ namespace CRMCore.Application.Crm.targets
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            // actually, we don't need this one :)
+            // https://gist.github.com/int128/e0cdec598c5b3db728ff35758abdbafd
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";

@@ -1,15 +1,11 @@
-﻿using CRMCore.Framework.Entities.Identity;
-using CRMCore.Module.Data;
-using CRMCore.Module.Identity.Services;
-using IdentityServer4.Services;
+﻿using CRMCore.Framework.MvcCore.Extensions;
+using CRMCore.Module.Migration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
 
 namespace CRMCore.DBMigration.Console
 {
@@ -27,51 +23,43 @@ namespace CRMCore.DBMigration.Console
 
         public void ConfigureServices(IServiceCollection services)
         {
-            Action<DbContextOptionsBuilder> optionsBuilderAction = (optionsBuilder) =>
-            {
-                if (!Environment.IsDevelopment())
-                {
-                    optionsBuilder.UseMySql(
-                        Configuration.GetConnectionString("Default"), 
-                        mySqlOptionsAction: sqlOptions =>
-                        {
-                            sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");
-                        });
-                } else
-                {
-                    optionsBuilder.UseSqlServer(
-                        Configuration.GetConnectionString("SqlServerDefault"),
-                        sqlOptions =>
-                        {
-                            sqlOptions.MigrationsAssembly("CRMCore.DBMigration.Console");
-                        });
-                }
-            };
-
-            services.AddDbContext<ApplicationDbContext>(options => optionsBuilderAction(options));
-
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
-              .AddEntityFrameworkStores<ApplicationDbContext>()
-              .AddDefaultTokenProviders();
-
-            // Adds IdentityServer
-            services.AddIdentityServer(x => x.IssuerUri = "null")
-                .AddAspNetIdentity<ApplicationUser>()
-                .AddConfigurationStore(options =>
-                {
-                    options.ConfigureDbContext = builder => optionsBuilderAction(builder);
-                })
-                .AddOperationalStore(options =>
-                {
-                    options.ConfigureDbContext = builder => optionsBuilderAction(builder);
-                })
-                .Services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>(); ;
+            services.AddScoped<IExtendDbContextOptionsBuilder, SqlServerDbContextOptionsBuilderFactory>();
+            services.AddScoped<IDatabaseConnectionStringFactory, SqlServerDatabaseConnectionStringFactory>();
+            services.AddMvcModules();
         }
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+        }
+    }
+
+    internal sealed class SqlServerDbContextOptionsBuilderFactory : IExtendDbContextOptionsBuilder
+    {
+        public DbContextOptionsBuilder Extend(DbContextOptionsBuilder optionsBuilder, string connectionString, string assemblyName)
+        {
+            return optionsBuilder.UseSqlServer(
+                connectionString,
+                sqlOptions =>
+                {
+                    sqlOptions.MigrationsAssembly(assemblyName);
+                });
+        }
+    }
+
+    internal sealed class SqlServerDatabaseConnectionStringFactory : IDatabaseConnectionStringFactory
+    {
+        private readonly IConfiguration _config;
+
+        public SqlServerDatabaseConnectionStringFactory(IConfiguration config)
+        {
+            _config = config;
+        }
+
+        public string Create()
+        {
+            return _config.GetConnectionString("SqlServerDefault");
         }
     }
 }

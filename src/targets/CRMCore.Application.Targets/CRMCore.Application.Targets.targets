@@ -1,43 +1,48 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
+
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
     <Target Name="CopyPackageAssets" AfterTargets="Build">
-    <ItemGroup>
-      <ModuleProjectReferences
-        Include="@(_MSBuildProjectReferenceExistent)"
-        Condition="Exists('%(RootDir)%(Directory)Module.txt') Or Exists('%(RootDir)%(Directory)obj\Module.txt') Or
-                   Exists('%(RootDir)%(Directory)Theme.txt') Or Exists('%(RootDir)%(Directory)obj\Theme.txt')" />
-    </ItemGroup>
-        <MSBuild Targets="CopyPackageAssetFiles" 
-            Properties="ApplicationDirectory=$(MSBuildProjectDirectory)" 
-            Projects="@(ModuleProjectReferences)" 
-            Condition="'@(ModuleProjectReferences)' != ''" 
-            ContinueOnError="true">
-        </MSBuild>
+      <ItemGroup>
+        <ModuleProjectReferences
+          Include="@(_MSBuildProjectReferenceExistent)"
+          Condition="Exists('%(RootDir)%(Directory)Module.txt') Or Exists('%(RootDir)%(Directory)obj\Module.txt') Or
+                     Exists('%(RootDir)%(Directory)Theme.txt') Or Exists('%(RootDir)%(Directory)obj\Theme.txt')" />
+      </ItemGroup>
+      
+      <MSBuild Targets="CopyPackageAssetFiles" 
+          Properties="ApplicationDirectory=$(MSBuildProjectDirectory)" 
+          Projects="@(ModuleProjectReferences)" 
+          Condition="'@(ModuleProjectReferences)' != ''" 
+          ContinueOnError="true">
+      </MSBuild>
     </Target>
 
-      <Target Name="CleanPackageAssets" AfterTargets="Clean"
-          Condition="'$(IgnorePackageAssets)' != 'true' And Exists('packages')">
+    <Target Name="CleanPackageAssets" AfterTargets="Clean" Condition="'$(IgnorePackageAssets)' != 'true' And Exists('packages')">
         <ItemGroup>
           <AllPackageAssetFiles Include="packages\**" />
         </ItemGroup>
+      
         <Delete
           Files="@(AllPackageAssetFiles)"
           ContinueOnError="true" />
+      
         <RemoveDir
           Directories="packages\%(AllPackageAssetFiles.RecursiveDir)"
           ContinueOnError="true" />
     </Target>
 
     <ItemGroup>
-        <Compile Remove="packages\**" />
-        <Content Remove="packages\**" />
-        <EmbeddedResource Remove="packages\**" />
-        <None Remove="packages\**" />
+      <Compile Remove="packages\**" />
+      <Content Remove="packages\**" />
+      <EmbeddedResource Remove="packages\**" />
+      <None Remove="packages\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <ResolvedFileToPublish Include="packages\**; CRMCertificate.pfx">
+        <ResolvedFileToPublish Include="packages\**; *.pfx">
           <RelativePath>packages\%(RecursiveDir)%(Filename)%(Extension)</RelativePath>
         </ResolvedFileToPublish>
     </ItemGroup>
+  
 </Project> 

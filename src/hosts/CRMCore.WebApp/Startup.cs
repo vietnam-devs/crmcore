@@ -39,14 +39,14 @@ namespace CRMCore.WebApp
 
         private void RegisterDbSettings(DbContextOptionsBuilder builder)
         {
+            var assemblyName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             if (!Environment.IsDevelopment())
             {
                 builder.UseMySql(
                    Configuration.GetConnectionString("Default"),
                    sqlOptions =>
                    {
-                       sqlOptions.MigrationsAssembly(
-                           typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                       sqlOptions.MigrationsAssembly(assemblyName);
                    });
             }
             else
@@ -55,8 +55,7 @@ namespace CRMCore.WebApp
                    Configuration.GetConnectionString("SqlServerDefault"),
                    sqlOptions =>
                    {
-                       sqlOptions.MigrationsAssembly(
-                           typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                       sqlOptions.MigrationsAssembly(assemblyName);
                    });
             }
         }

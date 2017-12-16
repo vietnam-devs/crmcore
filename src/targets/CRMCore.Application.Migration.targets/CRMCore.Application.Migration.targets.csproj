@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <IgnorePackageAssets>false</IgnorePackageAssets>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\crm\CRMCore.Module.Migration\CRMCore.Module.Migration.csproj" />
+    <ProjectReference Include="..\..\crm\CRMCore.Module.Task\CRMCore.Module.Task.csproj" />
+    <ProjectReference Include="..\..\modules\CRMCore.Module.CustomCollection\CRMCore.Module.CustomCollection.csproj" />
+    <ProjectReference Include="..\CRMCore.Application.Targets\CRMCore.Application.Targets.csproj" />
+  </ItemGroup>
+
+</Project>
