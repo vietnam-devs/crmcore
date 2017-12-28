@@ -43,6 +43,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\framework\CRMCore.Framework.MvcCore\CRMCore.Framework.MvcCore.csproj" />
+    <ProjectReference Include="..\..\modules\CRMCore.Module.Data.SqlServer\CRMCore.Module.Data.SqlServer.csproj" />
     <ProjectReference Include="..\..\targets\CRMCore.Application.Crm.targets\CRMCore.Application.Crm.targets.csproj" />
   </ItemGroup>
   

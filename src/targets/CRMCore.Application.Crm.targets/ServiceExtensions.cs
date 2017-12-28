@@ -1,33 +1,37 @@
 ﻿using CRMCore.Framework.Entities;
 using CRMCore.Framework.MvcCore.Extensions;
 using CRMCore.Module.Data;
-using CRMCore.Module.Identity.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-using Microsoft.AspNetCore.SpaServices.Webpack;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Reflection;
 using System.Text.Encodings.Web;
 
 namespace CRMCore.Application.Crm.targets
 {
     public static class ServiceExtensions
     {
-        public static IServiceCollection AddCrmCore(this IServiceCollection services,
-            IConfiguration config,
-            Action<DbContextOptionsBuilder> builderAction)
+        public static IServiceCollection AddCrmCore(this IServiceCollection services)
         {
+            var serviceProvider = services.BuildServiceProvider();
+            var config = serviceProvider.GetService<IConfiguration>();
+            var extendOptionsBuilder = serviceProvider.GetService<IExtendDbContextOptionsBuilder>();
+            var dbConnectionStringFactory = serviceProvider.GetService<IDatabaseConnectionStringFactory>();
+
             services.AddSingleton(JavaScriptEncoder.Default);
 
             services.AddOptions()
                 .Configure<PaginationOption>(config.GetSection("Pagination"));
 
-            services.AddDbContext<ApplicationDbContext>(options => builderAction(options));
+            services.AddDbContext<ApplicationDbContext>(optionsBuilder => {
+                var assemblyName = Assembly.GetEntryAssembly().GetName().Name;
+                var connectionString = dbConnectionStringFactory.Create();
+                extendOptionsBuilder.Extend(optionsBuilder, connectionString, assemblyName);
+            });
 
             services.AddCors(options =>
             {
@@ -39,16 +43,6 @@ namespace CRMCore.Application.Crm.targets
             });
 
             services.AddMvcModules();
-
-            services.RegisterIdentityAndID4(
-                options =>
-                {
-                    options.ConfigureDbContext = builder => builderAction(builder);
-                },
-                options =>
-                {
-                    options.ConfigureDbContext = builder => builderAction(builder);
-                });
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -76,23 +70,12 @@ namespace CRMCore.Application.Crm.targets
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
+            // make the authentication working
             app.UseAuthentication();
             app.UseIdentityServer();
 
             app.UseCors("CorsPolicy");
 
-            // override / route :((
-            app.Use(next => async context =>
-            {
-                if (context.Request.Path.Value == "/")
-                {
-                    context.Request.Path = new PathString("/home");
-                }
-
-                // let some other middlewares handle it
-                await next.Invoke(context);
-            });
-            
             app.UseMvc(routes =>
             {
                 preRouteAction(routes);
@@ -109,7 +92,7 @@ namespace CRMCore.Application.Crm.targets
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "watch");
+                    // spa.UseReactDevelopmentServer(npmScript: "watch");
                 }
             });
 

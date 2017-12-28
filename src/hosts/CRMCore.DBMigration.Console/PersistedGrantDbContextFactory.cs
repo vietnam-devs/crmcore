@@ -1,4 +1,5 @@
-﻿using CRMCore.Module.Migration;
+﻿using CRMCore.Module.Data;
+using CRMCore.Module.Data.SqlServer;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.EntityFrameworkCore;

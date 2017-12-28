@@ -74,9 +74,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.CustomCollec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Task", "src\crm\CRMCore.Module.Task\CRMCore.Module.Task.csproj", "{67EDCC2D-CC6B-412B-B268-C0AA50A9324D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Application.Migration.targets", "src\targets\CRMCore.Application.Migration.targets\CRMCore.Application.Migration.targets.csproj", "{8B7FC470-F389-410A-A711-9A99EB79D6B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Application.Migration.targets", "src\targets\CRMCore.Application.Migration.targets\CRMCore.Application.Migration.targets.csproj", "{8B7FC470-F389-410A-A711-9A99EB79D6B8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Migration", "src\crm\CRMCore.Module.Migration\CRMCore.Module.Migration.csproj", "{4DF418DD-0C67-4E7A-9C51-8EAF023F0485}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.Data.SqlServer", "src\modules\CRMCore.Module.Data.SqlServer\CRMCore.Module.Data.SqlServer.csproj", "{BF1620F3-C634-4F9B-AAC0-26EE2BAF8819}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -176,6 +178,10 @@ Global
 		{4DF418DD-0C67-4E7A-9C51-8EAF023F0485}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DF418DD-0C67-4E7A-9C51-8EAF023F0485}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DF418DD-0C67-4E7A-9C51-8EAF023F0485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF1620F3-C634-4F9B-AAC0-26EE2BAF8819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF1620F3-C634-4F9B-AAC0-26EE2BAF8819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF1620F3-C634-4F9B-AAC0-26EE2BAF8819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF1620F3-C634-4F9B-AAC0-26EE2BAF8819}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -205,6 +211,7 @@ Global
 		{67EDCC2D-CC6B-412B-B268-C0AA50A9324D} = {837B5FF2-B91A-4DA7-9D9E-9837F5B715C2}
 		{8B7FC470-F389-410A-A711-9A99EB79D6B8} = {801A9F75-24F6-4D8C-A884-98C6BE76986B}
 		{4DF418DD-0C67-4E7A-9C51-8EAF023F0485} = {837B5FF2-B91A-4DA7-9D9E-9837F5B715C2}
+		{BF1620F3-C634-4F9B-AAC0-26EE2BAF8819} = {74D2F004-44D9-4BEE-AEA7-51DFA9FD027C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3171C67F-EFB1-46FF-A566-6DC6C1E80FC5}

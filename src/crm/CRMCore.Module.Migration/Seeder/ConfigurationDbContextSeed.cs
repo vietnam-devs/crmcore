@@ -63,9 +63,9 @@ namespace CRMCore.Module.Migration.Seeder
                     ClientName = "CRM Core SPA-React OpenId Client",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
-                    RedirectUris =           { $"{clientUrls["SpaReactClient"]}/" },
+                    RedirectUris =           { $"{clientUrls["SpaReactClient"]}/callback" },
                     RequireConsent = false,
-                    PostLogoutRedirectUris = { $"{clientUrls["SpaReactClient"]}/" },
+                    PostLogoutRedirectUris = { $"{clientUrls["SpaReactClient"]}/logout" },
                     AllowedCorsOrigins =     { $"{clientUrls["SpaReactClient"]}" },
                     AllowedScopes =
                     {

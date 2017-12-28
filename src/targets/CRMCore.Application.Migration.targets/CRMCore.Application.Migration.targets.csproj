@@ -9,6 +9,7 @@
     <ProjectReference Include="..\..\crm\CRMCore.Module.Migration\CRMCore.Module.Migration.csproj" />
     <ProjectReference Include="..\..\crm\CRMCore.Module.Task\CRMCore.Module.Task.csproj" />
     <ProjectReference Include="..\..\modules\CRMCore.Module.CustomCollection\CRMCore.Module.CustomCollection.csproj" />
+    <ProjectReference Include="..\..\modules\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj" />
     <ProjectReference Include="..\CRMCore.Application.Targets\CRMCore.Application.Targets.csproj" />
   </ItemGroup>
 

@@ -9,9 +9,10 @@
   <ItemGroup>
     <PackageReference Include="LinqKit.Core" Version="1.1.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.1" />
-	<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
-	<PackageReference Include="IdentityServer4.EntityFramework" Version="2.1.0" />
+	  <PackageReference Include="IdentityServer4.EntityFramework" Version="2.1.0" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
   </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\..\framework\CRMCore.Framework.Entities\CRMCore.Framework.Entities.csproj" />
     <ProjectReference Include="..\..\framework\CRMCore.Framework.MvcCore\CRMCore.Framework.MvcCore.csproj" />

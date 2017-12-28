@@ -35,34 +35,49 @@ namespace CRMCore.Module.Migration
                 });
         }
 
-        internal static IWebHost MigrateDbContext<TContext>(this IWebHost webHost, Action<TContext, IServiceProvider> seeder) 
+        internal static IWebHost MigrateDbContext<TContext>(this IWebHost webHost, Action<TContext, IServiceProvider> seeder)
             where TContext : DbContext
         {
             using (var scope = webHost.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
-
-                var logger = services.GetRequiredService<ILogger<TContext>>();
-
-                var context = services.GetService<TContext>();
-
-                try
-                {
-                    logger.LogInformation($"Migrating database associated with context {typeof(TContext).Name}");
-
-                    context.Database.Migrate();
-
-                    seeder(context, services);
-
-                    logger.LogInformation($"Migrated database associated with context {typeof(TContext).Name}");
-                }
-                catch (Exception ex)
-                {
-                    logger.LogError(ex, $"An error occurred while migrating the database used on context {typeof(TContext).Name}");
-                }
+                scope.ServiceProvider.MigrateDbContext(seeder);
             }
 
-            return webHost;    
+            return webHost;
+        }
+
+        /// <summary>
+        /// This function will open up the door to make the Setup page
+        /// Because we can call to this function for provision new database
+        /// </summary>
+        /// <typeparam name="TContext"></typeparam>
+        /// <param name="serviceProvider"></param>
+        /// <param name="seeder"></param>
+        /// <returns></returns>
+        public static IServiceProvider MigrateDbContext<TContext>(
+            this IServiceProvider serviceProvider, Action<TContext, 
+                IServiceProvider> seeder)
+            where TContext : DbContext
+        {
+            var logger = serviceProvider.GetRequiredService<ILogger<TContext>>();
+            var context = serviceProvider.GetService<TContext>();
+
+            try
+            {
+                logger.LogInformation($"Migrating database associated with context {typeof(TContext).Name}");
+
+                context.Database.Migrate();
+
+                seeder(context, serviceProvider);
+
+                logger.LogInformation($"Migrated database associated with context {typeof(TContext).Name}");
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, $"An error occurred while migrating the database used on context {typeof(TContext).Name}");
+            }
+
+            return serviceProvider;
         }
     }
 }

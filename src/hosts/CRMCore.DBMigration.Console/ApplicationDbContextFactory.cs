@@ -1,5 +1,5 @@
 ﻿using CRMCore.Module.Data;
-using CRMCore.Module.Migration;
+using CRMCore.Module.Data.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
