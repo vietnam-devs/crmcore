@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\modules\Base\CRMCore.Module.Entities\CRMCore.Module.Entities.csproj" />
-    <ProjectReference Include="..\..\modules\Base\CRMCore.Module.MvcCore\CRMCore.Module.MvcCore.csproj" />
+    <ProjectReference Include="..\..\modules\base\CRMCore.Module.Entities\CRMCore.Module.Entities.csproj" />
+    <ProjectReference Include="..\..\modules\base\CRMCore.Module.MvcCore\CRMCore.Module.MvcCore.csproj" />
   </ItemGroup>
 
 </Project>

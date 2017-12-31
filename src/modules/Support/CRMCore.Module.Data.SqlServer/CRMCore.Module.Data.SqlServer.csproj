@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\CRMCore.Module.Data\CRMCore.Module.Data.csproj" />
+    <ProjectReference Include="..\..\core\CRMCore.Module.Data\CRMCore.Module.Data.csproj" />
   </ItemGroup>
 
 </Project>

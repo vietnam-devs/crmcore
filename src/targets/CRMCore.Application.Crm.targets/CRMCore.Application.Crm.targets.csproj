@@ -13,17 +13,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\modules\App\CRMCore.Module.Common\CRMCore.Module.Common.csproj" />
-    <ProjectReference Include="..\..\modules\App\CRMCore.Module.Contact\CRMCore.Module.Contact.csproj" />
-    <ProjectReference Include="..\..\modules\App\CRMCore.Module.Setup\CRMCore.Module.Setup.csproj" />
-    <ProjectReference Include="..\..\modules\App\CRMCore.Module.Spa\CRMCore.Module.Spa.csproj" />
-    <ProjectReference Include="..\..\modules\App\CRMCore.Module.Task\CRMCore.Module.Task.csproj" />
-    <ProjectReference Include="..\..\modules\Core\CRMCore.Module.CustomCollection\CRMCore.Module.CustomCollection.csproj" />
-    <ProjectReference Include="..\..\modules\Core\CRMCore.Module.Data\CRMCore.Module.Data.csproj" />
-    <ProjectReference Include="..\..\modules\Core\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj" />
-    <ProjectReference Include="..\..\modules\Support\CRMCore.Module.Data.SqlServer\CRMCore.Module.Data.SqlServer.csproj" />
-    <ProjectReference Include="..\..\modules\Support\CRMCore.Module.ReDoc\CRMCore.Module.ReDoc.csproj" />
-    <ProjectReference Include="..\..\modules\Support\CRMCore.Module.Swagger\CRMCore.Module.Swagger.csproj" />
+    <ProjectReference Include="..\..\modules\crm\CRMCore.Module.Common\CRMCore.Module.Common.csproj" />
+    <ProjectReference Include="..\..\modules\crm\CRMCore.Module.Contact\CRMCore.Module.Contact.csproj" />
+    <ProjectReference Include="..\..\modules\crm\CRMCore.Module.Setup\CRMCore.Module.Setup.csproj" />
+    <ProjectReference Include="..\..\modules\crm\CRMCore.Module.Spa\CRMCore.Module.Spa.csproj" />
+    <ProjectReference Include="..\..\modules\crm\CRMCore.Module.Task\CRMCore.Module.Task.csproj" />
+    <ProjectReference Include="..\..\modules\core\CRMCore.Module.CustomCollection\CRMCore.Module.CustomCollection.csproj" />
+    <ProjectReference Include="..\..\modules\core\CRMCore.Module.Data\CRMCore.Module.Data.csproj" />
+    <ProjectReference Include="..\..\modules\core\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj" />
+    <ProjectReference Include="..\..\modules\support\CRMCore.Module.Data.SqlServer\CRMCore.Module.Data.SqlServer.csproj" />
+    <ProjectReference Include="..\..\modules\support\CRMCore.Module.ReDoc\CRMCore.Module.ReDoc.csproj" />
+    <ProjectReference Include="..\..\modules\support\CRMCore.Module.Swagger\CRMCore.Module.Swagger.csproj" />
     <ProjectReference Include="..\..\themes\CRMCore.Theme\CRMCore.Theme.csproj" />
     <ProjectReference Include="..\CRMCore.Application.Targets\CRMCore.Application.Targets.csproj" />
   </ItemGroup>

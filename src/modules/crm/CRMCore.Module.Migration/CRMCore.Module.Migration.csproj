@@ -18,8 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.csproj" />
-    <ProjectReference Include="..\..\Core\CRMCore.Module.CustomCollection\CRMCore.Module.CustomCollection.csproj" />
-    <ProjectReference Include="..\..\Core\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj" />
+    <ProjectReference Include="..\..\core\CRMCore.Module.CustomCollection\CRMCore.Module.CustomCollection.csproj" />
+    <ProjectReference Include="..\..\core\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj" />
     <ProjectReference Include="..\CRMCore.Module.Task\CRMCore.Module.Task.csproj" />
   </ItemGroup>
 

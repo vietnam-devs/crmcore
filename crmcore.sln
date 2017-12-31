@@ -2,11 +2,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{801A9F75-24F6-4D8C-A884-98C6BE76986B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "targets", "targets", "{801A9F75-24F6-4D8C-A884-98C6BE76986B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{74D2F004-44D9-4BEE-AEA7-51DFA9FD027C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{74D2F004-44D9-4BEE-AEA7-51DFA9FD027C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{62C7829F-E191-4104-AD01-8E110FD44D67}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hosts", "hosts", "{62C7829F-E191-4104-AD01-8E110FD44D67}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Application.Targets", "src\targets\CRMCore.Application.Targets\CRMCore.Application.Targets.csproj", "{4D9E1B42-374D-4C6A-B7FA-08681EF5F259}"
 EndProject
@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.WebApp", "src\hosts\CRMCore.WebApp\CRMCore.WebApp.csproj", "{F9FEFFA8-47B5-4A80-AD50-D5C516DCADBA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Themes", "Themes", "{2069487F-E9F5-43BE-8C26-E7807F57C203}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "themes", "themes", "{2069487F-E9F5-43BE-8C26-E7807F57C203}"
 	ProjectSection(SolutionItems) = preProject
 		src\themes\Directory.Build.props = src\themes\Directory.Build.props
 	EndProjectSection
@@ -41,50 +41,50 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.DBMigration.Console
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Application.Migration.targets", "src\targets\CRMCore.Application.Migration.targets\CRMCore.Application.Migration.targets.csproj", "{8B7FC470-F389-410A-A711-9A99EB79D6B8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Support", "Support", "{18C4BB63-4369-4DF3-87D2-B203F0917F1E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "support", "support", "{18C4BB63-4369-4DF3-87D2-B203F0917F1E}"
 	ProjectSection(SolutionItems) = preProject
-		src\modules\Support\Directory.Build.props = src\modules\Support\Directory.Build.props
+		src\modules\support\Directory.Build.props = src\modules\support\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{B6747FCA-7273-4891-8CEB-3CF8C93D8F95}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{B6747FCA-7273-4891-8CEB-3CF8C93D8F95}"
 	ProjectSection(SolutionItems) = preProject
-		src\modules\Core\Directory.Build.props = src\modules\Core\Directory.Build.props
+		src\modules\core\Directory.Build.props = src\modules\core\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{7C9ACFC1-00F0-4547-9AF4-1A0E43AE1935}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "crm", "crm", "{7C9ACFC1-00F0-4547-9AF4-1A0E43AE1935}"
 	ProjectSection(SolutionItems) = preProject
-		src\modules\App\Directory.Build.props = src\modules\App\Directory.Build.props
+		src\modules\crm\Directory.Build.props = src\modules\crm\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Common", "src\modules\App\CRMCore.Module.Common\CRMCore.Module.Common.csproj", "{1E8E42AD-2057-40D1-8C23-1BE6C335E643}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Common", "src\modules\crm\CRMCore.Module.Common\CRMCore.Module.Common.csproj", "{1E8E42AD-2057-40D1-8C23-1BE6C335E643}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Contact", "src\modules\App\CRMCore.Module.Contact\CRMCore.Module.Contact.csproj", "{52289E90-F920-41CE-B4AB-220CE1933E47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Contact", "src\modules\crm\CRMCore.Module.Contact\CRMCore.Module.Contact.csproj", "{52289E90-F920-41CE-B4AB-220CE1933E47}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Migration", "src\modules\App\CRMCore.Module.Migration\CRMCore.Module.Migration.csproj", "{C996F9D0-D69C-4168-B1AC-848B4DFE6695}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Migration", "src\modules\crm\CRMCore.Module.Migration\CRMCore.Module.Migration.csproj", "{C996F9D0-D69C-4168-B1AC-848B4DFE6695}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Setup", "src\modules\App\CRMCore.Module.Setup\CRMCore.Module.Setup.csproj", "{EB3ACCF5-98B9-4FA2-9912-485B03F7CFDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Setup", "src\modules\crm\CRMCore.Module.Setup\CRMCore.Module.Setup.csproj", "{EB3ACCF5-98B9-4FA2-9912-485B03F7CFDC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Spa", "src\modules\App\CRMCore.Module.Spa\CRMCore.Module.Spa.csproj", "{789E4D74-F8CF-4631-98B5-EB5B3072982E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Spa", "src\modules\crm\CRMCore.Module.Spa\CRMCore.Module.Spa.csproj", "{789E4D74-F8CF-4631-98B5-EB5B3072982E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Task", "src\modules\App\CRMCore.Module.Task\CRMCore.Module.Task.csproj", "{1C794D05-1EE4-4F1C-9087-95E5D765FD16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Task", "src\modules\crm\CRMCore.Module.Task\CRMCore.Module.Task.csproj", "{1C794D05-1EE4-4F1C-9087-95E5D765FD16}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.CustomCollection", "src\modules\Core\CRMCore.Module.CustomCollection\CRMCore.Module.CustomCollection.csproj", "{F3D63B80-F78E-43D1-AC5C-8167CB011D48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.CustomCollection", "src\modules\core\CRMCore.Module.CustomCollection\CRMCore.Module.CustomCollection.csproj", "{F3D63B80-F78E-43D1-AC5C-8167CB011D48}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Identity", "src\modules\Core\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj", "{407FB2BE-E9D6-4C9C-80EB-1BBFC81D234D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Identity", "src\modules\core\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj", "{407FB2BE-E9D6-4C9C-80EB-1BBFC81D234D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Data", "src\modules\Core\CRMCore.Module.Data\CRMCore.Module.Data.csproj", "{EE4CA6DF-0F74-4962-B102-5DA53DD8FF76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Data", "src\modules\core\CRMCore.Module.Data\CRMCore.Module.Data.csproj", "{EE4CA6DF-0F74-4962-B102-5DA53DD8FF76}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{E71DEB4F-1656-46AA-979F-0211977DE983}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{E71DEB4F-1656-46AA-979F-0211977DE983}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.Entities", "src\modules\Base\CRMCore.Module.Entities\CRMCore.Module.Entities.csproj", "{A3971BCB-B342-4267-9783-D4C6A56A8391}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.Entities", "src\modules\base\CRMCore.Module.Entities\CRMCore.Module.Entities.csproj", "{A3971BCB-B342-4267-9783-D4C6A56A8391}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.MvcCore", "src\modules\Base\CRMCore.Module.MvcCore\CRMCore.Module.MvcCore.csproj", "{AFA2A443-4642-4C86-A3EC-106122E22D5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.MvcCore", "src\modules\base\CRMCore.Module.MvcCore\CRMCore.Module.MvcCore.csproj", "{AFA2A443-4642-4C86-A3EC-106122E22D5B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Data.SqlServer", "src\modules\Support\CRMCore.Module.Data.SqlServer\CRMCore.Module.Data.SqlServer.csproj", "{C1668722-949E-495A-B6A9-12D49B810041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Data.SqlServer", "src\modules\support\CRMCore.Module.Data.SqlServer\CRMCore.Module.Data.SqlServer.csproj", "{C1668722-949E-495A-B6A9-12D49B810041}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.ReDoc", "src\modules\Support\CRMCore.Module.ReDoc\CRMCore.Module.ReDoc.csproj", "{A9068043-B2DD-4E36-AF0D-AA5A918CFBEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.ReDoc", "src\modules\support\CRMCore.Module.ReDoc\CRMCore.Module.ReDoc.csproj", "{A9068043-B2DD-4E36-AF0D-AA5A918CFBEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Swagger", "src\modules\Support\CRMCore.Module.Swagger\CRMCore.Module.Swagger.csproj", "{72596C0C-FDB0-40FB-90AC-01752A080118}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Swagger", "src\modules\support\CRMCore.Module.Swagger\CRMCore.Module.Swagger.csproj", "{72596C0C-FDB0-40FB-90AC-01752A080118}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

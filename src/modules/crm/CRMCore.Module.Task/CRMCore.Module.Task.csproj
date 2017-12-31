@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.csproj" />
-    <ProjectReference Include="..\..\Core\CRMCore.Module.Data\CRMCore.Module.Data.csproj" />
+    <ProjectReference Include="..\..\core\CRMCore.Module.Data\CRMCore.Module.Data.csproj" />
   </ItemGroup>
 
 </Project>
