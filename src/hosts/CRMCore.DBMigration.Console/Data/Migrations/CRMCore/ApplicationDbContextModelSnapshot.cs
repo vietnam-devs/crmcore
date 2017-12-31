@@ -21,7 +21,7 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CRMCore.Framework.Entities.Identity.ApplicationRole", b =>
+            modelBuilder.Entity("CRMCore.Module.Entities.Identity.ApplicationRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -45,7 +45,7 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("CRMCore.Framework.Entities.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("CRMCore.Module.Entities.Identity.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -224,7 +224,7 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("CRMCore.Framework.Entities.Identity.ApplicationRole")
+                    b.HasOne("CRMCore.Module.Entities.Identity.ApplicationRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -232,7 +232,7 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("CRMCore.Framework.Entities.Identity.ApplicationUser")
+                    b.HasOne("CRMCore.Module.Entities.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -240,7 +240,7 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("CRMCore.Framework.Entities.Identity.ApplicationUser")
+                    b.HasOne("CRMCore.Module.Entities.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -248,12 +248,12 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("CRMCore.Framework.Entities.Identity.ApplicationRole")
+                    b.HasOne("CRMCore.Module.Entities.Identity.ApplicationRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CRMCore.Framework.Entities.Identity.ApplicationUser")
+                    b.HasOne("CRMCore.Module.Entities.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -261,7 +261,7 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("CRMCore.Framework.Entities.Identity.ApplicationUser")
+                    b.HasOne("CRMCore.Module.Entities.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

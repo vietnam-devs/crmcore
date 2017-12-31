@@ -31,7 +31,6 @@
 	</ItemGroup>
   
 	<ItemGroup>
-	  <ProjectReference Include="..\..\modules\CRMCore.Module.Data.SqlServer\CRMCore.Module.Data.SqlServer.csproj" />
 	  <ProjectReference Include="..\..\targets\CRMCore.Application.Migration.targets\CRMCore.Application.Migration.targets.csproj" />
 	</ItemGroup>
 </Project>

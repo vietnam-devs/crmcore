@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\modules\Base\CRMCore.Module.Entities\CRMCore.Module.Entities.csproj" />
+    <ProjectReference Include="..\..\modules\Base\CRMCore.Module.MvcCore\CRMCore.Module.MvcCore.csproj" />
+  </ItemGroup>
+
 </Project>

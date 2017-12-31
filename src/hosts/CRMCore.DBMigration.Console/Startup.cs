@@ -1,4 +1,4 @@
-﻿using CRMCore.Framework.MvcCore.Extensions;
+﻿using CRMCore.Module.MvcCore.Extensions;
 using CRMCore.Module.Data.SqlServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -6,10 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\crm\CRMCore.Module.Migration\CRMCore.Module.Migration.csproj" />
-    <ProjectReference Include="..\..\crm\CRMCore.Module.Task\CRMCore.Module.Task.csproj" />
-    <ProjectReference Include="..\..\modules\CRMCore.Module.CustomCollection\CRMCore.Module.CustomCollection.csproj" />
-    <ProjectReference Include="..\..\modules\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj" />
+    <ProjectReference Include="..\..\modules\App\CRMCore.Module.Migration\CRMCore.Module.Migration.csproj" />
+    <ProjectReference Include="..\..\modules\App\CRMCore.Module.Task\CRMCore.Module.Task.csproj" />
+    <ProjectReference Include="..\..\modules\Core\CRMCore.Module.CustomCollection\CRMCore.Module.CustomCollection.csproj" />
+    <ProjectReference Include="..\..\modules\Core\CRMCore.Module.Identity\CRMCore.Module.Identity.csproj" />
+    <ProjectReference Include="..\..\modules\Support\CRMCore.Module.Data.SqlServer\CRMCore.Module.Data.SqlServer.csproj" />
     <ProjectReference Include="..\CRMCore.Application.Targets\CRMCore.Application.Targets.csproj" />
   </ItemGroup>
 

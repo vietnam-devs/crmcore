@@ -1,5 +1,5 @@
-﻿using CRMCore.Framework.Entities;
-using CRMCore.Framework.MvcCore.Extensions;
+﻿using CRMCore.Module.Entities;
+using CRMCore.Module.MvcCore.Extensions;
 using CRMCore.Module.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
