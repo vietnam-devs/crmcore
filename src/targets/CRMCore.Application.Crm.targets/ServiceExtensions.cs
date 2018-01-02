@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
 using System.Text.Encodings.Web;
+using CRMCore.Module.Swagger;
 
 namespace CRMCore.Application.Crm.targets
 {
@@ -43,6 +44,7 @@ namespace CRMCore.Application.Crm.targets
             });
 
             services.AddMvcModules();
+            services.AddMySwagger();
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -50,6 +52,7 @@ namespace CRMCore.Application.Crm.targets
             });
 
             services.AddGenericDataModule();
+
             return services;
         }
 
@@ -85,6 +88,8 @@ namespace CRMCore.Application.Crm.targets
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            app.UseMySwagger();
+
             // https://gist.github.com/int128/e0cdec598c5b3db728ff35758abdbafd
             app.UseSpa(spa =>
             {
@@ -98,6 +103,8 @@ namespace CRMCore.Application.Crm.targets
 
             // TODO: consider moving this up
             app.UseModules();
+            
+
             return app;
         }
     }

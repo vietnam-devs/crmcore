@@ -9,7 +9,7 @@ namespace CRMCore.Module.ReDoc.Controllers
     {
         public IActionResult Index()
         {
-            var vm = new DocsViewModel { Specification = "~/swagger/v1/swagger.json" };
+            var vm = new DocsViewModel { Specification = "~/my-swagger/v1/swagger.json" };
 
             return View(nameof(Index), vm);
         }
