@@ -3,6 +3,7 @@
 </p>
 
 <p align="center">
+  <a href="https://img.shields.io/badge/.NET%20VN-Built%20with%20Love-blue.svg"><img src="https://img.shields.io/badge/.NET%20VN-Built%20with%20Love-blue.svg" alt="BuiltWithLove"></a>
   <a href="https://ci.appveyor.com/project/tungphuong/crmcore/branch/master">
     <img src="https://img.shields.io/appveyor/ci/tungphuong/crmcore/master.svg?label=appveyor&style=flat-square" alt="Build status" data-canonical-src="https://img.shields.io/appveyor/ci/tungphuong/crmcore/master.svg?label=appveyor&amp;style=flat-square" style="max-width:100%;"></a>
   <a href="https://travis-ci.org/crm-core/crmcore"><img src="https://travis-ci.org/crm-core/crmcore.svg?label=travis-ci&branch=master&style=flat-square" alt="Build Status" data-canonical-src="https://travis-ci.org/crm-core/crmcore.svg?label=travis-ci&branch=master" style="max-width:100%;"></a>
