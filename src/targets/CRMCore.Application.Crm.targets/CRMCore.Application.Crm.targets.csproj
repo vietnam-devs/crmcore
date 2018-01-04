@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\modules\crm\CRMCore.Module.Common\CRMCore.Module.Common.csproj" />
     <ProjectReference Include="..\..\modules\crm\CRMCore.Module.Contact\CRMCore.Module.Contact.csproj" />
+    <ProjectReference Include="..\..\modules\crm\CRMCore.Module.GraphQL\CRMCore.Module.GraphQL.csproj" />
     <ProjectReference Include="..\..\modules\crm\CRMCore.Module.Setup\CRMCore.Module.Setup.csproj" />
     <ProjectReference Include="..\..\modules\crm\CRMCore.Module.Spa\CRMCore.Module.Spa.csproj" />
     <ProjectReference Include="..\..\modules\crm\CRMCore.Module.Task\CRMCore.Module.Task.csproj" />

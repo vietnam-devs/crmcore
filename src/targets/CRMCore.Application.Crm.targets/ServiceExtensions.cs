@@ -11,6 +11,7 @@ using System;
 using System.Reflection;
 using System.Text.Encodings.Web;
 using CRMCore.Module.Swagger;
+using CRMCore.Module.GraphQL;
 
 namespace CRMCore.Application.Crm.targets
 {
@@ -45,6 +46,7 @@ namespace CRMCore.Application.Crm.targets
 
             services.AddMvcModules();
             services.AddMySwagger();
+            services.AddMyGraphQL();
 
             services.AddSpaStaticFiles(configuration =>
             {

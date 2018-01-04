@@ -6,7 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.csproj" />
+    <PackageReference Include="GraphQL" Version="0.17.3" />
   </ItemGroup>
-  
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\targets\CRMCore.Module.Targets\CRMCore.Module.Targets.csproj" />
+    <ProjectReference Include="..\..\core\CRMCore.Module.Data\CRMCore.Module.Data.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -123,7 +123,7 @@ export default {
         },
         {
           name: 'Swagger',
-          url: `${globalConfig.apiServer}/swagger`,
+          url: `${globalConfig.apiServer}/my-swagger`,
           icon: 'icon-star'
         },
         {

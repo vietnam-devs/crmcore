@@ -76,15 +76,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Data", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{E71DEB4F-1656-46AA-979F-0211977DE983}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.Entities", "src\modules\base\CRMCore.Module.Entities\CRMCore.Module.Entities.csproj", "{A3971BCB-B342-4267-9783-D4C6A56A8391}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Entities", "src\modules\base\CRMCore.Module.Entities\CRMCore.Module.Entities.csproj", "{A3971BCB-B342-4267-9783-D4C6A56A8391}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.MvcCore", "src\modules\base\CRMCore.Module.MvcCore\CRMCore.Module.MvcCore.csproj", "{AFA2A443-4642-4C86-A3EC-106122E22D5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.MvcCore", "src\modules\base\CRMCore.Module.MvcCore\CRMCore.Module.MvcCore.csproj", "{AFA2A443-4642-4C86-A3EC-106122E22D5B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Data.SqlServer", "src\modules\support\CRMCore.Module.Data.SqlServer\CRMCore.Module.Data.SqlServer.csproj", "{C1668722-949E-495A-B6A9-12D49B810041}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.ReDoc", "src\modules\support\CRMCore.Module.ReDoc\CRMCore.Module.ReDoc.csproj", "{A9068043-B2DD-4E36-AF0D-AA5A918CFBEC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRMCore.Module.Swagger", "src\modules\support\CRMCore.Module.Swagger\CRMCore.Module.Swagger.csproj", "{72596C0C-FDB0-40FB-90AC-01752A080118}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMCore.Module.GraphQL", "src\modules\crm\CRMCore.Module.GraphQL\CRMCore.Module.GraphQL.csproj", "{7ECB9B94-009E-4331-A924-5663C2111788}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -180,6 +182,10 @@ Global
 		{72596C0C-FDB0-40FB-90AC-01752A080118}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72596C0C-FDB0-40FB-90AC-01752A080118}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72596C0C-FDB0-40FB-90AC-01752A080118}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ECB9B94-009E-4331-A924-5663C2111788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ECB9B94-009E-4331-A924-5663C2111788}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ECB9B94-009E-4331-A924-5663C2111788}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ECB9B94-009E-4331-A924-5663C2111788}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -212,6 +218,7 @@ Global
 		{C1668722-949E-495A-B6A9-12D49B810041} = {18C4BB63-4369-4DF3-87D2-B203F0917F1E}
 		{A9068043-B2DD-4E36-AF0D-AA5A918CFBEC} = {18C4BB63-4369-4DF3-87D2-B203F0917F1E}
 		{72596C0C-FDB0-40FB-90AC-01752A080118} = {18C4BB63-4369-4DF3-87D2-B203F0917F1E}
+		{7ECB9B94-009E-4331-A924-5663C2111788} = {7C9ACFC1-00F0-4547-9AF4-1A0E43AE1935}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3171C67F-EFB1-46FF-A566-6DC6C1E80FC5}
