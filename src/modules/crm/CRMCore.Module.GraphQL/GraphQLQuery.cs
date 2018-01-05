@@ -1,5 +1,6 @@
 ﻿using CRMCore.Module.GraphQL.Models;
 using CRMCore.Module.GraphQL.Resolvers;
+using CRMCore.Module.GraphQL.Types;
 using GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
 

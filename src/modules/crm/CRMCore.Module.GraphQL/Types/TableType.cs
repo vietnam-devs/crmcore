@@ -22,7 +22,7 @@ namespace CRMCore.Module.GraphQL.Types
                 if (_databaseTypeToSystemType == null)
                 {
                     _databaseTypeToSystemType = new Dictionary<string, Type> {
-                        {"uniqueidentifier", typeof(String) },
+                        { "uniqueidentifier", typeof(String) },
                         { "char", typeof(String) },
                         { "nvarchar", typeof(String) },
                         { "int", typeof(int) },

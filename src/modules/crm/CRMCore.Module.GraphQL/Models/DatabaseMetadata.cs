@@ -14,17 +14,12 @@ namespace CRMCore.Module.GraphQL.Models
             _dbContext = dbContext;
             DatabaseName = _dbContext.Database.GetDbConnection().Database;
             if (Tables == null)
-                LoadMetaData();
+                ReloadMetadata();
         }
 
         public string DatabaseName { get; set; }
 
         public List<TableMetadata> Tables { get; set; }
-
-        public void ReloadMetadata()
-        {
-            LoadMetaData();
-        }
 
         public IEnumerable<TableMetadata> GetMetadataTables()
         {
@@ -34,7 +29,7 @@ namespace CRMCore.Module.GraphQL.Models
             return Tables;
         }
 
-        private void LoadMetaData()
+        public void ReloadMetadata()
         {
             Tables = FetchTableMetaData();
         }

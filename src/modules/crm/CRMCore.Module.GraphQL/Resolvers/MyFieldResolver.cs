@@ -21,7 +21,7 @@ namespace CRMCore.Module.GraphQL.Resolvers
 
         public object Resolve(ResolveFieldContext context)
         {
-            var queryable = _dbContext.Query(_tableMetadata.FullQualifiedName);
+            var queryable = _dbContext.Query(_tableMetadata.AssemblyFullName);
             if (context.FieldName.Contains("_list"))
             {
                 
