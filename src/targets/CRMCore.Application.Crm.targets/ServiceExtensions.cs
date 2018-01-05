@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Text.Encodings.Web;
 using CRMCore.Module.Swagger;
 using CRMCore.Module.GraphQL;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRMCore.Application.Crm.targets
 {
@@ -34,6 +35,8 @@ namespace CRMCore.Application.Crm.targets
                 var connectionString = dbConnectionStringFactory.Create();
                 extendOptionsBuilder.Extend(optionsBuilder, connectionString, assemblyName);
             });
+
+            services.AddScoped<DbContext>(resolver => resolver.GetRequiredService<ApplicationDbContext>());
 
             services.AddCors(options =>
             {

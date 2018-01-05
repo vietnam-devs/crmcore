@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="GraphQL" Version="0.17.3" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.8.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,8 +17,16 @@ namespace CRMCore.Module.GraphQL
             graphQLSchema = schema;
         }
 
-        [HttpPost("")]
-        public async Task<string> Get([FromQuery] string query = "{ crm_Tasks_list { id } }")
+        /// <summary>
+        /// Try as following
+        /// { crm_Tasks_list(offset:1, first:10) { name } }
+        /// { crm_Tasks_list { name } }
+        /// { crm_Tasks(id: "5BEF390D-5B71-4DBA-853A-00E164D4EA93") { name } }
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<string> Get([FromQuery] string query = "{ crm_Tasks_list(offset:1, first:10) { id, name } }")
         {
             var result = await new DocumentExecuter().ExecuteAsync(
                 new ExecutionOptions()
@@ -27,6 +35,11 @@ namespace CRMCore.Module.GraphQL
                     Query = query                    
                 }
             ).ConfigureAwait(false);
+
+            if (result.Errors?.Count > 0)
+            {
+                return result.Errors.ToString();
+            }
 
             var json = new DocumentWriter(indent: true).Write(result.Data);
             return json;

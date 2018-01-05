@@ -1,28 +1,27 @@
 ﻿using CRMCore.Module.GraphQL.Models;
+using CRMCore.Module.GraphQL.Resolvers;
 using GraphQL;
-using GraphQL.Resolvers;
 using GraphQL.Types;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
-namespace CRMCore.Module.GraphQL
+namespace CRMCore.Module.GraphQL.Types
 {
-    public class TableType : ObjectGraphType<IDictionary<string, object>>
+    public class TableType : ObjectGraphType<object>
     {
         public QueryArguments TableArgs
         {
             get; set;
         }
 
-        private IDictionary<string, Type> _SqliteTypeToSystemType;
-        protected IDictionary<string, Type> SqliteTypeToSystemType
+        private IDictionary<string, Type> _databaseTypeToSystemType;
+        protected IDictionary<string, Type> DatabaseTypeToSystemType
         {
             get
             {
-                if (_SqliteTypeToSystemType == null)
+                if (_databaseTypeToSystemType == null)
                 {
-                    _SqliteTypeToSystemType = new Dictionary<string, Type> {
+                    _databaseTypeToSystemType = new Dictionary<string, Type> {
                         {"uniqueidentifier", typeof(String) },
                         { "char", typeof(String) },
                         { "nvarchar", typeof(String) },
@@ -31,7 +30,7 @@ namespace CRMCore.Module.GraphQL
                         { "bit", typeof(bool) }
                     };
                 }
-                return _SqliteTypeToSystemType;
+                return _databaseTypeToSystemType;
             }
         }
 
@@ -52,11 +51,11 @@ namespace CRMCore.Module.GraphQL
                 columnMetadata.ColumnName
             );
 
-            columnField.Resolver = new DictionaryNameFieldResolver();
-            // FillArgs(columnMetadata.ColumnName);
+            columnField.Resolver = new NameFieldResolver();
+            FillArgs(columnMetadata.ColumnName);
         }
 
-        /*private void FillArgs(string columnName)
+        private void FillArgs(string columnName)
         {
             if (TableArgs == null)
             {
@@ -71,38 +70,18 @@ namespace CRMCore.Module.GraphQL
             {
                 TableArgs.Add(new QueryArgument<StringGraphType> { Name = columnName });
             }
-        } */
+
+            TableArgs.Add(new QueryArgument<IdGraphType> { Name = "id" });
+            TableArgs.Add(new QueryArgument<IntGraphType> { Name = "first" });
+            TableArgs.Add(new QueryArgument<IntGraphType> { Name = "offset" });
+        }
 
         private Type ResolveColumnMetaType(string dbType)
         {
-            if (SqliteTypeToSystemType.ContainsKey(dbType))
-                return SqliteTypeToSystemType[dbType];
+            if (DatabaseTypeToSystemType.ContainsKey(dbType))
+                return DatabaseTypeToSystemType[dbType];
 
             return typeof(String);
-        }
-    }
-
-    public class DictionaryNameFieldResolver : IFieldResolver
-    {
-        // private BindingFlags _flags = BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance;
-
-        public object Resolve(ResolveFieldContext context)
-        {
-            var source = context.Source;
-
-            if (source == null)
-            {
-                return null;
-            }
-
-            var value = (source as IDictionary<string, object>)[context.FieldAst.Name];
-
-            if (value == null)
-            {
-                throw new InvalidOperationException($"Expected to find property {context.FieldAst.Name} on {context.Source.GetType().Name} but it does not exist.");
-            }
-
-            return value;
         }
     }
 }

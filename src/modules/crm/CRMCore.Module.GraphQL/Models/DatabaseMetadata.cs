@@ -1,5 +1,4 @@
-﻿using CRMCore.Module.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +7,9 @@ namespace CRMCore.Module.GraphQL.Models
 {
     public class DatabaseMetadata : IDatabaseMetadata
     {
-        protected ApplicationDbContext _dbContext;
+        protected DbContext _dbContext;
 
-        public DatabaseMetadata(ApplicationDbContext dbContext)
+        public DatabaseMetadata(DbContext dbContext)
         {
             _dbContext = dbContext;
             DatabaseName = _dbContext.Database.GetDbConnection().Database;
@@ -37,21 +36,8 @@ namespace CRMCore.Module.GraphQL.Models
 
         private void LoadMetaData()
         {
-            // var res = new List<TableMetadata>();
-            /*res.Add(
-                FetchTableMetaData("Customers")
-            );*/
-            
             Tables = FetchTableMetaData();
         }
-
-        /*public List<TableMetadata> GetMetadataTables()
-        {
-            if (Tables == null)
-                return new List<TableMetadata>();
-
-            return Tables;
-        } */
 
         private List<TableMetadata> FetchTableMetaData()
         {
@@ -63,6 +49,7 @@ namespace CRMCore.Module.GraphQL.Models
                 var tableName = relational.TableName;
 
                 metaTable.TableName = tableName;
+                metaTable.AssemblyFullName = entityType.ClrType.FullName;
                 metaTable.Columns = GetColumnsMetadata(entityType).ToList();
 
                 metaTables.Add(metaTable);
