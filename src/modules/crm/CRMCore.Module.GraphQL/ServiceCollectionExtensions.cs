@@ -9,13 +9,17 @@ namespace CRMCore.Module.GraphQL
     {
         public static IServiceCollection AddMyGraphQL(this IServiceCollection services)
         {
+            services.AddScoped<ITableNameLookup, TableNameLookup>();
             services.AddScoped<IDatabaseMetadata, DatabaseMetadata>();
             services.AddScoped((resolver) =>
             {
                 var dbContext = resolver.GetRequiredService<ApplicationDbContext>();
                 var metaDatabase = resolver.GetRequiredService<IDatabaseMetadata>();
-                var schema = new Schema { Query = new GraphQLQuery(dbContext, metaDatabase) };
+                var tableNameLookup = resolver.GetRequiredService<ITableNameLookup>();
+
+                var schema = new Schema { Query = new GraphQLQuery(dbContext, metaDatabase, tableNameLookup) };
                 schema.Initialize();
+
                 return schema;
             });
 

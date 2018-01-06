@@ -9,21 +9,28 @@ namespace CRMCore.Module.GraphQL
     public class GraphQLQuery : ObjectGraphType<object>
     {
         private IDatabaseMetadata _dbMetadata;
+        private ITableNameLookup _tableNameLookup;
         private DbContext _dbContext;
 
-        public GraphQLQuery(DbContext dbContext, IDatabaseMetadata dbMetadata)
+        public GraphQLQuery(
+            DbContext dbContext, 
+            IDatabaseMetadata dbMetadata,
+            ITableNameLookup tableNameLookup)
         {
             _dbMetadata = dbMetadata;
+            _tableNameLookup = tableNameLookup;
             _dbContext = dbContext;
 
             Name = "Query";
 
-            foreach (var metaTable in _dbMetadata.GetMetadataTables())
+            foreach (var metaTable in _dbMetadata.GetTableMetadatas())
             {
                 var tableType = new TableType(metaTable);
+                var friendlyTableName = _tableNameLookup.GetFriendlyName(metaTable.TableName);
+
                 AddField(new FieldType
                 {
-                    Name = metaTable.TableName,
+                    Name = friendlyTableName,
                     Type = tableType.GetType(),
                     ResolvedType = tableType,
                     Resolver = new MyFieldResolver(metaTable, _dbContext),
@@ -36,7 +43,7 @@ namespace CRMCore.Module.GraphQL
                 var listType = new ListGraphType(tableType);
                 AddField(new FieldType
                 {
-                    Name = $"{metaTable.TableName}_list",
+                    Name = $"{friendlyTableName}_list",
                     Type = listType.GetType(),
                     ResolvedType = listType,
                     Resolver = new MyFieldResolver(metaTable, _dbContext),

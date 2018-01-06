@@ -19,9 +19,9 @@ namespace CRMCore.Module.GraphQL
 
         /// <summary>
         /// Try as following
-        /// { crm_Tasks_list(offset:1, first:10) { name } }
-        /// { crm_Tasks_list { name } }
-        /// { crm_Tasks(id: "5BEF390D-5B71-4DBA-853A-00E164D4EA93") { name } }
+        /// { tasks_list(offset:1, first:10) { name } }
+        /// { tasks_list { name } }
+        /// { tasks(id: "<task id>") { name } }
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>

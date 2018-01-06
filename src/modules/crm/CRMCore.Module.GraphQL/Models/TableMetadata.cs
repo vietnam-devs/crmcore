@@ -8,6 +8,6 @@ namespace CRMCore.Module.GraphQL.Models
 
         public string AssemblyFullName { get; set; }
 
-        public List<ColumnMetadata> Columns { get; set; }
+        public IEnumerable<ColumnMetadata> Columns { get; set; }
     }
 }

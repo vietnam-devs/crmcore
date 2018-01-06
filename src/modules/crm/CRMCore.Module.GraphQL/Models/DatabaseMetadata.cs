@@ -1,59 +1,69 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CRMCore.Module.GraphQL.Models
 {
-    public class DatabaseMetadata : IDatabaseMetadata
+    public interface IDatabaseMetadata
     {
-        protected DbContext _dbContext;
+        void ReloadMetadata();
+        IEnumerable<TableMetadata> GetTableMetadatas();
+    }
 
-        public DatabaseMetadata(DbContext dbContext)
+    public sealed class DatabaseMetadata : IDatabaseMetadata
+    {
+        private readonly DbContext _dbContext;
+        private readonly ITableNameLookup _tableNameLookup;
+
+        private string _databaseName;
+        private IEnumerable<TableMetadata> _tables;
+
+        public DatabaseMetadata(DbContext dbContext, ITableNameLookup tableNameLookup)
         {
             _dbContext = dbContext;
-            DatabaseName = _dbContext.Database.GetDbConnection().Database;
-            if (Tables == null)
+            _tableNameLookup = tableNameLookup;
+
+            _databaseName = _dbContext.Database.GetDbConnection().Database;
+
+            if (_tables == null)
                 ReloadMetadata();
         }
 
-        public string DatabaseName { get; set; }
-
-        public List<TableMetadata> Tables { get; set; }
-
-        public IEnumerable<TableMetadata> GetMetadataTables()
+        public IEnumerable<TableMetadata> GetTableMetadatas()
         {
-            if (Tables == null)
+            if (_tables == null)
                 return new List<TableMetadata>();
 
-            return Tables;
+            return _tables;
         }
 
         public void ReloadMetadata()
         {
-            Tables = FetchTableMetaData();
+            _tables = FetchTableMetaData();
         }
 
-        private List<TableMetadata> FetchTableMetaData()
+        private IReadOnlyList<TableMetadata> FetchTableMetaData()
         {
             var metaTables = new List<TableMetadata>();
+
             foreach (var entityType in _dbContext.Model.GetEntityTypes())
             {
-                var metaTable = new TableMetadata();
-                var relational = entityType.Relational();
-                var tableName = relational.TableName;
+                var tableName = entityType.Relational().TableName;
 
-                metaTable.TableName = tableName;
-                metaTable.AssemblyFullName = entityType.ClrType.FullName;
-                metaTable.Columns = GetColumnsMetadata(entityType).ToList();
+                metaTables.Add(new TableMetadata
+                {
+                    TableName = tableName,
+                    AssemblyFullName = entityType.ClrType.FullName,
+                    Columns = GetColumnsMetadata(entityType)
+                });
 
-                metaTables.Add(metaTable);
+                _tableNameLookup.InsertKeyName(tableName);
             }
                 
             return metaTables;
         }
 
-        private IEnumerable<ColumnMetadata> GetColumnsMetadata(IEntityType entityType)
+        private IReadOnlyList<ColumnMetadata> GetColumnsMetadata(IEntityType entityType)
         {
             var tableColumns = new List<ColumnMetadata>();
 
@@ -69,11 +79,5 @@ namespace CRMCore.Module.GraphQL.Models
 
             return tableColumns;
         }
-    }
-
-    public interface IDatabaseMetadata
-    {
-        void ReloadMetadata();
-        IEnumerable<TableMetadata> GetMetadataTables();
     }
 }
