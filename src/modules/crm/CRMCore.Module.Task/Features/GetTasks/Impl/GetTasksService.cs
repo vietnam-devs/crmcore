@@ -1,14 +1,13 @@
 ﻿using CRMCore.Module.Data;
-using System.Linq;
 using CRMCore.Module.Entities;
 using CRMCore.Module.Task.Features.GetTask;
 using Microsoft.Extensions.Options;
-using System.Linq.Expressions;
 using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace CRMCore.Module.Task.Features.GetTasks.Impl
 {
-
     public class GetTasksService : QueryServiceBase, IGetTasksService
     {
         private readonly IEfQueryRepository<Domain.Task> _taskRepo;

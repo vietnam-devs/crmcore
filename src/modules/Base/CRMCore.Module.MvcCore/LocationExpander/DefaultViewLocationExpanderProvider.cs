@@ -14,7 +14,6 @@ namespace CRMCore.Module.MvcCore.LocationExpander
 
         public void PopulateValues(ViewLocationExpanderContext context)
         {
-
         }
     }
 }

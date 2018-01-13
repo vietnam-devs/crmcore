@@ -175,10 +175,19 @@ namespace CRMCore.Module.Migration.Seeder
                         IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e")));
             }
 
+            var task1 = CrmTask.Domain.Task
+                .CreateInstance(
+                    "Implementing Repository in Task module.",
+                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e"))
+                .AddSubTask(CrmTask.Domain.Task.CreateInstance(
+                    "This is a sub task one.",
+                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e")))
+                .AddSubTask(CrmTask.Domain.Task.CreateInstance(
+                    "This is a sub task two.",
+                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e")));
+
             results.AddRange(new[] {
-                CrmTask.Domain.Task.CreateInstance(
-                    "Implementing Repository in Task module.", 
-                    IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e")),
+                task1,
                 CrmTask.Domain.Task.CreateInstance(
                     "Implementing Controller in Task module.",
                     IdHelper.GenerateId("0fd266b3-4376-4fa3-9a35-aabe1d08043e")),

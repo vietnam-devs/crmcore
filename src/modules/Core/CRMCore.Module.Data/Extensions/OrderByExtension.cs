@@ -38,6 +38,7 @@ namespace CRMCore.Module.Data.Extensions
                         && method.GetParameters().Length == 2)
                 .MakeGenericMethod(typeof(TEntity), type)
                 .Invoke(null, new object[] { source, lambda });
+
             return (IQueryable<TEntity>)result;
         }
     }

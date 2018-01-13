@@ -21,7 +21,18 @@ namespace CRMCore.Module.GraphQL.Resolvers
 
         public object Resolve(ResolveFieldContext context)
         {
-            var queryable = _dbContext.Query(_tableMetadata.AssemblyFullName);
+            var includes = context.Arguments["includes"] != null ?
+                    context.GetArgument<string>("includes").Split(',') : null;
+
+            IQueryable queryable = null;
+            if (includes != null)
+            {
+                queryable = _dbContext.Query(_tableMetadata.AssemblyFullName, includes);
+            } else
+            {
+                queryable = _dbContext.Query(_tableMetadata.AssemblyFullName);
+            }
+             
             if (context.FieldName.Contains("_list"))
             {
                 
@@ -41,7 +52,8 @@ namespace CRMCore.Module.GraphQL.Resolvers
             else
             {
                 var id = context.GetArgument<Guid>("id");
-                return queryable.FirstOrDefault($"Id == @0", id);
+                return queryable
+                    .FirstOrDefault($"Id == @0", id);
             }
         }
     }

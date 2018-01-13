@@ -59,7 +59,7 @@ namespace CRMCore.Module.GraphQL.Models
 
                 _tableNameLookup.InsertKeyName(tableName);
             }
-                
+
             return metaTables;
         }
 
@@ -74,6 +74,16 @@ namespace CRMCore.Module.GraphQL.Models
                 {
                     ColumnName = relational.ColumnName,
                     DataType = relational.ColumnType
+                });
+            }
+
+            var navigations = entityType.GetNavigations();
+            foreach (var nav in navigations)
+            {
+                tableColumns.Add(new ColumnMetadata
+                {
+                    ColumnName = nav.Name,
+                    DataType = nav.DeclaringEntityType.Name
                 });
             }
 

@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
+﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace CRMCore.Module.MvcCore.RazorPages
 {
-    public class DefaultModularPageRouteModelConvention: IPageRouteModelConvention
+    public class DefaultModularPageRouteModelConvention : IPageRouteModelConvention
     {
         public void Apply(PageRouteModel model)
         {
@@ -16,7 +15,8 @@ namespace CRMCore.Module.MvcCore.RazorPages
                     var pageIndex = template.LastIndexOf("/Pages/");
                     var moduleFolder = template.Substring(0, pageIndex);
                     var moduleId = moduleFolder.Substring(moduleFolder.LastIndexOf("/") + 1);
-                    //convert module format CRMCore.module.ModuleName to ModuleName
+
+                    //convert module format CRMCore.<module>.ModuleName to ModuleName
                     moduleId = moduleId.Substring(moduleId.LastIndexOf(".") + 1);
 
                     template = moduleId + template.Replace("/Pages/", "/").Substring(pageIndex);

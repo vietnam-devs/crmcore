@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace CRMCore.Module.MvcCore.RazorPages
 {
@@ -11,7 +10,7 @@ namespace CRMCore.Module.MvcCore.RazorPages
             {
                 options.RootDirectory = "/";
                 options.Conventions.Add(new DefaultModularPageRouteModelConvention());
-            });    
+            });
 
             return builder;
         }

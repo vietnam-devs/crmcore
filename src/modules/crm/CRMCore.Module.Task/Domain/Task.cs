@@ -1,6 +1,7 @@
 ﻿using CRMCore.Module.Entities;
 using CRMCore.Module.Entities.Helpers;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CRMCore.Module.Task.Domain
@@ -20,6 +21,8 @@ namespace CRMCore.Module.Task.Domain
             Name = name;
             AssignedTo = assignedTo;
             TaskStatus = TaskStatus.NotStarted;
+            ParentId = null; // is a root node
+            SubTasks = new List<Task>();
         }
 
         public static Task CreateInstance(Guid id, string name, Guid assignedTo)
@@ -29,7 +32,7 @@ namespace CRMCore.Module.Task.Domain
 
         public static Task CreateInstance(string name, Guid assignedTo)
         {
-            return Task.CreateInstance(IdHelper.GenerateId(), name, assignedTo);
+            return CreateInstance(IdHelper.GenerateId(), name, assignedTo);
         }
 
         public Task ChangeName(string name)
@@ -38,6 +41,7 @@ namespace CRMCore.Module.Task.Domain
             {
                 Name = name;
             }
+
             return this;
         }
 
@@ -47,6 +51,7 @@ namespace CRMCore.Module.Task.Domain
             {
                 AssignedTo = id;
             }
+
             return this;
         }
 
@@ -56,6 +61,7 @@ namespace CRMCore.Module.Task.Domain
             {
                 CategoryType = categoryType;
             }
+
             return this;
         }
 
@@ -65,6 +71,39 @@ namespace CRMCore.Module.Task.Domain
             {
                 TaskStatus = status;
             }
+
+            return this;
+        }
+
+        public Task AddSubTask(Task task)
+        {
+            task.ParentId = Id;
+            SubTasks.Add(task);
+
+            return this;
+        }
+
+        public Task RemoveSubTask(Task task)
+        {
+            SubTasks.Remove(task);
+
+            return this;
+        }
+
+        public Task UpdateSubTask(Task task)
+        {
+            SubTasks.Remove(task);
+
+            task.ParentId = Id;
+            SubTasks.Add(task);
+
+            return this;
+        }
+
+        public Task RemoveAllSubTasks()
+        {
+            SubTasks.Clear();
+
             return this;
         }
 
@@ -79,5 +118,9 @@ namespace CRMCore.Module.Task.Domain
 
         [Required]
         public TaskStatus TaskStatus { get; private set; }
+
+        public Guid? ParentId { get; private set; }
+
+        public ICollection<Task> SubTasks { get; private set; }
     }
 }

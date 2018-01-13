@@ -8,7 +8,7 @@ using System;
 
 namespace CRMCore.Module.Task
 {
-    public class StartUp : StartupBase
+    public class Startup : StartupBase
     {
         public override void ConfigureServices(IServiceCollection services)
         {

@@ -74,12 +74,20 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                     CategoryType = table.Column<int>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: false),
+                    ParentId = table.Column<Guid>(nullable: true),
+                    TaskId = table.Column<Guid>(nullable: true),
                     TaskStatus = table.Column<int>(nullable: false),
                     Updated = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_crm_Tasks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_crm_Tasks_crm_Tasks_TaskId",
+                        column: x => x.TaskId,
+                        principalTable: "crm_Tasks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,6 +234,11 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_crm_Tasks_TaskId",
+                table: "crm_Tasks",
+                column: "TaskId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

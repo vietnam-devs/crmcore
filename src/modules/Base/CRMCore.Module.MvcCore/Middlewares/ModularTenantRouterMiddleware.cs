@@ -71,7 +71,6 @@ namespace CRMCore.Module.MvcCore.Middlewares
                 startup.Configure(appBuilder, routeBuilder, serviceProvider);
             }
 
-
             tenantRouteBuilder.Configure(routeBuilder);
 
             var router = routeBuilder.Build();

@@ -21,6 +21,24 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CRMCore.Module.CustomCollection.Entity.Morphism", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ContentStr");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("SchemaStr");
+
+                    b.Property<DateTime>("Updated");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("crm_Morphisms");
+                });
+
             modelBuilder.Entity("CRMCore.Module.Entities.Identity.ApplicationRole", b =>
                 {
                     b.Property<Guid>("Id")
@@ -100,24 +118,6 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("CRMCore.Module.CustomCollection.Entity.Morphism", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ContentStr");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<string>("SchemaStr");
-
-                    b.Property<DateTime>("Updated");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("crm_Morphisms");
-                });
-
             modelBuilder.Entity("CRMCore.Module.Task.Domain.Task", b =>
                 {
                     b.Property<Guid>("Id")
@@ -132,11 +132,17 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.Property<Guid?>("ParentId");
+
+                    b.Property<Guid?>("TaskId");
+
                     b.Property<int>("TaskStatus");
 
                     b.Property<DateTime>("Updated");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TaskId");
 
                     b.ToTable("crm_Tasks");
                 });
@@ -220,6 +226,13 @@ namespace CRMCore.DBMigration.Console.Data.Migrations.CRMCore
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("CRMCore.Module.Task.Domain.Task", b =>
+                {
+                    b.HasOne("CRMCore.Module.Task.Domain.Task")
+                        .WithMany("SubTasks")
+                        .HasForeignKey("TaskId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

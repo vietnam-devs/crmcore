@@ -9,6 +9,20 @@ namespace CRMCore.Module.GraphQL.Types
 {
     public class TableType : ObjectGraphType<object>
     {
+        public TableType(TableMetadata tableMetadata)
+        {
+            Name = tableMetadata.TableName;
+            foreach (var tableColumn in tableMetadata.Columns)
+            {
+                InitGraphTableColumn(tableColumn);
+            }
+
+            TableArgs.Add(new QueryArgument<IdGraphType> { Name = "id" });
+            TableArgs.Add(new QueryArgument<IntGraphType> { Name = "first" });
+            TableArgs.Add(new QueryArgument<IntGraphType> { Name = "offset" });
+            TableArgs.Add(new QueryArgument<StringGraphType> { Name = "includes" });
+        }
+
         public QueryArguments TableArgs
         {
             get; set;
@@ -31,15 +45,6 @@ namespace CRMCore.Module.GraphQL.Types
                     };
                 }
                 return _databaseTypeToSystemType;
-            }
-        }
-
-        public TableType(TableMetadata tableMetadata)
-        {
-            Name = tableMetadata.TableName;
-            foreach (var tableColumn in tableMetadata.Columns)
-            {
-                InitGraphTableColumn(tableColumn);
             }
         }
 
@@ -70,10 +75,6 @@ namespace CRMCore.Module.GraphQL.Types
             {
                 TableArgs.Add(new QueryArgument<StringGraphType> { Name = columnName });
             }
-
-            TableArgs.Add(new QueryArgument<IdGraphType> { Name = "id" });
-            TableArgs.Add(new QueryArgument<IntGraphType> { Name = "first" });
-            TableArgs.Add(new QueryArgument<IntGraphType> { Name = "offset" });
         }
 
         private Type ResolveColumnMetaType(string dbType)

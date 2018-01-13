@@ -32,7 +32,7 @@ namespace CRMCore.Module.GraphQL
                 new ExecutionOptions()
                 {
                     Schema = graphQLSchema,
-                    Query = query                    
+                    Query = query
                 }
             ).ConfigureAwait(false);
 
