@@ -21,6 +21,8 @@
 
 **CRM-Core** makes it easy to create and manage a **Lightweight-CRM Web Application** efficiently.
 
+> The project is not maintaining at the moment so please very careful if you get the code and run it (there are some crashes when building the source codes).
+
 ## Table of contents
 - [Quick start](https://github.com/crm-core/crmcore#quick-start)
 - [What's included](https://github.com/crm-core/crmcore#whats-included)
